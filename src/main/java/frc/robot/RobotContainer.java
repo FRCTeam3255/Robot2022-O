@@ -17,6 +17,24 @@ import edu.wpi.first.wpilibj2.command.Command;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  // Subsystems
+
+  // Drivetrain Commands
+
+  // Hood Commands
+
+  // Turret Commands
+
+  // Shooter Commands
+
+  // Transfer Commands
+
+  // Intake Commands
+
+  // Vision Commands
+
+  // Climber Commands
+
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -34,7 +52,20 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    // Button 1
+    // Button 2
+    // Button 3
+    // Button 4
+    // Button 5
+    // Button 6
+    // Button 7
+    // Button 8
+    // Button 9
+    // Button 10
+    // Button 11
+    // Button 12
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
