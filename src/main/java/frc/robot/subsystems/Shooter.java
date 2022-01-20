@@ -26,7 +26,7 @@ public class Shooter extends SubsystemBase {
   }
 
   // SET TO FACTORY DEFAULT
-  private void configure() {
+  public void configure() {
     TopMotor.configFactoryDefault();
     BottomMotor.configFactoryDefault();
   }
