@@ -39,6 +39,7 @@ public class Climber extends SubsystemBase {
 
   }
 
+  // TODO: change when location of mag switch is (ex: isClimberRaised)
   public boolean isSafetyMagSwitchPressed() {
     return safetyMagSwitch.get();
 
