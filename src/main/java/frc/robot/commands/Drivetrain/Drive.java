@@ -33,7 +33,7 @@ public class Drive extends CommandBase {
     double speed = RobotContainer.DriverStick.getArcadeMove();
     double turn = RobotContainer.DriverStick.getArcadeRotate();
 
-    // Set motors to driection to joywtick
+    // Set motors to direction to joystick
     drivetrain.arcadeDrive(speed, turn);
   }
 
