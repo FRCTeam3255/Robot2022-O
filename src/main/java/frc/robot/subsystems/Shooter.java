@@ -42,7 +42,7 @@ public class Shooter extends SubsystemBase {
     return TopMotor.getSelectedSensorPosition();
   }
 
-  public double getbottomMotorEncoderCount() {
+  public double getBottomMotorEncoderCount() {
     return BottomMotor.getSelectedSensorPosition();
   }
 
@@ -50,6 +50,6 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Shooter Top Motor", getTopMotorEncoderCount());
-    SmartDashboard.putNumber("Shooter Bottom Motor", getbottomMotorEncoderCount());
+    SmartDashboard.putNumber("Shooter Bottom Motor", getBottomMotorEncoderCount());
   }
 }
