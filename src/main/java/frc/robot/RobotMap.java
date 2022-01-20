@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+
 /**
  * The RobotMap class provides a convenient place for teams to hold robot-wide
  * numerical or boolean
@@ -35,6 +37,10 @@ public final class RobotMap {
     }
 
     public final class Intake {
+
+        public static final int INTAKE_MOTOR_CAN = 30;
+        public static final int INTAKE_SOLENOID_CAN_A = 31;
+        public static final int INTAKE_SOLENOID_CAN_B = 32;
     }
 
     public final class Vision {
@@ -47,7 +53,7 @@ public final class RobotMap {
         public static final int TOP_MOTOR_CAN = 10;
         public static final int BOTTOM_MOTOR_CAN = 11;
     }
-  
+
     public final class Controller {
         public static final int DRIVER_STICK = 0;
     }
