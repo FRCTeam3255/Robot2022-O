@@ -24,6 +24,7 @@ public final class RobotMap {
     }
 
     public final class Turret {
+        public static final int TURRET_MOTOR_CAN = 20;
     }
 
     public final class Transfer {
