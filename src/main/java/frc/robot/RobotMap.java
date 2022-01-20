@@ -19,10 +19,10 @@ package frc.robot;
 public final class RobotMap {
     public final class Drivetrain {
 
-        public static final int LEFT_LEAD_CAN = 0;
-        public static final int RIGHT_LEAD_CAN = 0;
-        public static final int LEFT_FOLLOW_CAN = 0;
-        public static final int RIGHT_FOLLOW_CAN = 0;
+        public static final int LEFT_LEAD_MOTOR_CAN = 0;
+        public static final int RIGHT_LEAD_MOTOR_CAN = 0;
+        public static final int LEFT_FOLLOW_MOTOR_CAN = 0;
+        public static final int RIGHT_FOLLOW_MOTOR_CAN = 0;
     }
 
     public final class Hood {

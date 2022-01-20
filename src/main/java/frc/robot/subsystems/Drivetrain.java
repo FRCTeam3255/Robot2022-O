@@ -15,55 +15,59 @@ import frc.robot.RobotMap;
 public class Drivetrain extends SubsystemBase {
   /** Creates a new Drivetrain. */
 
-  private TalonFX leftLead;
-  private TalonFX rightLead;
-  private TalonFX leftFollow;
-  private TalonFX rightFollow;
+  private TalonFX leftLeadMotor;
+  private TalonFX rightLeadMotor;
+  private TalonFX leftFollowMotor;
+  private TalonFX rightFollowMotor;
 
   public Drivetrain() {
-    leftLead = new TalonFX(RobotMap.Drivetrain.LEFT_LEAD_CAN);
-    rightLead = new TalonFX(RobotMap.Drivetrain.RIGHT_LEAD_CAN);
-    leftFollow = new TalonFX(RobotMap.Drivetrain.LEFT_FOLLOW_CAN);
-    rightFollow = new TalonFX(RobotMap.Drivetrain.RIGHT_FOLLOW_CAN);
+    leftLeadMotor = new TalonFX(RobotMap.Drivetrain.LEFT_LEAD_MOTOR_CAN);
+    rightLeadMotor = new TalonFX(RobotMap.Drivetrain.RIGHT_LEAD_MOTOR_CAN);
+    leftFollowMotor = new TalonFX(RobotMap.Drivetrain.LEFT_FOLLOW_MOTOR_CAN);
+    rightFollowMotor = new TalonFX(RobotMap.Drivetrain.RIGHT_FOLLOW_MOTOR_CAN);
     configure();
   }
 
   public void configure() {
-    leftLead.configFactoryDefault();
-    rightLead.configFactoryDefault();
-    leftFollow.configFactoryDefault();
-    rightFollow.configFactoryDefault();
 
-    leftFollow.follow(leftLead);
-    rightFollow.follow(rightLead);
+    // Left
+    leftLeadMotor.setInverted(false);
+    leftFollowMotor.setInverted(false);
+    leftLeadMotor.setSensorPhase(false);
 
-    leftLead.setInverted(false);
-    rightLead.setInverted(true);
-    leftFollow.setInverted(false);
-    rightFollow.setInverted(true);
-    leftLead.setSensorPhase(false);
-    rightLead.setSensorPhase(true);
+    leftLeadMotor.configFactoryDefault();
+    leftFollowMotor.configFactoryDefault();
+    leftFollowMotor.follow(leftLeadMotor);
+
+    // Right
+    rightLeadMotor.configFactoryDefault();
+    rightFollowMotor.configFactoryDefault();
+    rightFollowMotor.follow(rightLeadMotor);
+
+    rightLeadMotor.setInverted(true);
+    rightFollowMotor.setInverted(true);
+    rightLeadMotor.setSensorPhase(true);
   }
 
   public void resetEncoderCount() {
-    leftLead.setSelectedSensorPosition(0);
-    rightLead.setSelectedSensorPosition(0);
+    leftLeadMotor.setSelectedSensorPosition(0);
+    rightLeadMotor.setSelectedSensorPosition(0);
   }
 
   public double getLeftEncoderCount() {
-    return leftLead.getSelectedSensorPosition();
+    return leftLeadMotor.getSelectedSensorPosition();
   }
 
   public double getRightEncoderCount() {
-    return rightLead.getSelectedSensorPosition();
+    return rightLeadMotor.getSelectedSensorPosition();
   }
 
   public void arcadeDrive(double a_speed, double a_turn) {
     double speed = a_speed;
     double turn = a_turn;
 
-    leftLead.set(ControlMode.PercentOutput, speed, DemandType.ArbitraryFeedForward, turn);
-    rightLead.set(ControlMode.PercentOutput, speed, DemandType.ArbitraryFeedForward, -turn);
+    leftLeadMotor.set(ControlMode.PercentOutput, speed, DemandType.ArbitraryFeedForward, turn);
+    rightLeadMotor.set(ControlMode.PercentOutput, speed, DemandType.ArbitraryFeedForward, -turn);
   }
 
   @Override
