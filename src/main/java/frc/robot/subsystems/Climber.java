@@ -29,6 +29,11 @@ public class Climber extends SubsystemBase {
 
   }
 
+  public void resetClimberEncoderCount() {
+    climbMotor.setSelectedSensorPosition(0);
+
+  }
+
   public double getClimberEncoderCount() {
     return climbMotor.getSelectedSensorPosition();
 
