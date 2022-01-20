@@ -37,7 +37,7 @@ public final class RobotMap {
 
     public final class Climber {
 
-        public static final int CLIMBER_MOTOR = 0;
-        public static final int SAFETY_MAG_SWITCH = 0;
+        public static final int CLIMBER_MOTOR_CAN = 0;
+        public static final int SAFETY_MAG_SWITCH_DIO = 0;
     }
 }
