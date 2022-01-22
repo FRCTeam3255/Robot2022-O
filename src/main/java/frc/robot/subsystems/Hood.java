@@ -35,9 +35,14 @@ public class Hood extends SubsystemBase {
     return hoodMotor.getSelectedSensorPosition();
   }
 
+  public boolean isHoodOpen() {
+    return hoodLimitSwitch.get();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Hood Encoder Count", getHoodEncoderCount());
+    SmartDashboard.putBoolean("Hood Open", isHoodOpen());
   }
 }
