@@ -30,7 +30,7 @@ public class RobotContainer {
 
   // Joysticks
   public static final SN_DualActionStick DriverStick = new SN_DualActionStick(RobotMap.ControllerMap.DRIVER_STICK);
-  public static final SN_Extreme3DStick coDriverStick = new SN_Extreme3DStick(RobotMap.ControllerMap.CODRIVER_STICK);
+  public static final SN_DualActionStick coDriverStick = new SN_DualActionStick(RobotMap.ControllerMap.CODRIVER_STICK);
 
   // Subsystems
   private final Drivetrain sub_drivetrain = new Drivetrain();
