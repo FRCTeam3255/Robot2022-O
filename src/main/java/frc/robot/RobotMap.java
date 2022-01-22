@@ -25,6 +25,9 @@ public final class RobotMap {
     }
 
     public final class Hood {
+
+        public static final int HOOD_MOTOR_CAN = 0;
+        public static final int HOOD_LIMIT_SWITCH = 0;
     }
 
     public final class Turret {
