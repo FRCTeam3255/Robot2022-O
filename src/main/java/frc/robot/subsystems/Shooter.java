@@ -19,8 +19,8 @@ public class Shooter extends SubsystemBase {
 
   // LINKS TO ROBOT MAP
   public Shooter() {
-    TopMotor = new TalonFX(RobotMap.Shooter.TOP_MOTOR_CAN);
-    BottomMotor = new TalonFX(RobotMap.Shooter.BOTTOM_MOTOR_CAN);
+    TopMotor = new TalonFX(RobotMap.ShooterMap.TOP_MOTOR_CAN);
+    BottomMotor = new TalonFX(RobotMap.ShooterMap.BOTTOM_MOTOR_CAN);
 
     configure();
   }

@@ -21,10 +21,10 @@ public class Drivetrain extends SubsystemBase {
   private TalonFX rightFollowMotor;
 
   public Drivetrain() {
-    leftLeadMotor = new TalonFX(RobotMap.Drivetrain.LEFT_LEAD_MOTOR_CAN);
-    rightLeadMotor = new TalonFX(RobotMap.Drivetrain.RIGHT_LEAD_MOTOR_CAN);
-    leftFollowMotor = new TalonFX(RobotMap.Drivetrain.LEFT_FOLLOW_MOTOR_CAN);
-    rightFollowMotor = new TalonFX(RobotMap.Drivetrain.RIGHT_FOLLOW_MOTOR_CAN);
+    leftLeadMotor = new TalonFX(RobotMap.DrivetrainMap.LEFT_LEAD_MOTOR_CAN);
+    rightLeadMotor = new TalonFX(RobotMap.DrivetrainMap.RIGHT_LEAD_MOTOR_CAN);
+    leftFollowMotor = new TalonFX(RobotMap.DrivetrainMap.LEFT_FOLLOW_MOTOR_CAN);
+    rightFollowMotor = new TalonFX(RobotMap.DrivetrainMap.RIGHT_FOLLOW_MOTOR_CAN);
     configure();
   }
 

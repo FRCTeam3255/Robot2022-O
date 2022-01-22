@@ -21,9 +21,9 @@ public class Intake extends SubsystemBase {
 
   // Link to Robot Map
   public Intake() {
-    intakeMotor = new TalonFX(RobotMap.Intake.INTAKE_MOTOR_CAN);
-    intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.Intake.INTAKE_SOLENOID_PCM_A,
-        RobotMap.Intake.INTAKE_SOLENOID_PCM_B);
+    intakeMotor = new TalonFX(RobotMap.IntakeMap.INTAKE_MOTOR_CAN);
+    intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.IntakeMap.INTAKE_SOLENOID_PCM_A,
+        RobotMap.IntakeMap.INTAKE_SOLENOID_PCM_B);
 
     configure();
   }
