@@ -7,9 +7,13 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
@@ -20,19 +24,21 @@ public class Transfer extends SubsystemBase {
 
   private TalonSRX topBeltMotor;
   private TalonSRX bottomBeltMotor;
-  private DigitalInput colorSensor;
+  // private ColorSensorV3 colorSensor;
+  private ColorSensorV3 colorSensor;
+  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+  private DigitalInput transferLimitSwitch;
 
   public Transfer() {
     topBeltMotor = new TalonSRX(RobotMap.Transfer.TOP_BELT_MOTOR_CAN);
     bottomBeltMotor = new TalonSRX(RobotMap.Transfer.BOTTOM_BELT_MOTOR_CAN);
-    colorSensor = new DigitalInput(RobotMap.Sensor.COLOR_SENSOR);
-    configure();
+    colorSensor = new ColorSensorV3(i2cPort);
+    transferLimitSwitch = new DigitalInput(RobotMap.Transfer.LIMIT_SWITCH_TRANSFER);
   }
 
   public void configure() {
     topBeltMotor.configFactoryDefault();
     bottomBeltMotor.configFactoryDefault();
-
   }
 
   public double getTopBeltMotorEncoderCount() {
@@ -41,6 +47,17 @@ public class Transfer extends SubsystemBase {
 
   public double getBottomBeltMotorEncoderCount() {
     return bottomBeltMotor.getSelectedSensorPosition();
+  }
+
+  public void setTransferMotorSpeed(double transfermotor_speed) {
+    double speed = transfermotor_speed;
+
+    topBeltMotor.set(ControlMode.PercentOutput, speed);
+    bottomBeltMotor.set(ControlMode.PercentOutput, speed);
+  }
+
+  public boolean isBallCollected() {
+    return transferLimitSwitch.get();
 
   }
 
