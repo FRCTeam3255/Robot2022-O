@@ -47,7 +47,7 @@ public final class RobotMap {
         public static final int SAFETY_MAG_SWITCH_DIO = 0;
     }
 
-    public final class Shooter {
+    public final class ShooterMap {
         public static final int TOP_MOTOR_CAN = 10;
         public static final int BOTTOM_MOTOR_CAN = 11;
     }
