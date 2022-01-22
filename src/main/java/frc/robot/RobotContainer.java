@@ -5,12 +5,15 @@
 package frc.robot;
 
 import com.frcteam3255.joystick.SN_DualActionStick;
+import com.frcteam3255.joystick.SN_Extreme3DStick;
 
+import frc.robot.RobotPreferences;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Drivetrain.*;
+import frc.robot.commands.Hood.AngleHood;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.ExampleSubsystem;
 
@@ -27,15 +30,18 @@ public class RobotContainer {
 
   // Joysticks
   public static final SN_DualActionStick DriverStick = new SN_DualActionStick(RobotMap.ControllerMap.DRIVER_STICK);
+  public static final SN_Extreme3DStick coDriverStick = new SN_Extreme3DStick(RobotMap.ControllerMap.CODRIVER_STICK);
 
   // Subsystems
   private final Drivetrain sub_drivetrain = new Drivetrain();
+  private final Hood sub_hood = new Hood();
 
   // Drivetrain Commands
   private final Drive com_drive = new Drive(sub_drivetrain);
 
   // Hood Commands
-
+  private final AngleHood com_angle_hood_up = new AngleHood(sub_hood, RobotPreferences.Hood.angleHoodDirectionUp);
+  private final AngleHood com_angle_hood_down = new AngleHood(sub_hood, RobotPreferences.Hood.angleHoodDirectionDown);
   // Turret Commands
 
   // Shooter Commands
@@ -83,6 +89,9 @@ public class RobotContainer {
     // Button 10
     // Button 11
     // Button 12
+
+    coDriverStick.POV_North.whenPressed(com_angle_hood_up);
+    coDriverStick.POV_South.whenPressed(com_angle_hood_down);
   }
 
   /**

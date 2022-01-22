@@ -4,11 +4,13 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
+import frc.robot.RobotPreferences;
 
 public class Hood extends SubsystemBase {
 
@@ -37,6 +39,15 @@ public class Hood extends SubsystemBase {
 
   public boolean isHoodOpen() {
     return hoodLimitSwitch.get();
+  }
+
+  public double getHoodPosition() {
+    return hoodMotor.getSelectedSensorPosition() / RobotPreferences.Hood.hoodCountsPerDegree.getValue();
+  }
+
+  public void moveHoodToDegree(double degree) {
+    hoodMotor.set(ControlMode.Position, (degree * RobotPreferences.Hood.hoodCountsPerDegree.getValue()));
+
   }
 
   @Override
