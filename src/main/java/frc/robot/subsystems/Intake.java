@@ -16,35 +16,35 @@ import frc.robot.RobotMap;
 public class Intake extends SubsystemBase {
 
   // Creates the motors
-  private TalonFX IntakeMotor;
-  private DoubleSolenoid IntakeSolenoid;
+  private TalonFX intakeMotor;
+  private DoubleSolenoid intakeSolenoid;
 
   // Link to Robot Map
   public Intake() {
-    IntakeMotor = new TalonFX(RobotMap.Intake.INTAKE_MOTOR_CAN);
-    IntakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.Intake.INTAKE_SOLENOID_CAN_A,
-        RobotMap.Intake.INTAKE_SOLENOID_CAN_B);
+    intakeMotor = new TalonFX(RobotMap.Intake.INTAKE_MOTOR_CAN);
+    intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.Intake.INTAKE_SOLENOID_PCM_A,
+        RobotMap.Intake.INTAKE_SOLENOID_PCM_B);
 
     configure();
   }
 
   // Set to factory default (configure it)
   public void configure() {
-    IntakeMotor.configFactoryDefault();
+    intakeMotor.configFactoryDefault();
   }
 
   // Reset Encoder Count
   public void resetEncoderCount() {
-    IntakeMotor.setSelectedSensorPosition(0);
+    intakeMotor.setSelectedSensorPosition(0);
   }
 
   // Get positons
   public double getIntakeMotorCount() {
-    return IntakeMotor.getSelectedSensorPosition();
+    return intakeMotor.getSelectedSensorPosition();
   }
 
   public Value getSolenoidPosition() {
-    return IntakeSolenoid.get();
+    return intakeSolenoid.get();
   }
 
   @Override

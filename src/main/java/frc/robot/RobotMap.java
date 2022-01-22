@@ -39,8 +39,8 @@ public final class RobotMap {
     public final class Intake {
 
         public static final int INTAKE_MOTOR_CAN = 30;
-        public static final int INTAKE_SOLENOID_CAN_A = 31;
-        public static final int INTAKE_SOLENOID_CAN_B = 32;
+        public static final int INTAKE_SOLENOID_PCM_A = 0;
+        public static final int INTAKE_SOLENOID_PCM_B = 1;
     }
 
     public final class Vision {
