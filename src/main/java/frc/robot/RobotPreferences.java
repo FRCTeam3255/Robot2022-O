@@ -11,8 +11,7 @@ public final class RobotPreferences {
 
     public static final class ShooterPrefs {
         public static final SN_DoublePreference shooterMotorSpeed = new SN_DoublePreference("shooterMotorSpeed", 1);
-        public static final SN_DoublePreference stopShooterMotorSpeed = new SN_DoublePreference("stopShooterMotorSpeed",
-                0);
+        public static final SN_DoublePreference shooterFireSpeed = new SN_DoublePreference("shooterFireSpeed", 5000.0);
     }
 
     public static final class TurretPrefs {
