@@ -18,8 +18,8 @@ public class Hood extends SubsystemBase {
   /** Creates a new Hood. */
 
   public Hood() {
-    hoodMotor = new TalonSRX(RobotMap.Hood.HOOD_MOTOR_CAN);
-    hoodLimitSwitch = new DigitalInput(RobotMap.Hood.HOOD_LIMIT_SWITCH);
+    hoodMotor = new TalonSRX(RobotMap.HoodMap.HOOD_MOTOR_CAN);
+    hoodLimitSwitch = new DigitalInput(RobotMap.HoodMap.HOOD_LIMIT_SWITCH);
     configure();
   }
 

@@ -26,7 +26,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 public class RobotContainer {
 
   // Joysticks
-  public static final SN_DualActionStick DriverStick = new SN_DualActionStick(RobotMap.Controller.DRIVER_STICK);
+  public static final SN_DualActionStick DriverStick = new SN_DualActionStick(RobotMap.ControllerMap.DRIVER_STICK);
 
   // Subsystems
   private final Drivetrain sub_drivetrain = new Drivetrain();

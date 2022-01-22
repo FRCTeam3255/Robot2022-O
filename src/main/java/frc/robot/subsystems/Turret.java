@@ -17,7 +17,7 @@ public class Turret extends SubsystemBase {
 
   // LINKS TO ROBOT MAP
   public Turret() {
-    TurretMotor = new TalonSRX(RobotMap.Turret.TURRET_MOTOR_CAN);
+    TurretMotor = new TalonSRX(RobotMap.TurretMap.TURRET_MOTOR_CAN);
 
     configure();
   }
