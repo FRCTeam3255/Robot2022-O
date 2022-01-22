@@ -41,13 +41,15 @@ public final class RobotMap {
     }
 
     public final class Climber {
+        public static final int CLIMBER_MOTOR_CAN = 30;
+        public static final int SAFETY_MAG_SWITCH_DIO = 0;
     }
 
     public final class Shooter {
         public static final int TOP_MOTOR_CAN = 10;
         public static final int BOTTOM_MOTOR_CAN = 11;
     }
-  
+
     public final class Controller {
         public static final int DRIVER_STICK = 0;
     }
