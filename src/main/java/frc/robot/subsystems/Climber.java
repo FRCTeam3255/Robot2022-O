@@ -18,8 +18,8 @@ public class Climber extends SubsystemBase {
 
   public Climber() {
 
-    safetyMagSwitch = new DigitalInput(RobotMap.Climber.SAFETY_MAG_SWITCH_DIO);
-    climbMotor = new TalonFX(RobotMap.Climber.CLIMBER_MOTOR_CAN);
+    safetyMagSwitch = new DigitalInput(RobotMap.ClimberMap.SAFETY_MAG_SWITCH_DIO);
+    climbMotor = new TalonFX(RobotMap.ClimberMap.CLIMBER_MOTOR_CAN);
     configure();
 
   }

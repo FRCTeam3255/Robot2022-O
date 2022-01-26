@@ -6,6 +6,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,10 +23,10 @@ public class Drivetrain extends SubsystemBase {
   private TalonFX rightFollowMotor;
 
   public Drivetrain() {
-    leftLeadMotor = new TalonFX(RobotMap.Drivetrain.LEFT_LEAD_MOTOR_CAN);
-    rightLeadMotor = new TalonFX(RobotMap.Drivetrain.RIGHT_LEAD_MOTOR_CAN);
-    leftFollowMotor = new TalonFX(RobotMap.Drivetrain.LEFT_FOLLOW_MOTOR_CAN);
-    rightFollowMotor = new TalonFX(RobotMap.Drivetrain.RIGHT_FOLLOW_MOTOR_CAN);
+    leftLeadMotor = new TalonFX(RobotMap.DrivetrainMap.LEFT_LEAD_MOTOR_CAN);
+    rightLeadMotor = new TalonFX(RobotMap.DrivetrainMap.RIGHT_LEAD_MOTOR_CAN);
+    leftFollowMotor = new TalonFX(RobotMap.DrivetrainMap.LEFT_FOLLOW_MOTOR_CAN);
+    rightFollowMotor = new TalonFX(RobotMap.DrivetrainMap.RIGHT_FOLLOW_MOTOR_CAN);
     configure();
   }
 
@@ -32,8 +34,10 @@ public class Drivetrain extends SubsystemBase {
 
     // Left
     leftLeadMotor.setInverted(false);
-    leftFollowMotor.setInverted(false);
+    leftFollowMotor.setInverted(TalonFXInvertType.FollowMaster);
     leftLeadMotor.setSensorPhase(false);
+    leftFollowMotor.setNeutralMode(NeutralMode.Brake);
+    leftLeadMotor.setNeutralMode(NeutralMode.Brake);
 
     leftLeadMotor.configFactoryDefault();
     leftFollowMotor.configFactoryDefault();
@@ -45,8 +49,11 @@ public class Drivetrain extends SubsystemBase {
     rightFollowMotor.follow(rightLeadMotor);
 
     rightLeadMotor.setInverted(true);
-    rightFollowMotor.setInverted(true);
+    rightFollowMotor.setInverted(TalonFXInvertType.FollowMaster);
     rightLeadMotor.setSensorPhase(true);
+    rightFollowMotor.setNeutralMode(NeutralMode.Brake);
+    rightLeadMotor.setNeutralMode(NeutralMode.Brake);
+
   }
 
   public void resetEncoderCount() {

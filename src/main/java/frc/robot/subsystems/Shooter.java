@@ -22,6 +22,7 @@ public class Shooter extends SubsystemBase {
   public Shooter() {
     leftMotor = new TalonFX(RobotMap.ShooterMap.LEFT_MOTOR_CAN);
     rightMotor = new TalonFX(RobotMap.ShooterMap.RIGHT_MOTOR_CAN);
+    
     configure();
   }
 
