@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Drivetrain.*;
-import frc.robot.commands.Hood.AngleHood;
+import frc.robot.commands.Hood.*;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.ExampleSubsystem;
 
@@ -40,8 +40,9 @@ public class RobotContainer {
   private final Drive com_drive = new Drive(sub_drivetrain);
 
   // Hood Commands
-  private final AngleHood com_angle_hood_up = new AngleHood(sub_hood, RobotPreferences.Hood.angleHoodDirectionUp);
-  private final AngleHood com_angle_hood_down = new AngleHood(sub_hood, RobotPreferences.Hood.angleHoodDirectionDown);
+  private final AngleHood com_angle_hood_up = new AngleHood(sub_hood, RobotPreferences.HoodMap.angleHoodDirectionUp);
+  private final AngleHood com_angle_hood_down = new AngleHood(sub_hood,
+      RobotPreferences.HoodMap.angleHoodDirectionDown);
   // Turret Commands
 
   // Shooter Commands

@@ -42,11 +42,11 @@ public class Hood extends SubsystemBase {
   }
 
   public double getHoodPosition() {
-    return hoodMotor.getSelectedSensorPosition() / RobotPreferences.Hood.hoodCountsPerDegree.getValue();
+    return hoodMotor.getSelectedSensorPosition() / RobotPreferences.HoodMap.hoodCountsPerDegree.getValue();
   }
 
   public void moveHoodToDegree(double degree) {
-    hoodMotor.set(ControlMode.Position, (degree * RobotPreferences.Hood.hoodCountsPerDegree.getValue()));
+    hoodMotor.set(ControlMode.Position, (degree * RobotPreferences.HoodMap.hoodCountsPerDegree.getValue()));
 
   }
 
