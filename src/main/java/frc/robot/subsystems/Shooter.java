@@ -49,14 +49,14 @@ public class Shooter extends SubsystemBase {
     return rightMotor.getSelectedSensorPosition();
   }
 
-  public void setShooterSpeed(double a_speed) {
-    double speed = a_speed;
+  public void setShooterVelocity(double a_velocity) {
+    double velocity = a_velocity;
 
-    leftMotor.set(ControlMode.PercentOutput, speed);
-    rightMotor.set(ControlMode.PercentOutput, speed);
+    leftMotor.set(ControlMode.PercentOutput, velocity);
+    rightMotor.set(ControlMode.PercentOutput, velocity);
   }
 
-  public double getShooterSpeed() {
+  public double getShooterVelocity() {
     return leftMotor.getSelectedSensorVelocity();
   }
 
@@ -65,6 +65,6 @@ public class Shooter extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Shooter Left Motor", getLeftMotorEncoderCount());
     SmartDashboard.putNumber("Shooter Right Motor", getRightMotorEncoderCount());
-    SmartDashboard.putNumber("Shooter Velocity", getShooterSpeed());
+    SmartDashboard.putNumber("Shooter Velocity", getShooterVelocity());
   }
 }
