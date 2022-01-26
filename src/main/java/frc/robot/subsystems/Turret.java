@@ -13,28 +13,28 @@ import frc.robot.RobotMap;
 public class Turret extends SubsystemBase {
   /** Creates a new Turret. */
 
-  private TalonSRX TurretMotor;
+  private TalonSRX turretMotor;
 
   // LINKS TO ROBOT MAP
   public Turret() {
-    TurretMotor = new TalonSRX(RobotMap.TurretMap.TURRET_MOTOR_CAN);
+    turretMotor = new TalonSRX(RobotMap.TurretMap.TURRET_MOTOR_CAN);
 
     configure();
   }
 
   // SET TO FACTORY DEFAULT
   public void configure() {
-    TurretMotor.configFactoryDefault();
+    turretMotor.configFactoryDefault();
   }
 
   // RESETS COUNT FOR ENCONDERS
   public void resetEncoderCounts() {
-    TurretMotor.setSelectedSensorPosition(0);
+    turretMotor.setSelectedSensorPosition(0);
   }
 
   // GETS AND RETURNS COUNT FOR ENCONDERS
   public double getTurretMotorEncoderCount() {
-    return TurretMotor.getSelectedSensorPosition();
+    return turretMotor.getSelectedSensorPosition();
   }
 
   @Override
