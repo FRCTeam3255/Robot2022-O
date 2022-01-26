@@ -20,8 +20,8 @@ public class Shooter extends SubsystemBase {
 
   // LINKS TO ROBOT MAP
   public Shooter() {
-    leftMotor = new TalonFX(RobotMap.ShooterMap.TOP_MOTOR_CAN);
-    rightMotor = new TalonFX(RobotMap.ShooterMap.BOTTOM_MOTOR_CAN);
+    leftMotor = new TalonFX(RobotMap.ShooterMap.LEFT_MOTOR_CAN);
+    rightMotor = new TalonFX(RobotMap.ShooterMap.RIGHT_MOTOR_CAN);
     configure();
   }
 
@@ -63,8 +63,8 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Shooter Top Motor", getLeftMotorEncoderCount());
-    SmartDashboard.putNumber("Shooter Bottom Motor", getRightMotorEncoderCount());
+    SmartDashboard.putNumber("Shooter Left Motor", getLeftMotorEncoderCount());
+    SmartDashboard.putNumber("Shooter Right Motor", getRightMotorEncoderCount());
     SmartDashboard.putNumber("Shooter Velocity", getShooterSpeed());
   }
 }
