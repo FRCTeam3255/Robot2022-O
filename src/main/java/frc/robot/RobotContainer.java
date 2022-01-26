@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Drivetrain.*;
+import frc.robot.commands.Shooter.ShootCargo;
 import frc.robot.subsystems.*;
 
 /**
@@ -28,6 +29,7 @@ public class RobotContainer {
 
   // Subsystems
   private final Drivetrain sub_drivetrain = new Drivetrain();
+  private final Shooter sub_shooter = new Shooter();
 
   // Drivetrain Commands
   private final Drive com_drive = new Drive(sub_drivetrain);
@@ -37,7 +39,7 @@ public class RobotContainer {
   // Turret Commands
 
   // Shooter Commands
-
+  private final ShootCargo com_shoot_cargo = new ShootCargo(sub_shooter);
   // Transfer Commands
 
   // Intake Commands
@@ -76,6 +78,7 @@ public class RobotContainer {
     // Button 10
     // Button 11
     // Button 12
+    DriverStick.btn_RTrig.whileHeld(com_shoot_cargo);
   }
 
   /**
