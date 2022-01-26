@@ -14,36 +14,36 @@ import frc.robot.RobotMap;
 public class Shooter extends SubsystemBase {
 
   // CREATES NEW MOTOR
-  private TalonFX TopMotor;
-  private TalonFX BottomMotor;
+  private TalonFX topMotor;
+  private TalonFX bottomMotor;
 
   // LINKS TO ROBOT MAP
   public Shooter() {
-    TopMotor = new TalonFX(RobotMap.ShooterMap.TOP_MOTOR_CAN);
-    BottomMotor = new TalonFX(RobotMap.ShooterMap.BOTTOM_MOTOR_CAN);
+    topMotor = new TalonFX(RobotMap.ShooterMap.TOP_MOTOR_CAN);
+    bottomMotor = new TalonFX(RobotMap.ShooterMap.BOTTOM_MOTOR_CAN);
 
     configure();
   }
 
   // SET TO FACTORY DEFAULT
   public void configure() {
-    TopMotor.configFactoryDefault();
-    BottomMotor.configFactoryDefault();
+    topMotor.configFactoryDefault();
+    bottomMotor.configFactoryDefault();
   }
 
   // RESETS COUNT FOR ENCODERS
   public void resetEncoderCounts() {
-    TopMotor.setSelectedSensorPosition(0);
-    BottomMotor.setSelectedSensorPosition(0);
+    topMotor.setSelectedSensorPosition(0);
+    bottomMotor.setSelectedSensorPosition(0);
   }
 
   // GETS AND RETURNS COUNT FOR ENCODERS
   public double getTopMotorEncoderCount() {
-    return TopMotor.getSelectedSensorPosition();
+    return topMotor.getSelectedSensorPosition();
   }
 
   public double getBottomMotorEncoderCount() {
-    return BottomMotor.getSelectedSensorPosition();
+    return bottomMotor.getSelectedSensorPosition();
   }
 
   @Override
