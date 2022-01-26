@@ -49,11 +49,11 @@ public class Shooter extends SubsystemBase {
     return rightMotor.getSelectedSensorPosition();
   }
 
-  public void setShooterVelocity(double a_velocity) {
-    double velocity = a_velocity;
+  public void setShooterVelocity(double a_speed) {
+    double speed = a_speed;
 
-    leftMotor.set(ControlMode.PercentOutput, velocity);
-    rightMotor.set(ControlMode.PercentOutput, velocity);
+    leftMotor.set(ControlMode.PercentOutput, speed);
+    rightMotor.set(ControlMode.PercentOutput, speed);
   }
 
   public double getShooterVelocity() {

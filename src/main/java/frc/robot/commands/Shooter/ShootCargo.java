@@ -27,7 +27,7 @@ public class ShootCargo extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setShooterVelocity(RobotPreferences.ShooterPrefs.shooterMotorVelocity.getValue());
+    shooter.setShooterVelocity(RobotPreferences.ShooterPrefs.shooterMotorSpeed.getValue());
   }
 
   // Called once the command ends or is interrupted.
