@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
  * wherever the
  * constants are needed, to reduce verbosity.
  */
+// Reminder, there are only 9 DIO on Roborio!
 public final class RobotMap {
     public final class DrivetrainMap {
         public static final int LEFT_LEAD_MOTOR_CAN = 0;
@@ -36,6 +37,11 @@ public final class RobotMap {
     }
 
     public final class TransferMap {
+
+        public static final int TOP_BELT_MOTOR_CAN = 40;
+        public static final int BOTTOM_BELT_MOTOR_CAN = 41;
+        public static final int TRANSFER_LIMIT_SWITCH_DIO = 0;
+
     }
 
     public final class IntakeMap {
@@ -59,6 +65,7 @@ public final class RobotMap {
     }
 
     public final class ControllerMap {
+
         public static final int DRIVER_STICK = 0;
     }
 }
