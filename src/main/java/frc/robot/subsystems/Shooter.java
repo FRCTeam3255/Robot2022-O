@@ -4,52 +4,68 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.frcteam3255.preferences.SN_DoublePreference;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class Shooter extends SubsystemBase {
 
   // CREATES NEW MOTOR
-  private TalonFX TopMotor;
-  private TalonFX BottomMotor;
+  private TalonFX leftMotor;
+  private TalonFX rightMotor;
 
   // LINKS TO ROBOT MAP
   public Shooter() {
-    TopMotor = new TalonFX(RobotMap.ShooterMap.TOP_MOTOR_CAN);
-    BottomMotor = new TalonFX(RobotMap.ShooterMap.BOTTOM_MOTOR_CAN);
+    leftMotor = new TalonFX(RobotMap.ShooterMap.LEFT_MOTOR_CAN);
+    rightMotor = new TalonFX(RobotMap.ShooterMap.RIGHT_MOTOR_CAN);
 
     configure();
   }
 
   // SET TO FACTORY DEFAULT
   public void configure() {
-    TopMotor.configFactoryDefault();
-    BottomMotor.configFactoryDefault();
+    leftMotor.configFactoryDefault();
+    rightMotor.configFactoryDefault();
+
+    leftMotor.setInverted(false);
+    rightMotor.setInverted(true);
   }
 
   // RESETS COUNT FOR ENCODERS
   public void resetEncoderCounts() {
-    TopMotor.setSelectedSensorPosition(0);
-    BottomMotor.setSelectedSensorPosition(0);
+    leftMotor.setSelectedSensorPosition(0);
+    rightMotor.setSelectedSensorPosition(0);
   }
 
   // GETS AND RETURNS COUNT FOR ENCODERS
-  public double getTopMotorEncoderCount() {
-    return TopMotor.getSelectedSensorPosition();
+  public double getLeftMotorEncoderCount() {
+    return leftMotor.getSelectedSensorPosition();
   }
 
-  public double getBottomMotorEncoderCount() {
-    return BottomMotor.getSelectedSensorPosition();
+  public double getRightMotorEncoderCount() {
+    return rightMotor.getSelectedSensorPosition();
+  }
+
+  public void setShooterSpeed(double a_speed) {
+    double speed = a_speed;
+
+    leftMotor.set(ControlMode.PercentOutput, speed);
+    rightMotor.set(ControlMode.PercentOutput, speed);
+  }
+
+  public double getShooterVelocity() {
+    return leftMotor.getSelectedSensorVelocity();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Shooter Top Motor", getTopMotorEncoderCount());
-    SmartDashboard.putNumber("Shooter Bottom Motor", getBottomMotorEncoderCount());
+    SmartDashboard.putNumber("Shooter Left Motor", getLeftMotorEncoderCount());
+    SmartDashboard.putNumber("Shooter Right Motor", getRightMotorEncoderCount());
+    SmartDashboard.putNumber("Shooter Velocity", getShooterVelocity());
   }
 }
