@@ -33,8 +33,9 @@ public final class RobotMap {
     public final class Transfer {
 
         public static final int TOP_BELT_MOTOR_CAN = 40;
-        public static final int BOTTOM_BELT_MOTOR_CAN = 40;
-        public static final int LIMIT_SWITCH_TRANSFER = 0;
+        public static final int BOTTOM_BELT_MOTOR_CAN = 41;
+        public static final int LIMIT_SWITCH_TRANSFER = 42;
+        public static final int TRANSFER_COLOR_SENSOR = 43;
 
     }
 
@@ -57,8 +58,4 @@ public final class RobotMap {
     }
 
     public final class Sensor {
-
-        public static final int TRANSFER_COLOR_SENSOR = 0;
-
     }
-}
