@@ -44,7 +44,7 @@ public class Hood extends SubsystemBase {
   }
 
   public double getHoodPosition() {
-    return hoodMotor.getSelectedSensorPosition() / RobotPreferences.HoodMap.hoodCountsPerDegree.getValue();
+    return hoodMotor.getSelectedSensorPosition() / RobotPreferences.HoodPrefs.hoodCountsPerDegree.getValue();
   }
 
   public void moveHoodToDegree(double degree) {
@@ -52,16 +52,16 @@ public class Hood extends SubsystemBase {
     if (degree > RobotMap.HoodMap.HOOD_SAFETY_FORWARD) {
       // doesnt move forward (only move backward)
       if (degree <= 0) {
-        hoodMotor.set(ControlMode.Position, (degree * RobotPreferences.HoodMap.hoodCountsPerDegree.getValue()));
+        hoodMotor.set(ControlMode.Position, (degree * RobotPreferences.HoodPrefs.hoodCountsPerDegree.getValue()));
 
       }
     } else if (isHoodOpen() == true) {
       // doesnt move back (only move forward)
       if (degree >= 0) {
-        hoodMotor.set(ControlMode.Position, (degree * RobotPreferences.HoodMap.hoodCountsPerDegree.getValue()));
+        hoodMotor.set(ControlMode.Position, (degree * RobotPreferences.HoodPrefs.hoodCountsPerDegree.getValue()));
       }
     } else {
-      hoodMotor.set(ControlMode.Position, (degree * RobotPreferences.HoodMap.hoodCountsPerDegree.getValue()));
+      hoodMotor.set(ControlMode.Position, (degree * RobotPreferences.HoodPrefs.hoodCountsPerDegree.getValue()));
     }
   }
 
