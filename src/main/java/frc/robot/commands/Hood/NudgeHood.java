@@ -30,19 +30,7 @@ public class NudgeHood extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (degrees.getValue() > RobotMap.HoodMap.HOOD_SAFETY_FORWARD) {
-      // doesnt move forward (only move backward)
-      if (degrees.getValue() <= 0) {
-        hood.moveHoodToDegree(hood.getHoodPosition() + degrees.getValue());
-      }
-    } else if (hood.isHoodOpen() == true) {
-      // doesnt move back (only move forward)
-      if (degrees.getValue() >= 0) {
-        hood.moveHoodToDegree(hood.getHoodPosition() + degrees.getValue());
-      }
-    } else {
-      hood.moveHoodToDegree(hood.getHoodPosition() + degrees.getValue());
-    }
+    hood.moveHoodToDegree(degrees.getValue());
   }
 
   // Called every time the scheduler runs while the command is scheduled.
