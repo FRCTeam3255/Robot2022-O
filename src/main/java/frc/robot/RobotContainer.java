@@ -42,9 +42,9 @@ public class RobotContainer {
   private final Drive com_drive = new Drive(sub_drivetrain);
 
   // Hood Commands
-  private final NudgeHood com_angle_hood_up = new NudgeHood(sub_hood, RobotPreferences.HoodMap.angleHoodDirectionUp);
+  private final NudgeHood com_angle_hood_up = new NudgeHood(sub_hood, RobotPreferences.HoodPrefs.angleHoodDirectionUp);
   private final NudgeHood com_angle_hood_down = new NudgeHood(sub_hood,
-      RobotPreferences.HoodMap.angleHoodDirectionDown);
+      RobotPreferences.HoodPrefs.angleHoodDirectionDown);
   // Turret Commands
 
   // Shooter Commands
