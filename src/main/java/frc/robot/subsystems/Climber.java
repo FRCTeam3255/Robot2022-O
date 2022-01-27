@@ -44,6 +44,10 @@ public class Climber extends SubsystemBase {
     double speed = a_speed;
 
     climbMotor.set(ControlMode.PercentOutput, speed);
+
+    if (isSafetyMagSwitchPressed() == true) {
+      setClimberSpeed(0);
+    }
   }
 
   // TODO: change when location of mag switch is (ex: isClimberRaised)

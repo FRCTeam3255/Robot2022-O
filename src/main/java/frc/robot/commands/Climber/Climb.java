@@ -33,8 +33,6 @@ public class Climb extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    if (climber.isSafetyMagSwitchPressed() == true)
-      climber.setClimberSpeed(0);
   }
 
   // Returns true when the command should end.
