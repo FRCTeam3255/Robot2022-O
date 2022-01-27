@@ -23,6 +23,7 @@ public final class RobotPreferences {
     }
 
     public static final class IntakePrefs {
+      public final static SN_DoublePreference collectSpeed = new SN_DoublePreference("collectSpeed", 0.80);
     }
 
     public static final class VisionPrefs {
@@ -31,5 +32,4 @@ public final class RobotPreferences {
     public static final class ClimberPrefs {
         public static final SN_DoublePreference climberMotorSpeed = new SN_DoublePreference("climberMotorSpeed", 0.5);
     }
-
 }

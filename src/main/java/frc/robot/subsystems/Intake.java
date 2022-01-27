@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -36,6 +38,12 @@ public class Intake extends SubsystemBase {
   // Reset Encoder Count
   public void resetEncoderCount() {
     intakeMotor.setSelectedSensorPosition(0);
+  }
+
+  public void setIntakeMotorSpeed(double a_speed) {
+    double speed = a_speed;
+
+    intakeMotor.set(ControlMode.PercentOutput, speed);
   }
 
   // Get positons

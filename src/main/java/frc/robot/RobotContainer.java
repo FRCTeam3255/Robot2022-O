@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Drivetrain.*;
-import frc.robot.commands.Shooter.ShootCargo;
+import frc.robot.commands.Intake.*;
+import frc.robot.commands.Shooter.*;
 import frc.robot.subsystems.*;
 
 /**
@@ -29,6 +30,7 @@ public class RobotContainer {
 
   // Subsystems
   private final Drivetrain sub_drivetrain = new Drivetrain();
+  private final Intake sub_intake = new Intake();
   private final Shooter sub_shooter = new Shooter();
 
   // Drivetrain Commands
@@ -43,6 +45,8 @@ public class RobotContainer {
   // Transfer Commands
 
   // Intake Commands
+
+  private final Collect com_collect = new Collect(sub_intake);
 
   // Vision Commands
 
@@ -66,7 +70,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // Button 1
+    // Collect Button
+
+    DriverStick.btn_LTrig.whileHeld(com_collect);
+
     // Button 2
     // Button 3
     // Button 4
