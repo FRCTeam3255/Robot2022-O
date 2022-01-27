@@ -16,6 +16,7 @@ package frc.robot;
  * wherever the
  * constants are needed, to reduce verbosity.
  */
+// Reminder, there are only 9 DIO on Roborio!
 public final class RobotMap {
     public final class Drivetrain {
         public static final int LEFT_LEAD_MOTOR_CAN = 0;
@@ -34,8 +35,7 @@ public final class RobotMap {
 
         public static final int TOP_BELT_MOTOR_CAN = 40;
         public static final int BOTTOM_BELT_MOTOR_CAN = 41;
-        public static final int LIMIT_SWITCH_TRANSFER = 42;
-        public static final int TRANSFER_COLOR_SENSOR = 43;
+        public static final int TRANSFER_LIMIT_SWITCH_DIO = 0;
 
     }
 

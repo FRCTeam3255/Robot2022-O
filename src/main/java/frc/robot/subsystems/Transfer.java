@@ -32,7 +32,7 @@ public class Transfer extends SubsystemBase {
     topBeltMotor = new TalonSRX(RobotMap.Transfer.TOP_BELT_MOTOR_CAN);
     bottomBeltMotor = new TalonSRX(RobotMap.Transfer.BOTTOM_BELT_MOTOR_CAN);
     colorSensor = new ColorSensorV3(i2cPort);
-    transferLimitSwitch = new DigitalInput(RobotMap.Transfer.LIMIT_SWITCH_TRANSFER);
+    transferLimitSwitch = new DigitalInput(RobotMap.Transfer.TRANSFER_LIMIT_SWITCH_DIO);
   }
 
   public void configure() {
