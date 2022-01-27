@@ -4,9 +4,11 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
@@ -36,17 +38,29 @@ public class Climber extends SubsystemBase {
 
   public double getClimberEncoderCount() {
     return climbMotor.getSelectedSensorPosition();
+  }
+
+  public void setClimberSpeed(double a_speed) {
+    double speed = a_speed;
+
+    if (isSafetyMagSwitchPressed() == true) {
+      climbMotor.set(ControlMode.PercentOutput, 0);
+
+    } else if (isSafetyMagSwitchPressed() == false) {
+      climbMotor.set(ControlMode.PercentOutput, speed);
+    }
 
   }
 
   // TODO: change when location of mag switch is (ex: isClimberRaised)
   public boolean isSafetyMagSwitchPressed() {
     return safetyMagSwitch.get();
-
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Climber Motor", getClimberEncoderCount());
+    SmartDashboard.putBoolean("Climber Mag Switch On", isSafetyMagSwitchPressed());
   }
 }
