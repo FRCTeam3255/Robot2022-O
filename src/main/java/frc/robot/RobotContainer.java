@@ -5,11 +5,14 @@
 package frc.robot;
 
 import com.frcteam3255.joystick.SN_DualActionStick;
+import com.frcteam3255.joystick.SN_Extreme3DStick;
 
+import frc.robot.RobotPreferences;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Drivetrain.*;
+import frc.robot.commands.Hood.*;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.subsystems.*;
@@ -27,9 +30,11 @@ public class RobotContainer {
 
   // Joysticks
   public static final SN_DualActionStick DriverStick = new SN_DualActionStick(RobotMap.ControllerMap.DRIVER_STICK);
+  public static final SN_DualActionStick coDriverStick = new SN_DualActionStick(RobotMap.ControllerMap.CODRIVER_STICK);
 
   // Subsystems
   private final Drivetrain sub_drivetrain = new Drivetrain();
+  private final Hood sub_hood = new Hood();
   private final Intake sub_intake = new Intake();
   private final Shooter sub_shooter = new Shooter();
 
@@ -37,7 +42,9 @@ public class RobotContainer {
   private final Drive com_drive = new Drive(sub_drivetrain);
 
   // Hood Commands
-
+  private final NudgeHood com_angle_hood_up = new NudgeHood(sub_hood, RobotPreferences.HoodPrefs.angleHoodDirectionUp);
+  private final NudgeHood com_angle_hood_down = new NudgeHood(sub_hood,
+      RobotPreferences.HoodPrefs.angleHoodDirectionDown);
   // Turret Commands
 
   // Shooter Commands
@@ -70,22 +77,11 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // Collect Button
-
-    DriverStick.btn_LTrig.whileHeld(com_collect);
-
-    // Button 2
-    // Button 3
-    // Button 4
-    // Button 5
-    // Button 6
-    // Button 7
-    // Button 8
-    // Button 9
-    // Button 10
-    // Button 11
-    // Button 12
     DriverStick.btn_RTrig.whileHeld(com_shoot_cargo);
+    DriverStick.btn_LTrig.whileHeld(com_collect);
+    
+    coDriverStick.POV_North.whenPressed(com_angle_hood_up);
+    coDriverStick.POV_South.whenPressed(com_angle_hood_down);
   }
 
   /**
