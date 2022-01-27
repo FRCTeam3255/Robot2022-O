@@ -58,4 +58,6 @@ public final class RobotMap {
     }
 
     public final class Sensor {
+
     }
+}
