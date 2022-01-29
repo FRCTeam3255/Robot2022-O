@@ -43,10 +43,10 @@ public class Climber extends SubsystemBase {
   public void setClimberSpeed(double a_speed) {
     double speed = a_speed;
 
-    if (isSafetyMagSwitchPressed() == true) {
+    if (isSafetyMagSwitchPressed() == false) {
       climbMotor.set(ControlMode.PercentOutput, 0);
 
-    } else if (isSafetyMagSwitchPressed() == false) {
+    } else if (isSafetyMagSwitchPressed() == true) {
       climbMotor.set(ControlMode.PercentOutput, speed);
     }
 

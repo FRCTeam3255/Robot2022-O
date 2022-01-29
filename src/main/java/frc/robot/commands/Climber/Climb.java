@@ -27,12 +27,15 @@ public class Climb extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climber.setClimberSpeed(RobotPreferences.ClimberPrefs.climberMotorSpeed.getValue());
+    double speed = RobotContainer.coDriverStick.getLeftStickY();
+
+    climber.setClimberSpeed(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    climber.setClimberSpeed(0);
   }
 
   // Returns true when the command should end.
