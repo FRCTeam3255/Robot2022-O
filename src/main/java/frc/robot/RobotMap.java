@@ -19,6 +19,8 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
  * constants are needed, to reduce verbosity.
  */
 // Reminder, there are only 9 DIO on Roborio!
+// THE CAN PORTS FOR EVERY SUBSYSTEM WILL GO UP BY 10
+
 public final class RobotMap {
     public final class DrivetrainMap {
         public static final int LEFT_LEAD_MOTOR_CAN = 0;
@@ -28,8 +30,8 @@ public final class RobotMap {
     }
 
     public final class HoodMap {
-        public static final int HOOD_MOTOR_CAN = 30;
-        public static final int HOOD_LIMIT_SWITCH = 31;
+        public static final int HOOD_MOTOR_CAN = 10;
+        public static final int HOOD_LIMIT_SWITCH_DIO = 3;
         public static final int HOOD_SAFETY_FORWARD = 270;
     }
 
@@ -39,15 +41,15 @@ public final class RobotMap {
 
     public final class TransferMap {
 
-        public static final int TOP_BELT_MOTOR_CAN = 40;
-        public static final int BOTTOM_BELT_MOTOR_CAN = 41;
+        public static final int TOP_BELT_MOTOR_CAN = 30;
+        public static final int BOTTOM_BELT_MOTOR_CAN = 31;
         public static final int TRANSFER_LIMIT_SWITCH_DIO = 0;
 
     }
 
     public final class IntakeMap {
 
-        public static final int INTAKE_MOTOR_CAN = 30;
+        public static final int INTAKE_MOTOR_CAN = 40;
         public static final int INTAKE_SOLENOID_PCM_A = 0;
         public static final int INTAKE_SOLENOID_PCM_B = 1;
     }
@@ -56,13 +58,13 @@ public final class RobotMap {
     }
 
     public final class ClimberMap {
-        public static final int CLIMBER_MOTOR_CAN = 30;
+        public static final int CLIMBER_MOTOR_CAN = 50;
         public static final int SAFETY_MAG_SWITCH_DIO = 0;
     }
 
     public final class ShooterMap {
-        public static final int LEFT_MOTOR_CAN = 10;
-        public static final int RIGHT_MOTOR_CAN = 11;
+        public static final int LEFT_MOTOR_CAN = 60;
+        public static final int RIGHT_MOTOR_CAN = 61;
     }
 
     public final class ControllerMap {
