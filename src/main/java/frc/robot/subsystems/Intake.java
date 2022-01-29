@@ -70,6 +70,10 @@ public class Intake extends SubsystemBase {
     intakeSolenoid.set(Value.kForward);
   }
 
+  public void retractIntake() {
+    intakeSolenoid.set(Value.kReverse);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

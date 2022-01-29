@@ -54,9 +54,10 @@ public class RobotContainer {
   // Transfer Commands
 
   // Intake Commands
-
   private final Collect com_collect = new Collect(sub_intake);
+  private final RetractIntake com_retract_intake = new RetractIntake(sub_intake);
   private final DeployIntake com_deploy_intake = new DeployIntake(sub_intake);
+  
   // Vision Commands
 
   // Climber Commands
@@ -84,6 +85,7 @@ public class RobotContainer {
     DriverStick.btn_RTrig.whileHeld(com_shoot_cargo);
     DriverStick.btn_LTrig.whileHeld(com_collect);
 
+    coDriverStick.btn_Y.whenPressed(com_retract_intake);
     coDriverStick.btn_X.whenPressed(com_deploy_intake);
     coDriverStick.POV_North.whenPressed(com_angle_hood_up);
     coDriverStick.POV_South.whenPressed(com_angle_hood_down);
