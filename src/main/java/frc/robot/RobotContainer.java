@@ -44,19 +44,19 @@ public class RobotContainer {
   private final Drive com_drive = new Drive(sub_drivetrain);
 
   // Hood Commands
-  private final NudgeHood com_angle_hood_up = new NudgeHood(sub_hood, RobotPreferences.HoodPrefs.angleHoodDirectionUp);
-  private final NudgeHood com_angle_hood_down = new NudgeHood(sub_hood,
+  private final NudgeHood com_angleHoodUp = new NudgeHood(sub_hood, RobotPreferences.HoodPrefs.angleHoodDirectionUp);
+  private final NudgeHood com_angleHoodDown = new NudgeHood(sub_hood,
       RobotPreferences.HoodPrefs.angleHoodDirectionDown);
   // Turret Commands
 
   // Shooter Commands
-  private final ShootCargo com_shoot_cargo = new ShootCargo(sub_shooter);
+  private final ShootCargo com_shootCargo = new ShootCargo(sub_shooter);
   // Transfer Commands
 
   // Intake Commands
   private final Collect com_collect = new Collect(sub_intake);
-  private final RetractIntake com_retract_intake = new RetractIntake(sub_intake);
-  private final DeployIntake com_deploy_intake = new DeployIntake(sub_intake);
+  private final RetractIntake com_retractIntake = new RetractIntake(sub_intake);
+  private final DeployIntake com_deployIntake = new DeployIntake(sub_intake);
   
   // Vision Commands
 
@@ -82,13 +82,13 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    DriverStick.btn_RTrig.whileHeld(com_shoot_cargo);
+    DriverStick.btn_RTrig.whileHeld(com_shootCargo);
     DriverStick.btn_LTrig.whileHeld(com_collect);
 
-    coDriverStick.btn_Y.whenPressed(com_retract_intake);
-    coDriverStick.btn_X.whenPressed(com_deploy_intake);
-    coDriverStick.POV_North.whenPressed(com_angle_hood_up);
-    coDriverStick.POV_South.whenPressed(com_angle_hood_down);
+    coDriverStick.btn_Y.whenPressed(com_retractIntake);
+    coDriverStick.btn_X.whenPressed(com_deployIntake);
+    coDriverStick.POV_North.whenPressed(com_angleHoodUp);
+    coDriverStick.POV_South.whenPressed(com_angleHoodDown);
 
     // btn_LStick can become btn_RStick for dominant hand
     coDriverStick.btn_LStick.whileHeld(com_climb);
