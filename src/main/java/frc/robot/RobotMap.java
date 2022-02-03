@@ -42,7 +42,8 @@ public final class RobotMap {
 
         public static final int TOP_BELT_MOTOR_CAN = 30;
         public static final int BOTTOM_BELT_MOTOR_CAN = 31;
-        public static final int TRANSFER_LIMIT_SWITCH_DIO = 0;
+        public static final int TRANSFER_TOP_LIMIT_SWITCH_DIO = 1;
+        public static final int TRANSFER_BOTTOM_LIMIT_SWITCH_DIO = 2;
 
     }
 

@@ -41,6 +41,7 @@ public class RobotContainer {
   private final Intake sub_intake = new Intake();
   private final Shooter sub_shooter = new Shooter();
   private final Climber sub_climber = new Climber();
+  private final Transfer sub_transfer = new Transfer();
 
   // Drivetrain Commands
   private final Drive com_drive = new Drive(sub_drivetrain);
@@ -56,7 +57,7 @@ public class RobotContainer {
   // Transfer Commands
 
   // Intake Commands
-  private final Collect com_collect = new Collect(sub_intake);
+  private final CollectCargo com_collect = new CollectCargo(sub_intake, sub_transfer);
   private final RetractIntake com_retractIntake = new RetractIntake(sub_intake);
   private final DeployIntake com_deployIntake = new DeployIntake(sub_intake);
 
