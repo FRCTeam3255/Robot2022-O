@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,6 +36,12 @@ public class Turret extends SubsystemBase {
   // GETS AND RETURNS COUNT FOR ENCONDERS
   public double getTurretMotorEncoderCount() {
     return turretMotor.getSelectedSensorPosition();
+  }
+
+  public void setTurretSpeed(double a_rotate) {
+    double rotate = a_rotate;
+
+    turretMotor.set(ControlMode.PercentOutput, rotate);
   }
 
   @Override

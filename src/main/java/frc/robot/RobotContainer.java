@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Hood.*;
+import frc.robot.commands.Turret.*;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.commands.Climber.*;
@@ -38,6 +39,7 @@ public class RobotContainer {
   // Subsystems
   private final Drivetrain sub_drivetrain = new Drivetrain();
   private final Hood sub_hood = new Hood();
+  private final Turret sub_turret = new Turret();
   private final Intake sub_intake = new Intake();
   private final Shooter sub_shooter = new Shooter();
   private final Climber sub_climber = new Climber();
@@ -51,6 +53,7 @@ public class RobotContainer {
   private final SteepenHood com_steepen_hood = new SteepenHood(sub_hood);
 
   // Turret Commands
+  private final ManualRotate com_manualRotate = new ManualRotate(sub_turret);
 
   // Shooter Commands
   private final ShootCargo com_shootCargo = new ShootCargo(sub_shooter);
@@ -91,6 +94,7 @@ public class RobotContainer {
 
     coDriverStick.btn_Y.whenPressed(com_retractIntake);
     coDriverStick.btn_X.whenPressed(com_deployIntake);
+    coDriverStick.POV_West.whileHeld(com_manualRotate);
 
     coDriverStick.btn_A.whenPressed(com_steepen_hood);
     coDriverStick.btn_B.whenPressed(com_shallow_hood);
