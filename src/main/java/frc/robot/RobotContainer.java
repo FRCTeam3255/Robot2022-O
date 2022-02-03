@@ -44,9 +44,9 @@ public class RobotContainer {
   private final Drive com_drive = new Drive(sub_drivetrain);
 
   // Hood Commands
-  private final NudgeHood com_angleHoodUp = new NudgeHood(sub_hood, RobotPreferences.HoodPrefs.angleHoodDirectionUp);
-  private final NudgeHood com_angleHoodDown = new NudgeHood(sub_hood,
-      RobotPreferences.HoodPrefs.angleHoodDirectionDown);
+  private final ShallowHood com_shallow_hood = new ShallowHood(sub_hood);
+  private final SteepenHood com_steepen_hood = new SteepenHood(sub_hood);
+
   // Turret Commands
 
   // Shooter Commands
@@ -57,7 +57,7 @@ public class RobotContainer {
   private final Collect com_collect = new Collect(sub_intake);
   private final RetractIntake com_retractIntake = new RetractIntake(sub_intake);
   private final DeployIntake com_deployIntake = new DeployIntake(sub_intake);
-  
+
   // Vision Commands
 
   // Climber Commands
@@ -87,8 +87,9 @@ public class RobotContainer {
 
     coDriverStick.btn_Y.whenPressed(com_retractIntake);
     coDriverStick.btn_X.whenPressed(com_deployIntake);
-    coDriverStick.POV_North.whenPressed(com_angleHoodUp);
-    coDriverStick.POV_South.whenPressed(com_angleHoodDown);
+
+    coDriverStick.btn_A.whenPressed(com_steepen_hood);
+    coDriverStick.btn_B.whenPressed(com_shallow_hood);
 
     // btn_LStick can become btn_RStick for dominant hand
     coDriverStick.btn_LStick.whileHeld(com_climb);
