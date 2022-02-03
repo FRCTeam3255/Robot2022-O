@@ -10,7 +10,9 @@ import com.frcteam3255.joystick.SN_Extreme3DStick;
 import frc.robot.RobotPreferences;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Hood.*;
 import frc.robot.commands.Intake.*;
@@ -57,7 +59,7 @@ public class RobotContainer {
   private final Collect com_collect = new Collect(sub_intake);
   private final RetractIntake com_retractIntake = new RetractIntake(sub_intake);
   private final DeployIntake com_deployIntake = new DeployIntake(sub_intake);
-  
+
   // Vision Commands
 
   // Climber Commands
@@ -70,6 +72,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    configureDashboardButtons();
     sub_drivetrain.setDefaultCommand(com_drive);
   }
 
@@ -92,6 +95,13 @@ public class RobotContainer {
 
     // btn_LStick can become btn_RStick for dominant hand
     coDriverStick.btn_LStick.whileHeld(com_climb);
+  }
+
+  /**
+   * Use this method to define your dashboard buttons
+   */
+  private void configureDashboardButtons() {
+
   }
 
   /**
