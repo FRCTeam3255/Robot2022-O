@@ -30,9 +30,8 @@ public final class RobotMap {
     }
 
     public final class HoodMap {
-        public static final int HOOD_MOTOR_CAN = 10;
-        public static final int HOOD_LIMIT_SWITCH_DIO = 3;
-        public static final int HOOD_SAFETY_FORWARD = 270;
+        public static final int HOOD_SOLENOID_PCM_A = 2;
+        public static final int HOOD_SOLENOID_PCM_B = 3;
     }
 
     public final class TurretMap {

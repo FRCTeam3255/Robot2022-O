@@ -9,6 +9,9 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.frcteam3255.preferences.SN_DoublePreference;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
@@ -16,60 +19,42 @@ import frc.robot.RobotPreferences;
 
 public class Hood extends SubsystemBase {
 
-  private TalonSRX hoodMotor;
-  private DigitalInput hoodLimitSwitch;
+  private DoubleSolenoid hoodSolenoid;
 
   /** Creates a new Hood. */
 
   public Hood() {
-    hoodMotor = new TalonSRX(RobotMap.HoodMap.HOOD_MOTOR_CAN);
-    hoodMotor.config_kP(0, 1);
-    hoodLimitSwitch = new DigitalInput(RobotMap.HoodMap.HOOD_LIMIT_SWITCH_DIO);
-    configure();
+    hoodSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.HoodMap.HOOD_SOLENOID_PCM_A,
+        RobotMap.HoodMap.HOOD_SOLENOID_PCM_B);
+    // configure is not needed since this is a solenoid
   }
 
-  public void configure() {
-    hoodMotor.configFactoryDefault();
-  }
+  // check if solenoid is extended
+  public boolean isHoodSteep() {
+    Value hoodSolenoidStatus = hoodSolenoid.get();
+    boolean isHoodSteep = false;
 
-  public void resetEncoderCount() {
-    hoodMotor.setSelectedSensorPosition(0);
-  }
-
-  public double getHoodEncoderCount() {
-    return hoodMotor.getSelectedSensorPosition();
-  }
-
-  public boolean isHoodOpen() {
-    return hoodLimitSwitch.get();
-  }
-
-  public double getHoodPosition() {
-    return hoodMotor.getSelectedSensorPosition() / RobotPreferences.HoodPrefs.hoodCountsPerDegree.getValue();
-  }
-
-  public void moveHoodToDegree(double degree) {
-
-    if (degree > RobotMap.HoodMap.HOOD_SAFETY_FORWARD) {
-      // doesnt move forward (only move backward)
-      if (degree <= 0) {
-        hoodMotor.set(ControlMode.Position, (degree * RobotPreferences.HoodPrefs.hoodCountsPerDegree.getValue()));
-
-      }
-    } else if (isHoodOpen() == true) {
-      // doesnt move back (only move forward)
-      if (degree >= 0) {
-        hoodMotor.set(ControlMode.Position, (degree * RobotPreferences.HoodPrefs.hoodCountsPerDegree.getValue()));
-      }
+    if (hoodSolenoidStatus == DoubleSolenoid.Value.kForward) {
+      isHoodSteep = true;
     } else {
-      hoodMotor.set(ControlMode.Position, (degree * RobotPreferences.HoodPrefs.hoodCountsPerDegree.getValue()));
+      isHoodSteep = false;
     }
+
+    return isHoodSteep;
+  }
+  // solenoid commands
+
+  public void steepenHood() {
+    hoodSolenoid.set(Value.kForward);
+  }
+
+  public void shallowHood() {
+    hoodSolenoid.set(Value.kReverse);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Hood Encoder Count", getHoodEncoderCount());
-    SmartDashboard.putBoolean("Hood Open", isHoodOpen());
+    SmartDashboard.putBoolean("Hood Solenoid", isHoodSteep());
   }
 }
