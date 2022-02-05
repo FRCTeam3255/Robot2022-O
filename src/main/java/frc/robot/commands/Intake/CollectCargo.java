@@ -34,24 +34,31 @@ public class CollectCargo extends CommandBase {
   @Override
   public void execute() {
 
-    // Top Belt Motors
-    if (transfer.isTopBallCollected() == true) {
-      transfer.setTopBeltMotorSpeed(0);
+    // Reject ball command
+    if (intake.ballColorMatchesAlliance() == false) {
+      intake.setIntakeMotorSpeed(RobotPreferences.IntakePrefs.rejectSpeed.getValue());
+    } else {
 
-    } else if (transfer.isTopBallCollected() == false) {
-      transfer.setTopBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());
-    }
+      // Motor Controlling
+      // Top Belt Motors
+      if (transfer.isTopBallCollected() == true) {
+        transfer.setTopBeltMotorSpeed(0);
 
-    // Bottom Belt Motors
-    if (transfer.isBottomBallCollected() && transfer.isTopBallCollected() == true) {
-      transfer.setBottomBeltMotorSpeed(0);
-      transfer.setEntranceBeltMotorSpeed(0);
-      intake.setIntakeMotorSpeed(0);
+      } else if (transfer.isTopBallCollected() == false) {
+        transfer.setTopBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());
+      }
 
-    } else if (transfer.isBottomBallCollected() && transfer.isTopBallCollected() == false) {
-      transfer.setBottomBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());
-      transfer.setEntranceBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());
-      intake.setIntakeMotorSpeed(RobotPreferences.IntakePrefs.collectSpeed.getValue());
+      // Bottom Belt Motors
+      if (transfer.isBottomBallCollected() == true && transfer.isTopBallCollected() == true) {
+        transfer.setBottomBeltMotorSpeed(0);
+        transfer.setEntranceBeltMotorSpeed(0);
+        intake.setIntakeMotorSpeed(0);
+
+      } else {
+        transfer.setBottomBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());
+        transfer.setEntranceBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());
+        intake.setIntakeMotorSpeed(RobotPreferences.IntakePrefs.collectSpeed.getValue());
+      }
     }
   }
 

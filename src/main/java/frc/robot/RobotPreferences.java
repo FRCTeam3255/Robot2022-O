@@ -26,6 +26,7 @@ public final class RobotPreferences {
 
   public static final class IntakePrefs {
     public final static SN_DoublePreference collectSpeed = new SN_DoublePreference("collectSpeed", 0.80);
+    public final static SN_DoublePreference rejectSpeed = new SN_DoublePreference("rejectSpeed", -0.80);
     public final static SN_IntPreference colorSensorMinProximity = new SN_IntPreference("colorSensorMinProximity",
         1000);
   }
