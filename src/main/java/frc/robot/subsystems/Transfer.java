@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 //if  rev robotics import is red, use ctrl shift p and clean java workspace
 import com.revrobotics.ColorSensorV3;
@@ -24,17 +25,17 @@ public class Transfer extends SubsystemBase {
    * Creates a new Transfer.
    */
 
-  private TalonSRX topBeltMotor;
-  private TalonSRX bottomBeltMotor;
-  private TalonSRX entranceBeltMotor;
+  private TalonFX topBeltMotor;
+  private TalonFX bottomBeltMotor;
+  private TalonFX entranceBeltMotor;
   private ColorSensorV3 colorSensor;
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private DigitalInput transferTopLimitSwitch;
   private DigitalInput transferBottomLimitSwitch;
 
   public Transfer() {
-    topBeltMotor = new TalonSRX(RobotMap.TransferMap.TOP_BELT_MOTOR_CAN);
-    bottomBeltMotor = new TalonSRX(RobotMap.TransferMap.BOTTOM_BELT_MOTOR_CAN);
+    topBeltMotor = new TalonFX(RobotMap.TransferMap.TOP_BELT_MOTOR_CAN);
+    bottomBeltMotor = new TalonFX(RobotMap.TransferMap.BOTTOM_BELT_MOTOR_CAN);
     colorSensor = new ColorSensorV3(i2cPort);
     transferTopLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_TOP_LIMIT_SWITCH_DIO);
     transferBottomLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_BOTTOM_LIMIT_SWITCH_DIO);
