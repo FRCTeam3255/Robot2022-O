@@ -56,7 +56,7 @@ public class Drivetrain extends SubsystemBase {
 
   }
 
-  public void resetEncoderCount() {
+  public void resetDrivetrainEncodersCount() {
     leftLeadMotor.setSelectedSensorPosition(0);
     rightLeadMotor.setSelectedSensorPosition(0);
   }

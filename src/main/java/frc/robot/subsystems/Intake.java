@@ -40,7 +40,7 @@ public class Intake extends SubsystemBase {
   }
 
   // Reset Encoder Count
-  public void resetEncoderCount() {
+  public void resetIntakeEncoderCount() {
     intakeMotor.setSelectedSensorPosition(0);
   }
 

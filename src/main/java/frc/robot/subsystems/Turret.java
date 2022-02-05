@@ -28,8 +28,8 @@ public class Turret extends SubsystemBase {
     turretMotor.configFactoryDefault();
   }
 
-  // RESETS COUNT FOR ENCONDERS
-  public void resetEncoderCounts() {
+  // RESETS COUNT FOR ENCODERS
+  public void resetTurretEncoderCounts() {
     turretMotor.setSelectedSensorPosition(0);
   }
 

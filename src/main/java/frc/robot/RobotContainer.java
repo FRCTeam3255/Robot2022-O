@@ -107,6 +107,16 @@ public class RobotContainer {
    * Use this method to define your dashboard buttons
    */
   private void configureDashboardButtons() {
+    SmartDashboard.putData("Reset Climber Encoders",
+        new InstantCommand(sub_climber::resetClimberEncoderCount, sub_climber));
+    SmartDashboard.putData("Reset Drivetrain Encoders",
+        new InstantCommand(sub_drivetrain::resetDrivetrainEncodersCount, sub_drivetrain));
+    SmartDashboard.putData("Reset Intake Encoders",
+        new InstantCommand(sub_intake::resetIntakeEncoderCount, sub_intake));
+    SmartDashboard.putData("Reset Turret Encoders",
+        new InstantCommand(sub_turret::resetTurretEncoderCounts, sub_turret));
+    SmartDashboard.putData("Reset Shooter Encoders",
+        new InstantCommand(sub_shooter::resetShooterEncoderCounts, sub_shooter));
 
   }
 

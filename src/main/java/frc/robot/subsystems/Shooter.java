@@ -36,7 +36,7 @@ public class Shooter extends SubsystemBase {
   }
 
   // RESETS COUNT FOR ENCODERS
-  public void resetEncoderCounts() {
+  public void resetShooterEncoderCounts() {
     leftMotor.setSelectedSensorPosition(0);
     rightMotor.setSelectedSensorPosition(0);
   }
