@@ -30,8 +30,8 @@ public final class RobotMap {
     }
 
     public final class HoodMap {
-        public static final int HOOD_SOLENOID_PCM_A = 2;
-        public static final int HOOD_SOLENOID_PCM_B = 3;
+        public static final int HOOD_SOLENOID_STEEP_ANGLE_PCM_A = 2;
+        public static final int HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B = 3;
     }
 
     public final class TurretMap {
