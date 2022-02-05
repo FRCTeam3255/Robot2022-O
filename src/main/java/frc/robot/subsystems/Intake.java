@@ -27,6 +27,10 @@ public class Intake extends SubsystemBase {
   private ColorSensorV3 intakeColorSensorV3;
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
 
+  // Create the Variables for Deployed and Retracted
+  public DoubleSolenoid.Value intakeDeploy = Value.kForward;
+  public DoubleSolenoid.Value intakeRetract = Value.kReverse;
+
   // Link to Robot Map
   public Intake() {
     intakeMotor = new TalonFX(RobotMap.IntakeMap.INTAKE_MOTOR_CAN);
@@ -53,7 +57,7 @@ public class Intake extends SubsystemBase {
     intakeMotor.set(ControlMode.PercentOutput, speed);
   }
 
-  // Get positons
+  // Get positions
   public double getIntakeMotorCount() {
     return intakeMotor.getSelectedSensorPosition();
   }
@@ -62,7 +66,7 @@ public class Intake extends SubsystemBase {
     Value intakeSolenoidStatus = intakeSolenoid.get();
     boolean isIntakeDeployed = false;
 
-    if (intakeSolenoidStatus == DoubleSolenoid.Value.kForward) {
+    if (intakeSolenoidStatus == intakeDeploy) {
       isIntakeDeployed = true;
     } else {
       isIntakeDeployed = false;
@@ -74,14 +78,14 @@ public class Intake extends SubsystemBase {
 
   // solenoid do solenoid thing!!
   public void deployIntake() {
-    intakeSolenoid.set(Value.kForward);
+    intakeSolenoid.set(intakeDeploy);
   }
 
   public void retractIntake() {
-    intakeSolenoid.set(Value.kReverse);
+    intakeSolenoid.set(intakeRetract);
   }
 
-  // color sesnror do colro senror thingss
+  // color sensor do color sensor things
   public int getRed() {
     return intakeColorSensorV3.getRed();
   }
@@ -118,7 +122,7 @@ public class Intake extends SubsystemBase {
     } else if (getBallColor() == ballColor.none) {
       return "none";
     } else {
-      return "huh";
+      return "BALL WENT KABOOM!!!!!!";
     }
   }
 
