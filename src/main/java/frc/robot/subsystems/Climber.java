@@ -29,15 +29,15 @@ public class Climber extends SubsystemBase {
 
   public Climber() {
 
-    climberBottomSafetySwitch = new DigitalInput(RobotMap.ClimberMap.SAFETY_MAG_SWITCH_DIO);
+    climberBottomSafetySwitch = new DigitalInput(RobotMap.ClimberMap.BOTTOM_SAFETY_MAG_SWITCH_DIO);
     climbMotor = new TalonFX(RobotMap.ClimberMap.CLIMBER_MOTOR_CAN);
-    climberLockPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.ClimberMap.CLIMBER_LOCK_PISTON_A,
-        RobotMap.ClimberMap.CLIMBER_LOCK_PISTON_B);
+    climberLockPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.ClimberMap.LOCK_PISTON_PCM_A,
+        RobotMap.ClimberMap.LOCK_PISTON_PCM_B);
     configure();
 
   }
 
-  public boolean isClimberLockInitiated() {
+  public boolean isClimberLocked() {
     Value climberLockStatus = climberLockPiston.get();
     boolean isClimberLocked = false;
 
@@ -84,7 +84,7 @@ public class Climber extends SubsystemBase {
       climbMotor.set(ControlMode.PercentOutput, 0);
 
     } else if (isClimberAtBottom() == true) {
-      climbMotor.set(ControlMode.PercentOutput, speed);
+      climbMotor.set(ControlMode.PercentOutput, RobotPreferences.ClimberPrefs.climberMotorSpeed.getValue() * speed);
     }
 
   }
@@ -99,6 +99,6 @@ public class Climber extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Climber Motor", getClimberEncoderCount());
     SmartDashboard.putBoolean("Is Climber At Bottom", isClimberAtBottom());
-    SmartDashboard.putBoolean("Is Climber Locked", isClimberLockInitiated());
+    SmartDashboard.putBoolean("Is Climber Locked", isClimberLocked());
   }
 }
