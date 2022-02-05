@@ -23,6 +23,10 @@ public class Climber extends SubsystemBase {
   private DigitalInput climberBottomSafetySwitch;
   private DoubleSolenoid climberLockPiston;
 
+  // Solenoid Variables
+  private DoubleSolenoid.Value lockDeploy = Value.kForward;
+  private DoubleSolenoid.Value lockRetract = Value.kReverse;
+
   public Climber() {
 
     climberBottomSafetySwitch = new DigitalInput(RobotMap.ClimberMap.SAFETY_MAG_SWITCH_DIO);
@@ -37,7 +41,7 @@ public class Climber extends SubsystemBase {
     Value climberLockStatus = climberLockPiston.get();
     boolean isClimberLocked = false;
 
-    if (climberLockStatus == DoubleSolenoid.Value.kForward) {
+    if (climberLockStatus == lockDeploy) {
       isClimberLocked = true;
     } else {
       isClimberLocked = false;
@@ -48,11 +52,11 @@ public class Climber extends SubsystemBase {
 
   // solenoid commands
   public void lockClimber() {
-    climberLockPiston.set(Value.kForward);
+    climberLockPiston.set(lockDeploy);
   }
 
   public void unlockClimber() {
-    climberLockPiston.set(Value.kReverse);
+    climberLockPiston.set(lockRetract);
   }
 
   private void configure() {
