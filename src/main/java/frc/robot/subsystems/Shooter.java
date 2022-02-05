@@ -55,6 +55,7 @@ public class Shooter extends SubsystemBase {
 
     leftMotor.set(ControlMode.PercentOutput, speed);
     rightMotor.set(ControlMode.PercentOutput, speed);
+
   }
 
   public double getShooterVelocity() {
