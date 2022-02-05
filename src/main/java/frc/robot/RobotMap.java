@@ -60,6 +60,8 @@ public final class RobotMap {
     public final class ClimberMap {
         public static final int CLIMBER_MOTOR_CAN = 50;
         public static final int SAFETY_MAG_SWITCH_DIO = 0;
+        public static final int CLIMBER_LOCK_PISTON_A = 4;
+        public static final int CLIMBER_LOCK_PISTON_B = 5;
     }
 
     public final class ShooterMap {
