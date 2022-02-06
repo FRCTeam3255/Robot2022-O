@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Turret;
 
-public class ManualRotate extends CommandBase {
+public class ManualRotateTurret extends CommandBase {
   Turret turret;
 
   /** Creates a new ManualRotate. */
-  public ManualRotate(Turret sub_turret) {
+  public ManualRotateTurret(Turret sub_turret) {
     // Use addRequirements() here to declare subsystem dependencies.
     turret = sub_turret;
     addRequirements(sub_turret);

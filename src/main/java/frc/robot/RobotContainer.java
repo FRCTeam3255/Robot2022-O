@@ -48,10 +48,11 @@ public class RobotContainer {
   private final SteepenHood com_steepen_hood = new SteepenHood(sub_hood);
 
   // Turret Commands
-  private final ManualRotate com_manualRotate = new ManualRotate(sub_turret);
+  private final ManualRotateTurret com_manualRotateTurret = new ManualRotateTurret(sub_turret);
 
   // Shooter Commands
   private final PushCargoToShooter com_shootCargo = new PushCargoToShooter(sub_shooter, sub_transfer);
+  private final SpinFlywheel com_spinFlywheel = new SpinFlywheel(sub_shooter);
   // Transfer Commands
 
   // Intake Commands
@@ -83,11 +84,12 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     DriverStick.btn_RTrig.whileHeld(com_shootCargo);
+    DriverStick.btn_RTrig.whileHeld(com_spinFlywheel);
     DriverStick.btn_LTrig.whileHeld(com_collect);
 
     coDriverStick.btn_Y.whenPressed(com_retractIntake);
     coDriverStick.btn_X.whenPressed(com_deployIntake);
-    coDriverStick.POV_West.whileHeld(com_manualRotate);
+    coDriverStick.POV_West.whileHeld(com_manualRotateTurret);
 
     coDriverStick.btn_A.whenPressed(com_steepen_hood);
     coDriverStick.btn_B.whenPressed(com_shallow_hood);
