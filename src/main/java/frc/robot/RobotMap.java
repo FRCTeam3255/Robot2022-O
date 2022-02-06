@@ -21,15 +21,15 @@ package frc.robot;
 
 public final class RobotMap {
     public final class DrivetrainMap {
-        public static final int LEFT_LEAD_MOTOR_CAN = 0;
-        public static final int RIGHT_LEAD_MOTOR_CAN = 1;
-        public static final int LEFT_FOLLOW_MOTOR_CAN = 2;
-        public static final int RIGHT_FOLLOW_MOTOR_CAN = 3;
+        public static final int LEFT_LEAD_MOTOR_CAN = 10;
+        public static final int RIGHT_LEAD_MOTOR_CAN = 11;
+        public static final int LEFT_FOLLOW_MOTOR_CAN = 12;
+        public static final int RIGHT_FOLLOW_MOTOR_CAN = 13;
     }
 
     public final class HoodMap {
-        public static final int HOOD_SOLENOID_STEEP_ANGLE_PCM_A = 2;
-        public static final int HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B = 3;
+        public static final int HOOD_SOLENOID_STEEP_ANGLE_PCM_A = 0;
+        public static final int HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B = 1;
     }
 
     public final class TurretMap {
@@ -41,16 +41,16 @@ public final class RobotMap {
         public static final int TOP_BELT_MOTOR_CAN = 30;
         public static final int BOTTOM_BELT_MOTOR_CAN = 31;
         public static final int ENTRANCE_BELT_MOTOR_CAN = 32;
-        public static final int TRANSFER_TOP_LIMIT_SWITCH_DIO = 1;
-        public static final int TRANSFER_BOTTOM_LIMIT_SWITCH_DIO = 2;
+        public static final int TRANSFER_TOP_LIMIT_SWITCH_DIO = 0;
+        public static final int TRANSFER_BOTTOM_LIMIT_SWITCH_DIO = 1;
 
     }
 
     public final class IntakeMap {
 
         public static final int INTAKE_MOTOR_CAN = 40;
-        public static final int INTAKE_SOLENOID_PCM_A = 0;
-        public static final int INTAKE_SOLENOID_PCM_B = 1;
+        public static final int INTAKE_SOLENOID_PCM_A = 2;
+        public static final int INTAKE_SOLENOID_PCM_B = 3;
     }
 
     public final class VisionMap {
@@ -58,7 +58,7 @@ public final class RobotMap {
 
     public final class ClimberMap {
         public static final int CLIMBER_MOTOR_CAN = 50;
-        public static final int BOTTOM_SAFETY_MAG_SWITCH_DIO = 0;
+        public static final int BOTTOM_SAFETY_MAG_SWITCH_DIO = 2;
         public static final int LOCK_PISTON_PCM_A = 4;
         public static final int LOCK_PISTON_PCM_B = 5;
     }

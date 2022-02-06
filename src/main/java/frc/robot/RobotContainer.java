@@ -5,9 +5,6 @@
 package frc.robot;
 
 import com.frcteam3255.joystick.SN_DualActionStick;
-import com.frcteam3255.joystick.SN_Extreme3DStick;
-
-import frc.robot.RobotPreferences;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

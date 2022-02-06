@@ -5,8 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
@@ -14,11 +13,11 @@ import frc.robot.RobotMap;
 public class Turret extends SubsystemBase {
   /** Creates a new Turret. */
 
-  private TalonSRX turretMotor;
+  private TalonFX turretMotor;
 
   // LINKS TO ROBOT MAP
   public Turret() {
-    turretMotor = new TalonSRX(RobotMap.TurretMap.TURRET_MOTOR_CAN);
+    turretMotor = new TalonFX(RobotMap.TurretMap.TURRET_MOTOR_CAN);
 
     configure();
   }
