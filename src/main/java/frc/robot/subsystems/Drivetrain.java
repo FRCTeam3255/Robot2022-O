@@ -33,14 +33,14 @@ public class Drivetrain extends SubsystemBase {
   public void configure() {
 
     // Left
+    leftLeadMotor.configFactoryDefault();
+    leftFollowMotor.configFactoryDefault();
     leftLeadMotor.setInverted(false);
     leftFollowMotor.setInverted(TalonFXInvertType.FollowMaster);
     leftLeadMotor.setSensorPhase(false);
     leftFollowMotor.setNeutralMode(NeutralMode.Brake);
     leftLeadMotor.setNeutralMode(NeutralMode.Brake);
 
-    leftLeadMotor.configFactoryDefault();
-    leftFollowMotor.configFactoryDefault();
     leftFollowMotor.follow(leftLeadMotor);
 
     // Right
