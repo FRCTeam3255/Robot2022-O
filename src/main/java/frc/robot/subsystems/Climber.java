@@ -80,10 +80,10 @@ public class Climber extends SubsystemBase {
   public void setClimberSpeed(double a_speed) {
     double speed = a_speed;
 
-    if (isClimberAtBottom() == false) {
+    if (isClimberAtBottom() == true && speed < 0) {
       climbMotor.set(ControlMode.PercentOutput, 0);
 
-    } else if (isClimberAtBottom() == true) {
+    } else {
       climbMotor.set(ControlMode.PercentOutput, RobotPreferences.ClimberPrefs.climberMotorSpeed.getValue() * speed);
     }
 
@@ -91,7 +91,7 @@ public class Climber extends SubsystemBase {
 
   // TODO: change when location of mag switch is (ex: isClimberRaised)
   public boolean isClimberAtBottom() {
-    return climberBottomSafetySwitch.get();
+    return !climberBottomSafetySwitch.get();
   }
 
   @Override
