@@ -8,6 +8,9 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
+import frc.robot.RobotPreferences;
 import frc.robot.RobotMap;
 
 public class Turret extends SubsystemBase {
@@ -25,11 +28,21 @@ public class Turret extends SubsystemBase {
   // SET TO FACTORY DEFAULT
   public void configure() {
     turretMotor.configFactoryDefault();
+
+    // soft limit
+    turretMotor.configForwardSoftLimitThreshold(RobotPreferences.TurretPrefs.turretMaxEncoderCount.getValue(), 0);
+    turretMotor.configReverseSoftLimitThreshold(RobotPreferences.TurretPrefs.turretMinEncoderCount.getValue(), 0);
+    turretMotor.configForwardSoftLimitEnable(true, 0);
+    turretMotor.configReverseSoftLimitEnable(true, 0);
   }
 
   // RESETS COUNT FOR ENCODERS
   public void resetTurretEncoderCounts() {
     turretMotor.setSelectedSensorPosition(0);
+
+    // soft limit
+    turretMotor.configForwardSoftLimitThreshold(RobotPreferences.TurretPrefs.turretMaxEncoderCount.getValue(), 0);
+    turretMotor.configReverseSoftLimitThreshold(RobotPreferences.TurretPrefs.turretMinEncoderCount.getValue(), 0);
   }
 
   // GETS AND RETURNS COUNT FOR ENCONDERS
@@ -41,6 +54,7 @@ public class Turret extends SubsystemBase {
     double rotate = a_rotate;
 
     turretMotor.set(ControlMode.PercentOutput, rotate);
+
   }
 
   @Override
