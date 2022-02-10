@@ -20,9 +20,11 @@ public final class RobotPreferences {
     public static final SN_DoublePreference turretMotorEncoderAngleMultiplier = new SN_DoublePreference(
         "turretMotorEncoderAngleMultipler", 90);
 
-    public static final SN_DoublePreference turretMaxEncoderCount = new SN_DoublePreference("turretMaxEncoderCount", 0);
+    public static final SN_DoublePreference turretMaxEncoderCount = new SN_DoublePreference("turretMaxEncoderCount",
+        999999);
 
-    public static final SN_DoublePreference turretMinEncoderCount = new SN_DoublePreference("turretMinEncoderCount", 0);
+    public static final SN_DoublePreference turretMinEncoderCount = new SN_DoublePreference("turretMinEncoderCount",
+        -999999);
   }
 
   public static final class TransferPrefs {

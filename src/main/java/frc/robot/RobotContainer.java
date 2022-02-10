@@ -85,8 +85,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     DriverStick.btn_RTrig.whileHeld(com_shootCargo);
     DriverStick.btn_RTrig.whileHeld(com_spinFlywheel);
-    DriverStick.btn_LTrig.whileHeld(com_collect);
 
+    coDriverStick.btn_LTrig.whileHeld(com_collect);
     coDriverStick.btn_Y.whenPressed(com_retractIntake);
     coDriverStick.btn_X.whenPressed(com_deployIntake);
     coDriverStick.POV_West.whileHeld(com_manualRotateTurret);
