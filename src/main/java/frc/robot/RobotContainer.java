@@ -39,6 +39,7 @@ public class RobotContainer {
   private final Shooter sub_shooter = new Shooter();
   private final Climber sub_climber = new Climber();
   private final Transfer sub_transfer = new Transfer();
+  public static final NavX sub_navX = new NavX();
 
   // Drivetrain Commands
   private final Drive com_drive = new Drive(sub_drivetrain);
@@ -112,6 +113,10 @@ public class RobotContainer {
         new InstantCommand(sub_turret::resetTurretEncoderCounts, sub_turret));
     SmartDashboard.putData("Reset Shooter Encoders",
         new InstantCommand(sub_shooter::resetShooterEncoderCounts, sub_shooter));
+    SmartDashboard.putData("Reset NavX Heading",
+        new InstantCommand(sub_navX::resetHeading, sub_navX));
+    SmartDashboard.putData("Calibrate NavX",
+        new InstantCommand(sub_navX::calibrate, sub_navX));
 
   }
 
