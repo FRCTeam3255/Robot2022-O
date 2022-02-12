@@ -84,8 +84,8 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    DriverStick.btn_RTrig.whileHeld(com_pushCargoToShooter);
-    DriverStick.btn_RTrig.whileHeld(com_spinFlywheel);
+    coDriverStick.btn_RTrig.whileHeld(com_pushCargoToShooter);
+    coDriverStick.btn_RTrig.whileHeld(com_spinFlywheel);
 
     coDriverStick.btn_LTrig.whileHeld(com_collect);
     coDriverStick.btn_Y.whenPressed(com_retractIntake);
