@@ -52,7 +52,7 @@ public class RobotContainer {
   private final ManualRotateTurret com_manualRotateTurret = new ManualRotateTurret(sub_turret);
 
   // Shooter Commands
-  private final PushCargoToShooter com_shootCargo = new PushCargoToShooter(sub_shooter, sub_transfer);
+  private final PushCargoToShooter com_pushCargoToShooter = new PushCargoToShooter(sub_shooter, sub_transfer);
   private final SpinFlywheel com_spinFlywheel = new SpinFlywheel(sub_shooter);
   // Transfer Commands
 
@@ -84,7 +84,7 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    DriverStick.btn_RTrig.whileHeld(com_shootCargo);
+    DriverStick.btn_RTrig.whileHeld(com_pushCargoToShooter);
     DriverStick.btn_RTrig.whileHeld(com_spinFlywheel);
 
     coDriverStick.btn_LTrig.whileHeld(com_collect);
