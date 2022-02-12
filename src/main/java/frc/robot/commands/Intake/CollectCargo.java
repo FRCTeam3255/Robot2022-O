@@ -25,14 +25,16 @@ public class CollectCargo extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    // Deploy the intake
+    intake.deployIntake();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
     // Reject ball command
     if (intake.ballColorMatchesAlliance() == false) {
+      // Reverse Motors
       intake.setIntakeMotorSpeed(RobotPreferences.IntakePrefs.rejectSpeed.getValue());
     } else {
 
@@ -42,16 +44,24 @@ public class CollectCargo extends CommandBase {
         transfer.setTopBeltMotorSpeed(0);
 
       } else if (transfer.isTopBallCollected() == false) {
+        // Make the Top Belt Move
         transfer.setTopBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());
       }
 
       // Bottom Belt Motors
       if (transfer.isBottomBallCollected() == true && transfer.isTopBallCollected() == true) {
+        // Retract the intake
+        intake.retractIntake();
+
         transfer.setBottomBeltMotorSpeed(0);
         transfer.setEntranceBeltMotorSpeed(0);
         intake.setIntakeMotorSpeed(0);
 
       } else {
+        // Deploy the intake if it isn't already deployed
+        intake.deployIntake();
+
+        // Set all bottom motors to Move
         transfer.setBottomBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());
         transfer.setEntranceBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());
         intake.setIntakeMotorSpeed(RobotPreferences.IntakePrefs.collectSpeed.getValue());
@@ -66,6 +76,8 @@ public class CollectCargo extends CommandBase {
     transfer.setTopBeltMotorSpeed(0);
     transfer.setBottomBeltMotorSpeed(0);
     transfer.setEntranceBeltMotorSpeed(0);
+    // Retract Intake
+    intake.retractIntake();
   }
 
   // Returns true when the command should end.
