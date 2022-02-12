@@ -24,7 +24,7 @@ public class Shooter extends SubsystemBase {
     configure();
   }
 
-  // SET TO FACTORY DEFAULT
+  // Configures Shooter Motor's factory Defaults
   public void configure() {
     leftMotor.configFactoryDefault();
     rightMotor.configFactoryDefault();
@@ -39,7 +39,7 @@ public class Shooter extends SubsystemBase {
     rightMotor.setSelectedSensorPosition(0);
   }
 
-  // GETS AND RETURNS COUNT FOR ENCODERS
+  // Gets and returns shooter's encoder counts
   public double getLeftMotorEncoderCount() {
     return leftMotor.getSelectedSensorPosition();
   }
@@ -48,6 +48,7 @@ public class Shooter extends SubsystemBase {
     return rightMotor.getSelectedSensorPosition();
   }
 
+  // Sets/Controls Shooter Motor speeds
   public void setShooterSpeed(double a_speed) {
     double speed = a_speed;
 

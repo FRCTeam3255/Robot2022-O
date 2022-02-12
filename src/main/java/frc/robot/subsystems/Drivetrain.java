@@ -16,12 +16,13 @@ import frc.robot.RobotMap;
 
 public class Drivetrain extends SubsystemBase {
   /** Creates a new Drivetrain. */
-
+  // Creates Variables for Drivetrain
   private TalonFX leftLeadMotor;
   private TalonFX rightLeadMotor;
   private TalonFX leftFollowMotor;
   private TalonFX rightFollowMotor;
 
+  // Initializes Variables for Drivetrain
   public Drivetrain() {
     leftLeadMotor = new TalonFX(RobotMap.DrivetrainMap.LEFT_LEAD_MOTOR_CAN);
     rightLeadMotor = new TalonFX(RobotMap.DrivetrainMap.RIGHT_LEAD_MOTOR_CAN);
@@ -30,6 +31,7 @@ public class Drivetrain extends SubsystemBase {
     configure();
   }
 
+  // Sets Drivetrain Variable's Default Settings
   public void configure() {
 
     // Left
@@ -69,6 +71,7 @@ public class Drivetrain extends SubsystemBase {
     return rightLeadMotor.getSelectedSensorPosition();
   }
 
+  // Method controls Drivetrain Motor speeds
   public void arcadeDrive(double a_speed, double a_turn) {
     double speed = a_speed;
     double turn = a_turn;

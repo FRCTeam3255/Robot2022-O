@@ -18,13 +18,14 @@ public class Transfer extends SubsystemBase {
   /**
    * Creates a new Transfer.
    */
-
+  // Creates Transfer Variables
   private TalonFX topBeltMotor;
   private TalonFX bottomBeltMotor;
   private TalonFX entranceBeltMotor;
   private DigitalInput transferTopLimitSwitch;
   private DigitalInput transferBottomLimitSwitch;
 
+  // Initializes Transfer Variables
   public Transfer() {
     topBeltMotor = new TalonFX(RobotMap.TransferMap.TOP_BELT_MOTOR_CAN);
     bottomBeltMotor = new TalonFX(RobotMap.TransferMap.BOTTOM_BELT_MOTOR_CAN);
@@ -33,6 +34,7 @@ public class Transfer extends SubsystemBase {
     transferBottomLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_BOTTOM_LIMIT_SWITCH_DIO);
   }
 
+  // Sets Transfer variable defaults
   public void configure() {
     topBeltMotor.configFactoryDefault();
     bottomBeltMotor.configFactoryDefault();

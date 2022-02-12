@@ -10,13 +10,14 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transfer;
 
 public class PushCargoToShooter extends CommandBase {
+  // Creates Shooter and Transfer Variables in PushCargotoShooter
   Shooter shooter;
   Transfer transfer;
 
   /** Creates a new ShootCargoIf. */
   public PushCargoToShooter(Shooter sub_shooter, Transfer sub_transfer) {
     // Use addRequirements() here to declare subsystem dependencies.
-
+    // Initializes PushCargoToShooter Variables
     shooter = sub_shooter;
     transfer = sub_transfer;
 
@@ -31,10 +32,15 @@ public class PushCargoToShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // If the Shooter speed is greater than or equal to the Targeted velocity then
+    // Transfer BeltMotors turn on
     if (shooter.getShooterVelocity() >= RobotPreferences.ShooterPrefs.shooterMotorTargetVelocity.getValue()) {
       // transfer.setTransferMotorSpeed(RobotPreferences.TransferPrefs.transferMotorSpeed);
       transfer.setBottomBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());
       transfer.setTopBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());
+
+      // If the Shooter speed is less than the targeted velocity then Transfer
+      // beltMotors Stop
     } else {
       transfer.setBottomBeltMotorSpeed(0);
       transfer.setTopBeltMotorSpeed(0);

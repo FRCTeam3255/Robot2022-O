@@ -16,7 +16,7 @@ package frc.robot;
  * wherever the
  * constants are needed, to reduce verbosity.
  */
-// Reminder, there are only 9 DIO on Roborio!
+// Reminder, there are only 10 DIO on Roborio! starting from 0 ending at 9
 // THE CAN PORTS FOR EVERY SUBSYSTEM WILL GO UP BY 10
 
 public final class RobotMap {

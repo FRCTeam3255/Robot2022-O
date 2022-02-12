@@ -18,12 +18,13 @@ public class Turret extends SubsystemBase {
 
   // LINKS TO ROBOT MAP
   public Turret() {
+    // Creates Turret Variables
     turretMotor = new TalonFX(RobotMap.TurretMap.TURRET_MOTOR_CAN);
 
     configure();
   }
 
-  // SET TO FACTORY DEFAULT
+  // Sets Turret Variable Factory Defaults
   public void configure() {
     turretMotor.configFactoryDefault();
 
@@ -34,7 +35,7 @@ public class Turret extends SubsystemBase {
     turretMotor.configReverseSoftLimitEnable(true);
   }
 
-  // RESETS COUNT FOR ENCODERS
+  // Resets Encoder Counts
   public void resetTurretEncoderCounts() {
     turretMotor.setSelectedSensorPosition(0);
 

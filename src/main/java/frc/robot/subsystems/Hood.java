@@ -12,13 +12,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
 public class Hood extends SubsystemBase {
+  /** Creates a new Hood. */
 
+  // Creates Hood Variables
   private DoubleSolenoid angleHoodSolenoid;
   private DoubleSolenoid.Value shallowAngleHoodValue = Value.kReverse;
   private DoubleSolenoid.Value steepAngleHoodValue = Value.kForward;
 
-  /** Creates a new Hood. */
-
+  // Initializes Hood Variables
   public Hood() {
     angleHoodSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,
         RobotMap.HoodMap.HOOD_SOLENOID_STEEP_ANGLE_PCM_A,
@@ -26,7 +27,7 @@ public class Hood extends SubsystemBase {
     // configure is not needed since this is a solenoid
   }
 
-  // check if solenoid is extended
+  // Method checks if solenoid is extended
   public boolean isHoodSteep() {
     Value hoodSolenoidStatus = angleHoodSolenoid.get();
     boolean isHoodSteep = false;
@@ -36,11 +37,11 @@ public class Hood extends SubsystemBase {
     } else {
       isHoodSteep = false;
     }
-
     return isHoodSteep;
   }
 
-  // solenoid commands
+  // solenoid methods
+  // Sets hood angle to the given value
 
   public void steepenHood() {
     angleHoodSolenoid.set(steepAngleHoodValue);
@@ -51,6 +52,7 @@ public class Hood extends SubsystemBase {
     angleHoodSolenoid.set(shallowAngleHoodValue);
   }
 
+  // Method constantly runs
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

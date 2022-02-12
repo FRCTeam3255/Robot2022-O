@@ -26,6 +26,7 @@ public class ManualRotateTurret extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // Direction that turret rotates depends on codriverstick rightstick input
     double rotate = RobotContainer.coDriverStick.getRightStickX();
 
     turret.setTurretSpeed(rotate);

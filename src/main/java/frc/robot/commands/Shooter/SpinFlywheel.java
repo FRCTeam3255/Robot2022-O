@@ -9,11 +9,12 @@ import frc.robot.RobotPreferences;
 import frc.robot.subsystems.Shooter;
 
 public class SpinFlywheel extends CommandBase {
+  // Creates Shooter Variables
   Shooter shooter;
 
   /** Creates a new ShootCargo. */
   public SpinFlywheel(Shooter sub_shooter) {
-    // Use addRequirements() here to declare subsystem dependencies.
+    // Initializes shooter variables
     shooter = sub_shooter;
     addRequirements(shooter);
   }

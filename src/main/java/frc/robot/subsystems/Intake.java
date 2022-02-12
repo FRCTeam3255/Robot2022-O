@@ -21,7 +21,7 @@ import frc.robot.RobotPreferences;
 
 public class Intake extends SubsystemBase {
 
-  // Creates the motors
+  // Creates the Intake motors
   private TalonFX intakeMotor;
   private DoubleSolenoid intakeSolenoid;
   private ColorSensorV3 intakeColorSensorV3;
@@ -31,7 +31,7 @@ public class Intake extends SubsystemBase {
   public DoubleSolenoid.Value intakeDeploy = Value.kForward;
   public DoubleSolenoid.Value intakeRetract = Value.kReverse;
 
-  // Link to Robot Map
+  // Initializes Intake Variables
   public Intake() {
     intakeMotor = new TalonFX(RobotMap.IntakeMap.INTAKE_MOTOR_CAN);
     intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.IntakeMap.INTAKE_SOLENOID_PCM_A,
@@ -41,23 +41,24 @@ public class Intake extends SubsystemBase {
     configure();
   }
 
-  // Set to factory default (configure it)
+  // Sets factory default (configure it)
   public void configure() {
     intakeMotor.configFactoryDefault();
   }
 
-  // Reset Encoder Count
+  // Resets Intake Motor Encoder Count
   public void resetIntakeEncoderCount() {
     intakeMotor.setSelectedSensorPosition(0);
   }
 
+  // Sets Intake Motor Speed
   public void setIntakeMotorSpeed(double a_speed) {
     double speed = a_speed;
 
     intakeMotor.set(ControlMode.PercentOutput, speed);
   }
 
-  // Get positions
+  // Returns positions of Intake Motors
   public double getIntakeMotorCount() {
     return intakeMotor.getSelectedSensorPosition();
   }
@@ -76,24 +77,27 @@ public class Intake extends SubsystemBase {
 
   }
 
-  // solenoid do solenoid thing!!
+  // Deploys Intake Solenoid
   public void deployIntake() {
     intakeSolenoid.set(intakeDeploy);
   }
 
+  // Retracts Intake Solenoid
   public void retractIntake() {
     intakeSolenoid.set(intakeRetract);
   }
 
-  // color sensor do color sensor things
+  // Returns Ball color in Intake
   public int getRed() {
     return intakeColorSensorV3.getRed();
   }
 
+  // Returns Ball color in Intake
   public int getBlue() {
     return intakeColorSensorV3.getBlue();
   }
 
+  // Returns Proximity of Ball in Intake
   public int getProximity() {
     return intakeColorSensorV3.getProximity();
   }
@@ -114,6 +118,7 @@ public class Intake extends SubsystemBase {
     }
   }
 
+  // Gets Ball Color/Status
   public String ballColorString() {
     if (getBallColor() == ballColor.blue) {
       return "blue";
@@ -122,7 +127,7 @@ public class Intake extends SubsystemBase {
     } else if (getBallColor() == ballColor.none) {
       return "none";
     } else {
-      return "BALL WENT KABOOM!!!!!!";
+      return "Unknown Color";
     }
   }
 

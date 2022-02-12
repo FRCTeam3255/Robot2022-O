@@ -77,12 +77,14 @@ public class Climber extends SubsystemBase {
     return climbMotor.getSelectedSensorPosition();
   }
 
+  // Method controls CLimb Motor Speed
   public void setClimberSpeed(double a_speed) {
     double speed = a_speed;
-
+    // If the Climber is at the bottom climber cannot go any lower
     if (isClimberAtBottom() == true && speed < 0) {
       climbMotor.set(ControlMode.PercentOutput, 0);
-
+      // If the Climber is anywhere other than the bottom the climber will move either
+      // up or down
     } else {
       climbMotor.set(ControlMode.PercentOutput, RobotPreferences.ClimberPrefs.climberMotorSpeed.getValue() * speed);
     }
