@@ -28,10 +28,10 @@ public class Turret extends SubsystemBase {
     turretMotor.configFactoryDefault();
 
     // soft limit
-    turretMotor.configForwardSoftLimitThreshold(RobotPreferences.TurretPrefs.turretMaxEncoderCount.getValue(), 0);
-    turretMotor.configReverseSoftLimitThreshold(RobotPreferences.TurretPrefs.turretMinEncoderCount.getValue(), 0);
-    turretMotor.configForwardSoftLimitEnable(true, 0);
-    turretMotor.configReverseSoftLimitEnable(true, 0);
+    turretMotor.configForwardSoftLimitThreshold(RobotPreferences.TurretPrefs.turretMaxEncoderCount.getValue());
+    turretMotor.configReverseSoftLimitThreshold(RobotPreferences.TurretPrefs.turretMinEncoderCount.getValue());
+    turretMotor.configForwardSoftLimitEnable(true);
+    turretMotor.configReverseSoftLimitEnable(true);
   }
 
   // RESETS COUNT FOR ENCODERS
@@ -39,8 +39,8 @@ public class Turret extends SubsystemBase {
     turretMotor.setSelectedSensorPosition(0);
 
     // soft limit
-    turretMotor.configForwardSoftLimitThreshold(RobotPreferences.TurretPrefs.turretMaxEncoderCount.getValue(), 0);
-    turretMotor.configReverseSoftLimitThreshold(RobotPreferences.TurretPrefs.turretMinEncoderCount.getValue(), 0);
+    turretMotor.configForwardSoftLimitThreshold(RobotPreferences.TurretPrefs.turretMaxEncoderCount.getValue());
+    turretMotor.configReverseSoftLimitThreshold(RobotPreferences.TurretPrefs.turretMinEncoderCount.getValue());
   }
 
   // GETS AND RETURNS COUNT FOR ENCONDERS

@@ -63,12 +63,12 @@ public class Climber extends SubsystemBase {
     climbMotor.configFactoryDefault();
 
     // Set the Soft Limit for Forward Throttle
-    climbMotor.configForwardSoftLimitThreshold(RobotPreferences.ClimberPrefs.climberMaxEncoderCount.getValue(), 0);
-    climbMotor.configForwardSoftLimitEnable(true, 0);
+    climbMotor.configForwardSoftLimitThreshold(RobotPreferences.ClimberPrefs.climberMaxEncoderCount.getValue());
+    climbMotor.configForwardSoftLimitEnable(true);
   }
 
   public void resetClimberEncoderCount() {
-    climbMotor.configForwardSoftLimitThreshold(RobotPreferences.ClimberPrefs.climberMaxEncoderCount.getValue(), 0);
+    climbMotor.configForwardSoftLimitThreshold(RobotPreferences.ClimberPrefs.climberMaxEncoderCount.getValue());
     climbMotor.setSelectedSensorPosition(0);
 
   }
