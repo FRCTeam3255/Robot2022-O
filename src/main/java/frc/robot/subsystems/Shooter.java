@@ -20,7 +20,7 @@ public class Shooter extends SubsystemBase {
   private TalonFX leadMotor;
   private TalonFX followMotor;
 
-  private TalonFXConfiguration config;
+  private TalonFXConfiguration config = new TalonFXConfiguration();
 
   // LINKS TO ROBOT MAP
   public Shooter() {
