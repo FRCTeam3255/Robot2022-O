@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
+import frc.robot.RobotPreferences;
 
 public class Drivetrain extends SubsystemBase {
   /** Creates a new Drivetrain. */
@@ -37,9 +38,9 @@ public class Drivetrain extends SubsystemBase {
     // Left
     leftLeadMotor.configFactoryDefault();
     leftFollowMotor.configFactoryDefault();
-    leftLeadMotor.setInverted(false);
+    leftLeadMotor.setInverted(true);
     leftFollowMotor.setInverted(TalonFXInvertType.FollowMaster);
-    leftLeadMotor.setSensorPhase(false);
+    leftLeadMotor.setSensorPhase(true);
     leftFollowMotor.setNeutralMode(NeutralMode.Brake);
     leftLeadMotor.setNeutralMode(NeutralMode.Brake);
 
@@ -50,9 +51,9 @@ public class Drivetrain extends SubsystemBase {
     rightFollowMotor.configFactoryDefault();
     rightFollowMotor.follow(rightLeadMotor);
 
-    rightLeadMotor.setInverted(true);
+    rightLeadMotor.setInverted(false);
     rightFollowMotor.setInverted(TalonFXInvertType.FollowMaster);
-    rightLeadMotor.setSensorPhase(true);
+    rightLeadMotor.setSensorPhase(false);
     rightFollowMotor.setNeutralMode(NeutralMode.Brake);
     rightLeadMotor.setNeutralMode(NeutralMode.Brake);
 
@@ -73,8 +74,8 @@ public class Drivetrain extends SubsystemBase {
 
   // Method controls Drivetrain Motor speeds
   public void arcadeDrive(double a_speed, double a_turn) {
-    double speed = a_speed;
-    double turn = a_turn;
+    double speed = a_speed * RobotPreferences.DrivetrainPrefs.arcadeSpeed.getValue();
+    double turn = a_turn * RobotPreferences.DrivetrainPrefs.arcadeTurn.getValue();
 
     leftLeadMotor.set(ControlMode.PercentOutput, speed, DemandType.ArbitraryFeedForward, turn);
     rightLeadMotor.set(ControlMode.PercentOutput, speed, DemandType.ArbitraryFeedForward, -turn);
