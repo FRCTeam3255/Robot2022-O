@@ -7,6 +7,22 @@ public final class RobotPreferences {
   public static final class DrivetrainPrefs {
     public static final SN_DoublePreference arcadeSpeed = new SN_DoublePreference("arcadeSpeed", 1);
     public static final SN_DoublePreference arcadeTurn = new SN_DoublePreference("arcadeTurn", 1);
+
+    public static final SN_DoublePreference driveF = new SN_DoublePreference("driveF", 0);
+    public static final SN_DoublePreference driveP = new SN_DoublePreference("driveP", 1);
+    public static final SN_DoublePreference driveI = new SN_DoublePreference("driveI", 0);
+    public static final SN_DoublePreference driveD = new SN_DoublePreference("driveD", 0);
+    public static final SN_DoublePreference driveAllowableCLError = new SN_DoublePreference("driveAllowableCLError",
+        1000);
+    public static final SN_DoublePreference driveCLPeakOutput = new SN_DoublePreference("driveCLPeakOutput", 1);
+
+    // drivetrain gear ratio: 10:60 aka motor rotates once, wheel rotates 1/6
+    // 2048 counts per motor rotation, * 6 is 12288 counts per wheel rotation
+    // 4 inch wheel * pi = inches per rot: 12.56637
+    // 12288 counts per rot / 12.56637 inches per rot = 978 counts per inch
+    // 978 counts per inch * 12 = 11734 counts per foot
+    public static final SN_IntPreference driveEncoderCountsPerFoot = new SN_IntPreference(
+        "driveEncoderCountsPerFoot", 11734);
   }
 
   public static final class HoodPrefs {
