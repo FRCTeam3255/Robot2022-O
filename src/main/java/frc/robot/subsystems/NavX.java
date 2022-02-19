@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -16,12 +15,7 @@ public class NavX extends SubsystemBase {
 
   /** Creates a new NavX. */
   public NavX() {
-    try {
-      navx = new AHRS();
-    } catch (RuntimeException e) {
-      // if this is causing error, navx is probably not plugged in
-      DriverStation.reportError("Error instantiating NavX: " + e.getMessage(), true);
-    }
+    navx = new AHRS();
   }
 
   public void resetHeading() {
@@ -35,7 +29,7 @@ public class NavX extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putBoolean("navx connected", navx.isConnected());
-    SmartDashboard.putNumber("navx heading", navx.getAngle());
+    SmartDashboard.putBoolean("is navx connected", navx.isConnected());
+    SmartDashboard.putNumber("navx yaw", navx.getYaw());
   }
 }

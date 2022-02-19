@@ -4,32 +4,48 @@
 
 package frc.robot.commands.Turret;
 
+import com.frcteam3255.preferences.SN_DoublePreference;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotPreferences;
 import frc.robot.subsystems.Turret;
-import frc.robot.RobotContainer;
 
-public class ManualRotateTurret extends CommandBase {
+public class SetTurretPosition extends CommandBase {
   Turret turret;
+  double degrees;
+  SN_DoublePreference degreesPref;
 
-  /** Creates a new ManualRotate. */
-  public ManualRotateTurret(Turret sub_turret) {
+  int loopsInTol;
+  int loopsToFinish;
+
+  /** Creates a new SetTurretPosition. */
+  public SetTurretPosition(Turret a_turret, SN_DoublePreference a_degreesPref) {
+    turret = a_turret;
+    degreesPref = a_degreesPref;
     // Use addRequirements() here to declare subsystem dependencies.
-    turret = sub_turret;
-    addRequirements(sub_turret);
+    addRequirements(turret);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    degrees = degreesPref.getValue();
+
+    loopsInTol = 0;
+    loopsToFinish = RobotPreferences.TurretPrefs.turretLoopsToFinish.getValue();
+
+    turret.setTurretAngle(degrees);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // Direction that turret rotates depends on codriverstick rightstick input
-    double rotate = RobotContainer.coDriverStick.getRightStickX();
-
-    turret.setTurretSpeed(rotate);
+    if (Math.abs(turret.getTurretClosedLoopErrorDegrees()) < RobotPreferences.TurretPrefs.turretMaxAllowableErrorDegrees
+        .getValue()) {
+      loopsInTol++;
+    } else {
+      loopsInTol = 0;
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -41,6 +57,6 @@ public class ManualRotateTurret extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return loopsInTol > loopsToFinish;
   }
 }
