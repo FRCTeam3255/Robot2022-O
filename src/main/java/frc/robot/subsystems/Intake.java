@@ -25,7 +25,7 @@ public class Intake extends SubsystemBase {
   private TalonFX intakeMotor;
   private DoubleSolenoid intakeSolenoid;
   private ColorSensorV3 intakeColorSensorV3;
-  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+  private final I2C.Port i2cPort = I2C.Port.kMXP;
 
   // Create the Variables for Deployed and Retracted
   public DoubleSolenoid.Value intakeDeploy = Value.kForward;
