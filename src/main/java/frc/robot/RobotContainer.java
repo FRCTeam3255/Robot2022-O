@@ -120,7 +120,6 @@ public class RobotContainer {
 
     coDriverStick.btn_LStick.whileHeld(com_climb);
 
-
     coDriverStick.POV_East.whenPressed(com_ResetClimber);
     coDriverStick.btn_RBump.whenPressed(com_ClimbNextRung);
   }
