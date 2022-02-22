@@ -87,6 +87,7 @@ public class RobotContainer {
   // Climber Commands
 
   private final Climb com_climb = new Climb(sub_climber);
+  private final ClimbNextRung com_ClimbNextRung = new ClimbNextRung(sub_climber);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -118,6 +119,7 @@ public class RobotContainer {
 
     coDriverStick.btn_LStick.whileHeld(com_climb);
 
+    coDriverStick.btn_LBump.whenPressed(com_ClimbNextRung);
   }
 
   /**

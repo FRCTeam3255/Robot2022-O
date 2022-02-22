@@ -22,10 +22,16 @@ public class Climber extends SubsystemBase {
   private TalonFX climbMotor;
   private DigitalInput climberBottomSafetySwitch;
   private DoubleSolenoid climberLockPiston;
+  private DoubleSolenoid climberPivotPiston;
 
   // Solenoid Variables
+  // Lock Piston
   private DoubleSolenoid.Value lockDeploy = Value.kForward;
   private DoubleSolenoid.Value lockRetract = Value.kReverse;
+
+  // Pivot Piston
+  private DoubleSolenoid.Value pivotDeploy = Value.kForward;
+  private DoubleSolenoid.Value pivotRetract = Value.kReverse;
 
   public Climber() {
 
@@ -34,7 +40,8 @@ public class Climber extends SubsystemBase {
     climberLockPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.ClimberMap.LOCK_PISTON_PCM_A,
         RobotMap.ClimberMap.LOCK_PISTON_PCM_B);
     configure();
-
+    climberPivotPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.ClimberMap.PIVOT_PISTON_PCM_A,
+        RobotMap.ClimberMap.PIVOT_PISTON_PCM_B);
   }
 
   public boolean isClimberLocked() {
@@ -48,6 +55,19 @@ public class Climber extends SubsystemBase {
     }
 
     return isClimberLocked;
+  }
+
+  public boolean isClimberPivoted() {
+    Value climberPivotStatus = climberPivotPiston.get();
+    boolean isClimberPivoted = false;
+
+    if (climberPivotStatus == lockDeploy) {
+      isClimberPivoted = true;
+    } else {
+      isClimberPivoted = false;
+    }
+
+    return isClimberPivoted;
   }
 
   // solenoid commands
@@ -91,6 +111,24 @@ public class Climber extends SubsystemBase {
 
   }
 
+  // Climbing Up/Down
+  public void extendClimber() {
+    climbMotor.set(ControlMode.Position, RobotPreferences.ClimberPrefs.climberUpPosition.getValue());
+  }
+
+  public void retractClimber() {
+    climbMotor.set(ControlMode.Position, RobotPreferences.ClimberPrefs.climberDownPosition.getValue());
+  }
+
+  // Piston Deploy/Retract
+  public void pivotForward() {
+    climberPivotPiston.set(pivotDeploy);
+  }
+
+  public void pivotBackward() {
+    climberPivotPiston.set(pivotRetract);
+  }
+
   // TODO: change when location of mag switch is (ex: isClimberRaised)
   public boolean isClimberAtBottom() {
     return !climberBottomSafetySwitch.get();
@@ -102,5 +140,6 @@ public class Climber extends SubsystemBase {
     SmartDashboard.putNumber("Climber Motor", getClimberEncoderCount());
     SmartDashboard.putBoolean("Is Climber At Bottom", isClimberAtBottom());
     SmartDashboard.putBoolean("Is Climber Locked", isClimberLocked());
+    SmartDashboard.putBoolean("Is Climber Pivoted", isClimberPivoted());
   }
 }

@@ -102,5 +102,9 @@ public final class RobotPreferences {
     public static final SN_DoublePreference climberMotorSpeed = new SN_DoublePreference("climberMotorSpeed", 0.5);
     public static final SN_DoublePreference climberMaxEncoderCount = new SN_DoublePreference("climberMaxEncoderCount",
         200000);
+
+    // Climbing Up/Down Positions
+    public static final SN_DoublePreference climberUpPosition = new SN_DoublePreference("climberUpPosition", 32555);
+    public static final SN_DoublePreference climberDownPosition = new SN_DoublePreference("climberDownPosition", 0);
   }
 }

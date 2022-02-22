@@ -61,6 +61,8 @@ public final class RobotMap {
         public static final int BOTTOM_SAFETY_MAG_SWITCH_DIO = 2;
         public static final int LOCK_PISTON_PCM_A = 4;
         public static final int LOCK_PISTON_PCM_B = 5;
+        public static final int PIVOT_PISTON_PCM_A = 6;
+        public static final int PIVOT_PISTON_PCM_B = 7;
     }
 
     public final class ShooterMap {

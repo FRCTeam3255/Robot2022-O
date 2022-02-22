@@ -40,6 +40,7 @@ public class Climb extends CommandBase {
     // Stops Climber when joystick button is released and applies brake
     climber.setClimberSpeed(0);
     climber.lockClimber();
+
   }
 
   // Returns true when the command should end.
