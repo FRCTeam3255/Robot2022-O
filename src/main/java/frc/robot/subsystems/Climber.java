@@ -137,7 +137,7 @@ public class Climber extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Climber Motor", getClimberEncoderCount());
+    SmartDashboard.putNumber("Climber Encoder Counts", getClimberEncoderCount());
     SmartDashboard.putBoolean("Is Climber At Bottom", isClimberAtBottom());
     SmartDashboard.putBoolean("Is Climber Locked", isClimberLocked());
     SmartDashboard.putBoolean("Is Climber Pivoted", isClimberPivoted());
