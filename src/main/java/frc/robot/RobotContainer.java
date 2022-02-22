@@ -119,7 +119,7 @@ public class RobotContainer {
 
     coDriverStick.btn_LStick.whileHeld(com_climb);
 
-    coDriverStick.btn_LBump.whenPressed(com_ClimbNextRung);
+    coDriverStick.btn_RBump.whenPressed(com_ClimbNextRung);
   }
 
   /**
