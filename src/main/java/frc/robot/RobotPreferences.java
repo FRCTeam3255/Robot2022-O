@@ -24,6 +24,8 @@ public final class RobotPreferences {
 
   public static final SN_ZeroIntPreference zeroIntPref = new SN_ZeroIntPreference();
   public static final SN_ZeroDoublePreference zeroDoublePref = new SN_ZeroDoublePreference();
+  public static final SN_DoublePreference encoderCountsPerTalonFXRotation = new SN_DoublePreference(
+      "encoderCountsPerTalonFXRotation", 2048);
 
   public static final class DrivetrainPrefs {
     public static final SN_DoublePreference arcadeSpeed = new SN_DoublePreference("arcadeSpeed", 1);
@@ -53,8 +55,9 @@ public final class RobotPreferences {
 
   public static final class ShooterPrefs {
     public static final SN_DoublePreference shooterMotorSpeed = new SN_DoublePreference("shooterMotorSpeed", 1);
-    public static final SN_DoublePreference shooterMotorTargetVelocity = new SN_DoublePreference(
-        "shooterMotorTargetVelocity", 5000.0);
+    // rpm is motor rpm
+    public static final SN_DoublePreference shooterTargetRPM = new SN_DoublePreference(
+        "shooterMotorTargetRPM", 5000.0);
 
     public static final SN_DoublePreference shooterF = new SN_DoublePreference("kF", 0);
     public static final SN_DoublePreference shooterP = new SN_DoublePreference("kP", 1);

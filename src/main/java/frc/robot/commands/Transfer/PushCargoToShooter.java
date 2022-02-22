@@ -34,7 +34,7 @@ public class PushCargoToShooter extends CommandBase {
   public void execute() {
     // If the Shooter speed is greater than or equal to the Targeted velocity then
     // Transfer BeltMotors turn on
-    if (shooter.getShooterVelocity() >= RobotPreferences.ShooterPrefs.shooterMotorTargetVelocity.getValue()) {
+    if (shooter.getShooterRPM() >= RobotPreferences.ShooterPrefs.shooterTargetRPM.getValue()) {
       // transfer.setTransferMotorSpeed(RobotPreferences.TransferPrefs.transferMotorSpeed);
       transfer.setBottomBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());
       transfer.setTopBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());

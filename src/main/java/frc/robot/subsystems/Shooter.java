@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
+import com.frcteam3255.utils.SN_Math;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,7 +23,9 @@ public class Shooter extends SubsystemBase {
 
   private TalonFXConfiguration config = new TalonFXConfiguration();
 
-  // LINKS TO ROBOT MAP
+  /**
+   * Creates new shooter
+   */
   public Shooter() {
     leadMotor = new TalonFX(RobotMap.ShooterMap.LEFT_MOTOR_CAN);
     followMotor = new TalonFX(RobotMap.ShooterMap.RIGHT_MOTOR_CAN);
@@ -32,7 +35,9 @@ public class Shooter extends SubsystemBase {
     configure();
   }
 
-  // Configures Shooter Motor's factory Defaults
+  /**
+   * Configures the shooter's motors
+   */
   public void configure() {
     leadMotor.configFactoryDefault();
     followMotor.configFactoryDefault();
@@ -54,13 +59,18 @@ public class Shooter extends SubsystemBase {
     followMotor.setSensorPhase(true);
   }
 
-  // RESETS COUNT FOR ENCODERS
+  /**
+   * Resets the shooter's motors' encoder counts to zero
+   */
   public void resetShooterEncoderCounts() {
     leadMotor.setSelectedSensorPosition(0);
     followMotor.setSelectedSensorPosition(0);
   }
 
-  // Gets and returns shooter's encoder counts
+  /**
+   * 
+   * @return Shooter Motor Encoder Counts
+   */
   public double getShooterEncoderCount() {
     return leadMotor.getSelectedSensorPosition();
   }
@@ -68,12 +78,41 @@ public class Shooter extends SubsystemBase {
   // Sets/Controls Shooter Motor speeds
   public void setShooterSpeed(double a_speed) {
     double speed = a_speed;
-
     leadMotor.set(ControlMode.PercentOutput, speed);
-
   }
 
-  public double getShooterVelocity() {
+  /**
+   * Sets the shooter velocity (encoder counts per 100ms)
+   * 
+   * @param a_velocity Encoder counts per 100ms
+   */
+  private void setShooterVelocity(double a_velocity) {
+    leadMotor.set(ControlMode.Velocity, a_velocity);
+  }
+
+  /**
+   * Sets the shooter RPM
+   * 
+   * @param a_rpm RPM to set motor to
+   */
+  public void setShooterRPM(double a_rpm) {
+    double rpm = SN_Math.RPMToVelocity(a_rpm, SN_Math.TALONFX_ENCODER_PULSES_PER_COUNT);
+    setShooterVelocity(rpm);
+  }
+
+  /**
+   * 
+   * @return Shooter RPM
+   */
+  public double getShooterRPM() {
+    return SN_Math.velocityToRPM(getShooterVelocity(), SN_Math.TALONFX_ENCODER_PULSES_PER_COUNT);
+  }
+
+  /**
+   * 
+   * @return Shooter velocity (encoder counts per 100ms)
+   */
+  private double getShooterVelocity() {
     return leadMotor.getSelectedSensorVelocity();
   }
 
