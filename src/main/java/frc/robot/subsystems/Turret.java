@@ -101,5 +101,6 @@ public class Turret extends SubsystemBase {
     SmartDashboard.putNumber("Turret Encoder", getTurretMotorEncoderCounts());
     SmartDashboard.putNumber("Turret Angle", getTurretAngle());
     SmartDashboard.putNumber("Turret Closed Loop Error", getTurretClosedLoopErrorDegrees());
+    SmartDashboard.putNumber("Turret Motor Speed", turretMotor.getMotorOutputPercent());
   }
 }
