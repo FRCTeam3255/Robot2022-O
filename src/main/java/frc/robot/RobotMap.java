@@ -41,8 +41,10 @@ public final class RobotMap {
         public static final int TOP_BELT_MOTOR_CAN = 30;
         public static final int BOTTOM_BELT_MOTOR_CAN = 31;
         public static final int ENTRANCE_BELT_MOTOR_CAN = 32;
-        public static final int TRANSFER_TOP_LIMIT_SWITCH_DIO = 0;
-        public static final int TRANSFER_BOTTOM_LIMIT_SWITCH_DIO = 1;
+        public static final int TRANSFER_TOP_LEFT_LIMIT_SWITCH_DIO = 0;
+        public static final int TRANSFER_BOTTOM_LEFT_LIMIT_SWITCH_DIO = 1;
+        public static final int TRANSFER_TOP_RIGHT_LIMIT_SWITCH_DIO = 2;
+        public static final int TRANSFER_BOTTOM_RIGHT_LIMIT_SWITCH_DIO = 3;
 
     }
 
@@ -58,7 +60,7 @@ public final class RobotMap {
 
     public final class ClimberMap {
         public static final int CLIMBER_MOTOR_CAN = 50;
-        public static final int BOTTOM_SAFETY_MAG_SWITCH_DIO = 2;
+        public static final int BOTTOM_SAFETY_MAG_SWITCH_DIO = 4;
         public static final int LOCK_PISTON_PCM_A = 4;
         public static final int LOCK_PISTON_PCM_B = 5;
         public static final int PIVOT_PISTON_PCM_A = 6;

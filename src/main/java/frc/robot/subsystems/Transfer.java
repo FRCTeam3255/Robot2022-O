@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,16 +23,20 @@ public class Transfer extends SubsystemBase {
   private TalonFX topBeltMotor;
   private TalonFX bottomBeltMotor;
   private TalonFX entranceBeltMotor;
-  private DigitalInput transferTopLimitSwitch;
-  private DigitalInput transferBottomLimitSwitch;
+  private DigitalInput transferTopLeftLimitSwitch;
+  private DigitalInput transferBottomLeftLimitSwitch;
+  private DigitalInput transferTopRightLimitSwitch;
+  private DigitalInput transferBottomRightLimitSwitch;
 
   // Initializes Transfer Variables
   public Transfer() {
     topBeltMotor = new TalonFX(RobotMap.TransferMap.TOP_BELT_MOTOR_CAN);
     bottomBeltMotor = new TalonFX(RobotMap.TransferMap.BOTTOM_BELT_MOTOR_CAN);
     entranceBeltMotor = new TalonFX(RobotMap.TransferMap.ENTRANCE_BELT_MOTOR_CAN);
-    transferTopLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_TOP_LIMIT_SWITCH_DIO);
-    transferBottomLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_BOTTOM_LIMIT_SWITCH_DIO);
+    transferTopLeftLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_TOP_LEFT_LIMIT_SWITCH_DIO);
+    transferBottomLeftLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_BOTTOM_LEFT_LIMIT_SWITCH_DIO);
+    transferTopRightLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_TOP_RIGHT_LIMIT_SWITCH_DIO);
+    transferBottomRightLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_BOTTOM_RIGHT_LIMIT_SWITCH_DIO);
   }
 
   // Sets Transfer variable defaults
@@ -39,6 +44,9 @@ public class Transfer extends SubsystemBase {
     topBeltMotor.configFactoryDefault();
     bottomBeltMotor.configFactoryDefault();
     entranceBeltMotor.configFactoryDefault();
+
+    topBeltMotor.setNeutralMode(NeutralMode.Brake);
+    bottomBeltMotor.setNeutralMode(NeutralMode.Brake);
   }
 
   public double getTopBeltMotorEncoderCount() {
@@ -66,11 +74,11 @@ public class Transfer extends SubsystemBase {
   }
 
   public boolean isTopBallCollected() {
-    return !transferTopLimitSwitch.get();
+    return !transferTopRightLimitSwitch.get() || !transferTopLeftLimitSwitch.get();
   }
 
   public boolean isBottomBallCollected() {
-    return !transferBottomLimitSwitch.get();
+    return !transferBottomRightLimitSwitch.get() || !transferBottomLeftLimitSwitch.get();
   }
 
   @Override
