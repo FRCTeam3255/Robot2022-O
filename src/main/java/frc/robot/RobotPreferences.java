@@ -93,6 +93,10 @@ public final class RobotPreferences {
 
   public static final class TransferPrefs {
     public final static SN_DoublePreference transferSpeed = new SN_DoublePreference("transferSpeed", 0.80);
+    // this one is time in loops. roborio runs at 50hz, so a loop is 20ms. 25 loops
+    // is 20*25ms to 500ms
+    public final static SN_IntPreference transferRejectLatchTimeLoops = new SN_IntPreference(
+        "transferRejectLatchTimeLoops", 25);
 
   }
 

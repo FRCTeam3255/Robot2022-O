@@ -44,6 +44,7 @@ public class Intake extends SubsystemBase {
   // Sets factory default (configure it)
   public void configure() {
     intakeMotor.configFactoryDefault();
+
   }
 
   // Resets Intake Motor Encoder Count
@@ -168,5 +169,6 @@ public class Intake extends SubsystemBase {
     SmartDashboard.putBoolean("Is Ball Blue", isBallBlue());
     SmartDashboard.putBoolean("Is Alliance Blue", isAllianceBlue());
     SmartDashboard.putBoolean("Ball Color Matches Alliance", ballColorMatchesAlliance());
+    SmartDashboard.putBoolean("Is Proximity", isProximity());
   }
 }

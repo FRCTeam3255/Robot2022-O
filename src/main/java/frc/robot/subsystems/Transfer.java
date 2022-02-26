@@ -37,6 +37,7 @@ public class Transfer extends SubsystemBase {
     transferBottomLeftLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_BOTTOM_LEFT_LIMIT_SWITCH_DIO);
     transferTopRightLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_TOP_RIGHT_LIMIT_SWITCH_DIO);
     transferBottomRightLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_BOTTOM_RIGHT_LIMIT_SWITCH_DIO);
+    configure();
   }
 
   // Sets Transfer variable defaults
@@ -47,6 +48,9 @@ public class Transfer extends SubsystemBase {
 
     topBeltMotor.setNeutralMode(NeutralMode.Brake);
     bottomBeltMotor.setNeutralMode(NeutralMode.Brake);
+    entranceBeltMotor.setNeutralMode(NeutralMode.Brake);
+
+    entranceBeltMotor.setInverted(true);
   }
 
   public double getTopBeltMotorEncoderCount() {
