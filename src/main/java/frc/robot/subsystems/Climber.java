@@ -141,5 +141,6 @@ public class Climber extends SubsystemBase {
     SmartDashboard.putBoolean("Is Climber At Bottom", isClimberAtBottom());
     SmartDashboard.putBoolean("Is Climber Locked", isClimberLocked());
     SmartDashboard.putBoolean("Is Climber Pivoted", isClimberPivoted());
+    SmartDashboard.putNumber("Climber Motor Speed", climbMotor.getMotorOutputPercent());
   }
 }
