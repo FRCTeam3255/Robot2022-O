@@ -4,39 +4,16 @@
 
 package frc.robot.commands.Hood;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Hood;
 
-public class SteepenHood extends CommandBase {
+public class SteepenHood extends SequentialCommandGroup {
 
   Hood hood;
 
-  /** Creates a new SteepenHood. */
+  /** Creates a new ShallowHood. */
   public SteepenHood(Hood sub_hood) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    hood = sub_hood;
-    addRequirements(hood);
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    hood.steepenHood();
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return true;
+    addCommands(new InstantCommand(sub_hood::steepenHood, sub_hood));
   }
 }
