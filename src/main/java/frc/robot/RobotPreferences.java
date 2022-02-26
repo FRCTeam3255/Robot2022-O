@@ -48,6 +48,9 @@ public final class RobotPreferences {
     // 978 counts per inch * 12 = 11734 counts per foot
     public static final SN_IntPreference driveEncoderCountsPerFoot = new SN_IntPreference(
         "driveEncoderCountsPerFoot", 11734);
+
+    public static final SN_IntPreference motionProfileMinBufferedPoints = new SN_IntPreference(
+        "motionProfileMinBufferedPoints", 10);
   }
 
   public static final class HoodPrefs {

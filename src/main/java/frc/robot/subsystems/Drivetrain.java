@@ -104,8 +104,10 @@ public class Drivetrain extends SubsystemBase {
     configure();
     resetDrivetrainEncodersCount();
 
-    leftLeadMotor.startMotionProfile(pointsLeft, 10, ControlMode.MotionProfile);
-    rightLeadMotor.startMotionProfile(pointsRight, 10, ControlMode.MotionProfile);
+    leftLeadMotor.startMotionProfile(pointsLeft,
+        RobotPreferences.DrivetrainPrefs.motionProfileMinBufferedPoints.getValue(), ControlMode.MotionProfile);
+    rightLeadMotor.startMotionProfile(pointsRight,
+        RobotPreferences.DrivetrainPrefs.motionProfileMinBufferedPoints.getValue(), ControlMode.MotionProfile);
   }
 
   public boolean isMotionProfileFinished() {
