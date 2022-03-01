@@ -79,7 +79,7 @@ public class Climber extends SubsystemBase {
     climberLockPiston.set(lockRetract);
   }
 
-  private void configure() {
+  public void configure() {
     climbMotor.configFactoryDefault();
 
     // Set the Soft Limit for Forward Throttle
