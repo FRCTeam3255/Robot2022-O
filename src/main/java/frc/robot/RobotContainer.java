@@ -73,7 +73,9 @@ public class RobotContainer {
 
   // Shooter Commands
   private final PushCargoToShooter com_pushCargoToShooter = new PushCargoToShooter(sub_shooter, sub_transfer);
-  private final SpinFlywheel com_spinFlywheel = new SpinFlywheel(sub_shooter);
+  private final SpinFlywheelVelocity com_spinFlywheel = new SpinFlywheelVelocity(sub_shooter);
+  private final SpinFlywheelPercentOutput com_FlywheelPercentOutput = new SpinFlywheelPercentOutput(
+      sub_shooter);
 
   // Transfer Commands
 

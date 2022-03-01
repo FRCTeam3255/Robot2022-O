@@ -76,7 +76,7 @@ public class Shooter extends SubsystemBase {
   }
 
   // Sets/Controls Shooter Motor speeds
-  public void setShooterSpeed(double a_speed) {
+  public void setShooterPercentOutput(double a_speed) {
     double speed = a_speed;
     leadMotor.set(ControlMode.PercentOutput, speed);
   }
