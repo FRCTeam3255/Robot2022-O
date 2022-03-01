@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotMap;
-import frc.robot.RobotPreferences;
+import frc.robot.RobotMap.*;
+import static frc.robot.RobotPreferences.*;
 
 public class Climber extends SubsystemBase {
 
@@ -35,13 +35,13 @@ public class Climber extends SubsystemBase {
 
   public Climber() {
 
-    climberBottomSafetySwitch = new DigitalInput(RobotMap.ClimberMap.BOTTOM_SAFETY_MAG_SWITCH_DIO);
-    climbMotor = new TalonFX(RobotMap.ClimberMap.CLIMBER_MOTOR_CAN);
-    climberLockPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.ClimberMap.LOCK_PISTON_PCM_A,
-        RobotMap.ClimberMap.LOCK_PISTON_PCM_B);
+    climberBottomSafetySwitch = new DigitalInput(ClimberMap.BOTTOM_SAFETY_MAG_SWITCH_DIO);
+    climbMotor = new TalonFX(ClimberMap.CLIMBER_MOTOR_CAN);
+    climberLockPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, ClimberMap.LOCK_PISTON_PCM_A,
+        ClimberMap.LOCK_PISTON_PCM_B);
     configure();
-    climberPivotPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.ClimberMap.PIVOT_PISTON_PCM_A,
-        RobotMap.ClimberMap.PIVOT_PISTON_PCM_B);
+    climberPivotPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, ClimberMap.PIVOT_PISTON_PCM_A,
+        ClimberMap.PIVOT_PISTON_PCM_B);
   }
 
   public boolean isClimberLocked() {
@@ -83,12 +83,12 @@ public class Climber extends SubsystemBase {
     climbMotor.configFactoryDefault();
 
     // Set the Soft Limit for Forward Throttle
-    climbMotor.configForwardSoftLimitThreshold(RobotPreferences.ClimberPrefs.climberMaxEncoderCount.getValue());
+    climbMotor.configForwardSoftLimitThreshold(ClimberPrefs.climberMaxEncoderCount.getValue());
     climbMotor.configForwardSoftLimitEnable(true);
   }
 
   public void resetClimberEncoderCount() {
-    climbMotor.configForwardSoftLimitThreshold(RobotPreferences.ClimberPrefs.climberMaxEncoderCount.getValue());
+    climbMotor.configForwardSoftLimitThreshold(ClimberPrefs.climberMaxEncoderCount.getValue());
     climbMotor.setSelectedSensorPosition(0);
 
   }
@@ -106,18 +106,18 @@ public class Climber extends SubsystemBase {
       // If the Climber is anywhere other than the bottom the climber will move either
       // up or down
     } else {
-      climbMotor.set(ControlMode.PercentOutput, RobotPreferences.ClimberPrefs.climberMotorSpeed.getValue() * speed);
+      climbMotor.set(ControlMode.PercentOutput, ClimberPrefs.climberMotorSpeed.getValue() * speed);
     }
 
   }
 
   // Climbing Up/Down
   public void extendClimber() {
-    climbMotor.set(ControlMode.Position, RobotPreferences.ClimberPrefs.climberUpPosition.getValue());
+    climbMotor.set(ControlMode.Position, ClimberPrefs.climberUpPosition.getValue());
   }
 
   public void retractClimber() {
-    climbMotor.set(ControlMode.Position, RobotPreferences.ClimberPrefs.climberDownPosition.getValue());
+    climbMotor.set(ControlMode.Position, ClimberPrefs.climberDownPosition.getValue());
   }
 
   // Piston Deploy/Retract
