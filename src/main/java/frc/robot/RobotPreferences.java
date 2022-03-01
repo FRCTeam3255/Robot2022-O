@@ -98,6 +98,9 @@ public final class RobotPreferences {
     public final static SN_IntPreference transferRejectLatchTimeLoops = new SN_IntPreference(
         "transferRejectLatchTimeLoops", 25);
 
+    // Transfer ramping
+    public final static SN_DoublePreference transferRampTime = new SN_DoublePreference("transferRampTime", 0.75);
+
   }
 
   public static final class IntakePrefs {
@@ -112,7 +115,8 @@ public final class RobotPreferences {
 
   public static final class ClimberPrefs {
     public static final SN_DoublePreference climberMotorSpeed = new SN_DoublePreference("climberMotorSpeed", 0.5);
-    public static final SN_DoublePreference climberMaxEncoderCount = new SN_DoublePreference("climberMaxEncoderCount",
+    public static final SN_DoublePreference climberMaxEncoderCount = new SN_DoublePreference(
+        "climberMaxEncoderCount",
         200000);
 
     // Climbing Up/Down Positions

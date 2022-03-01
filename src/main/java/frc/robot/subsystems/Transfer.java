@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
+import frc.robot.RobotPreferences;
 
 public class Transfer extends SubsystemBase {
   /**
@@ -51,6 +52,10 @@ public class Transfer extends SubsystemBase {
     entranceBeltMotor.setNeutralMode(NeutralMode.Brake);
 
     entranceBeltMotor.setInverted(true);
+
+    // Ramping
+    topBeltMotor.configOpenloopRamp(RobotPreferences.TransferPrefs.transferRampTime.getValue());
+    bottomBeltMotor.configOpenloopRamp(RobotPreferences.TransferPrefs.transferRampTime.getValue());
   }
 
   public double getTopBeltMotorEncoderCount() {
