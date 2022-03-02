@@ -46,11 +46,6 @@ public class RobotContainer {
   private final NavX sub_navX = new NavX();
   private final Vision sub_vision = new Vision();
 
-  // Commands for Multiple Subsystems
-  private final ConfigureSubsystems com_configureSubsystems = new ConfigureSubsystems(sub_climber, sub_drivetrain,
-      sub_intake, sub_shooter,
-      sub_transfer, sub_turret);
-
   // Drivetrain Commands
   private final Drive com_drive = new Drive(sub_drivetrain);
 
@@ -118,8 +113,8 @@ public class RobotContainer {
     coDriverStick.btn_RTrig.whileHeld(com_pushCargoToShooter);
     coDriverStick.btn_RTrig.whileHeld(com_spinFlywheel);
 
-    coDriverStick.btn_A.whileHeld(com_setTurretCenter);
-    coDriverStick.btn_B.whileHeld(com_holdTurretPos1);
+    coDriverStick.btn_A.whileHeld(com_deployIntake);
+    coDriverStick.btn_B.whileHeld(com_retractIntake);
     coDriverStick.btn_X.whileHeld(com_visionAimTurret);
     coDriverStick.btn_Y.whileHeld(com_visionHoldAimTurret);
     coDriverStick.btn_LBump.whileHeld(com_moveTurret);
