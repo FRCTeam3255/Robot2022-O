@@ -5,15 +5,19 @@
 package frc.robot.commands.Hood;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Hood;
 
-public class ShallowHood extends SequentialCommandGroup {
+public class ShallowHood extends InstantCommand {
 
   Hood hood;
 
   /** Creates a new ShallowHood. */
   public ShallowHood(Hood sub_hood) {
-    addCommands(new InstantCommand(sub_hood::shallowHood, sub_hood));
+    hood = sub_hood;
+  }
+
+  @Override
+  public void initialize() {
+    hood.shallowHood();
   }
 }
