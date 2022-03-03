@@ -16,8 +16,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotMap;
-import frc.robot.RobotPreferences;
+import frc.robot.RobotMap.*;
+import static frc.robot.RobotPreferences.*;
 
 public class Intake extends SubsystemBase {
 
@@ -33,9 +33,9 @@ public class Intake extends SubsystemBase {
 
   // Initializes Intake Variables
   public Intake() {
-    intakeMotor = new TalonFX(RobotMap.IntakeMap.INTAKE_MOTOR_CAN);
-    intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.IntakeMap.INTAKE_SOLENOID_PCM_A,
-        RobotMap.IntakeMap.INTAKE_SOLENOID_PCM_B);
+    intakeMotor = new TalonFX(IntakeMap.INTAKE_MOTOR_CAN);
+    intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, IntakeMap.INTAKE_SOLENOID_PCM_A,
+        IntakeMap.INTAKE_SOLENOID_PCM_B);
     intakeColorSensorV3 = new ColorSensorV3(i2cPort);
 
     configure();
@@ -133,7 +133,7 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean isProximity() {
-    return getProximity() > RobotPreferences.IntakePrefs.colorSensorMinProximity.getValue();
+    return getProximity() > IntakePrefs.colorSensorMinProximity.getValue();
   }
 
   public boolean isBallBlue() {
