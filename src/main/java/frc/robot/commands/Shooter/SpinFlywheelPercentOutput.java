@@ -27,7 +27,7 @@ public class SpinFlywheelPercentOutput extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setShooterPercentOutput(RobotPreferences.ShooterPrefs.shooterMotorSpeed.getValue());
+    shooter.setShooterPercentOutput(RobotPreferences.ShooterPrefs.shooterPercentOutput.getValue());
 
   }
 

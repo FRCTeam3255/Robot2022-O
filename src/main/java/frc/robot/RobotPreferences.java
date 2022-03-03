@@ -1,5 +1,6 @@
 package frc.robot;
 
+import com.frcteam3255.preferences.SN_BooleanPreference;
 import com.frcteam3255.preferences.SN_DoublePreference;
 import com.frcteam3255.preferences.SN_IntPreference;
 import com.frcteam3255.preferences.SN_ZeroDoublePreference;
@@ -57,15 +58,20 @@ public final class RobotPreferences {
   }
 
   public static final class ShooterPrefs {
-    public static final SN_DoublePreference shooterMotorSpeed = new SN_DoublePreference("shooterMotorSpeed", 1);
-    // rpm is motor rpm
+    public static final SN_DoublePreference shooterPercentOutput = new SN_DoublePreference(
+        "shooterPercentOutput", 1);
     public static final SN_DoublePreference shooterTargetRPM = new SN_DoublePreference(
-        "shooterMotorTargetRPM", 5000.0);
+        "shooterTargetRPM", 5000);
+    public static final SN_DoublePreference shooterAcceptableErrorRPM = new SN_DoublePreference(
+        "shooterAcceptableErrorRPM", 100);
 
-    public static final SN_DoublePreference shooterF = new SN_DoublePreference("kF", 0);
-    public static final SN_DoublePreference shooterP = new SN_DoublePreference("kP", 1);
-    public static final SN_DoublePreference shooterI = new SN_DoublePreference("kI", 0);
-    public static final SN_DoublePreference shooterD = new SN_DoublePreference("kD", 0);
+    public static final SN_BooleanPreference shooterInvert = new SN_BooleanPreference(
+        "shooterInvert", false);
+
+    public static final SN_DoublePreference shooterF = new SN_DoublePreference("shooterF", 0);
+    public static final SN_DoublePreference shooterP = new SN_DoublePreference("shooterP", 1);
+    public static final SN_DoublePreference shooterI = new SN_DoublePreference("shooterI", 0);
+    public static final SN_DoublePreference shooterD = new SN_DoublePreference("shooterD", 0);
   }
 
   public static final class TurretPrefs {
@@ -92,9 +98,21 @@ public final class RobotPreferences {
   }
 
   public static final class TransferPrefs {
-    public final static SN_DoublePreference transferSpeed = new SN_DoublePreference("transferSpeed", 0.80);
-    // this one is time in loops. roborio runs at 50hz, so a loop is 20ms. 25 loops
-    // is 20*25ms to 500ms
+    public final static SN_DoublePreference transferEntranceSpeed = new SN_DoublePreference(
+        "transferEntranceSpeed", .75);
+    public final static SN_DoublePreference transferEntranceRejectSpeed = new SN_DoublePreference(
+        "transferEntranceRejectSpeed", -.75);
+    public final static SN_DoublePreference transferBeltSpeed = new SN_DoublePreference(
+        "transferBeltSpeed", .75);
+
+    public final static SN_BooleanPreference transferEntranceInvert = new SN_BooleanPreference(
+        "transferEntranceInvert", true);
+    public final static SN_BooleanPreference transferBottomBeltInvert = new SN_BooleanPreference(
+        "transferBottomBeltInvert", false);
+    public final static SN_BooleanPreference transferTopBeltInvert = new SN_BooleanPreference(
+        "transferTopBeltInvert", false);
+
+    // one loop is 20ms
     public final static SN_IntPreference transferRejectLatchTimeLoops = new SN_IntPreference(
         "transferRejectLatchTimeLoops", 25);
 
@@ -104,10 +122,20 @@ public final class RobotPreferences {
   }
 
   public static final class IntakePrefs {
-    public final static SN_DoublePreference collectSpeed = new SN_DoublePreference("collectSpeed", 0.80);
-    public final static SN_DoublePreference rejectSpeed = new SN_DoublePreference("rejectSpeed", -0.80);
-    public final static SN_IntPreference colorSensorMinProximity = new SN_IntPreference("colorSensorMinProximity",
-        1000);
+    public final static SN_BooleanPreference intakeMotorInvert = new SN_BooleanPreference(
+        "intakeMotorInvert", false);
+    public final static SN_BooleanPreference intakePistonInvert = new SN_BooleanPreference(
+        "intakePistonInvert", false);
+
+    public final static SN_DoublePreference intakeCollectSpeed = new SN_DoublePreference(
+        "intakeCollectSpeed", 0.80);
+    public final static SN_DoublePreference intakeRejectSpeed = new SN_DoublePreference(
+        "intakeRejectSpeed", -0.80);
+    // one loop is 20ms
+    public final static SN_IntPreference intakeRejectLatchTimeLoops = new SN_IntPreference(
+        "intakeRejectLatchTimeLoops", 50);
+    public final static SN_IntPreference colorSensorMinProximity = new SN_IntPreference(
+        "colorSensorMinProximity", 1000);
   }
 
   public static final class VisionPrefs {

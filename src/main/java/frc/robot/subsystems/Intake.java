@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.frcteam3255.preferences.SN_DoublePreference;
 import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -53,8 +54,8 @@ public class Intake extends SubsystemBase {
   }
 
   // Sets Intake Motor Speed
-  public void setIntakeMotorSpeed(double a_speed) {
-    double speed = a_speed;
+  public void setIntakeMotorSpeed(SN_DoublePreference a_speed) {
+    double speed = a_speed.getValue();
 
     intakeMotor.set(ControlMode.PercentOutput, speed);
   }

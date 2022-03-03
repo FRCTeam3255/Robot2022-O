@@ -5,16 +5,25 @@
 package frc.robot.commands.Transfer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import static frc.robot.RobotPreferences.*;
+
+import com.frcteam3255.preferences.SN_DoublePreference;
+
 import frc.robot.RobotPreferences;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transfer;
+import frc.robot.subsystems.Transfer.TransferState;
 
 public class PushCargoToShooter extends CommandBase {
   // Creates Shooter and Transfer Variables in PushCargotoShooter
   Shooter shooter;
   Transfer transfer;
 
-  /** Creates a new ShootCargoIf. */
+  SN_DoublePreference outputEntranceSpeed;
+  SN_DoublePreference outputBottomBeltSpeed;
+  SN_DoublePreference outputTopBeltSpeed;
+
+  /** Creates a new ShootCargo. */
   public PushCargoToShooter(Shooter sub_shooter, Transfer sub_transfer) {
     // Use addRequirements() here to declare subsystem dependencies.
     // Initializes PushCargoToShooter Variables
@@ -27,32 +36,41 @@ public class PushCargoToShooter extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    transfer.setTransferState(TransferState.SHOOTING);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // If the Shooter speed is greater than or equal to the Targeted velocity then
-    // Transfer BeltMotors turn on
-    if (shooter.getShooterRPM() >= RobotPreferences.ShooterPrefs.shooterTargetRPM.getValue()) {
 
-      transfer.setBottomBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());
-      transfer.setTopBeltMotorSpeed(RobotPreferences.TransferPrefs.transferSpeed.getValue());
+    outputEntranceSpeed = TransferPrefs.transferEntranceSpeed;
+    outputBottomBeltSpeed = TransferPrefs.transferBeltSpeed;
+    outputTopBeltSpeed = TransferPrefs.transferBeltSpeed;
 
-      // If the Shooter speed is less than the targeted velocity then Transfer
-      // beltMotors Stop
-    } else {
-      transfer.setBottomBeltMotorSpeed(0);
-      transfer.setTopBeltMotorSpeed(0);
+    if (transfer.isTopBallCollected()) {
+      outputTopBeltSpeed = RobotPreferences.zeroDoublePref;
     }
 
+    if (transfer.isTopBallCollected() && transfer.isBottomBallCollected()) {
+      outputEntranceSpeed = RobotPreferences.zeroDoublePref;
+      outputBottomBeltSpeed = RobotPreferences.zeroDoublePref;
+      outputTopBeltSpeed = RobotPreferences.zeroDoublePref;
+
+      transfer.setEntranceBeltMotorSpeed(outputEntranceSpeed);
+      transfer.setBottomBeltMotorSpeed(outputBottomBeltSpeed);
+      transfer.setTopBeltMotorSpeed(outputTopBeltSpeed);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    transfer.setTopBeltMotorSpeed(0);
-    transfer.setBottomBeltMotorSpeed(0);
+    transfer.setEntranceBeltMotorSpeed(RobotPreferences.zeroDoublePref);
+    transfer.setBottomBeltMotorSpeed(RobotPreferences.zeroDoublePref);
+    transfer.setTopBeltMotorSpeed(RobotPreferences.zeroDoublePref);
+    transfer.setTransferState(TransferState.OFF);
+
   }
 
   // Returns true when the command should end.
