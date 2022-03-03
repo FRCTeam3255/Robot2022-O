@@ -13,8 +13,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotMap;
-import frc.robot.RobotPreferences;
+import frc.robot.RobotMap.*;
+import static frc.robot.RobotPreferences.*;
 
 public class Transfer extends SubsystemBase {
   /**
@@ -31,13 +31,13 @@ public class Transfer extends SubsystemBase {
 
   // Initializes Transfer Variables
   public Transfer() {
-    topBeltMotor = new TalonFX(RobotMap.TransferMap.TOP_BELT_MOTOR_CAN);
-    bottomBeltMotor = new TalonFX(RobotMap.TransferMap.BOTTOM_BELT_MOTOR_CAN);
-    entranceBeltMotor = new TalonFX(RobotMap.TransferMap.ENTRANCE_BELT_MOTOR_CAN);
-    transferTopLeftLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_TOP_LEFT_LIMIT_SWITCH_DIO);
-    transferBottomLeftLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_BOTTOM_LEFT_LIMIT_SWITCH_DIO);
-    transferTopRightLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_TOP_RIGHT_LIMIT_SWITCH_DIO);
-    transferBottomRightLimitSwitch = new DigitalInput(RobotMap.TransferMap.TRANSFER_BOTTOM_RIGHT_LIMIT_SWITCH_DIO);
+    topBeltMotor = new TalonFX(TransferMap.TOP_BELT_MOTOR_CAN);
+    bottomBeltMotor = new TalonFX(TransferMap.BOTTOM_BELT_MOTOR_CAN);
+    entranceBeltMotor = new TalonFX(TransferMap.ENTRANCE_BELT_MOTOR_CAN);
+    transferTopLeftLimitSwitch = new DigitalInput(TransferMap.TRANSFER_TOP_LEFT_LIMIT_SWITCH_DIO);
+    transferBottomLeftLimitSwitch = new DigitalInput(TransferMap.TRANSFER_BOTTOM_LEFT_LIMIT_SWITCH_DIO);
+    transferTopRightLimitSwitch = new DigitalInput(TransferMap.TRANSFER_TOP_RIGHT_LIMIT_SWITCH_DIO);
+    transferBottomRightLimitSwitch = new DigitalInput(TransferMap.TRANSFER_BOTTOM_RIGHT_LIMIT_SWITCH_DIO);
     configure();
   }
 
@@ -54,8 +54,8 @@ public class Transfer extends SubsystemBase {
     entranceBeltMotor.setInverted(true);
 
     // Ramping
-    topBeltMotor.configOpenloopRamp(RobotPreferences.TransferPrefs.transferRampTime.getValue());
-    bottomBeltMotor.configOpenloopRamp(RobotPreferences.TransferPrefs.transferRampTime.getValue());
+    topBeltMotor.configOpenloopRamp(TransferPrefs.transferRampTime.getValue());
+    bottomBeltMotor.configOpenloopRamp(TransferPrefs.transferRampTime.getValue());
   }
 
   public double getTopBeltMotorEncoderCount() {
