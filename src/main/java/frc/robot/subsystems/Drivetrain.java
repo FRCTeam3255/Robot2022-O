@@ -14,8 +14,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotMap;
-import frc.robot.RobotPreferences;
+import frc.robot.RobotMap.*;
+import static frc.robot.RobotPreferences.*;
 
 public class Drivetrain extends SubsystemBase {
   /** Creates a new Drivetrain. */
@@ -29,10 +29,10 @@ public class Drivetrain extends SubsystemBase {
 
   // Initializes Variables for Drivetrain
   public Drivetrain() {
-    leftLeadMotor = new TalonFX(RobotMap.DrivetrainMap.LEFT_LEAD_MOTOR_CAN);
-    rightLeadMotor = new TalonFX(RobotMap.DrivetrainMap.RIGHT_LEAD_MOTOR_CAN);
-    leftFollowMotor = new TalonFX(RobotMap.DrivetrainMap.LEFT_FOLLOW_MOTOR_CAN);
-    rightFollowMotor = new TalonFX(RobotMap.DrivetrainMap.RIGHT_FOLLOW_MOTOR_CAN);
+    leftLeadMotor = new TalonFX(DrivetrainMap.LEFT_LEAD_MOTOR_CAN);
+    rightLeadMotor = new TalonFX(DrivetrainMap.RIGHT_LEAD_MOTOR_CAN);
+    leftFollowMotor = new TalonFX(DrivetrainMap.LEFT_FOLLOW_MOTOR_CAN);
+    rightFollowMotor = new TalonFX(DrivetrainMap.RIGHT_FOLLOW_MOTOR_CAN);
 
     config = new TalonFXConfiguration();
 
@@ -42,12 +42,12 @@ public class Drivetrain extends SubsystemBase {
   // Sets Drivetrain Variable's Default Settings
   public void configure() {
 
-    config.slot0.allowableClosedloopError = RobotPreferences.DrivetrainPrefs.driveAllowableClosedLoopError.getValue();
-    config.slot0.closedLoopPeakOutput = RobotPreferences.DrivetrainPrefs.driveClosedLoopPeakOutput.getValue();
-    config.slot0.kF = RobotPreferences.DrivetrainPrefs.driveF.getValue();
-    config.slot0.kP = RobotPreferences.DrivetrainPrefs.driveP.getValue();
-    config.slot0.kI = RobotPreferences.DrivetrainPrefs.driveI.getValue();
-    config.slot0.kD = RobotPreferences.DrivetrainPrefs.driveD.getValue();
+    config.slot0.allowableClosedloopError = DrivetrainPrefs.driveAllowableClosedLoopError.getValue();
+    config.slot0.closedLoopPeakOutput = DrivetrainPrefs.driveClosedLoopPeakOutput.getValue();
+    config.slot0.kF = DrivetrainPrefs.driveF.getValue();
+    config.slot0.kP = DrivetrainPrefs.driveP.getValue();
+    config.slot0.kI = DrivetrainPrefs.driveI.getValue();
+    config.slot0.kD = DrivetrainPrefs.driveD.getValue();
 
     // Left
     leftLeadMotor.configFactoryDefault();
@@ -91,8 +91,8 @@ public class Drivetrain extends SubsystemBase {
 
   // Method controls Drivetrain Motor speeds
   public void arcadeDrive(double a_speed, double a_turn) {
-    double speed = a_speed * RobotPreferences.DrivetrainPrefs.arcadeSpeed.getValue();
-    double turn = a_turn * RobotPreferences.DrivetrainPrefs.arcadeTurn.getValue();
+    double speed = a_speed * DrivetrainPrefs.arcadeSpeed.getValue();
+    double turn = a_turn * DrivetrainPrefs.arcadeTurn.getValue();
 
     leftLeadMotor.set(ControlMode.PercentOutput, speed, DemandType.ArbitraryFeedForward, turn);
     rightLeadMotor.set(ControlMode.PercentOutput, speed, DemandType.ArbitraryFeedForward, -turn);
@@ -105,9 +105,9 @@ public class Drivetrain extends SubsystemBase {
     resetDrivetrainEncodersCount();
 
     leftLeadMotor.startMotionProfile(pointsLeft,
-        RobotPreferences.DrivetrainPrefs.motionProfileMinBufferedPoints.getValue(), ControlMode.MotionProfile);
+        DrivetrainPrefs.motionProfileMinBufferedPoints.getValue(), ControlMode.MotionProfile);
     rightLeadMotor.startMotionProfile(pointsRight,
-        RobotPreferences.DrivetrainPrefs.motionProfileMinBufferedPoints.getValue(), ControlMode.MotionProfile);
+        DrivetrainPrefs.motionProfileMinBufferedPoints.getValue(), ControlMode.MotionProfile);
   }
 
   public boolean isMotionProfileFinished() {
