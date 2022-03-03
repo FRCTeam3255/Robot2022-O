@@ -9,7 +9,7 @@ import static frc.robot.RobotPreferences.*;
 
 import com.frcteam3255.preferences.SN_DoublePreference;
 
-import frc.robot.RobotPreferences;
+import frc.robot.RobotPreferences.*;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transfer;
 import frc.robot.subsystems.Transfer.TransferState;
@@ -48,15 +48,20 @@ public class PushCargoToShooter extends CommandBase {
     outputBottomBeltSpeed = TransferPrefs.transferBeltSpeed;
     outputTopBeltSpeed = TransferPrefs.transferBeltSpeed;
 
-    if (transfer.isTopBallCollected()) {
-      outputTopBeltSpeed = RobotPreferences.zeroDoublePref;
-    }
+    shooter.setGoalRPM(ShooterPrefs.shooterTargetRPM);
 
-    if (transfer.isTopBallCollected() && transfer.isBottomBallCollected()) {
-      outputEntranceSpeed = RobotPreferences.zeroDoublePref;
-      outputBottomBeltSpeed = RobotPreferences.zeroDoublePref;
-      outputTopBeltSpeed = RobotPreferences.zeroDoublePref;
+    // If the shooter rpm is greater or equal to the target rpm
+    if (shooter.getShooterRPM() >= shooter.getShooterRPM()) {
 
+      if (transfer.isTopBallCollected()) {
+        outputTopBeltSpeed = zeroDoublePref;
+      }
+
+      if (transfer.isTopBallCollected() && transfer.isBottomBallCollected()) {
+        outputEntranceSpeed = zeroDoublePref;
+        outputBottomBeltSpeed = zeroDoublePref;
+        outputTopBeltSpeed = zeroDoublePref;
+      }
       transfer.setEntranceBeltMotorSpeed(outputEntranceSpeed);
       transfer.setBottomBeltMotorSpeed(outputBottomBeltSpeed);
       transfer.setTopBeltMotorSpeed(outputTopBeltSpeed);
@@ -66,9 +71,9 @@ public class PushCargoToShooter extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    transfer.setEntranceBeltMotorSpeed(RobotPreferences.zeroDoublePref);
-    transfer.setBottomBeltMotorSpeed(RobotPreferences.zeroDoublePref);
-    transfer.setTopBeltMotorSpeed(RobotPreferences.zeroDoublePref);
+    transfer.setEntranceBeltMotorSpeed(zeroDoublePref);
+    transfer.setBottomBeltMotorSpeed(zeroDoublePref);
+    transfer.setTopBeltMotorSpeed(zeroDoublePref);
     transfer.setTransferState(TransferState.OFF);
 
   }
