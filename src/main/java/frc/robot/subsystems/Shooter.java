@@ -12,8 +12,8 @@ import com.frcteam3255.utils.SN_Math;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotMap;
-import frc.robot.RobotPreferences;
+import frc.robot.RobotMap.*;
+import static frc.robot.RobotPreferences.*;
 
 public class Shooter extends SubsystemBase {
 
@@ -27,8 +27,8 @@ public class Shooter extends SubsystemBase {
    * Creates new shooter
    */
   public Shooter() {
-    leadMotor = new TalonFX(RobotMap.ShooterMap.LEFT_MOTOR_CAN);
-    followMotor = new TalonFX(RobotMap.ShooterMap.RIGHT_MOTOR_CAN);
+    leadMotor = new TalonFX(ShooterMap.LEFT_MOTOR_CAN);
+    followMotor = new TalonFX(ShooterMap.RIGHT_MOTOR_CAN);
 
     config = new TalonFXConfiguration();
 
@@ -42,10 +42,10 @@ public class Shooter extends SubsystemBase {
     leadMotor.configFactoryDefault();
     followMotor.configFactoryDefault();
 
-    config.slot0.kF = RobotPreferences.ShooterPrefs.shooterF.getValue();
-    config.slot0.kP = RobotPreferences.ShooterPrefs.shooterP.getValue();
-    config.slot0.kI = RobotPreferences.ShooterPrefs.shooterI.getValue();
-    config.slot0.kD = RobotPreferences.ShooterPrefs.shooterD.getValue();
+    config.slot0.kF = ShooterPrefs.shooterF.getValue();
+    config.slot0.kP = ShooterPrefs.shooterP.getValue();
+    config.slot0.kI = ShooterPrefs.shooterI.getValue();
+    config.slot0.kD = ShooterPrefs.shooterD.getValue();
 
     leadMotor.configAllSettings(config);
     followMotor.configAllSettings(config);
