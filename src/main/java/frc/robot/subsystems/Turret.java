@@ -11,8 +11,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotPreferences;
-import frc.robot.RobotMap;
+import static frc.robot.RobotPreferences.*;
+import frc.robot.RobotMap.*;
 
 public class Turret extends SubsystemBase {
   /** Creates a new Turret. */
@@ -23,7 +23,7 @@ public class Turret extends SubsystemBase {
   // LINKS TO ROBOT MAP
   public Turret() {
     // Creates Turret Variables
-    turretMotor = new TalonFX(RobotMap.TurretMap.TURRET_MOTOR_CAN);
+    turretMotor = new TalonFX(TurretMap.TURRET_MOTOR_CAN);
     config = new TalonFXConfiguration();
 
     configure();
@@ -35,12 +35,12 @@ public class Turret extends SubsystemBase {
     turretMotor.configFactoryDefault();
 
     // then we set the config settings
-    config.slot0.allowableClosedloopError = RobotPreferences.TurretPrefs.turretMaxAllowableErrorDegrees.getValue();
-    config.slot0.closedLoopPeakOutput = RobotPreferences.TurretPrefs.turretClosedLoopPeakOutput.getValue();
-    config.slot0.kF = RobotPreferences.TurretPrefs.turretF.getValue();
-    config.slot0.kP = RobotPreferences.TurretPrefs.turretP.getValue();
-    config.slot0.kI = RobotPreferences.TurretPrefs.turretI.getValue();
-    config.slot0.kD = RobotPreferences.TurretPrefs.turretD.getValue();
+    config.slot0.allowableClosedloopError = TurretPrefs.turretMaxAllowableErrorDegrees.getValue();
+    config.slot0.closedLoopPeakOutput = TurretPrefs.turretClosedLoopPeakOutput.getValue();
+    config.slot0.kF = TurretPrefs.turretF.getValue();
+    config.slot0.kP = TurretPrefs.turretP.getValue();
+    config.slot0.kI = TurretPrefs.turretI.getValue();
+    config.slot0.kD = TurretPrefs.turretD.getValue();
 
     // then we apply the config settings (which also sets every other setting, not
     // just the ones we set)
@@ -49,10 +49,10 @@ public class Turret extends SubsystemBase {
     // then we set more stuff that wasn't in the config
 
     // soft limit
-    turretMotor.configForwardSoftLimitThreshold(RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue()
-        * RobotPreferences.TurretPrefs.turretEncoderCountsPerDegrees.getValue());
-    turretMotor.configReverseSoftLimitThreshold(RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue()
-        * RobotPreferences.TurretPrefs.turretEncoderCountsPerDegrees.getValue());
+    turretMotor.configForwardSoftLimitThreshold(TurretPrefs.turretMaxAngleDegrees.getValue()
+        * TurretPrefs.turretEncoderCountsPerDegrees.getValue());
+    turretMotor.configReverseSoftLimitThreshold(TurretPrefs.turretMinAngleDegrees.getValue()
+        * TurretPrefs.turretEncoderCountsPerDegrees.getValue());
     turretMotor.configForwardSoftLimitEnable(true);
     turretMotor.configReverseSoftLimitEnable(true);
 
@@ -80,19 +80,19 @@ public class Turret extends SubsystemBase {
 
   // gets the turret angle in degrees
   public double getTurretAngle() {
-    return getTurretMotorEncoderCounts() / RobotPreferences.TurretPrefs.turretEncoderCountsPerDegrees.getValue();
+    return getTurretMotorEncoderCounts() / TurretPrefs.turretEncoderCountsPerDegrees.getValue();
   }
 
   // sets the turret angle in degrees
   public void setTurretAngle(double a_degrees) {
-    double position = a_degrees * RobotPreferences.TurretPrefs.turretEncoderCountsPerDegrees.getValue();
+    double position = a_degrees * TurretPrefs.turretEncoderCountsPerDegrees.getValue();
     turretMotor.set(ControlMode.Position, position);
   }
 
   // gets the difference between where the motor wants to be, and where it is, in
   // encoder counts
   public double getTurretClosedLoopErrorDegrees() {
-    return turretMotor.getClosedLoopError() * RobotPreferences.TurretPrefs.turretEncoderCountsPerDegrees.getValue();
+    return turretMotor.getClosedLoopError() * TurretPrefs.turretEncoderCountsPerDegrees.getValue();
   }
 
   @Override
