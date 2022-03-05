@@ -82,17 +82,7 @@ public class Shooter extends SubsystemBase {
 
   // Sets/Controls Shooter Motor speeds
   public void setShooterPercentOutput(double a_speed) {
-    double speed = a_speed;
-    leadMotor.set(ControlMode.PercentOutput, speed);
-  }
-
-  /**
-   * Sets the shooter velocity (encoder counts per 100ms)
-   * 
-   * @param a_velocity Encoder counts per 100ms
-   */
-  private void setShooterVelocity(double a_velocity) {
-    leadMotor.set(ControlMode.Velocity, a_velocity);
+    leadMotor.set(ControlMode.PercentOutput, a_speed);
   }
 
   /**
@@ -102,7 +92,7 @@ public class Shooter extends SubsystemBase {
    */
   public void setShooterRPM(double a_rpm) {
     double rpm = SN_Math.RPMToVelocity(a_rpm, SN_Math.TALONFX_ENCODER_PULSES_PER_COUNT);
-    setShooterVelocity(rpm);
+    leadMotor.set(ControlMode.Velocity, rpm);
   }
 
   /**
@@ -121,38 +111,14 @@ public class Shooter extends SubsystemBase {
     return leadMotor.getSelectedSensorVelocity();
   }
 
-  /**
-   * Sets the Goal RPM using primitive variable
-   * 
-   * @param a_rpm Desired Goal RPM
-   */
-  public void setGoalRPMPrimitive(double a_rpm) {
-    goalRPM = a_rpm;
-  }
+  public boolean isShooterUpToSpeed() {
+    double closedLoopError = leadMotor.getClosedLoopError() * ShooterPrefs.shooterEncoderCountsPerDegrees.getValue();
 
-  /**
-   * Sets the Goal RPM
-   * 
-   * @param a_rpm Desired Goal RPM
-   */
-  public void setGoalRPM(SN_DoublePreference a_rpm) {
-    goalRPM = a_rpm.getValue();
-  }
-
-  /**
-   * @return Previously Set Goal RPM
-   */
-  public double getGoalRPM() {
-    return goalRPM;
-  }
-
-  /**
-   * 
-   * @return True if the Shooter RPM error is within the acceptable range to
-   *         shoot.
-   */
-  public boolean isErrorAcceptable() {
-    return (getShooterRPM() - getGoalRPM()) < ShooterPrefs.shooterAcceptableErrorRPM.getValue();
+    boolean isShooterUpToSpeed = false;
+    if (closedLoopError >= ShooterPrefs.shooterTargetRPM.getValue()) {
+      isShooterUpToSpeed = true;
+    }
+    return isShooterUpToSpeed;
   }
 
   @Override

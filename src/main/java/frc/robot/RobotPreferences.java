@@ -68,6 +68,9 @@ public final class RobotPreferences {
     public static final SN_BooleanPreference shooterInvert = new SN_BooleanPreference(
         "shooterInvert", false);
 
+    public static final SN_DoublePreference shooterEncoderCountsPerDegrees = new SN_DoublePreference(
+        "shooterEncoderCountsPerDegrees", 84);
+
     public static final SN_DoublePreference shooterF = new SN_DoublePreference("shooterF", 0);
     public static final SN_DoublePreference shooterP = new SN_DoublePreference("shooterP", 1);
     public static final SN_DoublePreference shooterI = new SN_DoublePreference("shooterI", 0);

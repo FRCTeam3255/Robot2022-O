@@ -48,10 +48,8 @@ public class PushCargoToShooter extends CommandBase {
     outputBottomBeltSpeed = TransferPrefs.transferBeltSpeed;
     outputTopBeltSpeed = TransferPrefs.transferBeltSpeed;
 
-    shooter.setGoalRPM(ShooterPrefs.shooterTargetRPM);
-
     // If the shooter rpm is greater or equal to the target rpm
-    if (shooter.getShooterRPM() >= shooter.getShooterRPM()) {
+    if (shooter.isShooterUpToSpeed()) {
 
       if (transfer.isTopBallCollected()) {
         outputTopBeltSpeed = zeroDoublePref;
