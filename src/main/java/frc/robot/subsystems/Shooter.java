@@ -8,7 +8,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
-import com.frcteam3255.preferences.SN_DoublePreference;
 import com.frcteam3255.utils.SN_Math;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -112,13 +111,11 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean isShooterUpToSpeed() {
-    double closedLoopError = leadMotor.getClosedLoopError() * ShooterPrefs.shooterEncoderCountsPerDegrees.getValue();
+    return ShooterPrefs.shooterAcceptableErrorRPM.getValue() > Math
+        .abs(SN_Math.velocityToRPM(leadMotor.getClosedLoopError(), SN_Math.TALONFX_ENCODER_PULSES_PER_COUNT));
 
-    boolean isShooterUpToSpeed = false;
-    if (closedLoopError >= ShooterPrefs.shooterTargetRPM.getValue()) {
-      isShooterUpToSpeed = true;
-    }
-    return isShooterUpToSpeed;
+    // return true if the acceptable error (in rpm) is greater than the actual error
+    // (converted to rpm)
   }
 
   @Override
@@ -126,6 +123,7 @@ public class Shooter extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Shooter Left Motor", getShooterEncoderCount());
     SmartDashboard.putNumber("Shooter Velocity", getShooterVelocity());
+    SmartDashboard.putBoolean("Is Shooter Up To Speed", isShooterUpToSpeed());
     SmartDashboard.putNumber("ShooterLeadMotorSpeed", leadMotor.getMotorOutputPercent());
     SmartDashboard.putNumber("ShooterFollowMotorSpeed", followMotor.getMotorOutputPercent());
 
