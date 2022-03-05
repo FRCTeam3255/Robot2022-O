@@ -46,6 +46,8 @@ public class Intake extends SubsystemBase {
   public void configure() {
     intakeMotor.configFactoryDefault();
 
+    intakeMotor.setInverted(true);
+
   }
 
   // Resets Intake Motor Encoder Count

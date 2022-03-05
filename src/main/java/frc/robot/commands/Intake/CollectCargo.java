@@ -57,7 +57,7 @@ public class CollectCargo extends CommandBase {
   @Override
   public void execute() {
 
-    outputIntakeSpeed = zeroDoublePref;
+    outputIntakeSpeed = IntakePrefs.intakeCollectSpeed;
     outputEntranceSpeed = TransferPrefs.transferEntranceSpeed;
     outputBottomBeltSpeed = TransferPrefs.transferBeltSpeed;
     outputTopBeltSpeed = TransferPrefs.transferBeltSpeed;
