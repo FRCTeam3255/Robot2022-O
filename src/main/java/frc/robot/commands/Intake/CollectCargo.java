@@ -73,7 +73,7 @@ public class CollectCargo extends CommandBase {
     }
 
     // If there is a ball
-    if (intake.isProximity()) {
+    if (intake.isBallNearIntake()) {
       // And it's the correct color
       if (intake.ballColorMatchesAlliance()) {
 

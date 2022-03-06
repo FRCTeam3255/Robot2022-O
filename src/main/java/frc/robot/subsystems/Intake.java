@@ -111,7 +111,7 @@ public class Intake extends SubsystemBase {
   }
 
   public ballColor getBallColor() {
-    if (isProximity()) {
+    if (isBallNearIntake()) {
       if (getBlue() > getRed()) {
         return ballColor.blue;
       } else {
@@ -135,7 +135,7 @@ public class Intake extends SubsystemBase {
     }
   }
 
-  public boolean isProximity() {
+  public boolean isBallNearIntake() {
     return getProximity() > IntakePrefs.colorSensorMinProximity.getValue();
   }
 
@@ -172,6 +172,6 @@ public class Intake extends SubsystemBase {
     SmartDashboard.putBoolean("Is Ball Blue", isBallBlue());
     SmartDashboard.putBoolean("Is Alliance Blue", isAllianceBlue());
     SmartDashboard.putBoolean("Ball Color Matches Alliance", ballColorMatchesAlliance());
-    SmartDashboard.putBoolean("Is Proximity", isProximity());
+    SmartDashboard.putBoolean("Is Proximity", isBallNearIntake());
   }
 }
