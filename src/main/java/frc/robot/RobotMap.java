@@ -21,6 +21,9 @@ package frc.robot;
 
 public final class RobotMap {
 
+  public static final int PRIMARY_PCM = 0;
+  public static final int CLIMBER_PCM = 2;
+
   public final class ClimberMap {
     public static final int CLIMBER_MOTOR_CAN = 10;
 
