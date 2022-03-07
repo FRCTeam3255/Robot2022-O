@@ -64,12 +64,12 @@ public class CollectCargo extends CommandBase {
 
     if (transfer.isTopBallCollected()) {
       outputTopBeltSpeed = RobotPreferences.zeroDoublePref;
-    }
-
-    if (transfer.isTopBallCollected() && transfer.isBottomBallCollected()) {
-      outputEntranceSpeed = RobotPreferences.zeroDoublePref;
-      outputBottomBeltSpeed = RobotPreferences.zeroDoublePref;
-      outputTopBeltSpeed = RobotPreferences.zeroDoublePref;
+      // If top AND bottom are collected, turn everything else off as well
+      if (transfer.isBottomBallCollected()) {
+        outputIntakeSpeed = RobotPreferences.zeroDoublePref;
+        outputEntranceSpeed = RobotPreferences.zeroDoublePref;
+        outputBottomBeltSpeed = RobotPreferences.zeroDoublePref;
+      }
     }
 
     // If there is a ball
