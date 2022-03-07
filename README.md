@@ -1,5 +1,8 @@
 # Robot2022
 
+## <font color="red">Rapid React</font> <font color="white">2022</font> <font color="blue">Game links</font>
+[Game & Season Info](https://www.firstinspires.org/robotics/frc/game-and-season)
+
 ## <span style="color:green">Falcons</span>
 [Falcon User Manual](https://store.ctr-electronics.com/content/user-manual/Falcon%20500%20User%20Guide.pdf)
 
@@ -34,3 +37,4 @@
 [PCM software documentation](https://docs.wpilib.org/en/stable/docs/software/hardware-apis/pneumatics/pneumatics.html)
 
 [PCM firmware downloads 1.65](https://github.com/CrossTheRoadElec/Phoenix-Releases/blob/master/ctr-device-firmware.zip?raw=true)
+
