@@ -33,6 +33,8 @@ public final class RobotMap {
     public static final int LOCK_PISTON_PCM_B = 1;
     public static final int PIVOT_PISTON_PCM_A = 2;
     public static final int PIVOT_PISTON_PCM_B = 3;
+    public static final int STATIONARY_CLIMB_HOOKS_PISTON_A = 4;
+    public static final int STATIONARY_CLIMB_HOOKS_PISTON_B = 5;
   }
 
   public final class ControllerMap {
@@ -81,5 +83,4 @@ public final class RobotMap {
 
   public final class VisionMap {
   }
-
 }

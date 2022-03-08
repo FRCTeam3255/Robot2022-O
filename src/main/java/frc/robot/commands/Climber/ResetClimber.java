@@ -5,6 +5,7 @@
 package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotPreferences.ClimberPrefs;
 import frc.robot.subsystems.Climber;
 
 public class ResetClimber extends CommandBase {
@@ -28,7 +29,7 @@ public class ResetClimber extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climber.retractClimber();
+    climber.setClimberPosition(ClimberPrefs.climberDownPosition);
   }
 
   // Called once the command ends or is interrupted.

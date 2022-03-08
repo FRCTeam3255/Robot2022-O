@@ -149,11 +149,17 @@ public final class RobotPreferences {
   public static final class ClimberPrefs {
     public static final SN_DoublePreference climberMotorSpeed = new SN_DoublePreference("climberMotorSpeed", 0.5);
     public static final SN_DoublePreference climberMaxEncoderCount = new SN_DoublePreference(
-        "climberMaxEncoderCount",
-        200000);
+        "climberMaxEncoderCount", 200000);
 
     // Climbing Up/Down Positions
     public static final SN_DoublePreference climberUpPosition = new SN_DoublePreference("climberUpPosition", 32555);
     public static final SN_DoublePreference climberDownPosition = new SN_DoublePreference("climberDownPosition", 0);
+
+    public static final SN_BooleanPreference climberLockPistonInvert = new SN_BooleanPreference(
+        "climberLockPistonInvert", false);
+    public static final SN_BooleanPreference climberPivotPistonInvert = new SN_BooleanPreference(
+        "climberPivotPistonInvert", false);
+    public static final SN_BooleanPreference climberHookPistonInvert = new SN_BooleanPreference(
+        "climberHookPistonInvert", false);
   }
 }

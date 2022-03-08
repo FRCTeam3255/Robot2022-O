@@ -6,13 +6,14 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.frcteam3255.components.SN_DoubleSolenoid;
+import com.frcteam3255.preferences.SN_DoublePreference;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMap;
 import frc.robot.RobotMap.*;
 import static frc.robot.RobotPreferences.*;
 
@@ -21,62 +22,31 @@ public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
   private TalonFX climbMotor;
   private DigitalInput climberBottomSafetySwitch;
-  private DoubleSolenoid climberLockPiston;
-  private DoubleSolenoid climberPivotPiston;
-
-  // Solenoid Variables
-  // Lock Piston
-  private DoubleSolenoid.Value lockDeploy = Value.kForward;
-  private DoubleSolenoid.Value lockRetract = Value.kReverse;
-
-  // Pivot Piston
-  private DoubleSolenoid.Value pivotDeploy = Value.kForward;
-  private DoubleSolenoid.Value pivotRetract = Value.kReverse;
+  private SN_DoubleSolenoid climberLockPiston;
+  private SN_DoubleSolenoid climberPivotPiston;
+  // Somebody can rename this solenoid if they can think of a better name
+  // ok
+  private SN_DoubleSolenoid climberHookPiston;
 
   public Climber() {
 
     climberBottomSafetySwitch = new DigitalInput(ClimberMap.BOTTOM_SAFETY_MAG_SWITCH_DIO);
     climbMotor = new TalonFX(ClimberMap.CLIMBER_MOTOR_CAN);
-    climberLockPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, ClimberMap.LOCK_PISTON_PCM_A,
+
+    climberLockPiston = new SN_DoubleSolenoid(RobotMap.CLIMBER_PCM, PneumaticsModuleType.CTREPCM,
+        ClimberMap.LOCK_PISTON_PCM_A,
         ClimberMap.LOCK_PISTON_PCM_B);
-    configure();
-    climberPivotPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, ClimberMap.PIVOT_PISTON_PCM_A,
+
+    climberHookPiston = new SN_DoubleSolenoid(RobotMap.CLIMBER_PCM, PneumaticsModuleType.CTREPCM,
+        ClimberMap.STATIONARY_CLIMB_HOOKS_PISTON_A,
+        ClimberMap.STATIONARY_CLIMB_HOOKS_PISTON_B);
+
+    climberPivotPiston = new SN_DoubleSolenoid(RobotMap.CLIMBER_PCM, PneumaticsModuleType.CTREPCM,
+        ClimberMap.PIVOT_PISTON_PCM_A,
         ClimberMap.PIVOT_PISTON_PCM_B);
-  }
 
-  public boolean isClimberLocked() {
-    Value climberLockStatus = climberLockPiston.get();
-    boolean isClimberLocked = false;
+    configure();
 
-    if (climberLockStatus == lockDeploy) {
-      isClimberLocked = true;
-    } else {
-      isClimberLocked = false;
-    }
-
-    return isClimberLocked;
-  }
-
-  public boolean isClimberPivoted() {
-    Value climberPivotStatus = climberPivotPiston.get();
-    boolean isClimberPivoted = false;
-
-    if (climberPivotStatus == lockDeploy) {
-      isClimberPivoted = true;
-    } else {
-      isClimberPivoted = false;
-    }
-
-    return isClimberPivoted;
-  }
-
-  // solenoid commands
-  public void lockClimber() {
-    climberLockPiston.set(lockDeploy);
-  }
-
-  public void unlockClimber() {
-    climberLockPiston.set(lockRetract);
   }
 
   public void configure() {
@@ -85,48 +55,67 @@ public class Climber extends SubsystemBase {
     // Set the Soft Limit for Forward Throttle
     climbMotor.configForwardSoftLimitThreshold(ClimberPrefs.climberMaxEncoderCount.getValue());
     climbMotor.configForwardSoftLimitEnable(true);
+
+    climberLockPiston.setInverted(ClimberPrefs.climberLockPistonInvert.getValue());
+    climberPivotPiston.setInverted(ClimberPrefs.climberPivotPistonInvert.getValue());
+    climberHookPiston.setInverted(ClimberPrefs.climberHookPistonInvert.getValue());
+  }
+
+  // Method controls CLimb Motor Speed
+  public void setClimberSpeed(double a_speed) {
+    double speed = a_speed;
+    climbMotor.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void setClimberPosition(SN_DoublePreference a_position) {
+    climbMotor.set(ControlMode.Position, a_position.getValue());
   }
 
   public void resetClimberEncoderCount() {
     climbMotor.configForwardSoftLimitThreshold(ClimberPrefs.climberMaxEncoderCount.getValue());
     climbMotor.setSelectedSensorPosition(0);
-
   }
 
   public double getClimberEncoderCount() {
     return climbMotor.getSelectedSensorPosition();
   }
 
-  // Method controls CLimb Motor Speed
-  public void setClimberSpeed(double a_speed) {
-    double speed = a_speed;
-    // If the Climber is at the bottom climber cannot go any lower
-    if (isClimberAtBottom() == true && speed < 0) {
-      climbMotor.set(ControlMode.PercentOutput, 0);
-      // If the Climber is anywhere other than the bottom the climber will move either
-      // up or down
-    } else {
-      climbMotor.set(ControlMode.PercentOutput, ClimberPrefs.climberMotorSpeed.getValue() * speed);
-    }
-
+  public boolean isClimberLocked() {
+    return climberLockPiston.isDeployed();
   }
 
-  // Climbing Up/Down
-  public void extendClimber() {
-    climbMotor.set(ControlMode.Position, ClimberPrefs.climberUpPosition.getValue());
+  // solenoid commands
+  public void lockClimber() {
+    climberLockPiston.setDeployed();
   }
 
-  public void retractClimber() {
-    climbMotor.set(ControlMode.Position, ClimberPrefs.climberDownPosition.getValue());
+  public void unlockClimber() {
+    climberLockPiston.setRetracted();
   }
 
   // Piston Deploy/Retract
   public void pivotForward() {
-    climberPivotPiston.set(pivotDeploy);
+    climberPivotPiston.setDeployed();
   }
 
   public void pivotBackward() {
-    climberPivotPiston.set(pivotRetract);
+    climberPivotPiston.setRetracted();
+  }
+
+  public boolean isClimberPivoted() {
+    return climberPivotPiston.isDeployed();
+  }
+
+  public void hookForward() {
+    climberHookPiston.setDeployed();
+  }
+
+  public void hookBackward() {
+    climberHookPiston.setRetracted();
+  }
+
+  public boolean isHookDeployed() {
+    return climberHookPiston.isDeployed();
   }
 
   // TODO: change when location of mag switch is (ex: isClimberRaised)
@@ -141,6 +130,7 @@ public class Climber extends SubsystemBase {
     SmartDashboard.putBoolean("Is Climber At Bottom", isClimberAtBottom());
     SmartDashboard.putBoolean("Is Climber Locked", isClimberLocked());
     SmartDashboard.putBoolean("Is Climber Pivoted", isClimberPivoted());
+    SmartDashboard.putBoolean("Is Climber Hooked", isHookDeployed());
     SmartDashboard.putNumber("Climber Motor Speed", climbMotor.getMotorOutputPercent());
   }
 }
