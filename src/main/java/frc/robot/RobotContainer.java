@@ -92,6 +92,12 @@ public class RobotContainer {
   private final Climb com_climb = new Climb(sub_climber);
   private final ClimbNextRung com_ClimbNextRung = new ClimbNextRung(sub_climber);
   private final ResetClimber com_ResetClimber = new ResetClimber(sub_climber);
+  private final InstantCommand com_lockClimber = new InstantCommand(sub_climber::lockClimber);
+  private final InstantCommand com_unlockClimber = new InstantCommand(sub_climber::unlockClimber);
+  private final InstantCommand com_pivotClimberForward = new InstantCommand(sub_climber::pivotForward);
+  private final InstantCommand com_pivotClimberBackward = new InstantCommand(sub_climber::pivotBackward);
+  private final InstantCommand com_hookClimberForward = new InstantCommand(sub_climber::hookForward);
+  private final InstantCommand com_hookClimberBackward = new InstantCommand(sub_climber::hookBackward);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -113,21 +119,23 @@ public class RobotContainer {
     coDriverStick.btn_RTrig.whileHeld(com_pushCargoToShooter);
     coDriverStick.btn_RTrig.whileHeld(com_spinFlywheel);
 
+    coDriverStick.btn_LBump.whileHeld(com_moveTurret);
+    coDriverStick.btn_RBump.whenPressed(com_ClimbNextRung);
+
     coDriverStick.btn_A.whileHeld(com_deployIntake);
     coDriverStick.btn_B.whileHeld(com_retractIntake);
     coDriverStick.btn_X.whileHeld(com_visionAimTurret);
     coDriverStick.btn_Y.whileHeld(com_visionHoldAimTurret);
-    coDriverStick.btn_LBump.whileHeld(com_moveTurret);
 
     coDriverStick.btn_LTrig.whileHeld(com_collect);
 
     coDriverStick.btn_LStick.whileHeld(com_climb);
 
-    coDriverStick.POV_East.whenPressed(com_ResetClimber);
     coDriverStick.POV_North.whenPressed(com_shallowHood);
     coDriverStick.POV_South.whenPressed(com_steepenHood);
 
-    coDriverStick.btn_RBump.whenPressed(com_ClimbNextRung);
+    coDriverStick.POV_East.whenPressed(com_ResetClimber);
+
   }
 
   /**
@@ -177,6 +185,13 @@ public class RobotContainer {
 
     SmartDashboard.putData("Configure All Subsystems", new ConfigureSubsystems(sub_climber, sub_drivetrain,
         sub_intake, sub_shooter, sub_transfer, sub_turret));
+
+    SmartDashboard.putData("Lock Climber", com_lockClimber);
+    SmartDashboard.putData("Unlock Climber", com_unlockClimber);
+    SmartDashboard.putData("Pivot Climber Forward", com_pivotClimberForward);
+    SmartDashboard.putData("Pivot Climber Backward", com_pivotClimberBackward);
+    SmartDashboard.putData("Hook Climber Forward", com_hookClimberForward);
+    SmartDashboard.putData("Hook Climber Backwards", com_hookClimberBackward);
   }
 
   /**

@@ -90,8 +90,8 @@ public class Shooter extends SubsystemBase {
    * @param a_rpm RPM to set motor to
    */
   public void setShooterRPM(double a_rpm) {
-    double rpm = SN_Math.RPMToVelocity(a_rpm, SN_Math.TALONFX_ENCODER_PULSES_PER_COUNT);
-    leadMotor.set(ControlMode.Velocity, rpm);
+    double velocity = SN_Math.RPMToVelocity(a_rpm, SN_Math.TALONFX_ENCODER_PULSES_PER_COUNT);
+    leadMotor.set(ControlMode.Velocity, velocity);
   }
 
   /**
@@ -122,7 +122,11 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Shooter Left Motor", getShooterEncoderCount());
-    SmartDashboard.putNumber("Shooter Velocity", getShooterVelocity());
+    // SmartDashboard.putNumber("Shooter Velocity", getShooterVelocity());
+
+    SmartDashboard.putNumber("Shooter RPM", getShooterRPM());
+    SmartDashboard.putNumber("Shooter Error RPM", Math
+        .abs(SN_Math.velocityToRPM(leadMotor.getClosedLoopError(), SN_Math.TALONFX_ENCODER_PULSES_PER_COUNT)));
     SmartDashboard.putBoolean("Is Shooter Up To Speed", isShooterUpToSpeed());
     SmartDashboard.putNumber("ShooterLeadMotorSpeed", leadMotor.getMotorOutputPercent());
     SmartDashboard.putNumber("ShooterFollowMotorSpeed", followMotor.getMotorOutputPercent());
