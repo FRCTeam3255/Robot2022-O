@@ -52,6 +52,8 @@ public final class RobotPreferences {
 
     public static final SN_IntPreference motionProfileMinBufferedPoints = new SN_IntPreference(
         "motionProfileMinBufferedPoints", 10);
+    public static final SN_DoublePreference driveOpenLoopRampTimeSeconds = new SN_DoublePreference(
+        "driveOpenLoopRampTimeSeconds", .25);
   }
 
   public static final class HoodPrefs {
