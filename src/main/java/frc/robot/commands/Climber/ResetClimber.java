@@ -23,7 +23,7 @@ public class ResetClimber extends CommandBase {
   @Override
   public void initialize() {
     climber.unlockClimber();
-    climber.pivotBackward();
+    climber.pivotAngled();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

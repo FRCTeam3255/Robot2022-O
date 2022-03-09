@@ -100,8 +100,8 @@ public class RobotContainer {
   private final ResetClimber com_ResetClimber = new ResetClimber(sub_climber);
   private final InstantCommand com_lockClimber = new InstantCommand(sub_climber::lockClimber);
   private final InstantCommand com_unlockClimber = new InstantCommand(sub_climber::unlockClimber);
-  private final InstantCommand com_pivotClimberForward = new InstantCommand(sub_climber::pivotForward);
-  private final InstantCommand com_pivotClimberBackward = new InstantCommand(sub_climber::pivotBackward);
+  private final InstantCommand com_pivotClimberForward = new InstantCommand(sub_climber::pivotPerpendicular);
+  private final InstantCommand com_pivotClimberBackward = new InstantCommand(sub_climber::pivotAngled);
   private final InstantCommand com_hookClimberForward = new InstantCommand(sub_climber::hookForward);
   private final InstantCommand com_hookClimberBackward = new InstantCommand(sub_climber::hookBackward);
 

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
+import frc.robot.RobotPreferences;
 import frc.robot.RobotMap.*;
 import static frc.robot.RobotPreferences.*;
 
@@ -53,8 +54,10 @@ public class Climber extends SubsystemBase {
     climbMotor.configFactoryDefault();
 
     // Set the Soft Limit for Forward Throttle
-    climbMotor.configForwardSoftLimitThreshold(ClimberPrefs.climberMaxEncoderCount.getValue());
+    climbMotor.configForwardSoftLimitThreshold(ClimberPrefs.climberMaxEncoderCountPerpendicular.getValue());
+    climbMotor.configReverseSoftLimitThreshold(ClimberPrefs.climberMinEncoderCount.getValue());
     climbMotor.configForwardSoftLimitEnable(true);
+    climbMotor.configReverseSoftLimitEnable(true);
 
     climberLockPiston.setInverted(ClimberPrefs.climberLockPistonInvert.getValue());
     climberPivotPiston.setInverted(ClimberPrefs.climberPivotPistonInvert.getValue());
@@ -72,7 +75,6 @@ public class Climber extends SubsystemBase {
   }
 
   public void resetClimberEncoderCount() {
-    climbMotor.configForwardSoftLimitThreshold(ClimberPrefs.climberMaxEncoderCount.getValue());
     climbMotor.setSelectedSensorPosition(0);
   }
 
@@ -94,15 +96,17 @@ public class Climber extends SubsystemBase {
   }
 
   // Piston Deploy/Retract
-  public void pivotForward() {
+  public void pivotPerpendicular() {
     climberPivotPiston.setDeployed();
+    climbMotor.configForwardSoftLimitThreshold(ClimberPrefs.climberMaxEncoderCountPerpendicular.getValue());
   }
 
-  public void pivotBackward() {
+  public void pivotAngled() {
     climberPivotPiston.setRetracted();
+    climbMotor.configForwardSoftLimitThreshold(ClimberPrefs.climberMaxEncoderCountAngled.getValue());
   }
 
-  public boolean isClimberPivoted() {
+  public boolean isClimberAngled() {
     return climberPivotPiston.isDeployed();
   }
 
@@ -129,7 +133,7 @@ public class Climber extends SubsystemBase {
     SmartDashboard.putNumber("Climber Encoder Counts", getClimberEncoderCount());
     SmartDashboard.putBoolean("Is Climber At Bottom", isClimberAtBottom());
     SmartDashboard.putBoolean("Is Climber Locked", isClimberLocked());
-    SmartDashboard.putBoolean("Is Climber Pivoted", isClimberPivoted());
+    SmartDashboard.putBoolean("Is Climber Angled", isClimberAngled());
     SmartDashboard.putBoolean("Is Climber Hooked", isHookDeployed());
     SmartDashboard.putNumber("Climber Motor Speed", climbMotor.getMotorOutputPercent());
   }
