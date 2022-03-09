@@ -83,9 +83,9 @@ public final class RobotPreferences {
 
   public static final class TurretPrefs {
     public static final SN_DoublePreference turretMaxAngleDegrees = new SN_DoublePreference("turretMaxAngleDegrees",
-        180);
+        360);
     public static final SN_DoublePreference turretMinAngleDegrees = new SN_DoublePreference("turretMinAngleDegrees",
-        -180);
+        0);
 
     // 2048 encoder counts per rotation * 65 (gr) = 133120
     // 133120 / 360 = 370
@@ -104,13 +104,14 @@ public final class RobotPreferences {
     public static final SN_IntPreference turretLoopsToFinish = new SN_IntPreference("turretLoopsToFinish", 25);
 
     public static final SN_DoublePreference turretPresetPos1 = new SN_DoublePreference("turretTestPos", 45);
+    public static final SN_DoublePreference turretOpenLoopSpeed = new SN_DoublePreference("turretOpenLoopSpeed", .3);
   }
 
   public static final class TransferPrefs {
     public final static SN_DoublePreference transferEntranceSpeed = new SN_DoublePreference(
-        "transferEntranceSpeed", .75);
+        "transferEntranceSpeed", .8);
     public final static SN_DoublePreference transferEntranceRejectSpeed = new SN_DoublePreference(
-        "transferEntranceRejectSpeed", -.75);
+        "transferEntranceRejectSpeed", -.8);
     public final static SN_DoublePreference transferBeltSpeed = new SN_DoublePreference(
         "transferBeltSpeed", 1);
 

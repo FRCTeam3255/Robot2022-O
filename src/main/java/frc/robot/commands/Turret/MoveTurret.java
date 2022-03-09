@@ -7,6 +7,7 @@ package frc.robot.commands.Turret;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Turret;
+import frc.robot.RobotPreferences.TurretPrefs;
 
 public class MoveTurret extends CommandBase {
   Turret turret;
@@ -26,9 +27,8 @@ public class MoveTurret extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
     if (RobotContainer.switchBoard.btn_1.get()) {
-      turret.setTurretSpeed(RobotContainer.coDriverStick.getRightStickX());
+      turret.setTurretSpeed(RobotContainer.coDriverStick.getRightStickX() * TurretPrefs.turretOpenLoopSpeed.getValue());
     }
   }
 
