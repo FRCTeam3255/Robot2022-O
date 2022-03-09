@@ -40,6 +40,7 @@ public final class RobotMap {
   public final class ControllerMap {
     public static final int DRIVER_STICK = 0;
     public static final int CODRIVER_STICK = 1;
+    public static final int SWITCH_BOARD = 2;
   }
 
   public final class DrivetrainMap {

@@ -4,7 +4,11 @@
 
 package frc.robot;
 
+import java.sql.Driver;
+
 import com.frcteam3255.joystick.SN_DualActionStick;
+import com.frcteam3255.joystick.SN_SwitchboardStick;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,6 +38,8 @@ public class RobotContainer {
       RobotMap.ControllerMap.DRIVER_STICK);
   public static final SN_DualActionStick coDriverStick = new SN_DualActionStick(
       RobotMap.ControllerMap.CODRIVER_STICK);
+  public static final SN_SwitchboardStick switchBoard = new SN_SwitchboardStick(
+      RobotMap.ControllerMap.SWITCH_BOARD);
 
   // Subsystems
   private final Drivetrain sub_drivetrain = new Drivetrain();
@@ -116,25 +122,35 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+    // Driver Stick
+
+    DriverStick.btn_B.whileHeld(com_pivotClimberForward);
+    DriverStick.btn_A.whileHeld(com_pivotClimberBackward);
+
+    DriverStick.btn_Y.whileHeld(com_hookClimberForward);
+    DriverStick.btn_X.whileHeld(com_hookClimberBackward);
+
+    // DriverStick.btn_Start.whileHeld(com_magicClimb);
+    // DriverStick.btn_LTrig.whileHeld(com_runSpoolBackward);
+    // DriverStick.btn_RTrig.whileHeld(com_runSpoolForward);
+
+    // DriverStick.btn_Y.whileHeld(com_highHub);
+    // DriverStick.btn_X.whileHeld(com_lowHub);
+
+    // coDriver Stick
+
     coDriverStick.btn_RTrig.whileHeld(com_pushCargoToShooter);
     coDriverStick.btn_RTrig.whileHeld(com_spinFlywheel);
 
-    coDriverStick.btn_LBump.whileHeld(com_moveTurret);
-    coDriverStick.btn_RBump.whenPressed(com_ClimbNextRung);
-
-    coDriverStick.btn_A.whileHeld(com_deployIntake);
-    coDriverStick.btn_B.whileHeld(com_retractIntake);
-    coDriverStick.btn_X.whileHeld(com_visionAimTurret);
-    coDriverStick.btn_Y.whileHeld(com_visionHoldAimTurret);
+    coDriverStick.btn_Back.whileHeld(com_retractIntake);
 
     coDriverStick.btn_LTrig.whileHeld(com_collect);
 
-    coDriverStick.btn_LStick.whileHeld(com_climb);
-
-    coDriverStick.POV_North.whenPressed(com_shallowHood);
-    coDriverStick.POV_South.whenPressed(com_steepenHood);
-
-    coDriverStick.POV_East.whenPressed(com_ResetClimber);
+    // coDriverStick.POV_North.whileHeld(com_fenderPreset);
+    // coDriverStick.POV_East.whileHeld(com_tarmacPreset);
+    // coDriverStick.POV_South.whileHeld(com_launchPadPreset);
+    // coDriverStick.POV_West.whileHeld(com_unusedPreset);
 
   }
 
