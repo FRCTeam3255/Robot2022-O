@@ -118,6 +118,14 @@ public class Shooter extends SubsystemBase {
     // (converted to rpm)
   }
 
+  public void setGoalRPM(double a_goalRPM) {
+    goalRPM = a_goalRPM;
+  }
+
+  public double getGoalRPM() {
+    return goalRPM;
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

@@ -22,6 +22,10 @@ public class Vision extends SubsystemBase {
     limelight = new SN_Limelight();
   }
 
+  public double getIdealRPM() {
+    return /* regression */ limelight.getOffsetY(); // TODO: find regression
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
