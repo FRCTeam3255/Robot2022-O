@@ -58,8 +58,8 @@ public class Drivetrain extends SubsystemBase {
     leftLeadMotor.setInverted(true);
     leftFollowMotor.setInverted(TalonFXInvertType.FollowMaster);
     leftLeadMotor.setSensorPhase(true);
-    leftFollowMotor.setNeutralMode(NeutralMode.Brake);
-    leftLeadMotor.setNeutralMode(NeutralMode.Brake);
+    leftFollowMotor.setNeutralMode(NeutralMode.Coast);
+    leftLeadMotor.setNeutralMode(NeutralMode.Coast);
 
     leftFollowMotor.follow(leftLeadMotor);
 
@@ -71,8 +71,8 @@ public class Drivetrain extends SubsystemBase {
     rightLeadMotor.setInverted(false);
     rightFollowMotor.setInverted(TalonFXInvertType.FollowMaster);
     rightLeadMotor.setSensorPhase(false);
-    rightFollowMotor.setNeutralMode(NeutralMode.Brake);
-    rightLeadMotor.setNeutralMode(NeutralMode.Brake);
+    rightFollowMotor.setNeutralMode(NeutralMode.Coast);
+    rightLeadMotor.setNeutralMode(NeutralMode.Coast);
     rightFollowMotor.follow(rightLeadMotor);
 
   }
