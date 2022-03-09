@@ -138,6 +138,9 @@ public class CollectCargo extends CommandBase {
       transfer.setTransferState(TransferState.OFF);
     }
 
+    intakeRejectLatch = 0;
+    entranceRejectLatch = 0;
+
   }
 
   // Returns true when the command should end.
