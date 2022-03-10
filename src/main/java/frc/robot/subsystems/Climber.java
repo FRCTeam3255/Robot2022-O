@@ -67,7 +67,10 @@ public class Climber extends SubsystemBase {
   // Method controls CLimb Motor Speed
   public void setClimberSpeed(double a_speed) {
     double speed = a_speed;
-    climbMotor.set(ControlMode.PercentOutput, speed);
+
+    if (isHookDeployed()) {
+      climbMotor.set(ControlMode.PercentOutput, speed);
+    }
   }
 
   public void setClimberPosition(SN_DoublePreference a_position) {

@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Hood.*;
 import frc.robot.commands.Turret.*;
@@ -125,6 +126,7 @@ public class RobotContainer {
   private final InstantCommand com_pivotClimberBackward = new InstantCommand(sub_climber::pivotAngled);
   private final InstantCommand com_hookClimberForward = new InstantCommand(sub_climber::hookForward);
   private final InstantCommand com_hookClimberBackward = new InstantCommand(sub_climber::hookBackward);
+  private final PrepClimb com_prepClimb = new PrepClimb(sub_turret, sub_hood, sub_climber);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -158,6 +160,8 @@ public class RobotContainer {
 
     // DriverStick.btn_Y.whileHeld(com_highHub);
     // DriverStick.btn_X.whileHeld(com_lowHub);
+
+    DriverStick.btn_Back.whileHeld(com_prepClimb);
 
     // coDriver Stick
 
