@@ -158,7 +158,7 @@ public final class RobotPreferences {
         "transferTopBeltInvert", false);
 
     // one loop is 20ms
-    public final static SN_IntPreference transferRejectLatchTimeLoops = new SN_IntPreference(
+    public final static SN_IntPreference transferRejectTimerLoops = new SN_IntPreference(
         "transferRejectLatchTimeLoops", 25);
 
     // Transfer ramping
@@ -177,7 +177,7 @@ public final class RobotPreferences {
     public final static SN_DoublePreference intakeRejectSpeed = new SN_DoublePreference(
         "intakeRejectSpeed", -0.80);
     // one loop is 20ms
-    public final static SN_IntPreference intakeRejectLatchTimeLoops = new SN_IntPreference(
+    public final static SN_IntPreference intakeRejectTimerLoops = new SN_IntPreference(
         "intakeRejectLatchTimeLoops", 50);
     public final static SN_IntPreference colorSensorMinProximity = new SN_IntPreference(
         "colorSensorMinProximity", 1000);
