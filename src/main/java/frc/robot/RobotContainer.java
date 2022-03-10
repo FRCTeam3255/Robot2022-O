@@ -7,6 +7,7 @@ package frc.robot;
 import java.sql.Driver;
 
 import com.frcteam3255.joystick.SN_DualActionStick;
+import com.frcteam3255.joystick.SN_F310Gamepad;
 import com.frcteam3255.joystick.SN_SwitchboardStick;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -36,7 +37,7 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
 
   // Joysticks
-  public static final SN_DualActionStick DriverStick = new SN_DualActionStick(
+  public static final SN_F310Gamepad DriverStick = new SN_F310Gamepad(
       RobotMap.ControllerMap.DRIVER_STICK);
   public static final SN_DualActionStick coDriverStick = new SN_DualActionStick(
       RobotMap.ControllerMap.CODRIVER_STICK);
