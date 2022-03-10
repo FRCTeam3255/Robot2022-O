@@ -16,17 +16,22 @@ public class PresetShooter extends InstantCommand {
 
   Shooter shooter;
   Hood hood;
-  SN_DoublePreference shooterRPM;
-  SN_BooleanPreference hoodSteep;
+  SN_DoublePreference shooterRPMUpper;
+  SN_BooleanPreference hoodSteepUpper;
+  SN_DoublePreference shooterRPMLower;
+  SN_BooleanPreference hoodSteepLower;
 
-  public PresetShooter(Shooter sub_shooter, Hood sub_hood, SN_DoublePreference a_shooterRPM,
-      SN_BooleanPreference a_hoodSteep) {
+  public PresetShooter(Shooter sub_shooter, Hood sub_hood, SN_DoublePreference a_shooterRPMUpper,
+      SN_BooleanPreference a_hoodSteepUpper, SN_DoublePreference a_shooterRPMLower,
+      SN_BooleanPreference a_hoodSteepLower) {
 
     shooter = sub_shooter;
     hood = sub_hood;
 
-    shooterRPM = a_shooterRPM;
-    hoodSteep = a_hoodSteep;
+    shooterRPMUpper = a_shooterRPMUpper;
+    hoodSteepUpper = a_hoodSteepUpper;
+    shooterRPMLower = a_shooterRPMLower;
+    hoodSteepLower = a_hoodSteepLower;
 
     addRequirements(shooter, hood);
   }
@@ -35,12 +40,25 @@ public class PresetShooter extends InstantCommand {
   @Override
   public void initialize() {
 
-    shooter.setGoalRPM(shooterRPM.getValue());
+    if (shooter.isGoalHighHub()) {
 
-    if (hoodSteep.getValue()) {
-      hood.steepenHood();
+      shooter.setGoalRPM(shooterRPMUpper.getValue());
+
+      if (hoodSteepUpper.getValue()) {
+        hood.steepenHood();
+      } else {
+        hood.shallowHood();
+      }
     } else {
-      hood.shallowHood();
+
+      shooter.setGoalRPM(shooterRPMLower.getValue());
+
+      if (hoodSteepLower.getValue()) {
+        hood.steepenHood();
+      } else {
+        hood.shallowHood();
+      }
+
     }
 
   }

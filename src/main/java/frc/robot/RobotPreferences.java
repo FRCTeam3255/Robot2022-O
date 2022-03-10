@@ -59,6 +59,23 @@ public final class RobotPreferences {
   }
 
   public static final class HoodPrefs {
+    public static final SN_BooleanPreference hoodPresetUpperFenderSteep = new SN_BooleanPreference(
+        "hoodPresetUpperFenderSteep", false);
+    public static final SN_BooleanPreference hoodPresetUpperTarmacSteep = new SN_BooleanPreference(
+        "hoodPresetUpperTarmacSteep", true);
+    public static final SN_BooleanPreference hoodPresetUpperLaunchpadSteep = new SN_BooleanPreference(
+        "hoodPresetUpperLaunchpadSteep", true);
+    public static final SN_BooleanPreference hoodPresetUpperTerminalSteep = new SN_BooleanPreference(
+        "hoodPresetUpperTerminalSteep", true);
+
+    public static final SN_BooleanPreference hoodPresetLowerFenderSteep = new SN_BooleanPreference(
+        "hoodPresetLowerFenderSteep", true);
+    public static final SN_BooleanPreference hoodPresetLowerTarmacSteep = new SN_BooleanPreference(
+        "hoodPresetLowerTarmacSteep", true);
+    public static final SN_BooleanPreference hoodPresetLowerLaunchpadSteep = new SN_BooleanPreference(
+        "hoodPresetLowerLaunchpadSteep", true);
+    public static final SN_BooleanPreference hoodPresetLowerTerminalSteep = new SN_BooleanPreference(
+        "hoodPresetLowerTerminalSteep", true);
   }
 
   public static final class ShooterPrefs {
@@ -79,6 +96,24 @@ public final class RobotPreferences {
     public static final SN_DoublePreference shooterP = new SN_DoublePreference("shooterP", 0.005);
     public static final SN_DoublePreference shooterI = new SN_DoublePreference("shooterI", 0.0001);
     public static final SN_DoublePreference shooterD = new SN_DoublePreference("shooterD", 0);
+
+    public static final SN_DoublePreference shooterPresetUpperFenderRPM = new SN_DoublePreference(
+        "shooterPresetUpperFenderRPM", 3100);
+    public static final SN_DoublePreference shooterPresetUpperTarmacRPM = new SN_DoublePreference(
+        "shooterPresetUpperTarmacRPM", 4000);
+    public static final SN_DoublePreference shooterPresetUpperLaunchpadRPM = new SN_DoublePreference(
+        "shooterPresetUpperLaunchpadRPM", 4500);
+    public static final SN_DoublePreference shooterPresetUpperTerminalRPM = new SN_DoublePreference(
+        "shooterPresetUpperTerminalRPM", 5000);
+
+    public static final SN_DoublePreference shooterPresetLowerFenderRPM = new SN_DoublePreference(
+        "shooterPresetLowerFenderRPM", 2000);
+    public static final SN_DoublePreference shooterPresetLowerTarmacRPM = new SN_DoublePreference(
+        "shooterPresetLowerTarmacRPM", 2500);
+    public static final SN_DoublePreference shooterPresetLowerLaunchpadRPM = new SN_DoublePreference(
+        "shooterPresetLowerLaunchpadRPM", 3000);
+    public static final SN_DoublePreference shooterPresetLowerTerminalRPM = new SN_DoublePreference(
+        "shooterPresetLowerTerminalRPM", 3500);
   }
 
   public static final class TurretPrefs {

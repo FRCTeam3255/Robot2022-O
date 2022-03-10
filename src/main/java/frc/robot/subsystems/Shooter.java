@@ -24,6 +24,7 @@ public class Shooter extends SubsystemBase {
   private TalonFXConfiguration config = new TalonFXConfiguration();
 
   double goalRPM;
+  boolean isHighHub;
 
   /**
    * Creates new shooter
@@ -110,9 +111,12 @@ public class Shooter extends SubsystemBase {
     return leadMotor.getSelectedSensorVelocity();
   }
 
+  private double getErrorRPM() {
+    return SN_Math.velocityToRPM(leadMotor.getClosedLoopError(), SN_Math.TALONFX_ENCODER_PULSES_PER_COUNT);
+  }
+
   public boolean isShooterUpToSpeed() {
-    return ShooterPrefs.shooterAcceptableErrorRPM.getValue() > Math
-        .abs(SN_Math.velocityToRPM(leadMotor.getClosedLoopError(), SN_Math.TALONFX_ENCODER_PULSES_PER_COUNT));
+    return ShooterPrefs.shooterAcceptableErrorRPM.getValue() > Math.abs(getErrorRPM());
 
     // return true if the acceptable error (in rpm) is greater than the actual error
     // (converted to rpm)
@@ -126,16 +130,27 @@ public class Shooter extends SubsystemBase {
     return goalRPM;
   }
 
+  public void setGoalUpperHub() {
+    isHighHub = true;
+  }
+
+  public void setGoalLowerHub() {
+    isHighHub = false;
+  }
+
+  public boolean isGoalHighHub() {
+    return isHighHub;
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Shooter Left Motor", getShooterEncoderCount());
-    // SmartDashboard.putNumber("Shooter Velocity", getShooterVelocity());
-
+    SmartDashboard.putNumber("Shooter Goal RPM", getGoalRPM());
     SmartDashboard.putNumber("Shooter RPM", getShooterRPM());
-    SmartDashboard.putNumber("Shooter Error RPM", Math
-        .abs(SN_Math.velocityToRPM(leadMotor.getClosedLoopError(), SN_Math.TALONFX_ENCODER_PULSES_PER_COUNT)));
+    SmartDashboard.putNumber("Shooter Error RPM", getErrorRPM());
     SmartDashboard.putBoolean("Is Shooter Up To Speed", isShooterUpToSpeed());
+    SmartDashboard.putBoolean("Is Shooter Goal High Hub", isGoalHighHub());
     SmartDashboard.putNumber("ShooterLeadMotorSpeed", leadMotor.getMotorOutputPercent());
     SmartDashboard.putNumber("ShooterFollowMotorSpeed", followMotor.getMotorOutputPercent());
 

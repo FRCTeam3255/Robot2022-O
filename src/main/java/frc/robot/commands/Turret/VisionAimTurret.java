@@ -43,8 +43,11 @@ public class VisionAimTurret extends CommandBase {
       turret.setTurretAngle(target);
     }
 
-    shooter.setGoalRPM(vision.getIdealRPM());
-
+    if (shooter.isGoalHighHub()) {
+      shooter.setGoalRPM(vision.getIdealUpperHubRPM());
+    } else {
+      shooter.setGoalRPM(vision.getIdealLowerHubRPM());
+    }
   }
 
   // Called once the command ends or is interrupted.
