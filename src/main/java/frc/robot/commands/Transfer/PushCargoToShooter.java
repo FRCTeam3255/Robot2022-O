@@ -23,6 +23,8 @@ public class PushCargoToShooter extends CommandBase {
   SN_DoublePreference outputBottomBeltSpeed;
   SN_DoublePreference outputTopBeltSpeed;
 
+  int loopsUntilRPMMatters = 0;
+
   /** Creates a new ShootCargo. */
   public PushCargoToShooter(Shooter sub_shooter, Transfer sub_transfer) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -50,6 +52,7 @@ public class PushCargoToShooter extends CommandBase {
 
     // If the shooter rpm is greater or equal to the target rpm
     if (!shooter.isShooterUpToSpeed()) {
+      loopsUntilRPMMatters--;
 
       if (transfer.isTopBallCollected()) {
         outputTopBeltSpeed = zeroDoublePref;
@@ -60,6 +63,14 @@ public class PushCargoToShooter extends CommandBase {
         outputBottomBeltSpeed = zeroDoublePref;
         outputTopBeltSpeed = zeroDoublePref;
       }
+    } else {
+      loopsUntilRPMMatters = ShooterPrefs.shooterIgnoreRPMTimeAfterShotLoops.getValue();
+    }
+
+    if (loopsUntilRPMMatters > 0) {
+      outputEntranceSpeed = TransferPrefs.transferEntranceSpeed;
+      outputBottomBeltSpeed = TransferPrefs.transferBeltSpeed;
+      outputTopBeltSpeed = TransferPrefs.transferBeltSpeed;
     }
     transfer.setEntranceBeltMotorSpeed(outputEntranceSpeed);
     transfer.setBottomBeltMotorSpeed(outputBottomBeltSpeed);

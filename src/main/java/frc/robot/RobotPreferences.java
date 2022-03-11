@@ -114,6 +114,9 @@ public final class RobotPreferences {
         "shooterPresetLowerLaunchpadRPM", 3000);
     public static final SN_DoublePreference shooterPresetLowerTerminalRPM = new SN_DoublePreference(
         "shooterPresetLowerTerminalRPM", 3500);
+
+    public static final SN_IntPreference shooterIgnoreRPMTimeAfterShotLoops = new SN_IntPreference(
+        "shooterIgnoreRPMTimeAfterShotLoops", 25);
   }
 
   public static final class TurretPrefs {
