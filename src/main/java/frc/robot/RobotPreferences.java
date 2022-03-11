@@ -208,5 +208,9 @@ public final class RobotPreferences {
         "climberPivotPistonInvert", false);
     public static final SN_BooleanPreference climberHookPistonInvert = new SN_BooleanPreference(
         "climberHookPistonInvert", false);
+
+    public static final SN_IntPreference climberLoopsToFinish = new SN_IntPreference("climberLoopsToFinish", 25);
+    public static final SN_DoublePreference climberAcceptableClosedLoopError = new SN_DoublePreference(
+        "climberAcceptableClosedLoopError", 300);
   }
 }

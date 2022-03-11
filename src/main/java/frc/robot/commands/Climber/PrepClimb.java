@@ -27,7 +27,7 @@ public class PrepClimb extends SequentialCommandGroup {
         // Retract hood
         new ShallowHood(sub_hood),
         // Deploy stationary hooks
-        new InstantCommand(sub_climber::hookForward, sub_climber),
+        new InstantCommand(sub_climber::hookUp, sub_climber),
         // Angle climber
         new InstantCommand(sub_climber::pivotAngled, sub_climber));
   }

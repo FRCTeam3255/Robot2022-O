@@ -113,11 +113,11 @@ public class Climber extends SubsystemBase {
     return climberPivotPiston.isDeployed();
   }
 
-  public void hookForward() {
+  public void hookUp() {
     climberHookPiston.setDeployed();
   }
 
-  public void hookBackward() {
+  public void hookDown() {
     climberHookPiston.setRetracted();
   }
 
@@ -130,14 +130,24 @@ public class Climber extends SubsystemBase {
     return !climberBottomSafetySwitch.get();
   }
 
+  public double getClimberClosedLoopError() {
+    return climbMotor.getClosedLoopError();
+  }
+
+  public boolean isClimberClosedLoopErrorAcceptable() {
+    return Math.abs(getClimberClosedLoopError()) < ClimberPrefs.climberAcceptableClosedLoopError.getValue();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Climber Encoder Counts", getClimberEncoderCount());
+    SmartDashboard.putNumber("Climber Closed Loop Error", getClimberClosedLoopError());
     SmartDashboard.putBoolean("Is Climber At Bottom", isClimberAtBottom());
     SmartDashboard.putBoolean("Is Climber Locked", isClimberLocked());
     SmartDashboard.putBoolean("Is Climber Angled", isClimberAngled());
     SmartDashboard.putBoolean("Is Climber Hooked", isHookDeployed());
+    SmartDashboard.putBoolean("Is Climber Error Acceptable", isClimberClosedLoopErrorAcceptable());
     SmartDashboard.putNumber("Climber Motor Speed", climbMotor.getMotorOutputPercent());
   }
 }
