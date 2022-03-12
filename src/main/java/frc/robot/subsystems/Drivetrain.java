@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
@@ -29,6 +30,9 @@ public class Drivetrain extends SubsystemBase {
 
   private TalonFXConfiguration config;
 
+  public SlewRateLimiter posSlewRateLimiter;
+  public SlewRateLimiter negSlewRateLimiter;
+
   // Initializes Variables for Drivetrain
   public Drivetrain() {
     leftLeadMotor = new TalonFX(DrivetrainMap.LEFT_LEAD_MOTOR_CAN);
@@ -37,6 +41,9 @@ public class Drivetrain extends SubsystemBase {
     rightFollowMotor = new TalonFX(DrivetrainMap.RIGHT_FOLLOW_MOTOR_CAN);
 
     config = new TalonFXConfiguration();
+
+    posSlewRateLimiter = new SlewRateLimiter(DrivetrainPrefs.drivePosSlewRateLimit.getValue());
+    negSlewRateLimiter = new SlewRateLimiter(DrivetrainPrefs.driveNegSlewRateLimit.getValue());
 
     configure();
   }
@@ -87,6 +94,9 @@ public class Drivetrain extends SubsystemBase {
       rightLeadMotor.setNeutralMode(NeutralMode.Coast);
     }
     rightFollowMotor.follow(rightLeadMotor);
+
+    posSlewRateLimiter = new SlewRateLimiter(DrivetrainPrefs.drivePosSlewRateLimit.getValue());
+    negSlewRateLimiter = new SlewRateLimiter(DrivetrainPrefs.driveNegSlewRateLimit.getValue());
 
   }
 
