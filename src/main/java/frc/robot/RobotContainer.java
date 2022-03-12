@@ -236,6 +236,12 @@ public class RobotContainer {
     SmartDashboard.putData("Pivot Climber Backward", com_pivotClimberBackward);
     SmartDashboard.putData("Hook Climber Forward", com_hookClimberUp);
     SmartDashboard.putData("Hook Climber Backwards", com_hookClimberDown);
+
+    SmartDashboard.putData("Steepen Hood", com_steepenHood);
+    SmartDashboard.putData("Shallow Hood", com_shallowHood);
+
+    SmartDashboard.putData("Deplay Intake", com_deployIntake);
+    SmartDashboard.putData("Retract Intake", com_retractIntake);
   }
 
   /**
