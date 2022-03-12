@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.frcteam3255.components.SN_Limelight;
+import com.frcteam3255.components.SN_Limelight.LEDMode;
 
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,6 +29,14 @@ public class Vision extends SubsystemBase {
 
   public double getIdealLowerHubRPM() {
     return /* different regression */ limelight.getOffsetY(); // TODO: ^
+  }
+
+  public void turnLimelightOn() {
+    limelight.setLEDMode(LEDMode.on);
+  }
+
+  public void turnLimelightOff() {
+    limelight.setLEDMode(LEDMode.off);
   }
 
   @Override
