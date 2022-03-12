@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
+import com.frcteam3255.preferences.SN_DoublePreference;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -51,7 +52,6 @@ public class Drivetrain extends SubsystemBase {
   // Sets Drivetrain Variable's Default Settings
   public void configure() {
 
-    config.slot0.allowableClosedloopError = DrivetrainPrefs.driveAllowableClosedLoopError.getValue();
     config.slot0.closedLoopPeakOutput = DrivetrainPrefs.driveClosedLoopPeakOutput.getValue();
     config.slot0.kF = DrivetrainPrefs.driveF.getValue();
     config.slot0.kP = DrivetrainPrefs.driveP.getValue();
@@ -204,6 +204,25 @@ public class Drivetrain extends SubsystemBase {
     resetDrivetrainEncodersCount();
   }
 
+  public void driveDistance(SN_DoublePreference a_inchesToDrive, SN_DoublePreference a_peakPercentOutput) {
+    leftLeadMotor.configClosedLoopPeakOutput(0, a_peakPercentOutput.getValue());
+    double position = a_inchesToDrive.getValue() * (DrivetrainPrefs.driveEncoderCountsPerFoot.getValue() / 12);
+    leftLeadMotor.set(ControlMode.Position, position);
+    rightLeadMotor.set(ControlMode.Position, position);
+  }
+
+  public double getLeftClosedLoopErrorInches() {
+    return leftLeadMotor.getClosedLoopError() * (DrivetrainPrefs.driveEncoderCountsPerFoot.getValue() / 12);
+  }
+
+  public double getRightClosedLoopErrorInches() {
+    return rightLeadMotor.getClosedLoopError() * (DrivetrainPrefs.driveEncoderCountsPerFoot.getValue() / 12);
+  }
+
+  public double getAverageClosedLoopErrorInches() {
+    return (getLeftClosedLoopErrorInches() + getRightClosedLoopErrorInches()) / 2;
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -236,5 +255,10 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Drivetrain Left Velocity", getLeftVelocity());
     SmartDashboard.putNumber("Drivetrain Right Velocity", getRightVelocity());
     SmartDashboard.putNumber("Drivetrain Average Velocity", getAverageVelocity());
+
+    // Closed Loop Error
+    SmartDashboard.putNumber("Drivetrain Left Closed Loop Error Inches", getLeftClosedLoopErrorInches());
+    SmartDashboard.putNumber("Drivetrain Right Closed Loop Error Inches", getRightClosedLoopErrorInches());
+    SmartDashboard.putNumber("Drivetrain Average Closed Loop Error Inches", getAverageClosedLoopErrorInches());
   }
 }
