@@ -4,8 +4,11 @@
 
 package frc.robot;
 
+import com.frcteam3255.preferences.SN_Preferences;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -58,6 +61,12 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods. This must be called from the
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
+    if (RobotContainer.switchBoard.btn_2.get()) {
+      SN_Preferences.usePreferences();
+    } else {
+      SN_Preferences.useDefaults();
+    }
+    SmartDashboard.putBoolean("Using Code Defaults for Prefs", SN_Preferences.isUsingDefaults());
     CommandScheduler.getInstance().run();
   }
 
