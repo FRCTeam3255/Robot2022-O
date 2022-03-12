@@ -180,6 +180,8 @@ public class RobotContainer {
     coDriverStick.POV_South.whileHeld(com_presetLaunchpadUpper);
     coDriverStick.POV_West.whileHeld(com_presetTerminalUpper);
 
+    coDriverStick.btn_LBump.whileHeld(com_moveTurret);
+
   }
 
   /**

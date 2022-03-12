@@ -11,6 +11,9 @@ import frc.robot.RobotPreferences.TurretPrefs;
 
 public class MoveTurret extends CommandBase {
   Turret turret;
+  double speed;
+
+  boolean isSpeedPositive;
 
   /** Creates a new MoveTurret. */
   public MoveTurret(Turret a_turret) {
@@ -27,9 +30,22 @@ public class MoveTurret extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (RobotContainer.switchBoard.btn_1.get()) {
-      turret.setTurretSpeed(RobotContainer.coDriverStick.getRightStickX() * TurretPrefs.turretOpenLoopSpeed.getValue());
+
+    speed = RobotContainer.coDriverStick.getRightStickX();
+
+    if (speed > 0) {
+      isSpeedPositive = true;
+    } else {
+      isSpeedPositive = false;
     }
+
+    speed = speed * speed;
+
+    if (!isSpeedPositive) {
+      speed = -speed;
+    }
+
+    turret.setTurretSpeed(speed * TurretPrefs.turretOpenLoopSpeed.getValue());
   }
 
   // Called once the command ends or is interrupted.
