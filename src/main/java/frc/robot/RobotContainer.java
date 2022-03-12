@@ -127,6 +127,7 @@ public class RobotContainer {
   private final InstantCommand com_pivotClimberBackward = new InstantCommand(sub_climber::pivotAngled);
   private final InstantCommand com_hookClimberUp = new InstantCommand(sub_climber::hookUp);
   private final InstantCommand com_hookClimberDown = new InstantCommand(sub_climber::hookDown);
+  private final RunSpool com_runSpool = new RunSpool(sub_climber);
 
   private final PrepClimb com_prepClimb = new PrepClimb(sub_turret, sub_hood, sub_climber);
 
@@ -138,6 +139,7 @@ public class RobotContainer {
     configureButtonBindings();
     configureDashboardButtons();
     sub_drivetrain.setDefaultCommand(com_drive);
+    sub_climber.setDefaultCommand(com_runSpool);
   }
 
   /**

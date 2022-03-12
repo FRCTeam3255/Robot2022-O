@@ -5,16 +5,15 @@
 package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Climber;
 
-public class RunSpoolBackward extends CommandBase {
+public class RunSpool extends CommandBase {
 
   Climber climber;
 
-  /** Creates a new RunSpoolBackward. */
-  public RunSpoolBackward(Climber sub_climber) {
+  /** Creates a new RunSpool. */
+  public RunSpool(Climber sub_climber) {
     // Use addRequirements() here to declare subsystem dependencies.
     climber = sub_climber;
     addRequirements(climber);
@@ -23,15 +22,27 @@ public class RunSpoolBackward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    climber.unlockClimber();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = RobotContainer.DriverStick.getAxisLT();
+    double speed = 0;
+    if (climber.isHookDeployed()) {
+      if (RobotContainer.DriverStick.getAxisRT() > 0) {
+        climber.unlockClimber();
+        speed = RobotContainer.DriverStick.getAxisRT();
+      }
 
-    climber.setClimberSpeed(-speed);
+      if (RobotContainer.DriverStick.getAxisLT() > 0) {
+        climber.unlockClimber();
+        speed = -RobotContainer.DriverStick.getAxisRT();
+      }
+    } else {
+      speed = 0;
+      climber.lockClimber();
+    }
+    climber.setClimberSpeed(speed);
   }
 
   // Called once the command ends or is interrupted.
