@@ -57,7 +57,6 @@ public class Drivetrain extends SubsystemBase {
     config.slot0.kP = DrivetrainPrefs.driveP.getValue();
     config.slot0.kI = DrivetrainPrefs.driveI.getValue();
     config.slot0.kD = DrivetrainPrefs.driveD.getValue();
-    config.openloopRamp = DrivetrainPrefs.driveOpenLoopRampTimeSeconds.getValue();
 
     // Left
     leftLeadMotor.configFactoryDefault();

@@ -4,17 +4,16 @@
 
 package frc.robot.commands.Transfer;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import static frc.robot.RobotPreferences.*;
-
 import com.frcteam3255.preferences.SN_DoublePreference;
 
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotPreferences.TransferPrefs;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transfer;
 import frc.robot.subsystems.Transfer.TransferState;
+import static frc.robot.RobotPreferences.*;
 
-public class PushCargoToShooter extends CommandBase {
-  // Creates Shooter and Transfer Variables in PushCargotoShooter
+public class PushCargoWithDelay extends CommandBase {
   Shooter shooter;
   Transfer transfer;
 
@@ -22,12 +21,11 @@ public class PushCargoToShooter extends CommandBase {
   SN_DoublePreference outputBottomBeltSpeed;
   SN_DoublePreference outputTopBeltSpeed;
 
-  int timeToleranceLoops = 0;
+  int timeSinceLastShot;
 
-  /** Creates a new ShootCargo. */
-  public PushCargoToShooter(Shooter sub_shooter, Transfer sub_transfer) {
+  /** Creates a new PushCargoWithDelay. */
+  public PushCargoWithDelay(Shooter sub_shooter, Transfer sub_transfer) {
     // Use addRequirements() here to declare subsystem dependencies.
-    // Initializes PushCargoToShooter Variables
     shooter = sub_shooter;
     transfer = sub_transfer;
 
@@ -38,42 +36,43 @@ public class PushCargoToShooter extends CommandBase {
   @Override
   public void initialize() {
     transfer.setTransferState(TransferState.SHOOTING);
-
+    timeSinceLastShot = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
     outputEntranceSpeed = TransferPrefs.transferEntranceSpeed;
     outputBottomBeltSpeed = TransferPrefs.transferBeltSpeed;
     outputTopBeltSpeed = TransferPrefs.transferBeltSpeed;
 
-    // If the shooter rpm is greater or equal to the target rpm
     if (!shooter.isShooterUpToSpeed()) {
-      timeToleranceLoops--;
 
       if (transfer.isTopBallCollected()) {
         outputTopBeltSpeed = zeroDoublePref;
-      }
 
-      if (transfer.isTopBallCollected() && transfer.isBottomBallCollected()) {
-        outputEntranceSpeed = zeroDoublePref;
-        outputBottomBeltSpeed = zeroDoublePref;
-        outputTopBeltSpeed = zeroDoublePref;
+        if (transfer.isBottomBallCollected()) {
+          outputEntranceSpeed = zeroDoublePref;
+          outputBottomBeltSpeed = zeroDoublePref;
+          outputTopBeltSpeed = zeroDoublePref;
+        }
       }
     } else {
-      timeToleranceLoops = ShooterPrefs.shooterIgnoreRPMTimeAfterShotLoops.getValue();
+      if (transfer.isTopBallCollected() && transfer.isBottomBallCollected()) {
+        timeSinceLastShot = 0;
+      }
+
+      timeSinceLastShot++;
     }
 
-    if (timeToleranceLoops > 0) {
-      outputEntranceSpeed = TransferPrefs.transferEntranceSpeed;
-      outputBottomBeltSpeed = TransferPrefs.transferBeltSpeed;
-      outputTopBeltSpeed = TransferPrefs.transferBeltSpeed;
+    if (timeSinceLastShot < ShooterPrefs.shooterDelayLoops.getValue() && !transfer.isBottomBallCollected()) {
+      outputTopBeltSpeed = zeroDoublePref;
     }
+
     transfer.setEntranceBeltMotorSpeed(outputEntranceSpeed);
     transfer.setBottomBeltMotorSpeed(outputBottomBeltSpeed);
     transfer.setTopBeltMotorSpeed(outputTopBeltSpeed);
+
   }
 
   // Called once the command ends or is interrupted.
@@ -84,8 +83,7 @@ public class PushCargoToShooter extends CommandBase {
     transfer.setTopBeltMotorSpeed(zeroDoublePref);
     transfer.setTransferState(TransferState.OFF);
 
-    timeToleranceLoops = 0;
-
+    timeSinceLastShot = 0;
   }
 
   // Returns true when the command should end.

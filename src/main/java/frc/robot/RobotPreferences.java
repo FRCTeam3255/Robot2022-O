@@ -29,10 +29,10 @@ public final class RobotPreferences {
       "encoderCountsPerTalonFXRotation", 2048);
 
   public static final class DrivetrainPrefs {
-    public static final SN_DoublePreference arcadeSpeed = new SN_DoublePreference("arcadeSpeed", 0.75);
+    public static final SN_DoublePreference arcadeSpeed = new SN_DoublePreference("arcadeSpeed", 0.8);
+    public static final SN_DoublePreference arcadeTurn = new SN_DoublePreference("arcadeTurn", .5);
     public static final SN_DoublePreference arcadeLowSpeed = new SN_DoublePreference("arcadeLowSpeed", 0.5);
     public static final SN_DoublePreference arcadeHighSpeed = new SN_DoublePreference("arcadeHighSpeed", 1);
-    public static final SN_DoublePreference arcadeTurn = new SN_DoublePreference("arcadeTurn", 1);
 
     public static final SN_DoublePreference driveF = new SN_DoublePreference("driveF", 0);
     public static final SN_DoublePreference driveP = new SN_DoublePreference("driveP", 1);
@@ -55,20 +55,15 @@ public final class RobotPreferences {
 
     public static final SN_IntPreference motionProfileMinBufferedPoints = new SN_IntPreference(
         "motionProfileMinBufferedPoints", 10);
-    public static final SN_DoublePreference driveOpenLoopRampTimeSeconds = new SN_DoublePreference(
-        "driveOpenLoopRampTimeSeconds", .25);
 
-    public static final SN_BooleanPreference driveBreakMode = new SN_BooleanPreference("driveBreakMode", false);
-
-    public static final SN_DoublePreference driveMaximumArcadeSpeedDelta = new SN_DoublePreference(
-        "driveMaximumArcadeSpeedDelta", .01);
+    public static final SN_BooleanPreference driveBreakMode = new SN_BooleanPreference("driveBreakMode", true);
 
     // value is in controller input delta per second, eg 0.3 means that the
     // controller can only change by 0.3 in a second
     public static final SN_DoublePreference drivePosSlewRateLimit = new SN_DoublePreference(
-        "drivePosSlewRateLimit", .7);
+        "drivePosSlewRateLimit", 2);
     public static final SN_DoublePreference driveNegSlewRateLimit = new SN_DoublePreference(
-        "driveNegSlewRateLimit", .7);
+        "driveNegSlewRateLimit", 2);
     public static final SN_BooleanPreference driveSquaredInputs = new SN_BooleanPreference("driveSquaredInputs", true);
 
   }
@@ -132,6 +127,9 @@ public final class RobotPreferences {
 
     public static final SN_IntPreference shooterIgnoreRPMTimeAfterShotLoops = new SN_IntPreference(
         "shooterIgnoreRPMTimeAfterShotLoops", 25);
+
+    public static final SN_IntPreference shooterDelayLoops = new SN_IntPreference(
+        "shooterDelayLoops", 20);
   }
 
   public static final class TurretPrefs {
@@ -166,7 +164,7 @@ public final class RobotPreferences {
     public final static SN_DoublePreference transferEntranceRejectSpeed = new SN_DoublePreference(
         "transferEntranceRejectSpeed", -.8);
     public final static SN_DoublePreference transferBeltSpeed = new SN_DoublePreference(
-        "transferBeltSpeed", 1);
+        "transferBeltSpeed", .5);
 
     public final static SN_BooleanPreference transferEntranceInvert = new SN_BooleanPreference(
         "transferEntranceInvert", true);
@@ -177,7 +175,7 @@ public final class RobotPreferences {
 
     // one loop is 20ms
     public final static SN_IntPreference transferRejectTimerLoops = new SN_IntPreference(
-        "transferRejectLatchTimeLoops", 25);
+        "transferRejectTimerLoops", 25);
 
     // Transfer ramping
     public final static SN_DoublePreference transferRampTime = new SN_DoublePreference("transferRampTime", 0);
@@ -196,7 +194,7 @@ public final class RobotPreferences {
         "intakeRejectSpeed", -0.80);
     // one loop is 20ms
     public final static SN_IntPreference intakeRejectTimerLoops = new SN_IntPreference(
-        "intakeRejectLatchTimeLoops", 50);
+        "intakeRejectTimerLoops", 50);
     public final static SN_IntPreference colorSensorMinProximity = new SN_IntPreference(
         "colorSensorMinProximity", 1000);
   }

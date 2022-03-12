@@ -33,17 +33,17 @@ public class MoveTurret extends CommandBase {
 
     speed = RobotContainer.coDriverStick.getRightStickX();
 
-    if (speed > 0) {
-      isSpeedPositive = true;
-    } else {
-      isSpeedPositive = false;
-    }
+    // if (speed > 0) {
+    // isSpeedPositive = true;
+    // } else {
+    // isSpeedPositive = false;
+    // }
 
-    speed = speed * speed;
+    // speed = speed * speed;
 
-    if (!isSpeedPositive) {
-      speed = -speed;
-    }
+    // if (!isSpeedPositive) {
+    // speed = -speed;
+    // }
 
     turret.setTurretSpeed(speed * TurretPrefs.turretOpenLoopSpeed.getValue());
   }

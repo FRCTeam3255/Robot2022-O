@@ -72,38 +72,38 @@ public class CollectCargo extends CommandBase {
       }
     }
 
-    // If there is a ball
-    if (intake.isBallNearIntake()) {
-      // And it's the correct color
-      if (intake.ballColorMatchesAlliance()) {
+    // // If there is a ball
+    // if (intake.isBallNearIntake()) {
+    // // And it's the correct color
+    // if (intake.ballColorMatchesAlliance()) {
 
-        // the entrance motor should run
-        transferRejectTimer = 0;
+    // // the entrance motor should run
+    // transferRejectTimer = 0;
 
-        // but not the intake, since the incorrect color ball may still be there
-        intakeRejectTimer -= IntakePrefs.intakeRejectTimerLoops.getValue();
+    // // but not the intake, since the incorrect color ball may still be there
+    // intakeRejectTimer -= IntakePrefs.intakeRejectTimerLoops.getValue();
 
-        // but if it's the wrong color
-      } else {
+    // // but if it's the wrong color
+    // } else {
 
-        // the intake should go in reverse
-        intakeRejectTimer = IntakePrefs.intakeRejectTimerLoops.getValue();
+    // // the intake should go in reverse
+    // intakeRejectTimer = IntakePrefs.intakeRejectTimerLoops.getValue();
 
-        // and the entrance motor should also go in reverse
-        transferRejectTimer = TransferPrefs.transferRejectTimerLoops.getValue();
-      }
-    }
+    // // and the entrance motor should also go in reverse
+    // transferRejectTimer = TransferPrefs.transferRejectTimerLoops.getValue();
+    // }
+    // }
 
     // here we set the output speeds of the robot, and count down the timers
 
-    if (intakeRejectTimer > 0) {
-      outputIntakeSpeed = IntakePrefs.intakeRejectSpeed;
-      intakeRejectTimer--;
-    }
-    if (transferRejectTimer > 0) {
-      outputEntranceSpeed = TransferPrefs.transferEntranceRejectSpeed;
-      transferRejectTimer--;
-    }
+    // if (intakeRejectTimer > 0) {
+    // outputIntakeSpeed = IntakePrefs.intakeRejectSpeed;
+    // intakeRejectTimer--;
+    // }
+    // if (transferRejectTimer > 0) {
+    // outputEntranceSpeed = TransferPrefs.transferEntranceRejectSpeed;
+    // transferRejectTimer--;
+    // }
     // If the Intake and/or the entrance timer is greater than zero then the
     // transfer state will show Shooting to be true
     switch (transfer.getTransferState()) {
