@@ -29,7 +29,9 @@ public final class RobotPreferences {
       "encoderCountsPerTalonFXRotation", 2048);
 
   public static final class DrivetrainPrefs {
-    public static final SN_DoublePreference arcadeSpeed = new SN_DoublePreference("arcadeSpeed", 1);
+    public static final SN_DoublePreference arcadeSpeed = new SN_DoublePreference("arcadeSpeed", 0.75);
+    public static final SN_DoublePreference arcadeLowSpeed = new SN_DoublePreference("arcadeLowSpeed", 0.5);
+    public static final SN_DoublePreference arcadeHighSpeed = new SN_DoublePreference("arcadeHighSpeed", 1);
     public static final SN_DoublePreference arcadeTurn = new SN_DoublePreference("arcadeTurn", 1);
 
     public static final SN_DoublePreference driveF = new SN_DoublePreference("driveF", 0);

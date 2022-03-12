@@ -158,28 +158,27 @@ public class RobotContainer {
     DriverStick.btn_Y.whileHeld(com_hookClimberUp);
     DriverStick.btn_X.whileHeld(com_hookClimberDown);
 
-    // DriverStick.btn_Start.whileHeld(com_magicClimb);
-    // DriverStick.btn_LTrig.whileHeld(com_runSpoolBackward);
-    // DriverStick.btn_RTrig.whileHeld(com_runSpoolForward);
-
     // DriverStick.btn_Y.whileHeld(com_highHub);
     // DriverStick.btn_X.whileHeld(com_lowHub);
 
     DriverStick.btn_Back.whileHeld(com_prepClimb);
+    DriverStick.btn_Start.whileHeld(com_magicClimb);
 
     // coDriver Stick
 
     coDriverStick.btn_RTrig.whileHeld(com_pushCargoToShooter);
     coDriverStick.btn_RTrig.whileHeld(com_spinFlywheelVelocity);
 
-    coDriverStick.btn_Back.whileHeld(com_retractIntake);
+    coDriverStick.btn_X.whileHeld(com_setLowerHubGoal);
+    coDriverStick.btn_Y.whileHeld(com_setUpperHubGoal);
 
+    coDriverStick.btn_Back.whileHeld(com_retractIntake);
     coDriverStick.btn_LTrig.whileHeld(com_collect);
 
-    // coDriverStick.POV_North.whileHeld(com_fenderPreset);
-    // coDriverStick.POV_East.whileHeld(com_tarmacPreset);
-    // coDriverStick.POV_South.whileHeld(com_launchPadPreset);
-    // coDriverStick.POV_West.whileHeld(com_unusedPreset);
+    coDriverStick.POV_North.whileHeld(com_presetFender);
+    coDriverStick.POV_East.whileHeld(com_presetTarmacUpper);
+    coDriverStick.POV_South.whileHeld(com_presetLaunchpadUpper);
+    coDriverStick.POV_West.whileHeld(com_presetTerminalUpper);
 
   }
 

@@ -14,6 +14,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
+import frc.robot.RobotPreferences;
 import frc.robot.RobotMap.*;
 import frc.robot.RobotPreferences.*;
 
@@ -154,9 +156,18 @@ public class Drivetrain extends SubsystemBase {
   public void arcadeDrive(double a_speed, double a_turn) {
     double speed = a_speed * DrivetrainPrefs.arcadeSpeed.getValue();
     double turn = a_turn * DrivetrainPrefs.arcadeTurn.getValue();
+    double multiplier = 1;
 
-    leftLeadMotor.set(ControlMode.PercentOutput, speed, DemandType.ArbitraryFeedForward, turn);
-    rightLeadMotor.set(ControlMode.PercentOutput, speed, DemandType.ArbitraryFeedForward, -turn);
+    if (RobotContainer.DriverStick.btn_LBump.get()) {
+      multiplier = RobotPreferences.DrivetrainPrefs.arcadeLowSpeed.getValue();
+    }
+
+    if (RobotContainer.DriverStick.btn_RBump.get()) {
+      multiplier = RobotPreferences.DrivetrainPrefs.arcadeHighSpeed.getValue();
+    }
+
+    leftLeadMotor.set(ControlMode.PercentOutput, speed * multiplier, DemandType.ArbitraryFeedForward, turn);
+    rightLeadMotor.set(ControlMode.PercentOutput, speed * multiplier, DemandType.ArbitraryFeedForward, -turn);
   }
 
   // starts motion profile using seperate left and right trajectories, and ctre
