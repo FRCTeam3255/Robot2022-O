@@ -75,6 +75,8 @@ public class RobotContainer {
   private final MoveTurret com_moveTurret = new MoveTurret(sub_turret);
   private final SetTurretPosition com_setTurretCenter = new SetTurretPosition(sub_turret,
       RobotPreferences.zeroDoublePref);
+  private final SetTurretPosition com_setTurretPos1 = new SetTurretPosition(sub_turret,
+      RobotPreferences.TurretPrefs.turretPresetPos1);
   private final HoldTurretPosition com_holdTurretCenter = new HoldTurretPosition(sub_turret, sub_navX,
       RobotPreferences.zeroDoublePref);
   private final HoldTurretPosition com_holdTurretPos1 = new HoldTurretPosition(sub_turret, sub_navX,
@@ -86,6 +88,7 @@ public class RobotContainer {
   // Shooter Commands
   private final PushCargoToShooter com_pushCargoToShooter = new PushCargoToShooter(sub_shooter, sub_transfer);
   private final PushCargoWithDelay com_pushCargoWithDelay = new PushCargoWithDelay(sub_shooter, sub_transfer);
+  private final PushCargoSimple com_pushCargoSimple = new PushCargoSimple(sub_shooter, sub_transfer);
   private final SpinFlywheelVelocity com_spinFlywheelVelocity = new SpinFlywheelVelocity(sub_shooter);
   private final SpinFlywheelPercentOutput com_FlywheelPercentOutput = new SpinFlywheelPercentOutput(
       sub_shooter);
@@ -164,16 +167,18 @@ public class RobotContainer {
     // DriverStick.btn_Y.whileHeld(com_highHub);
     // DriverStick.btn_X.whileHeld(com_lowHub);
 
+    DriverStick.btn_RBump.toggleWhenPressed(com_collect);
+
     DriverStick.btn_Back.whenPressed(com_prepClimb);
     DriverStick.btn_Start.whileHeld(com_magicClimb);
 
     // coDriver Stick
 
-    coDriverStick.btn_RTrig.whileHeld(com_pushCargoWithDelay);
+    coDriverStick.btn_RTrig.whileHeld(com_pushCargoSimple);
     coDriverStick.btn_RTrig.whileHeld(com_spinFlywheelGoalRPM);
     coDriverStick.btn_RBump.whenPressed(com_spinFlywheelGoalRPM);
 
-    coDriverStick.btn_A.whileHeld(com_pushCargoToShooter);
+    coDriverStick.btn_A.whileHeld(com_visionAimTurret);
     coDriverStick.btn_B.whileHeld(com_spinFlywheelGoalRPM);
     coDriverStick.btn_X.whenPressed(com_setLowerHubGoal);
     coDriverStick.btn_Y.whenPressed(com_setUpperHubGoal);

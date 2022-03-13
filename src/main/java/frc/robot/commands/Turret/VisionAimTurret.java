@@ -37,7 +37,7 @@ public class VisionAimTurret extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    target = vision.limelight.getOffsetX() + turret.getTurretAngle();
+    target = -vision.limelight.getOffsetX() + turret.getTurretAngle();
 
     if (vision.limelight.hasTarget()) {
       turret.setTurretAngle(target);
@@ -54,7 +54,7 @@ public class VisionAimTurret extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     turret.setTurretSpeed(0);
-    vision.limelight.setLEDMode(LEDMode.off);
+    // vision.limelight.setLEDMode(LEDMode.off);
   }
 
   // Returns true when the command should end.

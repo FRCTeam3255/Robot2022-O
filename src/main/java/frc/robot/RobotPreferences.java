@@ -154,7 +154,7 @@ public final class RobotPreferences {
 
     public static final SN_IntPreference turretLoopsToFinish = new SN_IntPreference("turretLoopsToFinish", 25);
 
-    public static final SN_DoublePreference turretPresetPos1 = new SN_DoublePreference("turretTestPos", 45);
+    public static final SN_DoublePreference turretPresetPos1 = new SN_DoublePreference("turretTestPos", 90);
     public static final SN_DoublePreference turretOpenLoopSpeed = new SN_DoublePreference("turretOpenLoopSpeed", .3);
   }
 
