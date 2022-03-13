@@ -66,6 +66,13 @@ public final class RobotPreferences {
         "driveNegSlewRateLimit", 2);
     public static final SN_BooleanPreference driveSquaredInputs = new SN_BooleanPreference("driveSquaredInputs", true);
 
+    public static final SN_DoublePreference driveOpenLoopSpeedForward = new SN_DoublePreference(
+        "driveOpenLoopSpeedForward", .3);
+    public static final SN_DoublePreference driveOpenLoopSpeedReverse = new SN_DoublePreference(
+        "driveOpenLoopSpeedReverse", -.3);
+
+    public static final SN_DoublePreference driveOpenLoopCounts = new SN_DoublePreference("driveOpenLoopCounts", 44444);
+
   }
 
   public static final class HoodPrefs {
@@ -227,5 +234,54 @@ public final class RobotPreferences {
     public static final SN_IntPreference climberLoopsToFinish = new SN_IntPreference("climberLoopsToFinish", 25);
     public static final SN_DoublePreference climberAcceptableClosedLoopError = new SN_DoublePreference(
         "climberAcceptableClosedLoopError", 300);
+  }
+
+  public static final class AutoPrefs {
+
+    public static final SN_IntPreference autoPushToShooterLatchTimeLoops = new SN_IntPreference(
+        "autoPushToShooterLatchTimeLoops", 20);
+
+    // auto1
+    public static final class TwoCargoA {
+      public static final SN_DoublePreference auto1shooterRPM = new SN_DoublePreference("auto1shooterRPM", 3000);
+      public static final SN_DoublePreference auto1turretAngle = new SN_DoublePreference("auto1turretAngle", 0);
+      public static final SN_BooleanPreference auto1hoodSteep = new SN_BooleanPreference("auto1hoodSteep", true);
+    }
+
+    // auto2
+    public static final class FiveCargoA {
+      public static final SN_DoublePreference auto2shooterRPM1 = new SN_DoublePreference("auto2shooterRPM1", 3000);
+      public static final SN_DoublePreference auto2turretAngle1 = new SN_DoublePreference("auto2turretAngle1", 0);
+      public static final SN_BooleanPreference auto2hoodSteep1 = new SN_BooleanPreference("auto2hoodSteep1", true);
+
+      public static final SN_DoublePreference auto2shooterRPM2 = new SN_DoublePreference("auto2shooterRPM2", 3000);
+      public static final SN_DoublePreference auto2turretAngle2 = new SN_DoublePreference("auto2turretAngle2", 0);
+      public static final SN_BooleanPreference auto2hoodSteep2 = new SN_BooleanPreference("auto2hoodSteep2", true);
+
+      public static final SN_DoublePreference auto2shooterRPM3 = new SN_DoublePreference("auto2shooterRPM3", 3000);
+      public static final SN_DoublePreference auto2turretAngle3 = new SN_DoublePreference("auto2turretAngle3", 0);
+      public static final SN_BooleanPreference auto2hoodSteep3 = new SN_BooleanPreference("auto2hoodSteep3", true);
+    }
+
+    // auto3
+    public static final class FourCargoA {
+      public static final SN_DoublePreference auto3shooterRPM1 = new SN_DoublePreference("auto3shooterRPM1", 3000);
+      public static final SN_DoublePreference auto3turretAngle1 = new SN_DoublePreference("auto3turretAngle1", 0);
+      public static final SN_BooleanPreference auto3hoodSteep1 = new SN_BooleanPreference("auto3hoodSteep1", true);
+
+      public static final SN_DoublePreference auto3shooterRPM2 = new SN_DoublePreference("auto3shooterRPM2", 3000);
+      public static final SN_DoublePreference auto3turretAngle2 = new SN_DoublePreference("auto3turretAngle2", 0);
+      public static final SN_BooleanPreference auto3hoodSteep2 = new SN_BooleanPreference("auto3hoodSteep2", true);
+
+    }
+
+    // auto4
+    public static final class OpenLoopTwoBall {
+      public static final SN_DoublePreference auto4shooterRPM = new SN_DoublePreference("auto4shooterRPM", 3100);
+      public static final SN_BooleanPreference auto4hoodSteep = new SN_BooleanPreference("auto4hoodSteep", false);
+      public static final SN_DoublePreference auto4dist1 = new SN_DoublePreference("auto4dist1", 44444);
+      public static final SN_DoublePreference auto4dist2 = new SN_DoublePreference("auto4dist2", -82000);
+      public static final SN_DoublePreference auto4turretAngle = new SN_DoublePreference("auto4turretAngle", 340);
+    }
   }
 }

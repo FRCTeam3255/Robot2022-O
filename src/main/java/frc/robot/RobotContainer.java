@@ -9,6 +9,7 @@ import java.sql.Driver;
 import com.frcteam3255.joystick.SN_DualActionStick;
 import com.frcteam3255.joystick.SN_F310Gamepad;
 import com.frcteam3255.joystick.SN_SwitchboardStick;
+import com.frcteam3255.preferences.SN_DoublePreference;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -22,10 +23,14 @@ import frc.robot.commands.Turret.*;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.commands.Transfer.*;
+import frc.robot.RobotPreferences.AutoPrefs;
 import frc.robot.RobotPreferences.ClimberPrefs;
+import frc.robot.RobotPreferences.DrivetrainPrefs;
 import frc.robot.RobotPreferences.HoodPrefs;
 import frc.robot.RobotPreferences.ShooterPrefs;
 import frc.robot.commands.ConfigureSubsystems;
+import frc.robot.commands.Autonomous.DriveDistanceOpenLoop;
+import frc.robot.commands.Autonomous.OpenLoopTwoBall;
 import frc.robot.commands.Climber.*;
 import frc.robot.subsystems.*;
 
@@ -59,6 +64,8 @@ public class RobotContainer {
 
   // Drivetrain Commands
   private final Drive com_drive = new Drive(sub_drivetrain);
+  private final DriveDistanceOpenLoop com_driveOpenLoop = new DriveDistanceOpenLoop(
+      sub_drivetrain, DrivetrainPrefs.driveOpenLoopCounts, DrivetrainPrefs.driveOpenLoopSpeedForward);
 
   // Hood Commands
   private final ShallowHood com_shallowHood = new ShallowHood(sub_hood);
@@ -256,6 +263,8 @@ public class RobotContainer {
 
     SmartDashboard.putData("Deplay Intake", com_deployIntake);
     SmartDashboard.putData("Retract Intake", com_retractIntake);
+
+    SmartDashboard.putData("Set Turret Zero", com_setTurretCenter);
   }
 
   /**
@@ -266,6 +275,6 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return com_driveHanger;
+    return new OpenLoopTwoBall(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake);
   }
 }

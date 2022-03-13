@@ -205,6 +205,7 @@ public class Drivetrain extends SubsystemBase {
 
   public void driveDistance(SN_DoublePreference a_inchesToDrive, SN_DoublePreference a_peakPercentOutput) {
     leftLeadMotor.configClosedLoopPeakOutput(0, a_peakPercentOutput.getValue());
+    rightLeadMotor.configClosedLoopPeakOutput(0, a_peakPercentOutput.getValue());
     double position = a_inchesToDrive.getValue() * (DrivetrainPrefs.driveEncoderCountsPerFoot.getValue() / 12);
     leftLeadMotor.set(ControlMode.Position, position);
     rightLeadMotor.set(ControlMode.Position, position);
