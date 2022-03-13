@@ -165,6 +165,8 @@ public final class RobotPreferences {
         "transferEntranceRejectSpeed", -.8);
     public final static SN_DoublePreference transferBeltSpeed = new SN_DoublePreference(
         "transferBeltSpeed", .5);
+    public final static SN_DoublePreference transferBeltRejectSpeed = new SN_DoublePreference(
+        "transferBeltRejectSpeed", -.5);
 
     public final static SN_BooleanPreference transferEntranceInvert = new SN_BooleanPreference(
         "transferEntranceInvert", true);
