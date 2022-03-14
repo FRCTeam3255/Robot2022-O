@@ -175,8 +175,6 @@ public class RobotContainer {
     // DriverStick.btn_Y.whileHeld(com_highHub);
     // DriverStick.btn_X.whileHeld(com_lowHub);
 
-    DriverStick.btn_RBump.toggleWhenPressed(com_collect);
-
     DriverStick.btn_Back.whenPressed(com_prepClimb);
     DriverStick.btn_Start.whileHeld(com_magicClimb);
 
