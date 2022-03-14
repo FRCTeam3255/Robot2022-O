@@ -160,23 +160,25 @@ public class RobotContainer {
 
     // Driver Stick
 
-    DriverStick.btn_B.whenPressed(com_pivotClimberForward);
     DriverStick.btn_A.whenPressed(com_pivotClimberBackward);
-
-    DriverStick.btn_Y.whenPressed(com_hookClimberUp);
+    DriverStick.btn_B.whenPressed(com_pivotClimberForward);
     DriverStick.btn_X.whenPressed(com_hookClimberDown);
+    DriverStick.btn_Y.whenPressed(com_hookClimberUp);
 
     // DriverStick.btn_Y.whileHeld(com_highHub);
     // DriverStick.btn_X.whileHeld(com_lowHub);
 
-    DriverStick.btn_Back.whenPressed(com_prepClimb);
     DriverStick.btn_Start.whileHeld(com_magicClimb);
+    DriverStick.btn_Back.whenPressed(com_prepClimb);
 
     // coDriver Stick
 
     coDriverStick.btn_RTrig.whileHeld(com_pushCargoSimple);
     coDriverStick.btn_RTrig.whileHeld(com_spinFlywheelGoalRPM);
+    coDriverStick.btn_LTrig.whileHeld(com_collect);
+
     coDriverStick.btn_RBump.whenPressed(com_spinFlywheelGoalRPM);
+    coDriverStick.btn_LBump.whileHeld(com_moveTurret);
 
     coDriverStick.btn_A.whileHeld(com_visionAimTurret);
     coDriverStick.btn_B.whileHeld(com_reverseTransfer);
@@ -184,14 +186,11 @@ public class RobotContainer {
     coDriverStick.btn_Y.whenPressed(com_setUpperHubGoal);
 
     coDriverStick.btn_Back.whenPressed(com_retractIntake);
-    coDriverStick.btn_LTrig.whileHeld(com_collect);
 
     coDriverStick.POV_North.whenPressed(com_presetFender);
     coDriverStick.POV_East.whenPressed(com_presetTarmacUpper);
     coDriverStick.POV_South.whenPressed(com_presetLaunchpadUpper);
     coDriverStick.POV_West.whenPressed(com_presetTerminalUpper);
-
-    coDriverStick.btn_LBump.whileHeld(com_moveTurret);
 
   }
 
