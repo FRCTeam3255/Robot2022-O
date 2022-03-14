@@ -13,7 +13,6 @@ import frc.robot.commands.Intake.CollectCargo;
 import frc.robot.commands.Shooter.PresetShooter;
 import frc.robot.commands.Shooter.SpinFlywheelGoalRPM;
 import frc.robot.commands.Transfer.PushCargoSimple;
-import frc.robot.commands.Turret.SetTurretPosition;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Intake;

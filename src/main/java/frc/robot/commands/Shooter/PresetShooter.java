@@ -10,7 +10,6 @@ import com.frcteam3255.preferences.SN_DoublePreference;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Turret;
 
 public class PresetShooter extends InstantCommand {
 
