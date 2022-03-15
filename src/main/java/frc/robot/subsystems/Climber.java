@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.frcteam3255.components.SN_DoubleSolenoid;
 import com.frcteam3255.preferences.SN_DoublePreference;
@@ -57,6 +58,8 @@ public class Climber extends SubsystemBase {
     climbMotor.configReverseSoftLimitThreshold(ClimberPrefs.climberMinEncoderCount.getValue());
     climbMotor.configForwardSoftLimitEnable(true);
     climbMotor.configReverseSoftLimitEnable(true);
+
+    climbMotor.setNeutralMode(NeutralMode.Brake);
 
     climberLockPiston.setInverted(ClimberPrefs.climberLockPistonInvert.getValue());
     climberPivotPiston.setInverted(ClimberPrefs.climberPivotPistonInvert.getValue());

@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Hood.*;
 import frc.robot.commands.Turret.*;
+import frc.robot.commands.Vision.SetGoalRPM;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.commands.Transfer.*;
@@ -122,6 +123,7 @@ public class RobotContainer {
   private final DeployIntake com_deployIntake = new DeployIntake(sub_intake);
 
   // Vision Commands
+  private final SetGoalRPM com_setGoalRPM = new SetGoalRPM(sub_shooter, sub_vision);
 
   // Climber Commands
   private final Climb com_climb = new Climb(sub_climber);
@@ -129,8 +131,8 @@ public class RobotContainer {
   private final ResetClimber com_resetClimber = new ResetClimber(sub_climber);
   private final InstantCommand com_lockClimber = new InstantCommand(sub_climber::lockClimber);
   private final InstantCommand com_unlockClimber = new InstantCommand(sub_climber::unlockClimber);
-  private final InstantCommand com_pivotClimberForward = new InstantCommand(sub_climber::pivotPerpendicular);
-  private final InstantCommand com_pivotClimberBackward = new InstantCommand(sub_climber::pivotAngled);
+  private final InstantCommand com_pivotClimberPerpendicular = new InstantCommand(sub_climber::pivotPerpendicular);
+  private final InstantCommand com_pivotClimberAngled = new InstantCommand(sub_climber::pivotAngled);
   private final InstantCommand com_hookClimberUp = new InstantCommand(sub_climber::hookUp);
   private final InstantCommand com_hookClimberDown = new InstantCommand(sub_climber::hookDown);
   private final RunSpool com_runSpool = new RunSpool(sub_climber);
@@ -160,8 +162,8 @@ public class RobotContainer {
 
     // Driver Stick
 
-    DriverStick.btn_A.whenPressed(com_pivotClimberBackward);
-    DriverStick.btn_B.whenPressed(com_pivotClimberForward);
+    DriverStick.btn_A.whenPressed(com_pivotClimberAngled);
+    DriverStick.btn_B.whenPressed(com_pivotClimberPerpendicular);
     DriverStick.btn_X.whenPressed(com_hookClimberDown);
     DriverStick.btn_Y.whenPressed(com_hookClimberUp);
 
@@ -175,15 +177,16 @@ public class RobotContainer {
 
     coDriverStick.btn_RTrig.whileHeld(com_pushCargoSimple);
     coDriverStick.btn_RTrig.whileHeld(com_spinFlywheelGoalRPM);
-    coDriverStick.btn_LTrig.whileHeld(com_collect);
+    coDriverStick.btn_LTrig.toggleWhenPressed(com_collect);
 
     coDriverStick.btn_RBump.whenPressed(com_spinFlywheelGoalRPM);
     coDriverStick.btn_LBump.whileHeld(com_moveTurret);
 
     coDriverStick.btn_A.whileHeld(com_visionAimTurret);
     coDriverStick.btn_B.whileHeld(com_reverseTransfer);
-    coDriverStick.btn_X.whenPressed(com_setLowerHubGoal);
+    coDriverStick.btn_X.whileHeld(com_setGoalRPM);
     coDriverStick.btn_Y.whenPressed(com_setUpperHubGoal);
+    coDriverStick.btn_Y.whenPressed(new InstantCommand(sub_hood::steepenHood, sub_hood));
 
     coDriverStick.btn_Back.whenPressed(com_retractIntake);
 
@@ -244,8 +247,8 @@ public class RobotContainer {
 
     SmartDashboard.putData("Lock Climber", com_lockClimber);
     SmartDashboard.putData("Unlock Climber", com_unlockClimber);
-    SmartDashboard.putData("Pivot Climber Forward", com_pivotClimberForward);
-    SmartDashboard.putData("Pivot Climber Backward", com_pivotClimberBackward);
+    SmartDashboard.putData("Pivot Climber Perpendicular", com_pivotClimberPerpendicular);
+    SmartDashboard.putData("Pivot Climber Angled", com_pivotClimberAngled);
     SmartDashboard.putData("Hook Climber Forward", com_hookClimberUp);
     SmartDashboard.putData("Hook Climber Backwards", com_hookClimberDown);
 

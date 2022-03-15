@@ -21,6 +21,9 @@ public class PushCargoSimple extends CommandBase {
   SN_DoublePreference outputBottomBeltSpeed;
   SN_DoublePreference outputTopBeltSpeed;
 
+  boolean shooterReady;
+  int buffer;
+
   /** Creates a new PushCargoSimple. */
   public PushCargoSimple(Shooter sub_shooter, Transfer sub_transfer) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -33,6 +36,8 @@ public class PushCargoSimple extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    shooterReady = false;
+    buffer = 0;
     transfer.setTransferState(TransferState.SHOOTING);
 
   }
@@ -41,11 +46,21 @@ public class PushCargoSimple extends CommandBase {
   @Override
   public void execute() {
 
+    buffer++;
+
+    if (buffer > ShooterPrefs.shooterBufferLoops.getValue() && shooter.isShooterUpToSpeed()) {
+      shooterReady = true;
+    }
+
+    if (buffer > ShooterPrefs.shooterBufferLoops.getValue() && !shooter.isShooterUpToSpeed()) {
+      shooterReady = false;
+    }
+
     outputEntranceSpeed = TransferPrefs.transferEntranceSpeed;
     outputBottomBeltSpeed = TransferPrefs.transferBeltSpeed;
     outputTopBeltSpeed = TransferPrefs.transferBeltSpeed;
 
-    if (!shooter.isShooterUpToSpeed()) {
+    if (!shooterReady) {
 
       if (transfer.isTopBallCollected()) {
         outputTopBeltSpeed = zeroDoublePref;

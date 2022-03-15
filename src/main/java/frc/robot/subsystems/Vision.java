@@ -24,11 +24,15 @@ public class Vision extends SubsystemBase {
   }
 
   public double getIdealUpperHubRPM() {
-    return /* regression */ limelight.getOffsetY(); // TODO: find regression
+    double a = 10.998;
+    double b = 34.0879;
+    double c = 3600;
+    double x = limelight.getOffsetY();
+    return (a * (x * x)) + (b * x) + c;
   }
 
   public double getIdealLowerHubRPM() {
-    return /* different regression */ limelight.getOffsetY(); // TODO: ^
+    return /* different regression */ limelight.getOffsetY(); // TODO: find regression
   }
 
   public void turnLimelightOn() {

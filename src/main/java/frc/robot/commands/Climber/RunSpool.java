@@ -36,7 +36,7 @@ public class RunSpool extends CommandBase {
 
       if (RobotContainer.DriverStick.getAxisLT() > 0) {
         climber.unlockClimber();
-        speed = -RobotContainer.DriverStick.getAxisRT();
+        speed = -RobotContainer.DriverStick.getAxisLT();
       }
     } else {
       speed = 0;
