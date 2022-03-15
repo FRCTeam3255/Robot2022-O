@@ -137,6 +137,9 @@ public final class RobotPreferences {
 
     public static final SN_IntPreference shooterDelayLoops = new SN_IntPreference(
         "shooterDelayLoops", 20);
+
+    public static final SN_DoublePreference shooterGoalRPMMultiplier = new SN_DoublePreference(
+        "shooterGoalRPMMultiplier", 1);
   }
 
   public static final class TurretPrefs {
