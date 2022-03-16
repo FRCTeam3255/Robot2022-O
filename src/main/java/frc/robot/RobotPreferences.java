@@ -29,10 +29,9 @@ public final class RobotPreferences {
       "encoderCountsPerTalonFXRotation", 2048);
 
   public static final class DrivetrainPrefs {
-    public static final SN_DoublePreference arcadeSpeed = new SN_DoublePreference("arcadeSpeed", 0.8);
+    public static final SN_DoublePreference arcadeSpeed = new SN_DoublePreference("arcadeSpeed", 0.65);
     public static final SN_DoublePreference arcadeTurn = new SN_DoublePreference("arcadeTurn", .5);
-    public static final SN_DoublePreference arcadeLowSpeed = new SN_DoublePreference("arcadeLowSpeed", 0.5);
-    public static final SN_DoublePreference arcadeHighSpeed = new SN_DoublePreference("arcadeHighSpeed", 1);
+    public static final SN_DoublePreference arcadeLowSpeed = new SN_DoublePreference("arcadeLowSpeed", 0.4);
 
     public static final SN_DoublePreference driveF = new SN_DoublePreference("driveF", 0);
     public static final SN_DoublePreference driveP = new SN_DoublePreference("driveP", 1);
@@ -149,6 +148,8 @@ public final class RobotPreferences {
         360);
     public static final SN_DoublePreference turretMinAngleDegrees = new SN_DoublePreference("turretMinAngleDegrees",
         0);
+    public static final SN_DoublePreference turretSnapForwards = new SN_DoublePreference("turretSnapForwards", 0);
+    public static final SN_DoublePreference turretSnapBackwards = new SN_DoublePreference("turretSnapBackwards", 180);
 
     // 2048 encoder counts per rotation * 65 (gr) = 133120
     // 133120 / 360 = 370

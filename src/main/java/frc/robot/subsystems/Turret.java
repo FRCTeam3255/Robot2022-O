@@ -75,7 +75,7 @@ public class Turret extends SubsystemBase {
   public void setTurretSpeed(double a_rotate) {
     double rotate = a_rotate;
 
-    turretMotor.set(ControlMode.PercentOutput, rotate);
+    turretMotor.set(ControlMode.PercentOutput, -rotate);
   }
 
   // gets the turret angle in degrees

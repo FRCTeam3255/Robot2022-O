@@ -23,6 +23,7 @@ import frc.robot.commands.Transfer.*;
 import frc.robot.RobotPreferences.DrivetrainPrefs;
 import frc.robot.RobotPreferences.HoodPrefs;
 import frc.robot.RobotPreferences.ShooterPrefs;
+import frc.robot.RobotPreferences.TurretPrefs;
 import frc.robot.commands.ConfigureSubsystems;
 import frc.robot.commands.Autonomous.DriveDistanceOpenLoop;
 import frc.robot.commands.Autonomous.OpenLoopTwoBall;
@@ -113,6 +114,10 @@ public class RobotContainer {
       ShooterPrefs.shooterPresetUpperTerminalRPM, HoodPrefs.hoodPresetUpperTerminalSteep,
       ShooterPrefs.shooterPresetLowerTerminalRPM, HoodPrefs.hoodPresetLowerTerminalSteep);
 
+  private final SetTurretPosition com_presetForward = new SetTurretPosition(sub_turret, TurretPrefs.turretSnapForwards);
+  private final SetTurretPosition com_presetBackward = new SetTurretPosition(sub_turret,
+      TurretPrefs.turretSnapBackwards);
+
   // Transfer Commands
   private final ReverseTransfer com_reverseTransfer = new ReverseTransfer(sub_transfer);
 
@@ -177,7 +182,7 @@ public class RobotContainer {
 
     coDriverStick.btn_RTrig.whileHeld(com_pushCargoSimple);
     coDriverStick.btn_RTrig.whileHeld(com_spinFlywheelGoalRPM);
-    coDriverStick.btn_LTrig.toggleWhenPressed(com_collect);
+    coDriverStick.btn_LTrig.whileHeld(com_collect);
 
     coDriverStick.btn_RBump.whenPressed(com_spinFlywheelGoalRPM);
     coDriverStick.btn_LBump.whileHeld(com_moveTurret);
@@ -195,6 +200,8 @@ public class RobotContainer {
     coDriverStick.POV_South.whenPressed(com_presetLaunchpadUpper);
     coDriverStick.POV_West.whenPressed(com_presetTerminalUpper);
 
+    coDriverStick.btn_RStick.whenPressed(com_presetForward);
+    coDriverStick.btn_LStick.whenPressed(com_presetBackward);
   }
 
   /**
