@@ -69,6 +69,7 @@ public class CollectCargo extends CommandBase {
         outputIntakeSpeed = RobotPreferences.zeroDoublePref;
         outputEntranceSpeed = RobotPreferences.zeroDoublePref;
         outputBottomBeltSpeed = RobotPreferences.zeroDoublePref;
+        intake.retractIntake();
       }
     }
 
