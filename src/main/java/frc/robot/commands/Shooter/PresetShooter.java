@@ -32,7 +32,7 @@ public class PresetShooter extends InstantCommand {
     shooterRPMLower = a_shooterRPMLower;
     hoodSteepLower = a_hoodSteepLower;
 
-    addRequirements(shooter, hood);
+    // addRequirements(shooter, hood);
   }
 
   // Called when the command is initially scheduled.
