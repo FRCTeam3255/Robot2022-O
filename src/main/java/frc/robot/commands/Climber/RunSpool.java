@@ -11,6 +11,7 @@ import frc.robot.subsystems.Climber;
 public class RunSpool extends CommandBase {
 
   Climber climber;
+  double speed;
 
   /** Creates a new RunSpool. */
   public RunSpool(Climber sub_climber) {
@@ -22,25 +23,20 @@ public class RunSpool extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    climber.unlockClimber();
+    speed = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = 0;
-    if (climber.isHookDeployed()) {
-      if (RobotContainer.DriverStick.getAxisRT() > 0) {
-        climber.unlockClimber();
-        speed = RobotContainer.DriverStick.getAxisRT();
-      }
 
-      if (RobotContainer.DriverStick.getAxisLT() > 0) {
-        climber.unlockClimber();
-        speed = -RobotContainer.DriverStick.getAxisLT();
-      }
-    } else {
-      speed = 0;
-      climber.lockClimber();
+    if (RobotContainer.DriverStick.getAxisLT() > 0) {
+      speed = -RobotContainer.DriverStick.getAxisLT();
+
+    }
+    if (RobotContainer.DriverStick.getAxisRT() > 0) {
+      speed = RobotContainer.DriverStick.getAxisRT();
     }
     climber.setClimberSpeed(speed);
   }
