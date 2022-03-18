@@ -200,8 +200,8 @@ public class RobotContainer {
     coDriverStick.POV_South.whenPressed(com_presetLaunchpadUpper);
     coDriverStick.POV_West.whenPressed(com_presetTerminalUpper);
 
-    coDriverStick.btn_RStick.whenPressed(com_presetForward);
-    coDriverStick.btn_LStick.whenPressed(com_presetBackward);
+    coDriverStick.btn_RStick.whenPressed(com_presetBackward);
+    coDriverStick.btn_LStick.whenPressed(com_presetForward);
   }
 
   /**
