@@ -1,6 +1,5 @@
 # Robot2022
-
-<img src="https://raw.githubusercontent.com/FRCTeam3255/Graphics2022/main/Exports/Robot%20Logo%20Square%20BG.png?token=GHSAT0AAAAAABPSPWQCOYU7ZAQLCKVAPKHUYRYWSSQ" alt="Robot 2022 Logo" width="512"/>
+![RobotLogo](https://github.com/FRCTeam3255/Graphics2022/blob/51d6efafc27a38165ed6289be95bd5e06fa24663/Exports/Robot%20Logo%20Square%20BG.png)
 
 ## <font color="red">Rapid React</font> <font color="white">2022</font> <font color="blue">Game links</font>
 [Game & Season Info](https://www.firstinspires.org/robotics/frc/game-and-season)
