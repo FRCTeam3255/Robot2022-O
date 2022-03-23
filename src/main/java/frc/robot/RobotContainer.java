@@ -20,12 +20,12 @@ import frc.robot.commands.Vision.SetGoalRPM;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.commands.Transfer.*;
-import frc.robot.RobotPreferences.DrivetrainPrefs;
+// import frc.robot.RobotPreferences.DrivetrainPrefs;
 import frc.robot.RobotPreferences.HoodPrefs;
 import frc.robot.RobotPreferences.ShooterPrefs;
 import frc.robot.RobotPreferences.TurretPrefs;
 import frc.robot.commands.ConfigureSubsystems;
-import frc.robot.commands.Autonomous.DriveDistanceOpenLoop;
+// import frc.robot.commands.Autonomous.DriveDistanceOpenLoop;
 import frc.robot.commands.Autonomous.OpenLoopTwoBall;
 import frc.robot.commands.Climber.*;
 import frc.robot.subsystems.*;
@@ -60,45 +60,59 @@ public class RobotContainer {
 
   // Drivetrain Commands
   private final Drive com_drive = new Drive(sub_drivetrain);
-  private final DriveDistanceOpenLoop com_driveOpenLoop = new DriveDistanceOpenLoop(
-      sub_drivetrain, DrivetrainPrefs.driveOpenLoopCounts, DrivetrainPrefs.driveOpenLoopSpeedForward);
+  // private final DriveDistanceOpenLoop com_driveOpenLoop = new
+  // DriveDistanceOpenLoop(
+  // sub_drivetrain, DrivetrainPrefs.driveOpenLoopCounts,
+  // DrivetrainPrefs.driveOpenLoopSpeedForward);
 
   // Hood Commands
   private final ShallowHood com_shallowHood = new ShallowHood(sub_hood);
   private final SteepenHood com_steepenHood = new SteepenHood(sub_hood);
 
-  private final DriveMotionProfile com_driveTestPath = new DriveMotionProfile(sub_drivetrain,
-      "testpath_left.csv", "testpath_right.csv");
-  private final DriveMotionProfile com_drive2020Field = new DriveMotionProfile(sub_drivetrain,
-      "full2020path_left.csv", "full2020path_right.csv");
-  private final DriveMotionProfile com_driveHanger = new DriveMotionProfile(sub_drivetrain,
-      "hanger_left.csv", "hanger_right.csv");
+  // private final DriveMotionProfile com_driveTestPath = new
+  // DriveMotionProfile(sub_drivetrain,
+  // "testpath_left.csv", "testpath_right.csv");
+  // private final DriveMotionProfile com_drive2020Field = new
+  // DriveMotionProfile(sub_drivetrain,
+  // // "full2020path_left.csv", "full2020path_right.csv");
+  // // private final DriveMotionProfile com_driveHanger = new
+  // DriveMotionProfile(sub_drivetrain,
+  // "hanger_left.csv", "hanger_right.csv");
 
   // Turret Commands
   private final MoveTurret com_moveTurret = new MoveTurret(sub_turret);
   private final SetTurretPosition com_setTurretCenter = new SetTurretPosition(sub_turret,
       RobotPreferences.zeroDoublePref);
-  private final SetTurretPosition com_setTurretPos1 = new SetTurretPosition(sub_turret,
-      RobotPreferences.TurretPrefs.turretPresetPos1);
-  private final HoldTurretPosition com_holdTurretCenter = new HoldTurretPosition(sub_turret, sub_navX,
-      RobotPreferences.zeroDoublePref);
-  private final HoldTurretPosition com_holdTurretPos1 = new HoldTurretPosition(sub_turret, sub_navX,
-      RobotPreferences.TurretPrefs.turretPresetPos1);
+  // private final SetTurretPosition com_setTurretPos1 = new
+  // SetTurretPosition(sub_turret,
+  // RobotPreferences.TurretPrefs.turretPresetPos1);
+  // private final HoldTurretPosition com_holdTurretCenter = new
+  // HoldTurretPosition(sub_turret, sub_navX,
+  // RobotPreferences.zeroDoublePref);
+  // private final HoldTurretPosition com_holdTurretPos1 = new
+  // HoldTurretPosition(sub_turret, sub_navX,
+  // RobotPreferences.TurretPrefs.turretPresetPos1);
   private final VisionAimTurret com_visionAimTurret = new VisionAimTurret(sub_turret, sub_shooter, sub_vision);
-  private final VisionNavXAimTurret com_visionHoldAimTurret = new VisionNavXAimTurret(sub_turret, sub_vision,
-      sub_navX);
+  // private final VisionNavXAimTurret com_visionHoldAimTurret = new
+  // VisionNavXAimTurret(sub_turret, sub_vision,
+  // sub_navX);
 
   // Shooter Commands
-  private final PushCargoToShooter com_pushCargoToShooter = new PushCargoToShooter(sub_shooter, sub_transfer);
-  private final PushCargoWithDelay com_pushCargoWithDelay = new PushCargoWithDelay(sub_shooter, sub_transfer);
+  // private final PushCargoToShooter com_pushCargoToShooter = new
+  // PushCargoToShooter(sub_shooter, sub_transfer);
+  // private final PushCargoWithDelay com_pushCargoWithDelay = new
+  // PushCargoWithDelay(sub_shooter, sub_transfer);
   private final PushCargoSimple com_pushCargoSimple = new PushCargoSimple(sub_shooter, sub_transfer);
-  private final SpinFlywheelVelocity com_spinFlywheelVelocity = new SpinFlywheelVelocity(sub_shooter);
-  private final SpinFlywheelPercentOutput com_FlywheelPercentOutput = new SpinFlywheelPercentOutput(
-      sub_shooter);
+  // private final SpinFlywheelVelocity com_spinFlywheelVelocity = new
+  // SpinFlywheelVelocity(sub_shooter);
+  // private final SpinFlywheelPercentOutput com_FlywheelPercentOutput = new
+  // SpinFlywheelPercentOutput(
+  // sub_shooter);
   private final SpinFlywheelGoalRPM com_spinFlywheelGoalRPM = new SpinFlywheelGoalRPM(sub_shooter);
 
   private final InstantCommand com_setUpperHubGoal = new InstantCommand(sub_shooter::setGoalUpperHub);
-  private final InstantCommand com_setLowerHubGoal = new InstantCommand(sub_shooter::setGoalLowerHub);
+  // private final InstantCommand com_setLowerHubGoal = new
+  // InstantCommand(sub_shooter::setGoalLowerHub);
 
   // Shooter Presets
   private final PresetShooter com_presetFender = new PresetShooter(sub_shooter, sub_hood,
@@ -110,9 +124,12 @@ public class RobotContainer {
   private final PresetShooter com_presetLaunchpadUpper = new PresetShooter(sub_shooter, sub_hood,
       ShooterPrefs.shooterPresetUpperLaunchpadRPM, HoodPrefs.hoodPresetUpperLaunchpadSteep,
       ShooterPrefs.shooterPresetLowerLaunchpadRPM, HoodPrefs.hoodPresetLowerLaunchpadSteep);
-  private final PresetShooter com_presetTerminalUpper = new PresetShooter(sub_shooter, sub_hood,
-      ShooterPrefs.shooterPresetUpperTerminalRPM, HoodPrefs.hoodPresetUpperTerminalSteep,
-      ShooterPrefs.shooterPresetLowerTerminalRPM, HoodPrefs.hoodPresetLowerTerminalSteep);
+  // private final PresetShooter com_presetTerminalUpper = new
+  // PresetShooter(sub_shooter, sub_hood,
+  // ShooterPrefs.shooterPresetUpperTerminalRPM,
+  // HoodPrefs.hoodPresetUpperTerminalSteep,
+  // ShooterPrefs.shooterPresetLowerTerminalRPM,
+  // HoodPrefs.hoodPresetLowerTerminalSteep);
 
   private final SetTurretPosition com_presetForward = new SetTurretPosition(sub_turret, TurretPrefs.turretSnapForwards);
   private final SetTurretPosition com_presetBackward = new SetTurretPosition(sub_turret,
@@ -131,9 +148,9 @@ public class RobotContainer {
   private final SetGoalRPM com_setGoalRPM = new SetGoalRPM(sub_shooter, sub_vision);
 
   // Climber Commands
-  private final Climb com_climb = new Climb(sub_climber);
+  // private final Climb com_climb = new Climb(sub_climber);
   private final MagicClimb com_magicClimb = new MagicClimb(sub_climber);
-  private final ResetClimber com_resetClimber = new ResetClimber(sub_climber);
+  // private final ResetClimber com_resetClimber = new ResetClimber(sub_climber);
   private final InstantCommand com_lockClimber = new InstantCommand(sub_climber::lockClimber);
   private final InstantCommand com_unlockClimber = new InstantCommand(sub_climber::unlockClimber);
   private final InstantCommand com_pivotClimberPerpendicular = new InstantCommand(sub_climber::pivotPerpendicular);
@@ -198,7 +215,8 @@ public class RobotContainer {
     coDriverStick.POV_North.whenPressed(com_presetFender);
     coDriverStick.POV_East.whenPressed(com_presetTarmacUpper);
     coDriverStick.POV_South.whenPressed(com_presetLaunchpadUpper);
-    coDriverStick.POV_West.whenPressed(com_presetTerminalUpper);
+    coDriverStick.POV_South.whenPressed(new SetTurretPosition(sub_turret, TurretPrefs.turretMaxAngleDegrees));
+    coDriverStick.POV_West.whenPressed(com_presetTarmacUpper);
 
     coDriverStick.btn_RStick.whenPressed(com_presetBackward);
     coDriverStick.btn_LStick.whenPressed(com_presetForward);
@@ -276,6 +294,7 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new OpenLoopTwoBall(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake);
+    return new OpenLoopTwoBall(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake,
+        sub_climber);
   }
 }

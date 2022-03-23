@@ -13,6 +13,7 @@ import frc.robot.commands.Intake.CollectCargo;
 import frc.robot.commands.Shooter.PresetShooter;
 import frc.robot.commands.Shooter.SpinFlywheelGoalRPM;
 import frc.robot.commands.Transfer.PushCargoSimple;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Intake;
@@ -31,10 +32,11 @@ public class OpenLoopTwoBall extends SequentialCommandGroup {
   Hood hood;
   Transfer transfer;
   Intake intake;
+  Climber climber;
 
   /** Creates a new OpenLoopTwoBall. */
   public OpenLoopTwoBall(Drivetrain sub_drivetrain, Shooter sub_shooter, Turret sub_turret, Hood sub_hood,
-      Transfer sub_transfer, Intake sub_intake) {
+      Transfer sub_transfer, Intake sub_intake, Climber sub_climber) {
 
     drivetrain = sub_drivetrain;
     shooter = sub_shooter;
@@ -42,12 +44,14 @@ public class OpenLoopTwoBall extends SequentialCommandGroup {
     hood = sub_hood;
     transfer = sub_transfer;
     intake = sub_intake;
-
+    climber = sub_climber;
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
         new InstantCommand(drivetrain::resetDrivetrainEncodersCount),
         new InstantCommand(shooter::setGoalUpperHub),
+        new InstantCommand(drivetrain::setCoastMode),
+        new InstantCommand(climber::pivotAngled),
         new PresetShooter(shooter, hood, AutoPrefs.OpenLoopTwoBall.auto4shooterRPM,
             AutoPrefs.OpenLoopTwoBall.auto4hoodSteep, null, null),
 
@@ -58,6 +62,7 @@ public class OpenLoopTwoBall extends SequentialCommandGroup {
         new DriveDistanceOpenLoop(drivetrain, AutoPrefs.OpenLoopTwoBall.auto4dist2,
             DrivetrainPrefs.driveOpenLoopSpeedReverse),
         new WaitCommand(2),
+        new InstantCommand(drivetrain::configure),
         parallel(new SpinFlywheelGoalRPM(shooter), new PushCargoSimple(shooter, transfer)).withTimeout(8)
 
     );

@@ -219,42 +219,73 @@ public class Drivetrain extends SubsystemBase {
     return (getLeftClosedLoopErrorInches() + getRightClosedLoopErrorInches()) / 2;
   }
 
+  public void setBrakeMode() {
+    leftFollowMotor.setNeutralMode(NeutralMode.Brake);
+    leftLeadMotor.setNeutralMode(NeutralMode.Brake);
+
+    rightFollowMotor.setNeutralMode(NeutralMode.Brake);
+    rightLeadMotor.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void setCoastMode() {
+    leftFollowMotor.setNeutralMode(NeutralMode.Coast);
+    leftLeadMotor.setNeutralMode(NeutralMode.Coast);
+
+    rightFollowMotor.setNeutralMode(NeutralMode.Coast);
+    rightLeadMotor.setNeutralMode(NeutralMode.Coast);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
 
-    // Encoder Counts
-    SmartDashboard.putNumber("Drivetrain Left Encoder", getLeftEncoderCount());
-    SmartDashboard.putNumber("Drivetrain Right Encoder", getRightEncoderCount());
-    SmartDashboard.putNumber("Drivetrain Average Encoder", getAverageEncoderCount());
+    // // Encoder Counts
+    // SmartDashboard.putNumber("Drivetrain Left Encoder", getLeftEncoderCount());
+    // SmartDashboard.putNumber("Drivetrain Right Encoder", getRightEncoderCount());
+    // SmartDashboard.putNumber("Drivetrain Average Encoder",
+    // getAverageEncoderCount());
 
-    // Motion Profile
-    SmartDashboard.putBoolean("Is Drivetrain Motion Profile Finished", isMotionProfileFinished());
+    // // Motion Profile
+    // SmartDashboard.putBoolean("Is Drivetrain Motion Profile Finished",
+    // isMotionProfileFinished());
 
-    // Motor Percent Output
-    SmartDashboard.putNumber("Drivetrain Left Lead Motor Speed", leftLeadMotor.getMotorOutputPercent());
-    SmartDashboard.putNumber("Drivetrain Right Lead Motor Speed", rightLeadMotor.getMotorOutputPercent());
-    SmartDashboard.putNumber("Drivetrain Left Follow Motor Speed", leftFollowMotor.getMotorOutputPercent());
-    SmartDashboard.putNumber("Drivetrain Right Follow Motor Speed", rightFollowMotor.getMotorOutputPercent());
+    // // Motor Percent Output
+    // SmartDashboard.putNumber("Drivetrain Left Lead Motor Speed",
+    // leftLeadMotor.getMotorOutputPercent());
+    // SmartDashboard.putNumber("Drivetrain Right Lead Motor Speed",
+    // rightLeadMotor.getMotorOutputPercent());
+    // SmartDashboard.putNumber("Drivetrain Left Follow Motor Speed",
+    // leftFollowMotor.getMotorOutputPercent());
+    // SmartDashboard.putNumber("Drivetrain Right Follow Motor Speed",
+    // rightFollowMotor.getMotorOutputPercent());
 
-    // Feet Driven
-    SmartDashboard.putNumber("Drivetrain Left Feet Driven", getLeftFeetDriven());
-    SmartDashboard.putNumber("Drivetrain Right Feet Driven", getRightFeetDriven());
-    SmartDashboard.putNumber("Drivetrain Average Feet Driven", getAverageFeetDriven());
+    // // Feet Driven
+    // SmartDashboard.putNumber("Drivetrain Left Feet Driven", getLeftFeetDriven());
+    // SmartDashboard.putNumber("Drivetrain Right Feet Driven",
+    // getRightFeetDriven());
+    // SmartDashboard.putNumber("Drivetrain Average Feet Driven",
+    // getAverageFeetDriven());
 
-    // Feet Per Second
-    SmartDashboard.putNumber("Drivetrain Left Feet Per Second", getLeftFeetPerSecond());
-    SmartDashboard.putNumber("Drivetrain Right Feet Per Second", getRightFeetPerSecond());
-    SmartDashboard.putNumber("Drivetrain Average Feet Per Second", getAverageFeetPerSecond());
+    // // Feet Per Second
+    // SmartDashboard.putNumber("Drivetrain Left Feet Per Second",
+    // getLeftFeetPerSecond());
+    // SmartDashboard.putNumber("Drivetrain Right Feet Per Second",
+    // getRightFeetPerSecond());
+    // SmartDashboard.putNumber("Drivetrain Average Feet Per Second",
+    // getAverageFeetPerSecond());
 
-    // Encoder Counts per 100ms
-    SmartDashboard.putNumber("Drivetrain Left Velocity", getLeftVelocity());
-    SmartDashboard.putNumber("Drivetrain Right Velocity", getRightVelocity());
-    SmartDashboard.putNumber("Drivetrain Average Velocity", getAverageVelocity());
+    // // Encoder Counts per 100ms
+    // SmartDashboard.putNumber("Drivetrain Left Velocity", getLeftVelocity());
+    // SmartDashboard.putNumber("Drivetrain Right Velocity", getRightVelocity());
+    // SmartDashboard.putNumber("Drivetrain Average Velocity",
+    // getAverageVelocity());
 
-    // Closed Loop Error
-    SmartDashboard.putNumber("Drivetrain Left Closed Loop Error Inches", getLeftClosedLoopErrorInches());
-    SmartDashboard.putNumber("Drivetrain Right Closed Loop Error Inches", getRightClosedLoopErrorInches());
-    SmartDashboard.putNumber("Drivetrain Average Closed Loop Error Inches", getAverageClosedLoopErrorInches());
+    // // Closed Loop Error
+    // SmartDashboard.putNumber("Drivetrain Left Closed Loop Error Inches",
+    // getLeftClosedLoopErrorInches());
+    // SmartDashboard.putNumber("Drivetrain Right Closed Loop Error Inches",
+    // getRightClosedLoopErrorInches());
+    // SmartDashboard.putNumber("Drivetrain Average Closed Loop Error Inches",
+    // getAverageClosedLoopErrorInches());
   }
 }

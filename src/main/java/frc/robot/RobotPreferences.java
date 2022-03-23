@@ -100,7 +100,7 @@ public final class RobotPreferences {
     public static final SN_DoublePreference shooterTargetRPM = new SN_DoublePreference(
         "shooterTargetRPM", 5000);
     public static final SN_DoublePreference shooterAcceptableErrorRPM = new SN_DoublePreference(
-        "shooterAcceptableErrorRPM", 100);
+        "shooterAcceptableErrorRPM", 15);
 
     public static final SN_BooleanPreference shooterInvert = new SN_BooleanPreference(
         "shooterInvert", false);
@@ -118,7 +118,7 @@ public final class RobotPreferences {
     public static final SN_DoublePreference shooterPresetUpperTarmacRPM = new SN_DoublePreference(
         "shooterPresetUpperTarmacRPM", 3400);
     public static final SN_DoublePreference shooterPresetUpperLaunchpadRPM = new SN_DoublePreference(
-        "shooterPresetUpperLaunchpadRPM", 6000);
+        "shooterPresetUpperLaunchpadRPM", 4700);
     public static final SN_DoublePreference shooterPresetUpperTerminalRPM = new SN_DoublePreference(
         "shooterPresetUpperTerminalRPM", 5000);
 
@@ -281,7 +281,7 @@ public final class RobotPreferences {
 
     // auto4
     public static final class OpenLoopTwoBall {
-      public static final SN_DoublePreference auto4shooterRPM = new SN_DoublePreference("auto4shooterRPM", 3100);
+      public static final SN_DoublePreference auto4shooterRPM = new SN_DoublePreference("auto4shooterRPM", 3000);
       public static final SN_BooleanPreference auto4hoodSteep = new SN_BooleanPreference("auto4hoodSteep", false);
       public static final SN_DoublePreference auto4dist1 = new SN_DoublePreference("auto4dist1", 44444);
       public static final SN_DoublePreference auto4dist2 = new SN_DoublePreference("auto4dist2", -82000);

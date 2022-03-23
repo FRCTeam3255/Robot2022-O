@@ -8,25 +8,25 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.frcteam3255.components.SN_DoubleSolenoid;
 import com.frcteam3255.preferences.SN_DoublePreference;
-import com.revrobotics.ColorSensorV3;
+// import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.I2C;
+// import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import frc.robot.RobotMap.*;
-import static frc.robot.RobotPreferences.*;
+// import static frc.robot.RobotPreferences.*;
 
 public class Intake extends SubsystemBase {
 
   // Creates the Intake motors
   private TalonFX intakeMotor;
   private SN_DoubleSolenoid intakePiston;
-  private ColorSensorV3 intakeColorSensorV3;
-  private final I2C.Port i2cPort = I2C.Port.kMXP;
+  // private ColorSensorV3 intakeColorSensorV3;
+  // private final I2C.Port i2cPort = I2C.Port.kMXP;
 
   // Initializes Intake Variables
   public Intake() {
@@ -34,7 +34,7 @@ public class Intake extends SubsystemBase {
     intakePiston = new SN_DoubleSolenoid(RobotMap.PRIMARY_PCM, PneumaticsModuleType.CTREPCM,
         IntakeMap.INTAKE_SOLENOID_PCM_A,
         IntakeMap.INTAKE_SOLENOID_PCM_B);
-    intakeColorSensorV3 = new ColorSensorV3(i2cPort);
+    // intakeColorSensorV3 = new ColorSensorV3(i2cPort);
 
     configure();
   }
@@ -80,60 +80,60 @@ public class Intake extends SubsystemBase {
   }
 
   // Returns Ball color in Intake
-  public int getRed() {
-    return intakeColorSensorV3.getRed();
-  }
+  // public int getRed() {
+  // return intakeColorSensorV3.getRed();
+  // }
 
   // Returns Ball color in Intake
-  public int getBlue() {
-    return intakeColorSensorV3.getBlue();
-  }
+  // public int getBlue() {
+  // return intakeColorSensorV3.getBlue();
+  // }
 
   // Returns Proximity of Ball in Intake
-  public int getProximity() {
-    return intakeColorSensorV3.getProximity();
-  }
+  // public int getProximity() {
+  // return intakeColorSensorV3.getProximity();
+  // }
 
   public static enum ballColor {
     red, blue, none;
   }
 
-  public ballColor getBallColor() {
-    if (isBallNearIntake()) {
-      if (getBlue() > getRed()) {
-        return ballColor.blue;
-      } else {
-        return ballColor.red;
-      }
-    } else {
-      return ballColor.none;
-    }
-  }
+  // public ballColor getBallColor() {
+  // if (isBallNearIntake()) {
+  // if (getBlue() > getRed()) {
+  // return ballColor.blue;
+  // } else {
+  // return ballColor.red;
+  // }
+  // } else {
+  // return ballColor.none;
+  // }
+  // }
 
   // Gets Ball Color/Status
-  public String ballColorString() {
-    if (getBallColor() == ballColor.blue) {
-      return "blue";
-    } else if (getBallColor() == ballColor.red) {
-      return "red";
-    } else if (getBallColor() == ballColor.none) {
-      return "none";
-    } else {
-      return "Unknown Color";
-    }
-  }
+  // public String ballColorString() {
+  // if (getBallColor() == ballColor.blue) {
+  // return "blue";
+  // } else if (getBallColor() == ballColor.red) {
+  // return "red";
+  // } else if (getBallColor() == ballColor.none) {
+  // return "none";
+  // } else {
+  // return "Unknown Color";
+  // }
+  // }
 
-  public boolean isBallNearIntake() {
-    return getProximity() > IntakePrefs.colorSensorMinProximity.getValue();
-  }
+  // public boolean isBallNearIntake() {
+  // return getProximity() > IntakePrefs.colorSensorMinProximity.getValue();
+  // }
 
-  public boolean isBallBlue() {
-    return getBallColor() == ballColor.blue;
-  }
+  // public boolean isBallBlue() {
+  // return getBallColor() == ballColor.blue;
+  // }
 
-  public boolean isBallRed() {
-    return getBallColor() == ballColor.red;
-  }
+  // public boolean isBallRed() {
+  // return getBallColor() == ballColor.red;
+  // }
 
   public boolean isAllianceBlue() {
     return DriverStation.getAlliance() == Alliance.Blue;
@@ -143,23 +143,26 @@ public class Intake extends SubsystemBase {
     return DriverStation.getAlliance() == Alliance.Red;
   }
 
-  public boolean ballColorMatchesAlliance() {
-    return (isBallBlue() && isAllianceBlue()) || (isBallRed() && isAllianceRed());
-  }
+  // public boolean ballColorMatchesAlliance() {
+  // return (isBallBlue() && isAllianceBlue()) || (isBallRed() &&
+  // isAllianceRed());
+  // }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Intake Motor", getIntakeMotorCount());
-    SmartDashboard.putNumber("IntakeMotorOutputPercent", intakeMotor.getMotorOutputPercent());
+    // SmartDashboard.putNumber("Intake Motor", getIntakeMotorCount());
+    // SmartDashboard.putNumber("IntakeMotorOutputPercent",
+    // intakeMotor.getMotorOutputPercent());
     SmartDashboard.putBoolean("Intake Solenoid", isIntakeDeployed());
 
-    SmartDashboard.putNumber("Color Sensor Blue", getBlue());
-    SmartDashboard.putNumber("Color Sensor Red", getRed());
-    SmartDashboard.putNumber("Color Sensor Prox", getProximity());
-    SmartDashboard.putBoolean("Is Ball Blue", isBallBlue());
+    // SmartDashboard.putNumber("Color Sensor Blue", getBlue());
+    // SmartDashboard.putNumber("Color Sensor Red", getRed());
+    // SmartDashboard.putNumber("Color Sensor Prox", getProximity());
+    // SmartDashboard.putBoolean("Is Ball Blue", isBallBlue());
     SmartDashboard.putBoolean("Is Alliance Blue", isAllianceBlue());
-    SmartDashboard.putBoolean("Ball Color Matches Alliance", ballColorMatchesAlliance());
-    SmartDashboard.putBoolean("Is Proximity", isBallNearIntake());
+    // SmartDashboard.putBoolean("Ball Color Matches Alliance",
+    // ballColorMatchesAlliance());
+    // SmartDashboard.putBoolean("Is Proximity", isBallNearIntake());
   }
 }

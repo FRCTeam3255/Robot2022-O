@@ -145,14 +145,16 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Shooter Left Motor", getShooterEncoderCount());
-    SmartDashboard.putNumber("Shooter Goal RPM", getGoalRPM());
-    SmartDashboard.putNumber("Shooter RPM", getShooterRPM());
-    SmartDashboard.putNumber("Shooter Error RPM", getErrorRPM());
-    SmartDashboard.putBoolean("Is Shooter Up To Speed", isShooterUpToSpeed());
+    // SmartDashboard.putNumber("Shooter Left Motor", getShooterEncoderCount());
+    // SmartDashboard.putNumber("Shooter Goal RPM", getGoalRPM());
+    // SmartDashboard.putNumber("Shooter RPM", getShooterRPM());
+    // SmartDashboard.putNumber("Shooter Error RPM", getErrorRPM());
+    // SmartDashboard.putBoolean("Is Shooter Up To Speed", isShooterUpToSpeed());
     SmartDashboard.putBoolean("Is Shooter Goal High Hub", isGoalHighHub());
-    SmartDashboard.putNumber("ShooterLeadMotorSpeed", leadMotor.getMotorOutputPercent());
-    SmartDashboard.putNumber("ShooterFollowMotorSpeed", followMotor.getMotorOutputPercent());
+    // SmartDashboard.putNumber("ShooterLeadMotorSpeed",
+    // leadMotor.getMotorOutputPercent());
+    // SmartDashboard.putNumber("ShooterFollowMotorSpeed",
+    // followMotor.getMotorOutputPercent());
 
   }
 }
