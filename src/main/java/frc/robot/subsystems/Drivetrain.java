@@ -171,6 +171,10 @@ public class Drivetrain extends SubsystemBase {
       multiplier = RobotPreferences.DrivetrainPrefs.arcadeLowSpeed.getValue();
     }
 
+    if (RobotContainer.DriverStick.btn_RBump.get()) {
+      multiplier = RobotPreferences.DrivetrainPrefs.arcadeHighSpeed.getValue();
+    }
+
     leftLeadMotor.set(ControlMode.PercentOutput, speed * multiplier, DemandType.ArbitraryFeedForward, turn);
     rightLeadMotor.set(ControlMode.PercentOutput, speed * multiplier, DemandType.ArbitraryFeedForward, -turn);
   }

@@ -32,6 +32,7 @@ public final class RobotPreferences {
     public static final SN_DoublePreference arcadeSpeed = new SN_DoublePreference("arcadeSpeed", 0.65);
     public static final SN_DoublePreference arcadeTurn = new SN_DoublePreference("arcadeTurn", .5);
     public static final SN_DoublePreference arcadeLowSpeed = new SN_DoublePreference("arcadeLowSpeed", 0.4);
+    public static final SN_DoublePreference arcadeHighSpeed = new SN_DoublePreference("arcadeHighSpeed", 1.5);
 
     public static final SN_DoublePreference driveF = new SN_DoublePreference("driveF", 0);
     public static final SN_DoublePreference driveP = new SN_DoublePreference("driveP", 1);
