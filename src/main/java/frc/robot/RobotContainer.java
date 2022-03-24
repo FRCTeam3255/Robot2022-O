@@ -7,6 +7,7 @@ package frc.robot;
 import com.frcteam3255.joystick.SN_DualActionStick;
 import com.frcteam3255.joystick.SN_F310Gamepad;
 import com.frcteam3255.joystick.SN_SwitchboardStick;
+import com.frcteam3255.utils.SN_InstantCommand;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -228,16 +229,16 @@ public class RobotContainer {
   private void configureDashboardButtons() {
     // Reset Encoders
     SmartDashboard.putData("Reset Climber Encoders",
-        new InstantCommand(sub_climber::resetClimberEncoderCount, sub_climber));
+        new SN_InstantCommand(sub_climber::resetClimberEncoderCount, true, sub_climber));
     SmartDashboard.putData("Reset Drivetrain Encoders",
-        new InstantCommand(sub_drivetrain::resetDrivetrainEncodersCount,
+        new SN_InstantCommand(sub_drivetrain::resetDrivetrainEncodersCount, true,
             sub_drivetrain));
     SmartDashboard.putData("Reset Intake Encoders",
-        new InstantCommand(sub_intake::resetIntakeEncoderCount, sub_intake));
+        new SN_InstantCommand(sub_intake::resetIntakeEncoderCount, true, sub_intake));
     SmartDashboard.putData("Reset Turret Encoders",
-        new InstantCommand(sub_turret::resetTurretEncoderCounts, sub_turret));
+        new SN_InstantCommand(sub_turret::resetTurretEncoderCounts, true, sub_turret));
     SmartDashboard.putData("Reset Shooter Encoders",
-        new InstantCommand(sub_shooter::resetShooterEncoderCounts, sub_shooter));
+        new SN_InstantCommand(sub_shooter::resetShooterEncoderCounts, true, sub_shooter));
     SmartDashboard.putData("Reset NavX Heading",
         new InstantCommand(sub_navX::resetHeading, sub_navX));
 
