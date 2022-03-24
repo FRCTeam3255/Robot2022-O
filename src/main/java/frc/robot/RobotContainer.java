@@ -137,7 +137,7 @@ public class RobotContainer {
       TurretPrefs.turretSnapBackwards);
 
   // Transfer Commands
-  private final ReverseTransfer com_reverseTransfer = new ReverseTransfer(sub_transfer);
+  private final ReverseTransfer com_reverseTransfer = new ReverseTransfer(sub_transfer, sub_intake);
 
   // Intake Commands
   private final CollectCargo com_collect = new CollectCargo(sub_intake,
