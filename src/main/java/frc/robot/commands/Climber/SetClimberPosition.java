@@ -28,7 +28,6 @@ public class SetClimberPosition extends CommandBase {
   public void initialize() {
     loopsInTol = 0;
     climber.setClimberPosition(position);
-    climber.unlockClimber();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -46,7 +45,6 @@ public class SetClimberPosition extends CommandBase {
   public void end(boolean interrupted) {
     loopsInTol = 0;
     climber.setClimberSpeed(0);
-    climber.lockClimber();
 
   }
 

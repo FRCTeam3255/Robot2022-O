@@ -29,8 +29,6 @@ public final class RobotMap {
 
     public static final int BOTTOM_SAFETY_MAG_SWITCH_DIO = 0;
 
-    public static final int LOCK_PISTON_PCM_A = 0;
-    public static final int LOCK_PISTON_PCM_B = 1;
     public static final int PIVOT_PISTON_PCM_A = 2;
     public static final int PIVOT_PISTON_PCM_B = 3;
     public static final int STATIONARY_CLIMB_HOOKS_PISTON_A = 4;
@@ -51,8 +49,12 @@ public final class RobotMap {
   }
 
   public final class HoodMap {
-    public static final int HOOD_SOLENOID_STEEP_ANGLE_PCM_A = 4;
-    public static final int HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B = 5;
+    public static final int LONG_HOOD_SOLENOID_STEEP_ANGLE_PCM_A = 4;
+    public static final int LONG_HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B = 5;
+
+    // Climber PCM
+    public static final int SHORT_HOOD_SOLENOID_STEEP_ANGLE_PCM_A = 0;
+    public static final int SHORT_HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B = 1;
   }
 
   public final class IntakeMap {

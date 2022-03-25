@@ -22,7 +22,6 @@ public class ResetClimber extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    climber.unlockClimber();
     climber.pivotAngled();
   }
 
@@ -36,7 +35,6 @@ public class ResetClimber extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     climber.setClimberSpeed(0);
-    climber.lockClimber();
   }
 
   // Returns true when the command should end.

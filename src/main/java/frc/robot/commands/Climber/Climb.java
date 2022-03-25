@@ -22,7 +22,6 @@ public class Climb extends CommandBase {
   @Override
   public void initialize() {
     // Climber brake disengages when we press the button assigned to the climber
-    climber.unlockClimber();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,8 +38,6 @@ public class Climb extends CommandBase {
   public void end(boolean interrupted) {
     // Stops Climber when joystick button is released and applies brake
     climber.setClimberSpeed(0);
-    climber.lockClimber();
-
   }
 
   // Returns true when the command should end.

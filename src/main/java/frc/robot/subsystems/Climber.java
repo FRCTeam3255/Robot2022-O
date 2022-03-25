@@ -24,7 +24,6 @@ public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
   private TalonFX climbMotor;
   private DigitalInput climberBottomSafetySwitch;
-  private SN_DoubleSolenoid climberLockPiston;
   private SN_DoubleSolenoid climberPivotPiston;
   // Somebody can rename this solenoid if they can think of a better name
   // ok
@@ -34,10 +33,6 @@ public class Climber extends SubsystemBase {
 
     climberBottomSafetySwitch = new DigitalInput(ClimberMap.BOTTOM_SAFETY_MAG_SWITCH_DIO);
     climbMotor = new TalonFX(ClimberMap.CLIMBER_MOTOR_CAN);
-
-    climberLockPiston = new SN_DoubleSolenoid(RobotMap.CLIMBER_PCM, PneumaticsModuleType.CTREPCM,
-        ClimberMap.LOCK_PISTON_PCM_A,
-        ClimberMap.LOCK_PISTON_PCM_B);
 
     climberHookPiston = new SN_DoubleSolenoid(RobotMap.CLIMBER_PCM, PneumaticsModuleType.CTREPCM,
         ClimberMap.STATIONARY_CLIMB_HOOKS_PISTON_A,
@@ -61,7 +56,6 @@ public class Climber extends SubsystemBase {
     climbMotor.setNeutralMode(NeutralMode.Brake);
     climbMotor.setInverted(true);
 
-    climberLockPiston.setInverted(ClimberPrefs.climberLockPistonInvert.getValue());
     climberPivotPiston.setInverted(ClimberPrefs.climberPivotPistonInvert.getValue());
     climberHookPiston.setInverted(ClimberPrefs.climberHookPistonInvert.getValue());
   }
@@ -98,19 +92,6 @@ public class Climber extends SubsystemBase {
 
   public double getClimberEncoderCount() {
     return climbMotor.getSelectedSensorPosition();
-  }
-
-  public boolean isClimberLocked() {
-    return climberLockPiston.isDeployed();
-  }
-
-  // solenoid commands
-  public void lockClimber() {
-    climberLockPiston.setDeployed();
-  }
-
-  public void unlockClimber() {
-    climberLockPiston.setRetracted();
   }
 
   // Piston Deploy/Retract
@@ -155,7 +136,6 @@ public class Climber extends SubsystemBase {
     // SmartDashboard.putNumber("Climber Closed Loop Error",
     // getClimberClosedLoopError());
     SmartDashboard.putBoolean("Is Climber At Bottom", isClimberAtBottom());
-    SmartDashboard.putBoolean("Is Climber Locked", isClimberLocked());
     SmartDashboard.putBoolean("Is Climber Angled", isClimberAngled());
     SmartDashboard.putBoolean("Is Climber Hooked", isHookDeployed());
     // SmartDashboard.putBoolean("Is Climber Error Acceptable",

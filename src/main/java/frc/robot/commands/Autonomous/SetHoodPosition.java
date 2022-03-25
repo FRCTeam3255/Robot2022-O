@@ -25,9 +25,9 @@ public class SetHoodPosition extends InstantCommand {
   @Override
   public void initialize() {
     if (hoodSteep.getValue()) {
-      hood.shallowHood();
+      hood.hoodZeroTilt();
     } else {
-      hood.steepenHood();
+      hood.hoodHighTilt();
     }
   }
 }

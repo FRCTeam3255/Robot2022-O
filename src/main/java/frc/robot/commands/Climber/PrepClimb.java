@@ -7,7 +7,6 @@ package frc.robot.commands.Climber;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotPreferences;
-import frc.robot.commands.Hood.ShallowHood;
 import frc.robot.commands.Turret.SetTurretPosition;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Hood;
@@ -25,7 +24,7 @@ public class PrepClimb extends SequentialCommandGroup {
         // Zero Turret
         new SetTurretPosition(sub_turret, RobotPreferences.zeroDoublePref),
         // Retract hood
-        new ShallowHood(sub_hood),
+        new InstantCommand(sub_hood::hoodZeroTilt, sub_hood),
         // Deploy stationary hooks
         new InstantCommand(sub_climber::hookUp, sub_climber),
         // Angle climber

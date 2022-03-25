@@ -9,53 +9,59 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMap;
 import frc.robot.RobotMap.*;
 
 public class Hood extends SubsystemBase {
   /** Creates a new Hood. */
 
   // Creates Hood Variables
-  private DoubleSolenoid angleHoodSolenoid;
+  private DoubleSolenoid longHoodPiston;
+  private DoubleSolenoid shortHoodPiston;
   private DoubleSolenoid.Value shallowAngleHoodValue = Value.kReverse;
   private DoubleSolenoid.Value steepAngleHoodValue = Value.kForward;
 
   // Initializes Hood Variables
   public Hood() {
-    angleHoodSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,
-        HoodMap.HOOD_SOLENOID_STEEP_ANGLE_PCM_A,
-        HoodMap.HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B);
+    longHoodPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,
+        HoodMap.LONG_HOOD_SOLENOID_STEEP_ANGLE_PCM_A,
+        HoodMap.LONG_HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B);
+    shortHoodPiston = new DoubleSolenoid(RobotMap.CLIMBER_PCM, PneumaticsModuleType.CTREPCM,
+        HoodMap.SHORT_HOOD_SOLENOID_STEEP_ANGLE_PCM_A,
+        HoodMap.SHORT_HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B);
     // configure is not needed since this is a solenoid
-  }
-
-  // Method checks if solenoid is extended
-  public boolean isHoodSteep() {
-    Value hoodSolenoidStatus = angleHoodSolenoid.get();
-    boolean isHoodSteep = false;
-
-    if (hoodSolenoidStatus == DoubleSolenoid.Value.kForward) {
-      isHoodSteep = true;
-    } else {
-      isHoodSteep = false;
-    }
-    return isHoodSteep;
   }
 
   // solenoid methods
   // Sets hood angle to the given value
 
-  public void steepenHood() {
-    angleHoodSolenoid.set(steepAngleHoodValue);
-
+  // Both are on
+  public void hoodHighTilt() {
+    longHoodPiston.set(steepAngleHoodValue);
+    shortHoodPiston.set(steepAngleHoodValue);
   }
 
-  public void shallowHood() {
-    angleHoodSolenoid.set(shallowAngleHoodValue);
+  // Old is on, new is off
+  public void hoodMediumTilt() {
+    longHoodPiston.set(steepAngleHoodValue);
+    shortHoodPiston.set(shallowAngleHoodValue);
+  }
+
+  // Old is off, new is on
+  public void hoodLowTilt() {
+    longHoodPiston.set(shallowAngleHoodValue);
+    shortHoodPiston.set(steepAngleHoodValue);
+  }
+
+  // Both are off
+  public void hoodZeroTilt() {
+    longHoodPiston.set(shallowAngleHoodValue);
+    shortHoodPiston.set(shallowAngleHoodValue);
   }
 
   // Method constantly runs
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putBoolean("Hood Solenoid", isHoodSteep());
   }
 }
