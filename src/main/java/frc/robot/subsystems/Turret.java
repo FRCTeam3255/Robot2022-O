@@ -12,6 +12,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.RobotPreferences.*;
+
+import frc.robot.RobotContainer;
 import frc.robot.RobotMap.*;
 
 public class Turret extends SubsystemBase {
@@ -98,11 +100,13 @@ public class Turret extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // SmartDashboard.putNumber("Turret Encoder", getTurretMotorEncoderCounts());
-    // SmartDashboard.putNumber("Turret Angle", getTurretAngle());
-    // SmartDashboard.putNumber("Turret Closed Loop Error",
-    // getTurretClosedLoopErrorDegrees());
-    // SmartDashboard.putNumber("Turret Motor Speed",
-    // turretMotor.getMotorOutputPercent());
+    if (RobotContainer.switchBoard.btn_7.get()) {
+      SmartDashboard.putNumber("Turret Encoder", getTurretMotorEncoderCounts());
+      SmartDashboard.putNumber("Turret Angle", getTurretAngle());
+      SmartDashboard.putNumber("Turret Closed Loop Error",
+          getTurretClosedLoopErrorDegrees());
+      SmartDashboard.putNumber("Turret Motor Speed",
+          turretMotor.getMotorOutputPercent());
+    }
   }
 }

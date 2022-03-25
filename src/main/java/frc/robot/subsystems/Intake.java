@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 import frc.robot.RobotMap;
 import frc.robot.RobotMap.*;
 // import static frc.robot.RobotPreferences.*;
@@ -151,18 +152,22 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // SmartDashboard.putNumber("Intake Motor", getIntakeMotorCount());
-    // SmartDashboard.putNumber("IntakeMotorOutputPercent",
-    // intakeMotor.getMotorOutputPercent());
+    if (RobotContainer.switchBoard.btn_7.get()) {
+      SmartDashboard.putNumber("Intake Motor", getIntakeMotorCount());
+      SmartDashboard.putNumber("IntakeMotorOutputPercent",
+          intakeMotor.getMotorOutputPercent());
+      // SmartDashboard.putBoolean("Ball Color Matches Alliance",
+      // ballColorMatchesAlliance());
+      // SmartDashboard.putBoolean("Is Proximity", isBallNearIntake());
+      // SmartDashboard.putNumber("Color Sensor Blue", getBlue());
+      // SmartDashboard.putNumber("Color Sensor Red", getRed());
+      // SmartDashboard.putNumber("Color Sensor Prox", getProximity());
+      // SmartDashboard.putBoolean("Is Ball Blue", isBallBlue());
+    }
+    ;
+
     SmartDashboard.putBoolean("Intake Solenoid", isIntakeDeployed());
 
-    // SmartDashboard.putNumber("Color Sensor Blue", getBlue());
-    // SmartDashboard.putNumber("Color Sensor Red", getRed());
-    // SmartDashboard.putNumber("Color Sensor Prox", getProximity());
-    // SmartDashboard.putBoolean("Is Ball Blue", isBallBlue());
     SmartDashboard.putBoolean("Is Alliance Blue", isAllianceBlue());
-    // SmartDashboard.putBoolean("Ball Color Matches Alliance",
-    // ballColorMatchesAlliance());
-    // SmartDashboard.putBoolean("Is Proximity", isBallNearIntake());
   }
 }

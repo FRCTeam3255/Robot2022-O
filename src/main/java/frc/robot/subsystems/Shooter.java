@@ -12,6 +12,7 @@ import com.frcteam3255.utils.SN_Math;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 import frc.robot.RobotMap.*;
 import static frc.robot.RobotPreferences.*;
 
@@ -145,16 +146,19 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // SmartDashboard.putNumber("Shooter Left Motor", getShooterEncoderCount());
-    // SmartDashboard.putNumber("Shooter Goal RPM", getGoalRPM());
-    // SmartDashboard.putNumber("Shooter RPM", getShooterRPM());
-    // SmartDashboard.putNumber("Shooter Error RPM", getErrorRPM());
-    // SmartDashboard.putBoolean("Is Shooter Up To Speed", isShooterUpToSpeed());
+
+    if (RobotContainer.switchBoard.btn_7.get()) {
+      SmartDashboard.putNumber("Shooter Left Motor", getShooterEncoderCount());
+      // SmartDashboard.putNumber("Shooter Goal RPM", getGoalRPM());
+      // SmartDashboard.putNumber("Shooter RPM", getShooterRPM());
+      // SmartDashboard.putNumber("Shooter Error RPM", getErrorRPM());
+      // SmartDashboard.putBoolean("Is Shooter Up To Speed", isShooterUpToSpeed());
+      // SmartDashboard.putNumber("ShooterLeadMotorSpeed",
+      // leadMotor.getMotorOutputPercent());
+      // SmartDashboard.putNumber("ShooterFollowMotorSpeed",
+      // followMotor.getMotorOutputPercent());
+    }
     SmartDashboard.putBoolean("Is Shooter Goal High Hub", isGoalHighHub());
-    // SmartDashboard.putNumber("ShooterLeadMotorSpeed",
-    // leadMotor.getMotorOutputPercent());
-    // SmartDashboard.putNumber("ShooterFollowMotorSpeed",
-    // followMotor.getMotorOutputPercent());
 
   }
 }

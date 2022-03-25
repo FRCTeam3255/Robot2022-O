@@ -132,15 +132,15 @@ public class Climber extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // SmartDashboard.putNumber("Climber Encoder Counts", getClimberEncoderCount());
-    // SmartDashboard.putNumber("Climber Closed Loop Error",
-    // getClimberClosedLoopError());
+    if (RobotContainer.switchBoard.btn_7.get()) {
+      SmartDashboard.putNumber("Climber Encoder Counts", getClimberEncoderCount());
+      SmartDashboard.putNumber("Climber Closed Loop Error", getClimberClosedLoopError());
+      SmartDashboard.putBoolean("Is Climber Error Acceptable", isClimberClosedLoopErrorAcceptable());
+      SmartDashboard.putNumber("Climber Motor Speed", climbMotor.getMotorOutputPercent());
+    }
+
     SmartDashboard.putBoolean("Is Climber At Bottom", isClimberAtBottom());
     SmartDashboard.putBoolean("Is Climber Angled", isClimberAngled());
     SmartDashboard.putBoolean("Is Climber Hooked", isHookDeployed());
-    // SmartDashboard.putBoolean("Is Climber Error Acceptable",
-    // isClimberClosedLoopErrorAcceptable());
-    // SmartDashboard.putNumber("Climber Motor Speed",
-    // climbMotor.getMotorOutputPercent());
   }
 }

@@ -15,6 +15,7 @@ import com.frcteam3255.preferences.SN_DoublePreference;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 import frc.robot.RobotMap.*;
 
 import static frc.robot.RobotPreferences.*;
@@ -116,12 +117,14 @@ public class Transfer extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putBoolean("Top Ball Collected", isTopBallCollected());
     SmartDashboard.putBoolean("Bottom Ball Collected", isBottomBallCollected());
-    // SmartDashboard.getNumber("Top Belt Motor Speed",
-    // topBeltMotor.getMotorOutputPercent());
-    // SmartDashboard.getNumber("Bottom Belt Motor Speed",
-    // bottomBeltMotor.getMotorOutputPercent());
-    // SmartDashboard.getNumber("Entrance Belt Motor Speed",
-    // entranceBeltMotor.getMotorOutputPercent());
+    if (RobotContainer.switchBoard.btn_7.get()) {
+      SmartDashboard.getNumber("Top Belt Motor Speed",
+          topBeltMotor.getMotorOutputPercent());
+      SmartDashboard.getNumber("Bottom Belt Motor Speed",
+          bottomBeltMotor.getMotorOutputPercent());
+      SmartDashboard.getNumber("Entrance Belt Motor Speed",
+          entranceBeltMotor.getMotorOutputPercent());
+    }
 
   }
 }
