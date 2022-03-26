@@ -23,12 +23,19 @@ public class Vision extends SubsystemBase {
     limelight = new SN_Limelight();
   }
 
-  public double getIdealUpperHubRPM() {
-    double a = 10.998;
-    double b = 34.0879;
-    double c = 3600;
+  // public double getIdealUpperHubRPM() {
+  // double a = 10.998;
+  // double b = 34.0879;
+  // double c = 3600;
+  // double x = limelight.getOffsetY();
+  // return (a * (x * x)) + (b * x) + c;
+  // }
+
+  public double getIdealMediumHoodRPM() {
+    double a = 3338.9172;
+    double b = 0.9929;
     double x = limelight.getOffsetY();
-    return (a * (x * x)) + (b * x) + c;
+    return a * Math.pow(b, x);
   }
 
   public double getIdealLowerHubRPM() {
@@ -50,7 +57,7 @@ public class Vision extends SubsystemBase {
     SmartDashboard.putNumber("limelight x error", limelight.getOffsetX());
     SmartDashboard.putNumber("limelight y error", limelight.getOffsetY());
     SmartDashboard.putNumber("limelight target area", limelight.getTargetArea());
-    SmartDashboard.putNumber("limelight Ideal Upper Hub RPM", getIdealUpperHubRPM());
+    SmartDashboard.putNumber("limelight Ideal Upper Hub RPM", getIdealMediumHoodRPM());
     SmartDashboard.putNumber("limelight Idead Lower Hub RPM", getIdealLowerHubRPM());
 
     if (RobotController.getUserButton()) {

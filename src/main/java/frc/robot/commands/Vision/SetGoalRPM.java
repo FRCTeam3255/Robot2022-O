@@ -27,7 +27,7 @@ public class SetGoalRPM extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setGoalRPM(vision.getIdealUpperHubRPM());
+    shooter.setGoalRPM(vision.getIdealMediumHoodRPM());
   }
 
   // Called once the command ends or is interrupted.

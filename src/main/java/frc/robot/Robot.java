@@ -68,11 +68,13 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods. This must be called from the
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
+
     if (RobotContainer.switchBoard.btn_2.get()) {
       SN_Preferences.usePreferences();
     } else {
       SN_Preferences.useDefaults();
     }
+
     SmartDashboard.putBoolean("Using Code Defaults for Prefs", SN_Preferences.isUsingDefaults());
     CommandScheduler.getInstance().run();
   }

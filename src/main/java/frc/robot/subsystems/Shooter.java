@@ -150,9 +150,9 @@ public class Shooter extends SubsystemBase {
     if (RobotContainer.switchBoard.btn_7.get()) {
       SmartDashboard.putNumber("Shooter Left Motor", getShooterEncoderCount());
       // SmartDashboard.putNumber("Shooter Goal RPM", getGoalRPM());
-      // SmartDashboard.putNumber("Shooter RPM", getShooterRPM());
+      SmartDashboard.putNumber("Shooter RPM", getShooterRPM());
       // SmartDashboard.putNumber("Shooter Error RPM", getErrorRPM());
-      // SmartDashboard.putBoolean("Is Shooter Up To Speed", isShooterUpToSpeed());
+      SmartDashboard.putBoolean("Is Shooter Up To Speed", isShooterUpToSpeed());
       // SmartDashboard.putNumber("ShooterLeadMotorSpeed",
       // leadMotor.getMotorOutputPercent());
       // SmartDashboard.putNumber("ShooterFollowMotorSpeed",
