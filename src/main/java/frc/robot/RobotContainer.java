@@ -133,9 +133,10 @@ public class RobotContainer {
   // ShooterPrefs.shooterPresetLowerTerminalRPM,
   // HoodPrefs.hoodPresetLowerTerminalSteep);
 
-  private final SetTurretPosition com_presetForward = new SetTurretPosition(sub_turret, TurretPrefs.turretSnapForwards);
-  private final SetTurretPosition com_presetBackward = new SetTurretPosition(sub_turret,
-      TurretPrefs.turretSnapBackwards);
+  private final SetTurretPosition com_presetAwayIntake = new SetTurretPosition(sub_turret,
+      TurretPrefs.turretSnapAwayIntake);
+  private final SetTurretPosition com_presetToIntake = new SetTurretPosition(sub_turret,
+      TurretPrefs.turretSnapToIntake);
 
   // Transfer Commands
   private final ReverseTransfer com_reverseTransfer = new ReverseTransfer(sub_transfer, sub_intake);
@@ -218,8 +219,9 @@ public class RobotContainer {
     coDriverStick.POV_South.whenPressed(new SetTurretPosition(sub_turret, TurretPrefs.turretMaxAngleDegrees));
     coDriverStick.POV_West.whenPressed(com_presetTarmacUpper);
 
-    coDriverStick.btn_RStick.whenPressed(com_presetBackward);
-    coDriverStick.btn_LStick.whenPressed(com_presetForward);
+    // Foward = Facing Intake
+    coDriverStick.btn_RStick.whenPressed(com_presetToIntake);
+    coDriverStick.btn_LStick.whenPressed(com_presetAwayIntake);
   }
 
   /**

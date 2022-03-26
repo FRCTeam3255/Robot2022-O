@@ -100,6 +100,7 @@ public class Turret extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+
     if (RobotContainer.switchBoard.btn_7.get()) {
       SmartDashboard.putNumber("Turret Encoder", getTurretMotorEncoderCounts());
       SmartDashboard.putNumber("Turret Angle", getTurretAngle());
