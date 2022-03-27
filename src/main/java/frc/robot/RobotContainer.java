@@ -126,12 +126,11 @@ public class RobotContainer {
   private final PresetShooter com_presetLaunchpadUpper = new PresetShooter(sub_shooter, sub_hood,
       ShooterPrefs.shooterPresetUpperLaunchpadRPM, HoodPrefs.hoodPresetUpperLaunchpadSteep,
       ShooterPrefs.shooterPresetLowerLaunchpadRPM, HoodPrefs.hoodPresetLowerLaunchpadSteep);
-  // private final PresetShooter com_presetTerminalUpper = new
-  // PresetShooter(sub_shooter, sub_hood,
-  // ShooterPrefs.shooterPresetUpperTerminalRPM,
-  // HoodPrefs.hoodPresetUpperTerminalSteep,
-  // ShooterPrefs.shooterPresetLowerTerminalRPM,
-  // HoodPrefs.hoodPresetLowerTerminalSteep);
+  private final PresetShooter com_presetTerminalUpper = new PresetShooter(sub_shooter, sub_hood,
+      ShooterPrefs.shooterPresetUpperTerminalRPM,
+      HoodPrefs.hoodPresetUpperTerminalSteep,
+      ShooterPrefs.shooterPresetLowerTerminalRPM,
+      HoodPrefs.hoodPresetLowerTerminalSteep);
 
   private final SetTurretPosition com_presetAwayIntake = new SetTurretPosition(sub_turret,
       TurretPrefs.turretSnapAwayIntake);
@@ -214,10 +213,18 @@ public class RobotContainer {
     coDriverStick.btn_Back.whenPressed(com_retractIntake);
 
     coDriverStick.POV_North.whenPressed(com_presetFender);
-    coDriverStick.POV_East.whenPressed(com_presetTarmacUpper);
+    coDriverStick.POV_North.whenPressed(new InstantCommand(sub_hood::hoodZeroTilt, sub_hood));
+
+    coDriverStick.POV_East.whenPressed(com_presetTerminalUpper);
+    coDriverStick.POV_East.whenPressed(new InstantCommand(sub_hood::hoodHighTilt, sub_hood));
+
     coDriverStick.POV_South.whenPressed(com_presetLaunchpadUpper);
-    coDriverStick.POV_South.whenPressed(new SetTurretPosition(sub_turret, TurretPrefs.turretMaxAngleDegrees));
+    coDriverStick.POV_South.whenPressed(new InstantCommand(sub_hood::hoodHighTilt, sub_hood));
+    // coDriverStick.POV_South.whenPressed(new SetTurretPosition(sub_turret,
+    // TurretPrefs.turretMaxAngleDegrees));
+
     coDriverStick.POV_West.whenPressed(com_presetTarmacUpper);
+    coDriverStick.POV_West.whenPressed(new InstantCommand(sub_hood::hoodMediumTilt, sub_hood));
 
     // Foward = Facing Intake
     coDriverStick.btn_RStick.whenPressed(com_presetToIntake);

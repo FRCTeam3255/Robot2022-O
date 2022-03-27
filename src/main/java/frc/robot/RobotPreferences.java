@@ -5,6 +5,7 @@ import com.frcteam3255.preferences.SN_DoublePreference;
 import com.frcteam3255.preferences.SN_IntPreference;
 import com.frcteam3255.preferences.SN_ZeroDoublePreference;
 import com.frcteam3255.preferences.SN_ZeroIntPreference;
+import com.frcteam3255.utils.SN_Debug;
 
 public final class RobotPreferences {
 
@@ -115,13 +116,13 @@ public final class RobotPreferences {
     public static final SN_DoublePreference shooterD = new SN_DoublePreference("shooterD", 0);
 
     public static final SN_DoublePreference shooterPresetUpperFenderRPM = new SN_DoublePreference(
-        "shooterPresetUpperFenderRPM", 3100);
+        "shooterPresetUpperFenderRPM", 3000);
     public static final SN_DoublePreference shooterPresetUpperTarmacRPM = new SN_DoublePreference(
-        "shooterPresetUpperTarmacRPM", 3400);
+        "shooterPresetUpperTarmacRPM", 3255);
     public static final SN_DoublePreference shooterPresetUpperLaunchpadRPM = new SN_DoublePreference(
-        "shooterPresetUpperLaunchpadRPM", 4700);
+        "shooterPresetUpperLaunchpadRPM", 3925);
     public static final SN_DoublePreference shooterPresetUpperTerminalRPM = new SN_DoublePreference(
-        "shooterPresetUpperTerminalRPM", 5000);
+        "shooterPresetUpperTerminalRPM", 4550);
 
     public static final SN_DoublePreference shooterPresetLowerFenderRPM = new SN_DoublePreference(
         "shooterPresetLowerFenderRPM", 2000);
@@ -145,6 +146,9 @@ public final class RobotPreferences {
   }
 
   public static final class TurretPrefs {
+
+    public static final SN_DoublePreference turretTwoBallAutoDegrees = new SN_DoublePreference(
+        "turretTwoBallAutoDegrees", 84);
     public static final SN_DoublePreference turretMaxAngleDegrees = new SN_DoublePreference("turretMaxAngleDegrees",
 
         110);
@@ -158,8 +162,7 @@ public final class RobotPreferences {
     public static final SN_DoublePreference turretEncoderCountsPerDegrees = new SN_DoublePreference(
         "turretEncoderCountsPerDegrees", 370);
     public static final SN_DoublePreference turretMaxAllowableErrorDegrees = new SN_DoublePreference(
-        "turretMaxAllowableErrorDegrees",
-        1);
+        "turretMaxAllowableErrorDegrees", 3);
     public static final SN_DoublePreference turretClosedLoopPeakOutput = new SN_DoublePreference(
         "turretClosedLoopPeakOutput", 1);
     public static final SN_DoublePreference turretF = new SN_DoublePreference("turretF", 0);
@@ -283,7 +286,7 @@ public final class RobotPreferences {
 
     // auto4
     public static final class OpenLoopTwoBall {
-      public static final SN_DoublePreference auto4shooterRPM = new SN_DoublePreference("auto4shooterRPM", 3000);
+      public static final SN_DoublePreference auto4shooterRPM = new SN_DoublePreference("auto4shooterRPM", 3255);
       public static final SN_BooleanPreference auto4hoodSteep = new SN_BooleanPreference("auto4hoodSteep", false);
       public static final SN_DoublePreference auto4dist1 = new SN_DoublePreference("auto4dist1", 44444);
       public static final SN_DoublePreference auto4dist2 = new SN_DoublePreference("auto4dist2", -82000);

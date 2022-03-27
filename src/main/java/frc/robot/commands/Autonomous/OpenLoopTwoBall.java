@@ -7,12 +7,14 @@ package frc.robot.commands.Autonomous;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.RobotPreferences;
 import frc.robot.RobotPreferences.AutoPrefs;
 import frc.robot.RobotPreferences.DrivetrainPrefs;
 import frc.robot.commands.Intake.CollectCargo;
 import frc.robot.commands.Shooter.PresetShooter;
 import frc.robot.commands.Shooter.SpinFlywheelGoalRPM;
 import frc.robot.commands.Transfer.PushCargoSimple;
+import frc.robot.commands.Turret.SetTurretPosition;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hood;
@@ -50,7 +52,7 @@ public class OpenLoopTwoBall extends SequentialCommandGroup {
     addCommands(
         new InstantCommand(drivetrain::resetDrivetrainEncodersCount),
         new InstantCommand(shooter::setGoalUpperHub),
-        new InstantCommand(drivetrain::setCoastMode),
+        new InstantCommand(drivetrain::setBrakeMode),
         new InstantCommand(climber::pivotAngled),
         new PresetShooter(shooter, hood, AutoPrefs.OpenLoopTwoBall.auto4shooterRPM,
             AutoPrefs.OpenLoopTwoBall.auto4hoodSteep, null, null),
@@ -58,11 +60,12 @@ public class OpenLoopTwoBall extends SequentialCommandGroup {
         parallel(
             new DriveDistanceOpenLoop(drivetrain, AutoPrefs.OpenLoopTwoBall.auto4dist1,
                 DrivetrainPrefs.driveOpenLoopSpeedForward),
+            new InstantCommand(hood::hoodMediumTilt),
             (new CollectCargo(intake, transfer)).perpetually().until(transfer::isBottomBallCollected)),
-        new DriveDistanceOpenLoop(drivetrain, AutoPrefs.OpenLoopTwoBall.auto4dist2,
-            DrivetrainPrefs.driveOpenLoopSpeedReverse),
-        new WaitCommand(2),
-        new InstantCommand(drivetrain::configure),
+        // new DriveDistanceOpenLoop(drivetrain, AutoPrefs.OpenLoopTwoBall.auto4dist2,
+        // DrivetrainPrefs.driveOpenLoopSpeedReverse),
+        // new WaitCommand(2),
+        new SetTurretPosition(turret, RobotPreferences.TurretPrefs.turretTwoBallAutoDegrees).withTimeout(0.5),
         parallel(new SpinFlywheelGoalRPM(shooter), new PushCargoSimple(shooter, transfer)).withTimeout(8)
 
     );
