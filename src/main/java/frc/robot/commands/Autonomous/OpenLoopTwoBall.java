@@ -53,7 +53,6 @@ public class OpenLoopTwoBall extends SequentialCommandGroup {
         new InstantCommand(drivetrain::resetDrivetrainEncodersCount),
         new InstantCommand(shooter::setGoalUpperHub),
         new InstantCommand(drivetrain::setBrakeMode),
-        new InstantCommand(climber::pivotAngled),
         new PresetShooter(shooter, hood, AutoPrefs.OpenLoopTwoBall.auto4shooterRPM,
             AutoPrefs.OpenLoopTwoBall.auto4hoodSteep, null, null),
 
