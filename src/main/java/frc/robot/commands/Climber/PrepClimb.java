@@ -22,7 +22,7 @@ public class PrepClimb extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
         // Zero Turret
-        new SetTurretPosition(sub_turret, RobotPreferences.TurretPrefs.turretSnapToIntake),
+        new SetTurretPosition(sub_turret, RobotPreferences.TurretPrefs.turretSnapAwayIntake),
         // Retract hood
         new InstantCommand(sub_hood::hoodZeroTilt, sub_hood),
         // Deploy stationary hooks
