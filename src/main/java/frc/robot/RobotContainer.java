@@ -25,6 +25,7 @@ import frc.robot.RobotPreferences.HoodPrefs;
 import frc.robot.RobotPreferences.ShooterPrefs;
 import frc.robot.RobotPreferences.TurretPrefs;
 import frc.robot.commands.ConfigureSubsystems;
+import frc.robot.commands.Autonomous.AutoThreeCargo;
 // import frc.robot.commands.Autonomous.DriveDistanceOpenLoop;
 import frc.robot.commands.Autonomous.OpenLoopTwoBall;
 import frc.robot.commands.Climber.*;
@@ -303,7 +304,12 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new OpenLoopTwoBall(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake,
-        sub_climber);
+    if (switchBoard.btn_1.get()) {
+      return new AutoThreeCargo(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake,
+          sub_climber);
+    } else {
+      return new OpenLoopTwoBall(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake,
+          sub_climber);
+    }
   }
 }

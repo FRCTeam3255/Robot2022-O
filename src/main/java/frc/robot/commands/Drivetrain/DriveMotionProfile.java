@@ -35,6 +35,7 @@ public class DriveMotionProfile extends CommandBase {
     // documentation
     SN_MotionProfile.setSensorUnitsPerTick(RobotPreferences.DrivetrainPrefs.driveEncoderCountsPerFoot.getValue());
     motionProfile.reload();
+    drivetrain.resetDrivetrainEncodersCount();
     drivetrain.startMotionProfile(motionProfile.pointsLeft, motionProfile.pointsRight);
   }
 
