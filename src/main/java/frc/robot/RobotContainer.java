@@ -96,6 +96,7 @@ public class RobotContainer {
   // HoldTurretPosition(sub_turret, sub_navX,
   // RobotPreferences.TurretPrefs.turretPresetPos1);
   private final VisionAimTurret com_visionAimTurret = new VisionAimTurret(sub_turret, sub_shooter, sub_vision);
+  private final VisionSpinTurret com_visionSpinTurret = new VisionSpinTurret(sub_turret, sub_shooter, sub_vision);
   // private final VisionNavXAimTurret com_visionHoldAimTurret = new
   // VisionNavXAimTurret(sub_turret, sub_vision,
   // sub_navX);
@@ -205,11 +206,15 @@ public class RobotContainer {
     coDriverStick.btn_RBump.whenPressed(com_spinFlywheelGoalRPM);
     coDriverStick.btn_LBump.whileHeld(com_moveTurret);
 
+    // Limelight Commands
     coDriverStick.btn_A.whileHeld(com_visionAimTurret);
+    coDriverStick.btn_A.whenPressed(new InstantCommand(sub_hood::hoodMediumTilt, sub_hood));
     coDriverStick.btn_B.whileHeld(com_reverseTransfer);
-    coDriverStick.btn_X.whileHeld(com_setGoalRPM);
-    coDriverStick.btn_Y.whenPressed(com_setUpperHubGoal);
-    coDriverStick.btn_Y.whenPressed(new InstantCommand(sub_hood::hoodHighTilt, sub_hood));
+    // Just Setting Angle (X Axis)
+    coDriverStick.btn_X.whileHeld(com_visionSpinTurret);
+    // Just Setting RPM (Y Axis)
+    coDriverStick.btn_Y.whenPressed(com_setGoalRPM);
+    coDriverStick.btn_Y.whenPressed(new InstantCommand(sub_hood::hoodMediumTilt, sub_hood));
 
     coDriverStick.btn_Back.whenPressed(com_retractIntake);
 
