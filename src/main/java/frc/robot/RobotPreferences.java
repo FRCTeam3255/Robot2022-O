@@ -227,7 +227,7 @@ public final class RobotPreferences {
   public static final class ClimberPrefs {
     public static final SN_DoublePreference climberMotorSpeed = new SN_DoublePreference("climberMotorSpeed", 0.5);
     public static final SN_DoublePreference climberMaxEncoderCountPerpendicular = new SN_DoublePreference(
-        "climberMaxEncoderCount", 284000);
+        "climberMaxEncoderCount", 240000);
     public static final SN_DoublePreference climberMaxEncoderCountAngled = new SN_DoublePreference(
         "climberMaxEncoderCountPivoted", 240000);
 

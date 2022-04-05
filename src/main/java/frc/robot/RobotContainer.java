@@ -54,7 +54,7 @@ public class RobotContainer {
   private final Turret sub_turret = new Turret();
   private final Intake sub_intake = new Intake();
   private final Shooter sub_shooter = new Shooter();
-  private final Climber sub_climber = new Climber();
+  public final Climber sub_climber = new Climber();
   private final Transfer sub_transfer = new Transfer();
   private final NavX sub_navX = new NavX();
   private final Vision sub_vision = new Vision();
@@ -161,7 +161,7 @@ public class RobotContainer {
   private final InstantCommand com_hookClimberDown = new InstantCommand(sub_climber::hookDown);
   private final RunSpool com_runSpool = new RunSpool(sub_climber);
 
-  private final PrepClimb com_prepClimb = new PrepClimb(sub_turret, sub_hood, sub_climber);
+  private final PrepClimb com_prepClimb = new PrepClimb(sub_turret, sub_hood, sub_climber, sub_intake);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.

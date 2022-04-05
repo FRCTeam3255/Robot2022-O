@@ -40,9 +40,9 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     DriverStation.silenceJoystickConnectionWarning(true);
-    PortForwarder.add(5800, "limelight.local", 5800);
-    PortForwarder.add(5801, "limelight.local", 5801);
-    PortForwarder.add(5805, "limelight.local", 5805);
+    PortForwarder.add(5800, "10.32.55.11", 5800);
+    PortForwarder.add(5801, "10.32.55.11", 5801);
+    PortForwarder.add(5805, "10.32.55.11", 5805);
 
     // Intake camera
     CameraServer.startAutomaticCapture();
@@ -95,6 +95,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_robotContainer.sub_climber.hookDown();
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -113,6 +114,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    m_robotContainer.sub_climber.hookDown();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
