@@ -54,7 +54,7 @@ public class RobotContainer {
   private final Turret sub_turret = new Turret();
   private final Intake sub_intake = new Intake();
   private final Shooter sub_shooter = new Shooter();
-  public final Climber sub_climber = new Climber();
+  // public final Climber sub_climber = new Climber();
   private final Transfer sub_transfer = new Transfer();
   private final NavX sub_navX = new NavX();
   private final Vision sub_vision = new Vision();
@@ -153,15 +153,20 @@ public class RobotContainer {
 
   // Climber Commands
   // private final Climb com_climb = new Climb(sub_climber);
-  private final MagicClimb com_magicClimb = new MagicClimb(sub_climber);
+  // private final MagicClimb com_magicClimb = new MagicClimb(sub_climber);
   // private final ResetClimber com_resetClimber = new ResetClimber(sub_climber);
-  private final InstantCommand com_pivotClimberPerpendicular = new InstantCommand(sub_climber::pivotPerpendicular);
-  private final InstantCommand com_pivotClimberAngled = new InstantCommand(sub_climber::pivotAngled);
-  private final InstantCommand com_hookClimberUp = new InstantCommand(sub_climber::hookUp);
-  private final InstantCommand com_hookClimberDown = new InstantCommand(sub_climber::hookDown);
-  private final RunSpool com_runSpool = new RunSpool(sub_climber);
+  // private final InstantCommand com_pivotClimberPerpendicular = new
+  // InstantCommand(sub_climber::pivotPerpendicular);
+  // private final InstantCommand com_pivotClimberAngled = new
+  // InstantCommand(sub_climber::pivotAngled);
+  // private final InstantCommand com_hookClimberUp = new
+  // InstantCommand(sub_climber::hookUp);
+  // private final InstantCommand com_hookClimberDown = new
+  // InstantCommand(sub_climber::hookDown);
+  // private final RunSpool com_runSpool = new RunSpool(sub_climber);
 
-  private final PrepClimb com_prepClimb = new PrepClimb(sub_turret, sub_hood, sub_climber, sub_intake);
+  // private final PrepClimb com_prepClimb = new PrepClimb(sub_turret, sub_hood,
+  // sub_climber, sub_intake);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -171,7 +176,7 @@ public class RobotContainer {
     configureButtonBindings();
     configureDashboardButtons();
     sub_drivetrain.setDefaultCommand(com_drive);
-    sub_climber.setDefaultCommand(com_runSpool);
+    // sub_climber.setDefaultCommand(com_runSpool);
     com_setUpperHubGoal.initialize(); // upper hub needs to be set as goal
     com_presetFender.initialize(); // before setting fender as the preset
   }
@@ -186,16 +191,16 @@ public class RobotContainer {
 
     // Driver Stick
 
-    DriverStick.btn_A.whenPressed(com_pivotClimberAngled);
-    DriverStick.btn_B.whenPressed(com_pivotClimberPerpendicular);
-    DriverStick.btn_X.whenPressed(com_hookClimberDown);
-    DriverStick.btn_Y.whenPressed(com_hookClimberUp);
+    // DriverStick.btn_A.whenPressed(com_pivotClimberAngled);
+    // DriverStick.btn_B.whenPressed(com_pivotClimberPerpendicular);
+    // DriverStick.btn_X.whenPressed(com_hookClimberDown);
+    // DriverStick.btn_Y.whenPressed(com_hookClimberUp);
 
     // DriverStick.btn_Y.whileHeld(com_highHub);
     // DriverStick.btn_X.whileHeld(com_lowHub);
 
-    DriverStick.btn_Start.whileHeld(com_magicClimb);
-    DriverStick.btn_Back.whenPressed(com_prepClimb);
+    // DriverStick.btn_Start.whileHeld(com_magicClimb);
+    // DriverStick.btn_Back.whenPressed(com_prepClimb);
 
     // coDriver Stick
 
@@ -242,8 +247,9 @@ public class RobotContainer {
    */
   private void configureDashboardButtons() {
     // Reset Encoders
-    SmartDashboard.putData("Reset Climber Encoders",
-        new SN_InstantCommand(sub_climber::resetClimberEncoderCount, true, sub_climber));
+    // SmartDashboard.putData("Reset Climber Encoders",
+    // new SN_InstantCommand(sub_climber::resetClimberEncoderCount, true,
+    // sub_climber));
     SmartDashboard.putData("Reset Drivetrain Encoders",
         new SN_InstantCommand(sub_drivetrain::resetDrivetrainEncodersCount, true,
             sub_drivetrain));
@@ -261,8 +267,8 @@ public class RobotContainer {
         new InstantCommand(sub_navX::calibrate, sub_navX));
 
     // Configure Resets (Each Subsystem & All Subsystems at once)
-    SmartDashboard.putData("Configure Climber",
-        new InstantCommand(sub_climber::configure, sub_climber));
+    // SmartDashboard.putData("Configure Climber",
+    // new InstantCommand(sub_climber::configure, sub_climber));
 
     SmartDashboard.putData("Configure Drivetrain",
         new InstantCommand(sub_drivetrain::configure, sub_drivetrain));
@@ -282,13 +288,15 @@ public class RobotContainer {
     // The NanX and the Vision subsystems are also not featured here since I have no
     // clue how they work B)
 
-    SmartDashboard.putData("Configure All Subsystems", new ConfigureSubsystems(sub_climber, sub_drivetrain,
-        sub_intake, sub_shooter, sub_transfer, sub_turret));
+    // SmartDashboard.putData("Configure All Subsystems", new
+    // ConfigureSubsystems(sub_climber, sub_drivetrain,
+    // sub_intake, sub_shooter, sub_transfer, sub_turret));
 
-    SmartDashboard.putData("Pivot Climber Perpendicular", com_pivotClimberPerpendicular);
-    SmartDashboard.putData("Pivot Climber Angled", com_pivotClimberAngled);
-    SmartDashboard.putData("Hook Climber Forward", com_hookClimberUp);
-    SmartDashboard.putData("Hook Climber Backwards", com_hookClimberDown);
+    // SmartDashboard.putData("Pivot Climber Perpendicular",
+    // com_pivotClimberPerpendicular);
+    // SmartDashboard.putData("Pivot Climber Angled", com_pivotClimberAngled);
+    // SmartDashboard.putData("Hook Climber Forward", com_hookClimberUp);
+    // SmartDashboard.putData("Hook Climber Backwards", com_hookClimberDown);
 
     SmartDashboard.putData("Hood High Tilt", com_hoodHighTilt);
     SmartDashboard.putData("Hood Medium Tilt", com_hoodMediumTilt);
@@ -309,12 +317,16 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    if (switchBoard.btn_1.get()) {
-      return new AutoThreeCargo(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake,
-          sub_climber);
-    } else {
-      return new OpenLoopTwoBall(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake,
-          sub_climber);
-    }
+    // if (switchBoard.btn_1.get()) {
+    // return new AutoThreeCargo(sub_drivetrain, sub_shooter, sub_turret, sub_hood,
+    // sub_transfer, sub_intake,
+    // sub_climber);
+    // } else {
+    // return new OpenLoopTwoBall(sub_drivetrain, sub_shooter, sub_turret, sub_hood,
+    // sub_transfer, sub_intake,
+    // sub_climber);
+    // }
+
+    return null;
   }
 }
