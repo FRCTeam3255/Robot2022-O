@@ -7,22 +7,19 @@ package frc.robot.commands.Turret;
 import com.frcteam3255.components.SN_Limelight.LEDMode;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Vision;
 
 public class VisionAimTurret extends CommandBase {
 
   Turret turret;
-  Shooter shooter;
   Vision vision;
 
   double target;
 
   /** Creates a new VisionAimTurret. */
-  public VisionAimTurret(Turret sub_turret, Shooter sub_shooter, Vision sub_vision) {
+  public VisionAimTurret(Turret sub_turret, Vision sub_vision) {
     turret = sub_turret;
-    shooter = sub_shooter;
     vision = sub_vision;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(turret);
@@ -42,14 +39,6 @@ public class VisionAimTurret extends CommandBase {
     if (vision.limelight.hasTarget()) {
       turret.setTurretAngle(target);
     }
-
-    // if (shooter.isGoalHighHub()) {
-    // shooter.setGoalRPM(vision.getIdealMediumHoodRPM());
-    // } else {
-    // shooter.setGoalRPM(vision.getIdealLowerHubRPM());
-    // }
-
-    shooter.setGoalRPM(vision.getIdealMediumHoodRPM());
   }
 
   // Called once the command ends or is interrupted.

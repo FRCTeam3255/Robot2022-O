@@ -19,7 +19,6 @@ import frc.robot.commands.Autonomous.AutoThreeCargo;
 import frc.robot.commands.Autonomous.OpenLoopTwoBall;
 import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Turret.*;
-import frc.robot.commands.Vision.SetGoalRPM;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.commands.Transfer.*;
@@ -68,7 +67,7 @@ public class RobotContainer {
   private final MoveTurret com_moveTurret = new MoveTurret(sub_turret);
   private final SetTurretPosition com_setTurretCenter = new SetTurretPosition(sub_turret,
       RobotPreferences.zeroDoublePref);
-  private final VisionAimTurret com_visionAimTurret = new VisionAimTurret(sub_turret, sub_shooter, sub_vision);
+  private final VisionAimTurret com_visionAimTurret = new VisionAimTurret(sub_turret, sub_vision);
   private final VisionSpinTurret com_visionSpinTurret = new VisionSpinTurret(sub_turret, sub_shooter, sub_vision);
 
   // Shooter Commands
@@ -106,8 +105,7 @@ public class RobotContainer {
   private final RetractIntake com_retractIntake = new RetractIntake(sub_intake);
   private final DeployIntake com_deployIntake = new DeployIntake(sub_intake);
 
-  // Vision Commands
-  private final SetGoalRPM com_setGoalRPM = new SetGoalRPM(sub_shooter, sub_vision);
+  // Vision Commands (none)
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -147,7 +145,6 @@ public class RobotContainer {
     // Just Setting Angle (X Axis)
     coDriverStick.btn_X.whileHeld(com_visionSpinTurret);
     // Just Setting RPM (Y Axis)
-    coDriverStick.btn_Y.whenPressed(com_setGoalRPM);
     coDriverStick.btn_Y.whenPressed(new InstantCommand(sub_hood::hoodMediumTilt, sub_hood));
 
     coDriverStick.btn_Back.whenPressed(com_retractIntake);
