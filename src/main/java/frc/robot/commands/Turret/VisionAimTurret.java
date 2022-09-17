@@ -38,9 +38,18 @@ public class VisionAimTurret extends CommandBase {
   @Override
   public void execute() {
     target = -vision.limelight.getOffsetX() + turret.getTurretAngle();
+    double oldTargetPosition = 0;
+    // TODO: What is your offset with no target??? what is a positive angle??? aaaaa
 
     if (vision.limelight.hasTarget()) {
       turret.setTurretAngle(target);
+      oldTargetPosition = target;
+    } else {
+      if (turret.getTurretAngle() < oldTargetPosition) {
+        turret.setTurretSpeed(1); // threw in a random value for both of these but the idea is there
+      } else {
+        turret.setTurretSpeed(-1);
+      }
     }
 
     // if (shooter.isGoalHighHub()) {
