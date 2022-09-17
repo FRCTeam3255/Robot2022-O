@@ -156,8 +156,8 @@ public final class RobotPreferences {
         110);
     public static final SN_DoublePreference turretMinAngleDegrees = new SN_DoublePreference("turretMinAngleDegrees",
         -270);
-    public static final SN_DoublePreference turretSnapToIntake = new SN_DoublePreference("turretSnapToIntake", 90);
-    public static final SN_DoublePreference turretSnapAwayIntake = new SN_DoublePreference("turretSnapAwayIntake", -90);
+    public static final SN_DoublePreference turretSnapAwayIntake = new SN_DoublePreference("turretSnapToIntake", 90);
+    public static final SN_DoublePreference turretSnapToIntake = new SN_DoublePreference("turretSnapAwayIntake", -90);
 
     // 2048 encoder counts per rotation * 65 (gr) = 133120
     // 133120 / 360 = 370
@@ -168,9 +168,9 @@ public final class RobotPreferences {
     public static final SN_DoublePreference turretClosedLoopPeakOutput = new SN_DoublePreference(
         "turretClosedLoopPeakOutput", 1);
     public static final SN_DoublePreference turretF = new SN_DoublePreference("turretF", 0);
-    public static final SN_DoublePreference turretP = new SN_DoublePreference("turretP", 0.5);
-    public static final SN_DoublePreference turretI = new SN_DoublePreference("turretI", 0);
-    public static final SN_DoublePreference turretD = new SN_DoublePreference("turretD", 5);
+    public static final SN_DoublePreference turretP = new SN_DoublePreference("turretP", 0.15);
+    public static final SN_DoublePreference turretI = new SN_DoublePreference("turretI", 0.00001);
+    public static final SN_DoublePreference turretD = new SN_DoublePreference("turretD", 8);
 
     public static final SN_IntPreference turretLoopsToFinish = new SN_IntPreference("turretLoopsToFinish", 25);
 
