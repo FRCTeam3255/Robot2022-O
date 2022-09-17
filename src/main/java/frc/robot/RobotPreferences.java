@@ -5,7 +5,6 @@ import com.frcteam3255.preferences.SN_DoublePreference;
 import com.frcteam3255.preferences.SN_IntPreference;
 import com.frcteam3255.preferences.SN_ZeroDoublePreference;
 import com.frcteam3255.preferences.SN_ZeroIntPreference;
-import com.frcteam3255.utils.SN_Debug;
 
 public final class RobotPreferences {
 
@@ -222,29 +221,6 @@ public final class RobotPreferences {
   }
 
   public static final class VisionPrefs {
-  }
-
-  public static final class ClimberPrefs {
-    public static final SN_DoublePreference climberMotorSpeed = new SN_DoublePreference("climberMotorSpeed", 0.5);
-    public static final SN_DoublePreference climberMaxEncoderCountPerpendicular = new SN_DoublePreference(
-        "climberMaxEncoderCount", 240000);
-    public static final SN_DoublePreference climberMaxEncoderCountAngled = new SN_DoublePreference(
-        "climberMaxEncoderCountPivoted", 240000);
-
-    // Climbing Up/Down Positions
-    public static final SN_DoublePreference climberUpPosition = new SN_DoublePreference("climberUpPosition", 32555);
-    public static final SN_DoublePreference climberDownPosition = new SN_DoublePreference("climberDownPosition", 0);
-
-    public static final SN_BooleanPreference climberLockPistonInvert = new SN_BooleanPreference(
-        "climberLockPistonInvert", false);
-    public static final SN_BooleanPreference climberPivotPistonInvert = new SN_BooleanPreference(
-        "climberPivotPistonInvert", false);
-    public static final SN_BooleanPreference climberHookPistonInvert = new SN_BooleanPreference(
-        "climberHookPistonInvert", false);
-
-    public static final SN_IntPreference climberLoopsToFinish = new SN_IntPreference("climberLoopsToFinish", 25);
-    public static final SN_DoublePreference climberAcceptableClosedLoopError = new SN_DoublePreference(
-        "climberAcceptableClosedLoopError", 300);
   }
 
   public static final class AutoPrefs {

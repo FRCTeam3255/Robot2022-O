@@ -14,21 +14,18 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.commands.ConfigureSubsystems;
+import frc.robot.commands.Autonomous.AutoThreeCargo;
+import frc.robot.commands.Autonomous.OpenLoopTwoBall;
 import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Turret.*;
 import frc.robot.commands.Vision.SetGoalRPM;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.commands.Transfer.*;
-// import frc.robot.RobotPreferences.DrivetrainPrefs;
 import frc.robot.RobotPreferences.HoodPrefs;
 import frc.robot.RobotPreferences.ShooterPrefs;
 import frc.robot.RobotPreferences.TurretPrefs;
-import frc.robot.commands.ConfigureSubsystems;
-import frc.robot.commands.Autonomous.AutoThreeCargo;
-// import frc.robot.commands.Autonomous.DriveDistanceOpenLoop;
-import frc.robot.commands.Autonomous.OpenLoopTwoBall;
-import frc.robot.commands.Climber.*;
 import frc.robot.subsystems.*;
 
 /**
@@ -54,17 +51,12 @@ public class RobotContainer {
   private final Turret sub_turret = new Turret();
   private final Intake sub_intake = new Intake();
   private final Shooter sub_shooter = new Shooter();
-  public final Climber sub_climber = new Climber();
   private final Transfer sub_transfer = new Transfer();
   private final NavX sub_navX = new NavX();
   private final Vision sub_vision = new Vision();
 
   // Drivetrain Commands
   private final Drive com_drive = new Drive(sub_drivetrain);
-  // private final DriveDistanceOpenLoop com_driveOpenLoop = new
-  // DriveDistanceOpenLoop(
-  // sub_drivetrain, DrivetrainPrefs.driveOpenLoopCounts,
-  // DrivetrainPrefs.driveOpenLoopSpeedForward);
 
   // Hood Commands
   private final InstantCommand com_hoodHighTilt = new InstantCommand(sub_hood::hoodHighTilt);
@@ -72,51 +64,17 @@ public class RobotContainer {
   private final InstantCommand com_hoodLowTilt = new InstantCommand(sub_hood::hoodLowTilt);
   private final InstantCommand com_hoodZeroTilt = new InstantCommand(sub_hood::hoodZeroTilt);
 
-  // private final DriveMotionProfile com_driveTestPath = new
-  // DriveMotionProfile(sub_drivetrain,
-  // "testpath_left.csv", "testpath_right.csv");
-  // private final DriveMotionProfile com_drive2020Field = new
-  // DriveMotionProfile(sub_drivetrain,
-  // // "full2020path_left.csv", "full2020path_right.csv");
-  // // private final DriveMotionProfile com_driveHanger = new
-  // DriveMotionProfile(sub_drivetrain,
-  // "hanger_left.csv", "hanger_right.csv");
-
   // Turret Commands
   private final MoveTurret com_moveTurret = new MoveTurret(sub_turret);
   private final SetTurretPosition com_setTurretCenter = new SetTurretPosition(sub_turret,
       RobotPreferences.zeroDoublePref);
-  // private final SetTurretPosition com_setTurretPos1 = new
-  // SetTurretPosition(sub_turret,
-  // RobotPreferences.TurretPrefs.turretPresetPos1);
-  // private final HoldTurretPosition com_holdTurretCenter = new
-  // HoldTurretPosition(sub_turret, sub_navX,
-  // RobotPreferences.zeroDoublePref);
-  // private final HoldTurretPosition com_holdTurretPos1 = new
-  // HoldTurretPosition(sub_turret, sub_navX,
-  // RobotPreferences.TurretPrefs.turretPresetPos1);
   private final VisionAimTurret com_visionAimTurret = new VisionAimTurret(sub_turret, sub_shooter, sub_vision);
   private final VisionSpinTurret com_visionSpinTurret = new VisionSpinTurret(sub_turret, sub_shooter, sub_vision);
-  // private final VisionNavXAimTurret com_visionHoldAimTurret = new
-  // VisionNavXAimTurret(sub_turret, sub_vision,
-  // sub_navX);
 
   // Shooter Commands
-  // private final PushCargoToShooter com_pushCargoToShooter = new
-  // PushCargoToShooter(sub_shooter, sub_transfer);
-  // private final PushCargoWithDelay com_pushCargoWithDelay = new
-  // PushCargoWithDelay(sub_shooter, sub_transfer);
   private final PushCargoSimple com_pushCargoSimple = new PushCargoSimple(sub_shooter, sub_transfer);
-  // private final SpinFlywheelVelocity com_spinFlywheelVelocity = new
-  // SpinFlywheelVelocity(sub_shooter);
-  // private final SpinFlywheelPercentOutput com_FlywheelPercentOutput = new
-  // SpinFlywheelPercentOutput(
-  // sub_shooter);
   private final SpinFlywheelGoalRPM com_spinFlywheelGoalRPM = new SpinFlywheelGoalRPM(sub_shooter);
-
   private final InstantCommand com_setUpperHubGoal = new InstantCommand(sub_shooter::setGoalUpperHub);
-  // private final InstantCommand com_setLowerHubGoal = new
-  // InstantCommand(sub_shooter::setGoalLowerHub);
 
   // Shooter Presets
   private final PresetShooter com_presetFender = new PresetShooter(sub_shooter, sub_hood,
@@ -151,18 +109,6 @@ public class RobotContainer {
   // Vision Commands
   private final SetGoalRPM com_setGoalRPM = new SetGoalRPM(sub_shooter, sub_vision);
 
-  // Climber Commands
-  // private final Climb com_climb = new Climb(sub_climber);
-  private final MagicClimb com_magicClimb = new MagicClimb(sub_climber);
-  // private final ResetClimber com_resetClimber = new ResetClimber(sub_climber);
-  private final InstantCommand com_pivotClimberPerpendicular = new InstantCommand(sub_climber::pivotPerpendicular);
-  private final InstantCommand com_pivotClimberAngled = new InstantCommand(sub_climber::pivotAngled);
-  private final InstantCommand com_hookClimberUp = new InstantCommand(sub_climber::hookUp);
-  private final InstantCommand com_hookClimberDown = new InstantCommand(sub_climber::hookDown);
-  private final RunSpool com_runSpool = new RunSpool(sub_climber);
-
-  private final PrepClimb com_prepClimb = new PrepClimb(sub_turret, sub_hood, sub_climber, sub_intake);
-
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -171,7 +117,6 @@ public class RobotContainer {
     configureButtonBindings();
     configureDashboardButtons();
     sub_drivetrain.setDefaultCommand(com_drive);
-    sub_climber.setDefaultCommand(com_runSpool);
     com_setUpperHubGoal.initialize(); // upper hub needs to be set as goal
     com_presetFender.initialize(); // before setting fender as the preset
   }
@@ -184,18 +129,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    // Driver Stick
-
-    DriverStick.btn_A.whenPressed(com_pivotClimberAngled);
-    DriverStick.btn_B.whenPressed(com_pivotClimberPerpendicular);
-    DriverStick.btn_X.whenPressed(com_hookClimberDown);
-    DriverStick.btn_Y.whenPressed(com_hookClimberUp);
-
-    // DriverStick.btn_Y.whileHeld(com_highHub);
-    // DriverStick.btn_X.whileHeld(com_lowHub);
-
-    DriverStick.btn_Start.whileHeld(com_magicClimb);
-    DriverStick.btn_Back.whenPressed(com_prepClimb);
+    // Driver Stick (there's nothing)
 
     // coDriver Stick
 
@@ -226,8 +160,6 @@ public class RobotContainer {
 
     coDriverStick.POV_South.whenPressed(com_presetLaunchpadUpper);
     coDriverStick.POV_South.whenPressed(new InstantCommand(sub_hood::hoodHighTilt, sub_hood));
-    // coDriverStick.POV_South.whenPressed(new SetTurretPosition(sub_turret,
-    // TurretPrefs.turretMaxAngleDegrees));
 
     coDriverStick.POV_West.whenPressed(com_presetTarmacUpper);
     coDriverStick.POV_West.whenPressed(new InstantCommand(sub_hood::hoodMediumTilt, sub_hood));
@@ -242,8 +174,6 @@ public class RobotContainer {
    */
   private void configureDashboardButtons() {
     // Reset Encoders
-    SmartDashboard.putData("Reset Climber Encoders",
-        new SN_InstantCommand(sub_climber::resetClimberEncoderCount, true, sub_climber));
     SmartDashboard.putData("Reset Drivetrain Encoders",
         new SN_InstantCommand(sub_drivetrain::resetDrivetrainEncodersCount, true,
             sub_drivetrain));
@@ -261,8 +191,6 @@ public class RobotContainer {
         new InstantCommand(sub_navX::calibrate, sub_navX));
 
     // Configure Resets (Each Subsystem & All Subsystems at once)
-    SmartDashboard.putData("Configure Climber",
-        new InstantCommand(sub_climber::configure, sub_climber));
 
     SmartDashboard.putData("Configure Drivetrain",
         new InstantCommand(sub_drivetrain::configure, sub_drivetrain));
@@ -278,17 +206,12 @@ public class RobotContainer {
 
     SmartDashboard.putData("Configure Turret",
         new InstantCommand(sub_turret::configure, sub_turret));
+
+    SmartDashboard.putData("Configure All Subsystems",
+        new ConfigureSubsystems(sub_drivetrain, sub_intake, sub_shooter, sub_transfer, sub_turret));
     // The hood is not configured since its pretty hard to configure a solenoid
     // The NanX and the Vision subsystems are also not featured here since I have no
     // clue how they work B)
-
-    SmartDashboard.putData("Configure All Subsystems", new ConfigureSubsystems(sub_climber, sub_drivetrain,
-        sub_intake, sub_shooter, sub_transfer, sub_turret));
-
-    SmartDashboard.putData("Pivot Climber Perpendicular", com_pivotClimberPerpendicular);
-    SmartDashboard.putData("Pivot Climber Angled", com_pivotClimberAngled);
-    SmartDashboard.putData("Hook Climber Forward", com_hookClimberUp);
-    SmartDashboard.putData("Hook Climber Backwards", com_hookClimberDown);
 
     SmartDashboard.putData("Hood High Tilt", com_hoodHighTilt);
     SmartDashboard.putData("Hood Medium Tilt", com_hoodMediumTilt);
@@ -310,11 +233,9 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     if (switchBoard.btn_1.get()) {
-      return new AutoThreeCargo(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake,
-          sub_climber);
+      return new AutoThreeCargo(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake);
     } else {
-      return new OpenLoopTwoBall(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake,
-          sub_climber);
+      return new OpenLoopTwoBall(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake);
     }
   }
 }

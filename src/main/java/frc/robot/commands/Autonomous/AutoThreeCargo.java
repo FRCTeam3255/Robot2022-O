@@ -19,7 +19,6 @@ import frc.robot.commands.Shooter.PresetShooter;
 import frc.robot.commands.Shooter.SpinFlywheelGoalRPM;
 import frc.robot.commands.Transfer.PushCargoSimple;
 import frc.robot.commands.Turret.SetTurretPosition;
-import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Intake;
@@ -38,12 +37,11 @@ public class AutoThreeCargo extends SequentialCommandGroup {
   Hood hood;
   Transfer transfer;
   Intake intake;
-  Climber climber;
   DriveMotionProfile AutoThreeCargo;
 
   /** Creates a new AutoThreeCargo. */
   public AutoThreeCargo(Drivetrain sub_drivetrain, Shooter sub_shooter, Turret sub_turret, Hood sub_hood,
-      Transfer sub_transfer, Intake sub_intake, Climber sub_climber) {
+      Transfer sub_transfer, Intake sub_intake) {
 
     drivetrain = sub_drivetrain;
     shooter = sub_shooter;
@@ -51,7 +49,6 @@ public class AutoThreeCargo extends SequentialCommandGroup {
     hood = sub_hood;
     transfer = sub_transfer;
     intake = sub_intake;
-    climber = sub_climber;
 
     AutoThreeCargo = new DriveMotionProfile(drivetrain, "neg3BallShort_left.csv", "neg3BallShort_right.csv");
     // Add your commands in the addCommands() call, e.g.
