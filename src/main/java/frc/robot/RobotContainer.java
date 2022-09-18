@@ -92,10 +92,10 @@ public class RobotContainer {
       ShooterPrefs.shooterPresetLowerTerminalRPM,
       HoodPrefs.hoodPresetLowerTerminalSteep);
 
-  private final SetTurretPosition com_presetAwayIntake = new SetTurretPosition(sub_turret,
-      TurretPrefs.turretSnapAwayIntake);
   private final SetTurretPosition com_presetToIntake = new SetTurretPosition(sub_turret,
       TurretPrefs.turretSnapToIntake);
+  private final SetTurretPosition com_presetAwayIntake = new SetTurretPosition(sub_turret,
+      TurretPrefs.turretSnapAwayIntake);
 
   // Transfer Commands
   private final ReverseTransfer com_reverseTransfer = new ReverseTransfer(sub_transfer, sub_intake);
