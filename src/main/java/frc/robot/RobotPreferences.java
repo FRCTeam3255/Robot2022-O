@@ -156,8 +156,8 @@ public final class RobotPreferences {
         110);
     public static final SN_DoublePreference turretMinAngleDegrees = new SN_DoublePreference("turretMinAngleDegrees",
         -270);
-    public static final SN_DoublePreference turretSnapAwayIntake = new SN_DoublePreference("turretSnapToIntake", 90);
-    public static final SN_DoublePreference turretSnapToIntake = new SN_DoublePreference("turretSnapAwayIntake", -90);
+    public static final SN_DoublePreference turretSnapAwayIntake = new SN_DoublePreference("turretSnapAwayIntake", 90);
+    public static final SN_DoublePreference turretSnapToIntake = new SN_DoublePreference("turretSnapToIntake", -90);
 
     // 2048 encoder counts per rotation * 65 (gr) = 133120
     // 133120 / 360 = 370
