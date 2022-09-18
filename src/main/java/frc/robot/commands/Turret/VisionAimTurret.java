@@ -42,14 +42,6 @@ public class VisionAimTurret extends CommandBase {
     if (vision.limelight.hasTarget()) {
       turret.setTurretAngle(target);
     }
-
-    // if (shooter.isGoalHighHub()) {
-    // shooter.setGoalRPM(vision.getIdealMediumHoodRPM());
-    // } else {
-    // shooter.setGoalRPM(vision.getIdealLowerHubRPM());
-    // }
-
-    shooter.setGoalRPM(vision.getIdealMediumHoodRPM());
   }
 
   // Called once the command ends or is interrupted.
