@@ -167,8 +167,11 @@ public class RobotContainer {
     SmartDashboard.putData("Configure Turret",
         new InstantCommand(sub_turret::configure, sub_turret));
 
+    SmartDashboard.putData("Configure Hood",
+        new InstantCommand(sub_hood::configure, sub_hood));
+
     SmartDashboard.putData("Configure All Subsystems",
-        new ConfigureSubsystems(sub_drivetrain, sub_intake, sub_shooter, sub_transfer, sub_turret));
+        new ConfigureSubsystems(sub_drivetrain, sub_intake, sub_shooter, sub_transfer, sub_turret, sub_hood));
 
     SmartDashboard.putData("Deplay Intake", com_deployIntake);
     SmartDashboard.putData("Retract Intake", com_retractIntake);

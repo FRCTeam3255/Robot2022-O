@@ -18,9 +18,10 @@ public class ConfigureSubsystems extends InstantCommand {
   Shooter shooter;
   Transfer transfer;
   Turret turret;
+  Hood hood;
 
   public ConfigureSubsystems(Drivetrain a_drivetrain, Intake a_intake, Shooter a_shooter,
-      Transfer a_transfer, Turret a_turret) {
+      Transfer a_transfer, Turret a_turret, Hood a_hood) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
 
@@ -29,6 +30,7 @@ public class ConfigureSubsystems extends InstantCommand {
     shooter = a_shooter;
     transfer = a_transfer;
     turret = a_turret;
+    hood = a_hood;
   }
 
   @Override
@@ -39,5 +41,6 @@ public class ConfigureSubsystems extends InstantCommand {
     shooter.configure();
     transfer.configure();
     turret.configure();
+    hood.configure();
   }
 }

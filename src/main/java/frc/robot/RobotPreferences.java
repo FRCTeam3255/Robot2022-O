@@ -76,23 +76,21 @@ public final class RobotPreferences {
   }
 
   public static final class HoodPrefs {
-    public static final SN_BooleanPreference hoodPresetUpperFenderSteep = new SN_BooleanPreference(
-        "hoodPresetUpperFenderSteep", false);
-    public static final SN_BooleanPreference hoodPresetUpperTarmacSteep = new SN_BooleanPreference(
-        "hoodPresetUpperTarmacSteep", true);
-    public static final SN_BooleanPreference hoodPresetUpperLaunchpadSteep = new SN_BooleanPreference(
-        "hoodPresetUpperLaunchpadSteep", true);
-    public static final SN_BooleanPreference hoodPresetUpperTerminalSteep = new SN_BooleanPreference(
-        "hoodPresetUpperTerminalSteep", true);
+    public static final SN_DoublePreference hoodF = new SN_DoublePreference("hoodF", 0);
+    public static final SN_DoublePreference hoodP = new SN_DoublePreference("hoodP", 1);
+    public static final SN_DoublePreference hoodI = new SN_DoublePreference("hoodI", 0);
+    public static final SN_DoublePreference hoodD = new SN_DoublePreference("hoodD", 0);
 
-    public static final SN_BooleanPreference hoodPresetLowerFenderSteep = new SN_BooleanPreference(
-        "hoodPresetLowerFenderSteep", true);
-    public static final SN_BooleanPreference hoodPresetLowerTarmacSteep = new SN_BooleanPreference(
-        "hoodPresetLowerTarmacSteep", true);
-    public static final SN_BooleanPreference hoodPresetLowerLaunchpadSteep = new SN_BooleanPreference(
-        "hoodPresetLowerLaunchpadSteep", true);
-    public static final SN_BooleanPreference hoodPresetLowerTerminalSteep = new SN_BooleanPreference(
-        "hoodPresetLowerTerminalSteep", true);
+    public static final SN_DoublePreference hoodAllowableClosedLoopErrorDegrees = new SN_DoublePreference(
+        "hoodAllowableClosedLoopErrorDegrees", 0.5);
+    public static final SN_DoublePreference hoodClosedLoopPeakOutput = new SN_DoublePreference(
+        "hoodClosedLoopPeakOutput", 1);
+    // TODO: get hood gear ratio
+    public static final SN_DoublePreference hoodGearRatio = new SN_DoublePreference("hoodGearRatio", 0);
+    // TODO: get min and max
+    public static final SN_DoublePreference hoodMinDegrees = new SN_DoublePreference("hoodMinDegrees", 0);
+    public static final SN_DoublePreference hoodMaxDegrees = new SN_DoublePreference("hoodMaxDegrees", 90);
+
   }
 
   public static final class ShooterPrefs {
