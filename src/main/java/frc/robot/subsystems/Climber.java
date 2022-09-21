@@ -4,13 +4,16 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.frcteam3255.components.SN_DoubleSolenoid;
-
-import edu.wpi.first.wpilibj.DigitalInput;
+import com.frcteam3255.preferences.SN_DoublePreference;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 import frc.robot.RobotMap;
 import frc.robot.RobotMap.ClimberMap;
 import frc.robot.RobotPreferences.ClimberPrefs;
@@ -47,10 +50,58 @@ public class Climber extends SubsystemBase {
 
     climbMotor.configAllSettings(config);
 
+    climbMotor.configReverseSoftLimitThreshold(ClimberPrefs.climbMinAnglePosition.getValue());
+    climbMotor.configReverseSoftLimitEnable(false);
+    climbMotor.setNeutralMode(NeutralMode.Brake);
+    climbMotor.setInverted(false);
+
+    pivotPiston.setInverted(false);
+  }
+
+  public void setClimberSpeed(double speed) {
+    climbMotor.set(ControlMode.PercentOutput, speed * ClimberPrefs.climbOpenLoopSpeed.getValue());
+  }
+
+  public void setClimberPosition(SN_DoublePreference position) {
+    climbMotor.set(ControlMode.Position, position.getValue());
+  }
+
+  public void setPistonAngled() {
+    pivotPiston.setDeployed();
+    climbMotor.configReverseSoftLimitEnable(true);
+  }
+
+  public void setPistonPerpendicular() {
+    pivotPiston.setRetracted();
+    climbMotor.configReverseSoftLimitEnable(false);
+  }
+
+  public boolean isPistonAngled() {
+    return pivotPiston.isDeployed();
+  }
+
+  public double getClimberEncoderCounts() {
+    return climbMotor.getSelectedSensorPosition();
+  }
+
+  public boolean isClimberMax() {
+    return climbMotor.isFwdLimitSwitchClosed() == 1 ? true : false;
+  }
+
+  public boolean isClimberMin() {
+    return climbMotor.isRevLimitSwitchClosed() == 1 ? true : false;
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    if (RobotContainer.switchBoard.btn_7.get()) {
+
+      SmartDashboard.putNumber("Climber Encoder Count", getClimberEncoderCounts());
+      SmartDashboard.putBoolean("Is Climber Max", isClimberMax());
+      SmartDashboard.putBoolean("Is Climber Min", isClimberMin());
+
+      SmartDashboard.putBoolean("Is Climber Angled", isPistonAngled());
+
+    }
   }
 }
