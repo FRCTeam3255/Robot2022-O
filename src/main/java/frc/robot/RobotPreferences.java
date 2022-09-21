@@ -40,7 +40,11 @@ public final class RobotPreferences {
         "climbAllowableClosedLoopError", 0);
 
     // encoder counts position of "up" position or able reach the next bar
-    public static final SN_DoublePreference climbUpPosition = new SN_DoublePreference("climbUpPosition", 10000);
+    public static final SN_DoublePreference climbUpPosition = new SN_DoublePreference("climbUpPosition", 42069);
+
+    // if the climber is too low and you try to angle the climber will hit turret
+    public static final SN_DoublePreference climbMinAnglePosition = new SN_DoublePreference(
+        "climbMinAnglePosition", 6942);
   }
 
   public static final class DrivetrainPrefs {
