@@ -28,6 +28,21 @@ public final class RobotPreferences {
   public static final SN_DoublePreference encoderCountsPerTalonFXRotation = new SN_DoublePreference(
       "encoderCountsPerTalonFXRotation", 2048);
 
+  public static final class ClimberPrefs {
+    public static final SN_DoublePreference climbOpenLoopSpeed = new SN_DoublePreference("climbOpenLoopSpeed", 1);
+    public static final SN_DoublePreference climbClosedLoopSpeed = new SN_DoublePreference("climbClosedLoopSpeed", 1);
+
+    public static final SN_DoublePreference climbF = new SN_DoublePreference("climbF", 0);
+    public static final SN_DoublePreference climbP = new SN_DoublePreference("climbP", 1);
+    public static final SN_DoublePreference climbI = new SN_DoublePreference("climbI", 0);
+    public static final SN_DoublePreference climbD = new SN_DoublePreference("climbD", 0);
+    public static final SN_DoublePreference climbAllowableClosedLoopError = new SN_DoublePreference(
+        "climbAllowableClosedLoopError", 0);
+
+    // encoder counts position of "up" position or able reach the next bar
+    public static final SN_DoublePreference climbUpPosition = new SN_DoublePreference("climbUpPosition", 10000);
+  }
+
   public static final class DrivetrainPrefs {
     public static final SN_DoublePreference arcadeSpeed = new SN_DoublePreference("arcadeSpeed", 0.65);
     public static final SN_DoublePreference arcadeTurn = new SN_DoublePreference("arcadeTurn", .5);

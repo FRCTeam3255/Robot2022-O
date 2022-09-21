@@ -33,9 +33,6 @@ public final class RobotMap {
   public final class ClimberMap {
     public static final int CLIMB_MOTOR_CAN = 10;
 
-    public static final int EXTENDED_SWITCH_DIO = 5;
-    public static final int RETRACTED_SWITCH_DIO = 6;
-
     // Climber PCM
     public static final int PIVOT_PISTON_SOLENOID_PCM_A = 2;
     public static final int PIVOT_PISTON_SOLENOID_PCM_B = 3;
