@@ -22,6 +22,7 @@ import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.commands.Transfer.*;
 import frc.robot.RobotPreferences.HoodPrefs;
+import frc.robot.RobotPreferences.ShooterPrefs;
 import frc.robot.RobotPreferences.TurretPrefs;
 import frc.robot.subsystems.*;
 
@@ -121,10 +122,22 @@ public class RobotContainer {
     coDriverStick.btn_A.whileHeld(com_visionAimTurret);
     coDriverStick.btn_X.whileHeld(com_visionSpinTurret);
 
+    // shooter/hood commands
     coDriverStick.POV_North.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodFender));
+    coDriverStick.POV_North
+        .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperFenderRPM.getValue()));
+
     coDriverStick.POV_East.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodTerminal));
+    coDriverStick.POV_East
+        .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperTerminalRPM.getValue()));
+
     coDriverStick.POV_South.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodLaunchpad));
+    coDriverStick.POV_South
+        .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperLaunchpadRPM.getValue()));
+
     coDriverStick.POV_West.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodTarmac));
+    coDriverStick.POV_West
+        .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperTarmacRPM.getValue()));
 
     coDriverStick.btn_B.whileHeld(com_reverseTransfer);
 
