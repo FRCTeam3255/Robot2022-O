@@ -7,6 +7,7 @@ package frc.robot;
 import com.frcteam3255.joystick.SN_DualActionStick;
 import com.frcteam3255.joystick.SN_F310Gamepad;
 import com.frcteam3255.joystick.SN_SwitchboardStick;
+import com.frcteam3255.preferences.SN_DoublePreference;
 import com.frcteam3255.utils.SN_InstantCommand;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -20,6 +21,7 @@ import frc.robot.commands.Turret.*;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.commands.Transfer.*;
+import frc.robot.RobotPreferences.HoodPrefs;
 import frc.robot.RobotPreferences.TurretPrefs;
 import frc.robot.subsystems.*;
 
@@ -53,7 +55,7 @@ public class RobotContainer {
   // Drivetrain Commands
   private final Drive com_drive = new Drive(sub_drivetrain);
 
-  // Hood Commands
+  // Hood Commands (none here they're done inline on controller)
 
   // Turret Commands
   private final MoveTurret com_moveTurret = new MoveTurret(sub_turret);
@@ -117,10 +119,14 @@ public class RobotContainer {
 
     // Limelight Commands
     coDriverStick.btn_A.whileHeld(com_visionAimTurret);
+    coDriverStick.btn_X.whileHeld(com_visionSpinTurret);
+
+    coDriverStick.POV_North.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodFender));
+    coDriverStick.POV_East.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodTerminal));
+    coDriverStick.POV_South.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodLaunchpad));
+    coDriverStick.POV_West.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodTarmac));
 
     coDriverStick.btn_B.whileHeld(com_reverseTransfer);
-    // Just Setting Angle (X Axis)
-    coDriverStick.btn_X.whileHeld(com_visionSpinTurret);
 
     coDriverStick.btn_Back.whenPressed(com_retractIntake);
 
