@@ -117,7 +117,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    // Driver Stick (there's nothing)
+    // Driver Stick (there's something!)
     DriverStick.btn_A.whenPressed(() -> sub_climber.setPistonAngled());
     DriverStick.btn_B.whenPressed(() -> sub_climber.setPistonPerpendicular());
 
