@@ -68,7 +68,7 @@ public class Climber extends SubsystemBase {
 
   public void setPistonAngled() {
     if (getClimberEncoderCounts() > ClimberPrefs.climbMinAnglePosition.getValue()) {
-      setPistonAngled();
+      pivotPiston.setDeployed();
       climbMotor.configReverseSoftLimitEnable(true);
     }
   }
