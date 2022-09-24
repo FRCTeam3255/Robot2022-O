@@ -95,11 +95,11 @@ public class RobotContainer {
   // private final HoldTurretPosition com_holdTurretPos1 = new
   // HoldTurretPosition(sub_turret, sub_navX,
   // RobotPreferences.TurretPrefs.turretPresetPos1);
-  private final VisionAimTurret com_visionAimTurret = new VisionAimTurret(sub_turret, sub_shooter, sub_vision);
+  private final VisionAimTurret com_visionAimTurret = new VisionAimTurret(sub_turret, sub_shooter, sub_vision,
+      sub_navX);
   private final VisionSpinTurret com_visionSpinTurret = new VisionSpinTurret(sub_turret, sub_shooter, sub_vision);
   // private final VisionNavXAimTurret com_visionHoldAimTurret = new
-  // VisionNavXAimTurret(sub_turret, sub_vision,
-  // sub_navX);
+  // VisionNavXAimTurret(sub_turret, sub_vision, sub_navX);
 
   // Shooter Commands
   // private final PushCargoToShooter com_pushCargoToShooter = new
@@ -208,6 +208,7 @@ public class RobotContainer {
     coDriverStick.btn_LBump.whileHeld(com_moveTurret);
 
     // Limelight Command
+    coDriverStick.btn_A.whileHeld(com_visionAimTurret);
     coDriverStick.btn_B.whileHeld(com_reverseTransfer);
     // Just Setting Angle (X Axis)
     coDriverStick.btn_X.whileHeld(com_visionSpinTurret);
