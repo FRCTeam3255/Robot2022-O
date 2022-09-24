@@ -102,7 +102,7 @@ public class RobotContainer {
     sub_climber.setDefaultCommand(new RunCommand(
         () -> sub_climber.setClimberSpeed(
             (DriverStick.getAxisRT() * ClimberPrefs.climbOpenLoopSpeed.getValue())
-                - (DriverStick.getAxisLSX() * ClimberPrefs.climbOpenLoopSpeed.getValue())),
+                - (DriverStick.getAxisLT() * ClimberPrefs.climbOpenLoopSpeed.getValue())),
         sub_climber));
 
     com_setUpperHubGoal.initialize(); // upper hub needs to be set as goal
