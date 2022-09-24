@@ -47,12 +47,7 @@ public final class RobotMap {
   }
 
   public final class HoodMap {
-    public static final int LONG_HOOD_SOLENOID_STEEP_ANGLE_PCM_A = 4;
-    public static final int LONG_HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B = 5;
-
-    // Climber PCM
-    public static final int SHORT_HOOD_SOLENOID_STEEP_ANGLE_PCM_A = 0;
-    public static final int SHORT_HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B = 1;
+    public static final int HOOD_MOTOR_CAN = 25;
   }
 
   public final class IntakeMap {
