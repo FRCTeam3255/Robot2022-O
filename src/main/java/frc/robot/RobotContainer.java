@@ -14,12 +14,14 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.commands.ConfigureSubsystems;
 import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Turret.*;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.commands.Transfer.*;
+import frc.robot.RobotPreferences.ClimberPrefs;
 import frc.robot.RobotPreferences.TurretPrefs;
 import frc.robot.subsystems.*;
 
@@ -41,6 +43,7 @@ public class RobotContainer {
       RobotMap.ControllerMap.SWITCH_BOARD);
 
   // Subsystems
+  private final Climber sub_climber = new Climber();
   private final Drivetrain sub_drivetrain = new Drivetrain();
   private final Hood sub_hood = new Hood();
   private final Turret sub_turret = new Turret();
@@ -49,6 +52,8 @@ public class RobotContainer {
   private final Transfer sub_transfer = new Transfer();
   private final NavX sub_navX = new NavX();
   private final Vision sub_vision = new Vision();
+
+  // Climber Commands
 
   // Drivetrain Commands
   private final Drive com_drive = new Drive(sub_drivetrain);
@@ -93,7 +98,15 @@ public class RobotContainer {
     configureButtonBindings();
     configureDashboardButtons();
     sub_drivetrain.setDefaultCommand(com_drive);
+
+    sub_climber.setDefaultCommand(new RunCommand(
+        () -> sub_climber.setClimberSpeed(
+            (DriverStick.getAxisRT() * ClimberPrefs.climbOpenLoopSpeed.getValue())
+                - (DriverStick.getAxisLT() * ClimberPrefs.climbOpenLoopSpeed.getValue())),
+        sub_climber));
+
     com_setUpperHubGoal.initialize(); // upper hub needs to be set as goal
+
   }
 
   /**
@@ -104,7 +117,9 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    // Driver Stick (there's nothing)
+    // Driver Stick (there's something!)
+    DriverStick.btn_A.whenPressed(() -> sub_climber.setPistonAngled());
+    DriverStick.btn_B.whenPressed(() -> sub_climber.setPistonPerpendicular());
 
     // coDriver Stick
 

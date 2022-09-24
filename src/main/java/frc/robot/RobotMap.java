@@ -30,6 +30,15 @@ public final class RobotMap {
     public static final int SWITCH_BOARD = 2;
   }
 
+  public final class ClimberMap {
+    public static final int CLIMB_MOTOR_CAN = 10;
+
+    // Climber PCM
+    public static final int PIVOT_PISTON_SOLENOID_PCM_A = 2;
+    public static final int PIVOT_PISTON_SOLENOID_PCM_B = 3;
+
+  }
+
   public final class DrivetrainMap {
     public static final int LEFT_LEAD_MOTOR_CAN = 20;
     public static final int LEFT_FOLLOW_MOTOR_CAN = 21;
