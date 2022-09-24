@@ -6,7 +6,9 @@ package frc.robot.commands.Turret;
 
 import com.frcteam3255.components.SN_Limelight.LEDMode;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Vision;
@@ -18,6 +20,7 @@ public class VisionAimTurret extends CommandBase {
   Vision vision;
 
   double target;
+  double oldTargetPosition = 0;
 
   /** Creates a new VisionAimTurret. */
   public VisionAimTurret(Turret sub_turret, Shooter sub_shooter, Vision sub_vision) {
@@ -38,26 +41,21 @@ public class VisionAimTurret extends CommandBase {
   @Override
   public void execute() {
     target = -vision.limelight.getOffsetX() + turret.getTurretAngle();
-    double oldTargetPosition = 0;
-    // TODO: What is your offset with no target??? what is a positive angle??? aaaaa
+    SmartDashboard.putNumber("oldTargetPosition", oldTargetPosition);
 
-    if (vision.limelight.hasTarget()) {
-      turret.setTurretAngle(target);
-      oldTargetPosition = target;
-    } else {
-      if (turret.getTurretAngle() < oldTargetPosition) {
-        turret.setTurretSpeed(1); // threw in a random value for both of these but the idea is there
+    boolean isPressed = RobotContainer.coDriverStick.btn_A.get();
+    SmartDashboard.putBoolean("button A is pressed", isPressed);
+
+    if (isPressed) {
+      if (vision.limelight.hasTarget()) {
+        turret.setTurretAngle(target);
       } else {
-        turret.setTurretSpeed(-1);
+        turret.setTurretAngle(oldTargetPosition);
+        // ADD LOGIC IF WE ARE AT A LIMIT
+        // also remember to edit visionSpinTurret once we get this workin
       }
     }
-
-    // if (shooter.isGoalHighHub()) {
-    // shooter.setGoalRPM(vision.getIdealMediumHoodRPM());
-    // } else {
-    // shooter.setGoalRPM(vision.getIdealLowerHubRPM());
-    // }
-
+    oldTargetPosition = target;
     shooter.setGoalRPM(vision.getIdealMediumHoodRPM());
   }
 
@@ -65,7 +63,6 @@ public class VisionAimTurret extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     turret.setTurretSpeed(0);
-    // vision.limelight.setLEDMode(LEDMode.off);
   }
 
   // Returns true when the command should end.
