@@ -4,6 +4,8 @@
 
 package frc.robot.commands.Turret;
 
+import frc.robot.RobotPreferences;
+import frc.robot.subsystems.NavX;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Vision;
@@ -17,14 +19,23 @@ public class VisionSpinTurret extends CommandBase {
   Turret turret;
   Shooter shooter;
   Vision vision;
+  NavX navX;
 
   double target;
+  double oldTargetPosition = 0;
+  double oldNavXPosition = 0;
+  double newTargetPosition = 0;
+  double changeInNavx = 0;
+  double oppositePosition = 0;
+  boolean is360Spin = false;
 
   /** Creates a new VisionSpinTurret. */
-  public VisionSpinTurret(Turret sub_turret, Shooter sub_shooter, Vision sub_vision) {
+  public VisionSpinTurret(Turret sub_turret, Shooter sub_shooter, Vision sub_vision, NavX sub_navX) {
     turret = sub_turret;
     shooter = sub_shooter;
     vision = sub_vision;
+    navX = sub_navX;
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(turret);
   }
@@ -41,9 +52,32 @@ public class VisionSpinTurret extends CommandBase {
     target = -vision.limelight.getOffsetX() + turret.getTurretAngle();
 
     if (vision.limelight.hasTarget()) {
-      turret.setTurretAngle(target);
-    }
+      if (!is360Spin) {
+        turret.setTurretAngle(target);
+        oldNavXPosition = navX.navx.getYaw();
+      }
+      oldTargetPosition = target;
+    } else {
+      changeInNavx = navX.navx.getYaw() - oldNavXPosition;
 
+      newTargetPosition = oldTargetPosition + changeInNavx;
+
+      if (newTargetPosition < RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue()) {
+        is360Spin = true;
+        oppositePosition = RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() - newTargetPosition;
+        turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue() - oppositePosition);
+        is360Spin = false;
+
+      } else if (newTargetPosition > RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue()) {
+        is360Spin = true;
+        oppositePosition = newTargetPosition - RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue();
+        turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() + oppositePosition);
+        is360Spin = false;
+
+      } else {
+        turret.setTurretAngle(newTargetPosition);
+      }
+    }
   }
 
   // Called once the command ends or is interrupted.

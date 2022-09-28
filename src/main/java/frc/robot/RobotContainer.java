@@ -97,7 +97,8 @@ public class RobotContainer {
   // RobotPreferences.TurretPrefs.turretPresetPos1);
   private final VisionAimTurret com_visionAimTurret = new VisionAimTurret(sub_turret, sub_shooter, sub_vision,
       sub_navX);
-  private final VisionSpinTurret com_visionSpinTurret = new VisionSpinTurret(sub_turret, sub_shooter, sub_vision);
+  private final VisionSpinTurret com_visionSpinTurret = new VisionSpinTurret(sub_turret, sub_shooter, sub_vision,
+      sub_navX);
   // private final VisionNavXAimTurret com_visionHoldAimTurret = new
   // VisionNavXAimTurret(sub_turret, sub_vision, sub_navX);
 

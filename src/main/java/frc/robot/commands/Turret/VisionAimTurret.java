@@ -4,14 +4,10 @@
 
 package frc.robot.commands.Turret;
 
-import javax.print.attribute.standard.MediaSize.NA;
-import javax.swing.event.ChangeEvent;
-
 import com.frcteam3255.components.SN_Limelight.LEDMode;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.RobotPreferences;
 import frc.robot.subsystems.NavX;
@@ -19,6 +15,7 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Vision;
 
+//TODO: Add RPM functionality so that this command isn't exactly the same as VisionSpinTurret
 public class VisionAimTurret extends CommandBase {
 
   Turret turret;
@@ -31,7 +28,7 @@ public class VisionAimTurret extends CommandBase {
   double oldNavXPosition = 0;
   double newTargetPosition = 0;
   double changeInNavx = 0;
-  double funnyPosition = 0;
+  double oppositePosition = 0;
   boolean is360Spin = false;
 
   /** Creates a new VisionAimTurret. */
@@ -58,7 +55,6 @@ public class VisionAimTurret extends CommandBase {
     SmartDashboard.putNumber("oldTargetPosition", oldTargetPosition);
 
     boolean isPressed = RobotContainer.coDriverStick.btn_A.get();
-    SmartDashboard.putBoolean("button A is pressed", isPressed);
 
     if (isPressed) {
       if (vision.limelight.hasTarget()) {
@@ -68,32 +64,29 @@ public class VisionAimTurret extends CommandBase {
         }
         oldTargetPosition = target;
       } else {
-        // if this works and you wanna know why, too bad, because I don't know either!
         changeInNavx = navX.navx.getYaw() - oldNavXPosition;
 
         newTargetPosition = oldTargetPosition + changeInNavx;
         SmartDashboard.putNumber("newTargetPosition", newTargetPosition);
 
-        // ADD LOGIC IF WE ARE AT A LIMIT
         if (newTargetPosition < RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue()) {
           is360Spin = true;
-          funnyPosition = RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() - newTargetPosition;
-          turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue() - funnyPosition);
+          oppositePosition = RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() - newTargetPosition;
+          turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue() - oppositePosition);
           is360Spin = false;
 
         } else if (newTargetPosition > RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue()) {
           is360Spin = true;
-          funnyPosition = newTargetPosition - RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue();
-          turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() + funnyPosition);
+          oppositePosition = newTargetPosition - RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue();
+          turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() + oppositePosition);
           is360Spin = false;
 
         } else {
           turret.setTurretAngle(newTargetPosition);
         }
-        // also remember to edit visionSpinTurret once we get this workin
       }
     }
-    shooter.setGoalRPM(vision.getIdealMediumHoodRPM());
+    // shooter.setGoalRPM(vision.getIdealMediumHoodRPM());
   }
 
   // Called once the command ends or is interrupted.
