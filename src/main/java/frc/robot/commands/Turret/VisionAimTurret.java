@@ -62,19 +62,20 @@ public class VisionAimTurret extends CommandBase {
 
     if (isPressed) {
       if (vision.limelight.hasTarget()) {
-        if(!is360Spin){
+        if (!is360Spin) {
           turret.setTurretAngle(target);
           oldNavXPosition = navX.navx.getYaw();
         }
-
+        oldTargetPosition = target;
       } else {
         // if this works and you wanna know why, too bad, because I don't know either!
         changeInNavx = navX.navx.getYaw() - oldNavXPosition;
 
         newTargetPosition = oldTargetPosition + changeInNavx;
+        SmartDashboard.putNumber("newTargetPosition", newTargetPosition);
 
         // ADD LOGIC IF WE ARE AT A LIMIT
-        if (newTargetPosition < RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue()){
+        if (newTargetPosition < RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue()) {
           is360Spin = true;
           funnyPosition = RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() - newTargetPosition;
           turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue() - funnyPosition);
@@ -92,7 +93,6 @@ public class VisionAimTurret extends CommandBase {
         // also remember to edit visionSpinTurret once we get this workin
       }
     }
-    oldTargetPosition = target;
     shooter.setGoalRPM(vision.getIdealMediumHoodRPM());
   }
 
