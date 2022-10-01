@@ -4,64 +4,69 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
+import com.frcteam3255.preferences.SN_DoublePreference;
+import com.frcteam3255.utils.SN_Math;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotMap;
-import frc.robot.RobotMap.*;
+import frc.robot.RobotMap.HoodMap;
+import frc.robot.RobotPreferences.HoodPrefs;
 
 public class Hood extends SubsystemBase {
   /** Creates a new Hood. */
 
   // Creates Hood Variables
-  private DoubleSolenoid longHoodPiston;
-  private DoubleSolenoid shortHoodPiston;
-  private DoubleSolenoid.Value shallowAngleHoodValue = Value.kReverse;
-  private DoubleSolenoid.Value steepAngleHoodValue = Value.kForward;
+  TalonFX hoodMotor;
+  TalonFXConfiguration config;
 
   // Initializes Hood Variables
   public Hood() {
-    longHoodPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,
-        HoodMap.LONG_HOOD_SOLENOID_STEEP_ANGLE_PCM_A,
-        HoodMap.LONG_HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B);
-    shortHoodPiston = new DoubleSolenoid(RobotMap.CLIMBER_PCM, PneumaticsModuleType.CTREPCM,
-        HoodMap.SHORT_HOOD_SOLENOID_STEEP_ANGLE_PCM_A,
-        HoodMap.SHORT_HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B);
-    // configure is not needed since this is a solenoid
+    hoodMotor = new TalonFX(HoodMap.HOOD_MOTOR_CAN);
+    configure();
   }
 
-  // solenoid methods
-  // Sets hood angle to the given value
+  public void configure() {
+    config = new TalonFXConfiguration();
 
-  // Both are on
-  public void hoodHighTilt() {
-    longHoodPiston.set(steepAngleHoodValue);
-    shortHoodPiston.set(steepAngleHoodValue);
+    hoodMotor.configFactoryDefault();
+
+    config.slot0.kF = HoodPrefs.hoodF.getValue();
+    config.slot0.kP = HoodPrefs.hoodP.getValue();
+    config.slot0.kI = HoodPrefs.hoodI.getValue();
+    config.slot0.kD = HoodPrefs.hoodD.getValue();
+
+    config.slot0.allowableClosedloopError = SN_Math
+        .degreesToFalcon(HoodPrefs.hoodAllowableClosedLoopErrorDegrees.getValue(), HoodPrefs.hoodGearRatio.getValue());
+
+    hoodMotor.configAllSettings(config);
+
+    hoodMotor.configClosedLoopPeakOutput(0, HoodPrefs.hoodClosedLoopPeakOutput.getValue());
+
+    hoodMotor.configForwardSoftLimitEnable(true);
+    hoodMotor.configForwardSoftLimitThreshold(
+        SN_Math.degreesToFalcon(HoodPrefs.hoodMaxDegrees.getValue(), HoodPrefs.hoodGearRatio.getValue()));
+
+    hoodMotor.configReverseSoftLimitEnable(true);
+    hoodMotor.configReverseSoftLimitThreshold(
+        SN_Math.degreesToFalcon(HoodPrefs.hoodMinDegrees.getValue(), HoodPrefs.hoodGearRatio.getValue()));
   }
 
-  // Old is on, new is off
-  public void hoodMediumTilt() {
-    longHoodPiston.set(steepAngleHoodValue);
-    shortHoodPiston.set(shallowAngleHoodValue);
+  public void setAngleDegrees(SN_DoublePreference angle) {
+    double encoderCounts = SN_Math.degreesToFalcon(angle.getValue(), HoodPrefs.hoodGearRatio.getValue());
+    hoodMotor.set(ControlMode.Position, encoderCounts);
   }
 
-  // Old is off, new is on
-  public void hoodLowTilt() {
-    longHoodPiston.set(shallowAngleHoodValue);
-    shortHoodPiston.set(steepAngleHoodValue);
-  }
-
-  // Both are off
-  public void hoodZeroTilt() {
-    longHoodPiston.set(shallowAngleHoodValue);
-    shortHoodPiston.set(shallowAngleHoodValue);
+  public double getAngleDegrees() {
+    return SN_Math.falconToDegrees(hoodMotor.getSelectedSensorPosition(), HoodPrefs.hoodGearRatio.getValue());
   }
 
   // Method constantly runs
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Hood Angle Degrees", getAngleDegrees());
   }
 }
