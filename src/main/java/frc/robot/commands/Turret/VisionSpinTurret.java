@@ -27,7 +27,6 @@ public class VisionSpinTurret extends CommandBase {
   double newTargetPosition = 0;
   double changeInNavx = 0;
   double oppositePosition = 0;
-  boolean is360Spin = false;
 
   /** Creates a new VisionSpinTurret. */
   public VisionSpinTurret(Turret sub_turret, Shooter sub_shooter, Vision sub_vision, NavX sub_navX) {
@@ -51,29 +50,20 @@ public class VisionSpinTurret extends CommandBase {
   public void execute() {
     target = -vision.limelight.getOffsetX() + turret.getTurretAngle();
 
+    changeInNavx = navX.navx.getYaw() - oldNavXPosition;
+    newTargetPosition = oldTargetPosition + changeInNavx;
+
     if (vision.limelight.hasTarget()) {
-      if (!is360Spin) {
-        turret.setTurretAngle(target);
-        oldNavXPosition = navX.navx.getYaw();
-      }
+      turret.setTurretAngle(target);
+      oldNavXPosition = navX.navx.getYaw();
       oldTargetPosition = target;
     } else {
-      changeInNavx = navX.navx.getYaw() - oldNavXPosition;
-
-      newTargetPosition = oldTargetPosition + changeInNavx;
-
       if (newTargetPosition < RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue()) {
-        is360Spin = true;
         oppositePosition = RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() - newTargetPosition;
         turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue() - oppositePosition);
-        is360Spin = false;
-
       } else if (newTargetPosition > RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue()) {
-        is360Spin = true;
         oppositePosition = newTargetPosition - RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue();
         turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() + oppositePosition);
-        is360Spin = false;
-
       } else {
         turret.setTurretAngle(newTargetPosition);
       }

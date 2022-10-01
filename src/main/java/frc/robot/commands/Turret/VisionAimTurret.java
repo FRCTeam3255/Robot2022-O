@@ -23,13 +23,12 @@ public class VisionAimTurret extends CommandBase {
   Vision vision;
   NavX navX;
 
-  double target;
+  double limelightTarget;
   double oldTargetPosition = 0;
   double oldNavXPosition = 0;
   double newTargetPosition = 0;
   double changeInNavx = 0;
   double oppositePosition = 0;
-  boolean is360Spin = false;
 
   /** Creates a new VisionAimTurret. */
   public VisionAimTurret(Turret sub_turret, Shooter sub_shooter, Vision sub_vision, NavX sub_navX) {
@@ -46,47 +45,36 @@ public class VisionAimTurret extends CommandBase {
   @Override
   public void initialize() {
     vision.limelight.setLEDMode(LEDMode.on);
+    oldTargetPosition = turret.getTurretAngle();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    target = -vision.limelight.getOffsetX() + turret.getTurretAngle();
+    limelightTarget = -vision.limelight.getOffsetX() + turret.getTurretAngle();
+
+    changeInNavx = navX.navx.getYaw() - oldNavXPosition;
+    newTargetPosition = oldTargetPosition + changeInNavx;
+    SmartDashboard.putNumber("newTargetPosition", newTargetPosition);
     SmartDashboard.putNumber("oldTargetPosition", oldTargetPosition);
 
     boolean isPressed = RobotContainer.coDriverStick.btn_A.get();
 
-    if (isPressed) {
-      if (vision.limelight.hasTarget()) {
-        if (!is360Spin) {
-          turret.setTurretAngle(target);
-          oldNavXPosition = navX.navx.getYaw();
-        }
-        oldTargetPosition = target;
+    if (isPressed && vision.limelight.hasTarget()) {
+      turret.setTurretAngle(limelightTarget);
+      oldNavXPosition = navX.navx.getYaw();
+      oldTargetPosition = limelightTarget;
+    } else {
+      if (newTargetPosition < RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue()) {
+        oppositePosition = RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() - newTargetPosition;
+        turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue() - oppositePosition);
+      } else if (newTargetPosition > RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue()) {
+        oppositePosition = newTargetPosition - RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue();
+        turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() + oppositePosition);
       } else {
-        changeInNavx = navX.navx.getYaw() - oldNavXPosition;
-
-        newTargetPosition = oldTargetPosition + changeInNavx;
-        SmartDashboard.putNumber("newTargetPosition", newTargetPosition);
-
-        if (newTargetPosition < RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue()) {
-          is360Spin = true;
-          oppositePosition = RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() - newTargetPosition;
-          turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue() - oppositePosition);
-          is360Spin = false;
-
-        } else if (newTargetPosition > RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue()) {
-          is360Spin = true;
-          oppositePosition = newTargetPosition - RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue();
-          turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() + oppositePosition);
-          is360Spin = false;
-
-        } else {
-          turret.setTurretAngle(newTargetPosition);
-        }
+        turret.setTurretAngle(newTargetPosition);
       }
     }
-    // shooter.setGoalRPM(vision.getIdealMediumHoodRPM());
   }
 
   // Called once the command ends or is interrupted.
