@@ -222,6 +222,11 @@ public final class RobotPreferences {
   }
 
   public static final class VisionPrefs {
+    // all of these are in inches
+    public static final SN_DoublePreference highHubHeight = new SN_DoublePreference("highHubHeight", 104);
+    public static final SN_DoublePreference limelightMountHeight = new SN_DoublePreference(
+        "limelightMountHeight", 42);
+    public static final SN_DoublePreference limelightMountAngle = new SN_DoublePreference("limelightMountAngle", 35.6);
   }
 
   public static final class ClimberPrefs {
