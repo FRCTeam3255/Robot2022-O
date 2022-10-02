@@ -24,21 +24,19 @@ public final class RobotMap {
   public static final int PRIMARY_PCM = 0;
   public static final int CLIMBER_PCM = 2;
 
-  public final class ClimberMap {
-    public static final int CLIMBER_MOTOR_CAN = 10;
-
-    public static final int BOTTOM_SAFETY_MAG_SWITCH_DIO = 0;
-
-    public static final int PIVOT_PISTON_PCM_A = 2;
-    public static final int PIVOT_PISTON_PCM_B = 3;
-    public static final int STATIONARY_CLIMB_HOOKS_PISTON_A = 4;
-    public static final int STATIONARY_CLIMB_HOOKS_PISTON_B = 5;
-  }
-
   public final class ControllerMap {
     public static final int DRIVER_STICK = 0;
     public static final int CODRIVER_STICK = 1;
     public static final int SWITCH_BOARD = 2;
+  }
+
+  public final class ClimberMap {
+    public static final int CLIMB_MOTOR_CAN = 10;
+
+    // Climber PCM
+    public static final int PIVOT_PISTON_SOLENOID_PCM_A = 2;
+    public static final int PIVOT_PISTON_SOLENOID_PCM_B = 3;
+
   }
 
   public final class DrivetrainMap {
@@ -49,12 +47,7 @@ public final class RobotMap {
   }
 
   public final class HoodMap {
-    public static final int LONG_HOOD_SOLENOID_STEEP_ANGLE_PCM_A = 4;
-    public static final int LONG_HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B = 5;
-
-    // Climber PCM
-    public static final int SHORT_HOOD_SOLENOID_STEEP_ANGLE_PCM_A = 0;
-    public static final int SHORT_HOOD_SOLENOID_SHALLOW_ANGLE_PCM_B = 1;
+    public static final int HOOD_MOTOR_CAN = 25;
   }
 
   public final class IntakeMap {

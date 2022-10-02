@@ -13,34 +13,34 @@ import frc.robot.subsystems.*;
 public class ConfigureSubsystems extends InstantCommand {
   /** Creates a new ConfigureSubsystems. */
 
-  Climber climber;
   Drivetrain drivetrain;
   Intake intake;
   Shooter shooter;
   Transfer transfer;
   Turret turret;
+  Hood hood;
 
-  public ConfigureSubsystems(Climber a_climber, Drivetrain a_drivetrain, Intake a_intake, Shooter a_shooter,
-      Transfer a_transfer, Turret a_turret) {
+  public ConfigureSubsystems(Drivetrain a_drivetrain, Intake a_intake, Shooter a_shooter,
+      Transfer a_transfer, Turret a_turret, Hood a_hood) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
 
-    climber = a_climber;
     drivetrain = a_drivetrain;
     intake = a_intake;
     shooter = a_shooter;
     transfer = a_transfer;
     turret = a_turret;
+    hood = a_hood;
   }
 
   @Override
   public void initialize() {
 
-    climber.configure();
     drivetrain.configure();
     intake.configure();
     shooter.configure();
     transfer.configure();
     turret.configure();
+    hood.configure();
   }
 }

@@ -5,7 +5,6 @@ import com.frcteam3255.preferences.SN_DoublePreference;
 import com.frcteam3255.preferences.SN_IntPreference;
 import com.frcteam3255.preferences.SN_ZeroDoublePreference;
 import com.frcteam3255.preferences.SN_ZeroIntPreference;
-import com.frcteam3255.utils.SN_Debug;
 
 public final class RobotPreferences {
 
@@ -28,6 +27,25 @@ public final class RobotPreferences {
   public static final SN_ZeroDoublePreference zeroDoublePref = new SN_ZeroDoublePreference();
   public static final SN_DoublePreference encoderCountsPerTalonFXRotation = new SN_DoublePreference(
       "encoderCountsPerTalonFXRotation", 2048);
+
+  public static final class ClimberPrefs {
+    public static final SN_DoublePreference climbOpenLoopSpeed = new SN_DoublePreference("climbOpenLoopSpeed", 1);
+    public static final SN_DoublePreference climbClosedLoopSpeed = new SN_DoublePreference("climbClosedLoopSpeed", 1);
+
+    public static final SN_DoublePreference climbF = new SN_DoublePreference("climbF", 0);
+    public static final SN_DoublePreference climbP = new SN_DoublePreference("climbP", 1);
+    public static final SN_DoublePreference climbI = new SN_DoublePreference("climbI", 0);
+    public static final SN_DoublePreference climbD = new SN_DoublePreference("climbD", 0);
+    public static final SN_DoublePreference climbAllowableClosedLoopError = new SN_DoublePreference(
+        "climbAllowableClosedLoopError", 0);
+
+    // encoder counts position of "up" position or able reach the next bar
+    public static final SN_DoublePreference climbUpPosition = new SN_DoublePreference("climbUpPosition", 42069);
+
+    // if the climber is too low and you try to angle the climber will hit turret
+    public static final SN_DoublePreference climbMinAnglePosition = new SN_DoublePreference(
+        "climbMinAnglePosition", 6942);
+  }
 
   public static final class DrivetrainPrefs {
     public static final SN_DoublePreference arcadeSpeed = new SN_DoublePreference("arcadeSpeed", 0.65);
@@ -77,23 +95,27 @@ public final class RobotPreferences {
   }
 
   public static final class HoodPrefs {
-    public static final SN_BooleanPreference hoodPresetUpperFenderSteep = new SN_BooleanPreference(
-        "hoodPresetUpperFenderSteep", false);
-    public static final SN_BooleanPreference hoodPresetUpperTarmacSteep = new SN_BooleanPreference(
-        "hoodPresetUpperTarmacSteep", true);
-    public static final SN_BooleanPreference hoodPresetUpperLaunchpadSteep = new SN_BooleanPreference(
-        "hoodPresetUpperLaunchpadSteep", true);
-    public static final SN_BooleanPreference hoodPresetUpperTerminalSteep = new SN_BooleanPreference(
-        "hoodPresetUpperTerminalSteep", true);
+    public static final SN_DoublePreference hoodF = new SN_DoublePreference("hoodF", 0);
+    public static final SN_DoublePreference hoodP = new SN_DoublePreference("hoodP", 1);
+    public static final SN_DoublePreference hoodI = new SN_DoublePreference("hoodI", 0);
+    public static final SN_DoublePreference hoodD = new SN_DoublePreference("hoodD", 0);
 
-    public static final SN_BooleanPreference hoodPresetLowerFenderSteep = new SN_BooleanPreference(
-        "hoodPresetLowerFenderSteep", true);
-    public static final SN_BooleanPreference hoodPresetLowerTarmacSteep = new SN_BooleanPreference(
-        "hoodPresetLowerTarmacSteep", true);
-    public static final SN_BooleanPreference hoodPresetLowerLaunchpadSteep = new SN_BooleanPreference(
-        "hoodPresetLowerLaunchpadSteep", true);
-    public static final SN_BooleanPreference hoodPresetLowerTerminalSteep = new SN_BooleanPreference(
-        "hoodPresetLowerTerminalSteep", true);
+    public static final SN_DoublePreference hoodAllowableClosedLoopErrorDegrees = new SN_DoublePreference(
+        "hoodAllowableClosedLoopErrorDegrees", 0.5);
+    public static final SN_DoublePreference hoodClosedLoopPeakOutput = new SN_DoublePreference(
+        "hoodClosedLoopPeakOutput", 1);
+    // TODO: get hood gear ratio
+    public static final SN_DoublePreference hoodGearRatio = new SN_DoublePreference("hoodGearRatio", 0);
+    // TODO: get min and max
+    public static final SN_DoublePreference hoodMinDegrees = new SN_DoublePreference("hoodMinDegrees", 0);
+    public static final SN_DoublePreference hoodMaxDegrees = new SN_DoublePreference("hoodMaxDegrees", 90);
+
+    // TODO: get ideal positions
+    public static final SN_DoublePreference hoodFender = new SN_DoublePreference("hoodFender", 0);
+    public static final SN_DoublePreference hoodTerminal = new SN_DoublePreference("hoodTerminal", 0);
+    public static final SN_DoublePreference hoodLaunchpad = new SN_DoublePreference("hoodLaunchpad", 0);
+    public static final SN_DoublePreference hoodTarmac = new SN_DoublePreference("hoodTarmac", 0);
+
   }
 
   public static final class ShooterPrefs {
@@ -222,29 +244,6 @@ public final class RobotPreferences {
   }
 
   public static final class VisionPrefs {
-  }
-
-  public static final class ClimberPrefs {
-    public static final SN_DoublePreference climberMotorSpeed = new SN_DoublePreference("climberMotorSpeed", 0.5);
-    public static final SN_DoublePreference climberMaxEncoderCountPerpendicular = new SN_DoublePreference(
-        "climberMaxEncoderCount", 240000);
-    public static final SN_DoublePreference climberMaxEncoderCountAngled = new SN_DoublePreference(
-        "climberMaxEncoderCountPivoted", 240000);
-
-    // Climbing Up/Down Positions
-    public static final SN_DoublePreference climberUpPosition = new SN_DoublePreference("climberUpPosition", 32555);
-    public static final SN_DoublePreference climberDownPosition = new SN_DoublePreference("climberDownPosition", 0);
-
-    public static final SN_BooleanPreference climberLockPistonInvert = new SN_BooleanPreference(
-        "climberLockPistonInvert", false);
-    public static final SN_BooleanPreference climberPivotPistonInvert = new SN_BooleanPreference(
-        "climberPivotPistonInvert", false);
-    public static final SN_BooleanPreference climberHookPistonInvert = new SN_BooleanPreference(
-        "climberHookPistonInvert", false);
-
-    public static final SN_IntPreference climberLoopsToFinish = new SN_IntPreference("climberLoopsToFinish", 25);
-    public static final SN_DoublePreference climberAcceptableClosedLoopError = new SN_DoublePreference(
-        "climberAcceptableClosedLoopError", 300);
   }
 
   public static final class AutoPrefs {
