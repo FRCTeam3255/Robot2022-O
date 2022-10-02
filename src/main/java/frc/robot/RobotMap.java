@@ -48,6 +48,8 @@ public final class RobotMap {
 
   public final class HoodMap {
     public static final int HOOD_MOTOR_CAN = 25;
+
+    public static final int HOOD_BOTTOM_SWITCH = 5;
   }
 
   public final class IntakeMap {
