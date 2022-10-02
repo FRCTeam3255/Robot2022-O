@@ -95,26 +95,27 @@ public final class RobotPreferences {
   }
 
   public static final class HoodPrefs {
-    public static final SN_DoublePreference hoodF = new SN_DoublePreference("hoodF", 0);
-    public static final SN_DoublePreference hoodP = new SN_DoublePreference("hoodP", 1);
+    public static final SN_DoublePreference hoodArbitraryFeedForward = new SN_DoublePreference(
+        "hoodArbitraryFeedForward", 0.040078);
+    public static final SN_DoublePreference hoodP = new SN_DoublePreference("hoodP", 0.09);
     public static final SN_DoublePreference hoodI = new SN_DoublePreference("hoodI", 0);
     public static final SN_DoublePreference hoodD = new SN_DoublePreference("hoodD", 0);
 
     public static final SN_DoublePreference hoodAllowableClosedLoopErrorDegrees = new SN_DoublePreference(
-        "hoodAllowableClosedLoopErrorDegrees", 0.5);
+        "hoodAllowableClosedLoopErrorDegrees", 0.0001);
     public static final SN_DoublePreference hoodClosedLoopPeakOutput = new SN_DoublePreference(
-        "hoodClosedLoopPeakOutput", 1);
-    // TODO: get hood gear ratio
-    public static final SN_DoublePreference hoodGearRatio = new SN_DoublePreference("hoodGearRatio", 0);
-    // TODO: get min and max
-    public static final SN_DoublePreference hoodMinDegrees = new SN_DoublePreference("hoodMinDegrees", 0);
-    public static final SN_DoublePreference hoodMaxDegrees = new SN_DoublePreference("hoodMaxDegrees", 90);
+        "hoodClosedLoopPeakOutput", .25);
+    public static final SN_DoublePreference hoodOpenLoopSpeedMultiplier = new SN_DoublePreference(
+        "hoodOpenLoopSpeedMultiplier", .25);
+    public static final SN_DoublePreference hoodGearRatio = new SN_DoublePreference("hoodGearRatio", 69.33333);
+    public static final SN_DoublePreference hoodMinDegrees = new SN_DoublePreference("hoodMinDegrees", 4.89);
+    public static final SN_DoublePreference hoodMaxDegrees = new SN_DoublePreference("hoodMaxDegrees", 38);
 
     // TODO: get ideal positions
     public static final SN_DoublePreference hoodFender = new SN_DoublePreference("hoodFender", 0);
-    public static final SN_DoublePreference hoodTerminal = new SN_DoublePreference("hoodTerminal", 0);
-    public static final SN_DoublePreference hoodLaunchpad = new SN_DoublePreference("hoodLaunchpad", 0);
-    public static final SN_DoublePreference hoodTarmac = new SN_DoublePreference("hoodTarmac", 0);
+    public static final SN_DoublePreference hoodTerminal = new SN_DoublePreference("hoodTerminal", 35);
+    public static final SN_DoublePreference hoodLaunchpad = new SN_DoublePreference("hoodLaunchpad", 5);
+    public static final SN_DoublePreference hoodTarmac = new SN_DoublePreference("hoodTarmac", 15);
 
   }
 
