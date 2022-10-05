@@ -111,10 +111,6 @@ public class RobotContainer {
                 - (DriverStick.getAxisLT() * ClimberPrefs.climbOpenLoopSpeed.getValue())),
         sub_climber));
 
-    sub_hood.setDefaultCommand(new RunCommand(
-        () -> sub_hood.setSpeed(coDriverStick.getRightStickY()),
-        sub_hood));
-
     com_setUpperHubGoal.initialize(); // upper hub needs to be set as goal
 
   }
@@ -157,7 +153,7 @@ public class RobotContainer {
     coDriverStick.POV_South
         .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperLaunchpadRPM.getValue()));
 
-    coDriverStick.POV_West.whileHeld(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodTarmac), sub_hood);
+    coDriverStick.POV_West.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodTarmac), sub_hood);
     coDriverStick.POV_West
         .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperTarmacRPM.getValue()));
 
