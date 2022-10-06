@@ -75,7 +75,6 @@ public class Hood extends SubsystemBase {
     double encoderCounts = SN_Math.degreesToFalcon(angle, HoodPrefs.hoodGearRatio.getValue());
     hoodMotor.set(ControlMode.Position, encoderCounts, DemandType.ArbitraryFeedForward,
         HoodPrefs.hoodArbitraryFeedForward.getValue());
-    SmartDashboard.putNumber("Hood Desired Angle", angle);
   }
 
   public double getAngleDegrees() {
