@@ -69,8 +69,6 @@ public class RobotContainer {
 
   private final VisionAimTurret com_visionAimTurret = new VisionAimTurret(sub_turret, sub_shooter, sub_vision,
       sub_navX);
-  private final VisionSpinTurret com_visionSpinTurret = new VisionSpinTurret(sub_turret, sub_shooter, sub_vision,
-      sub_navX);
 
   // Shooter Commands
   private final PushCargoSimple com_pushCargoSimple = new PushCargoSimple(sub_shooter, sub_transfer);
@@ -136,11 +134,15 @@ public class RobotContainer {
     coDriverStick.btn_RBump.whenPressed(com_spinFlywheelGoalRPM);
     coDriverStick.btn_LBump.whileHeld(com_moveTurret);
 
-    // Limelight Command
-    // Just Setting Angle (X Axis)
-    coDriverStick.btn_X.whileHeld(com_visionSpinTurret);
-
     // shooter/hood commands
+
+    // NUDGING
+    coDriverStick.btn_X.whenPressed(
+        () -> sub_hood.setDoubleAngleDegrees(sub_hood.getAngleDegrees() - HoodPrefs.hoodNudgeDegrees.getValue()));
+    coDriverStick.btn_Y.whenPressed(
+        () -> sub_hood.setDoubleAngleDegrees(sub_hood.getAngleDegrees() + HoodPrefs.hoodNudgeDegrees.getValue()));
+
+    // PRESETS
     coDriverStick.POV_North.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodFender));
     coDriverStick.POV_North
         .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperFenderRPM.getValue()));
