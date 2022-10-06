@@ -51,28 +51,30 @@ public class VisionAimTurret extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    limelightTarget = -vision.limelight.getOffsetX() + turret.getTurretAngle();
+    if (RobotContainer.switchBoard.btn_9.get()) {
+      limelightTarget = -vision.limelight.getOffsetX() + turret.getTurretAngle();
 
-    changeInNavx = navX.navx.getYaw() - oldNavXPosition;
-    newTargetPosition = oldTargetPosition + changeInNavx;
-    SmartDashboard.putNumber("newTargetPosition", newTargetPosition);
-    SmartDashboard.putNumber("oldTargetPosition", oldTargetPosition);
+      changeInNavx = navX.navx.getYaw() - oldNavXPosition;
+      newTargetPosition = oldTargetPosition + changeInNavx;
+      SmartDashboard.putNumber("newTargetPosition", newTargetPosition);
+      SmartDashboard.putNumber("oldTargetPosition", oldTargetPosition);
 
-    boolean isPressed = RobotContainer.coDriverStick.btn_A.get();
+      boolean isPressed = RobotContainer.coDriverStick.btn_A.get();
 
-    if (isPressed && vision.limelight.hasTarget()) {
-      turret.setTurretAngle(limelightTarget);
-      oldNavXPosition = navX.navx.getYaw();
-      oldTargetPosition = limelightTarget;
-    } else {
-      if (newTargetPosition < RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue()) {
-        oppositePosition = RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() - newTargetPosition;
-        turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue() - oppositePosition);
-      } else if (newTargetPosition > RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue()) {
-        oppositePosition = newTargetPosition - RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue();
-        turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() + oppositePosition);
+      if (isPressed && vision.limelight.hasTarget()) {
+        turret.setTurretAngle(limelightTarget);
+        oldNavXPosition = navX.navx.getYaw();
+        oldTargetPosition = limelightTarget;
       } else {
-        turret.setTurretAngle(newTargetPosition);
+        if (newTargetPosition < RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue()) {
+          oppositePosition = RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() - newTargetPosition;
+          turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue() - oppositePosition);
+        } else if (newTargetPosition > RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue()) {
+          oppositePosition = newTargetPosition - RobotPreferences.TurretPrefs.turretMaxAngleDegrees.getValue();
+          turret.setTurretAngle(RobotPreferences.TurretPrefs.turretMinAngleDegrees.getValue() + oppositePosition);
+        } else {
+          turret.setTurretAngle(newTargetPosition);
+        }
       }
     }
   }
