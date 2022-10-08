@@ -6,6 +6,8 @@ import com.frcteam3255.preferences.SN_IntPreference;
 import com.frcteam3255.preferences.SN_ZeroDoublePreference;
 import com.frcteam3255.preferences.SN_ZeroIntPreference;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+
 public final class RobotPreferences {
 
   // when mechanical builds stuff, it's almost always (and should be) designed to
@@ -52,6 +54,8 @@ public final class RobotPreferences {
     public static final SN_DoublePreference arcadeTurn = new SN_DoublePreference("arcadeTurn", .5);
     public static final SN_DoublePreference arcadeLowSpeed = new SN_DoublePreference("arcadeLowSpeed", 0.4);
     public static final SN_DoublePreference arcadeHighSpeed = new SN_DoublePreference("arcadeHighSpeed", 1.5);
+    public static final SN_DoublePreference arcadeClosedLoopMaxSpeed = new SN_DoublePreference(
+        "arcadeClosedLoopMaxSpeed", 3);
 
     public static final SN_DoublePreference driveF = new SN_DoublePreference("driveF", 0);
     public static final SN_DoublePreference driveP = new SN_DoublePreference("driveP", 1);
@@ -91,6 +95,15 @@ public final class RobotPreferences {
         "driveOpenLoopSpeedReverse", -.3);
 
     public static final SN_DoublePreference driveOpenLoopCounts = new SN_DoublePreference("driveOpenLoopCounts", 44444);
+
+    public static final SN_DoublePreference driveWheelCircumference = new SN_DoublePreference(
+        "driveWheelCircumference", 4 * Math.PI);
+    public static final SN_DoublePreference driveGearRatio = new SN_DoublePreference("driveGearRatio", 6);
+
+    public static final SN_DoublePreference driveWidth = new SN_DoublePreference("driveWidth", 0.55); // meters
+    public static final SN_DoublePreference driveLength = new SN_DoublePreference("driveLength", 0.67); // meters
+    public static final DifferentialDriveKinematics driveKinematics = new DifferentialDriveKinematics(
+        driveWidth.getValue());
 
   }
 
