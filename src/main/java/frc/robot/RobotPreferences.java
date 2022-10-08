@@ -314,5 +314,23 @@ public final class RobotPreferences {
       public static final SN_DoublePreference autoThreeCargoShooterRPM = new SN_DoublePreference(
           "autoThreeCargoShooterRPM", 3255);
     }
+
+    // auto 6
+    public static final class ThreeCargo {
+      public static final SN_DoublePreference shooterRPM1_6 = new SN_DoublePreference(
+          "shooterRPM1_6", ShooterPrefs.shooterPresetUpperFenderRPM.getValue());
+      public static final SN_DoublePreference hoodAngle1_6 = new SN_DoublePreference(
+          "hoodAngle1_6", 5);
+      public static final SN_DoublePreference turretAngle1_6 = new SN_DoublePreference(
+          "turretAngle1_6", TurretPrefs.turretSnapAwayIntake.getValue());
+
+      public static final SN_DoublePreference shooterRPM2_6 = new SN_DoublePreference(
+          "shooterRPM2_6", 3500);
+      public static final SN_DoublePreference hoodAngle2_6 = new SN_DoublePreference(
+          "hoodAngle2_6", 5);
+      public static final SN_DoublePreference turretAngle2_6 = new SN_DoublePreference(
+          "turretAngle2_6", -198);
+    }
+
   }
 }
