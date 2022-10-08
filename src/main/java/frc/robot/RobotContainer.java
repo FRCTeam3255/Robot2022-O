@@ -69,8 +69,6 @@ public class RobotContainer {
 
   private final VisionAimTurret com_visionAimTurret = new VisionAimTurret(sub_turret, sub_shooter, sub_vision,
       sub_navX);
-  private final VisionSpinTurret com_visionSpinTurret = new VisionSpinTurret(sub_turret, sub_shooter, sub_vision,
-      sub_navX);
 
   // Shooter Commands
   private final PushCargoSimple com_pushCargoSimple = new PushCargoSimple(sub_shooter, sub_transfer);
@@ -111,10 +109,6 @@ public class RobotContainer {
                 - (DriverStick.getAxisLT() * ClimberPrefs.climbOpenLoopSpeed.getValue())),
         sub_climber));
 
-    sub_hood.setDefaultCommand(new RunCommand(
-        () -> sub_hood.setSpeed(coDriverStick.getRightStickY()),
-        sub_hood));
-
     com_setUpperHubGoal.initialize(); // upper hub needs to be set as goal
 
   }
@@ -140,24 +134,28 @@ public class RobotContainer {
     coDriverStick.btn_RBump.whenPressed(com_spinFlywheelGoalRPM);
     coDriverStick.btn_LBump.whileHeld(com_moveTurret);
 
-    // Limelight Command
-    // Just Setting Angle (X Axis)
-    coDriverStick.btn_X.whileHeld(com_visionSpinTurret);
-
     // shooter/hood commands
-    coDriverStick.POV_North.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodFender));
+
+    // NUDGING
+    coDriverStick.btn_X.whenPressed(
+        () -> sub_hood.setDoubleAngleDegrees(sub_hood.getAngleDegrees() - HoodPrefs.hoodNudgeDegrees.getValue()));
+    coDriverStick.btn_Y.whenPressed(
+        () -> sub_hood.setDoubleAngleDegrees(sub_hood.getAngleDegrees() + HoodPrefs.hoodNudgeDegrees.getValue()));
+
+    // PRESETS
+    coDriverStick.POV_North.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodFender), sub_hood);
     coDriverStick.POV_North
         .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperFenderRPM.getValue()));
 
-    coDriverStick.POV_East.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodTerminal));
+    coDriverStick.POV_East.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodTerminal), sub_hood);
     coDriverStick.POV_East
         .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperTerminalRPM.getValue()));
 
-    coDriverStick.POV_South.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodLaunchpad));
+    coDriverStick.POV_South.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodLaunchpad), sub_hood);
     coDriverStick.POV_South
         .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperLaunchpadRPM.getValue()));
 
-    coDriverStick.POV_West.whileHeld(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodTarmac), sub_hood);
+    coDriverStick.POV_West.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodTarmac), sub_hood);
     coDriverStick.POV_West
         .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperTarmacRPM.getValue()));
 
