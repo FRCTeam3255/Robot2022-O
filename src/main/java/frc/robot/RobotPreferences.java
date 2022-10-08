@@ -124,6 +124,8 @@ public final class RobotPreferences {
     public static final SN_DoublePreference hoodMinDegrees = new SN_DoublePreference("hoodMinDegrees", 4.89);
     public static final SN_DoublePreference hoodMaxDegrees = new SN_DoublePreference("hoodMaxDegrees", 38);
 
+    public static final SN_DoublePreference hoodNudgeDegrees = new SN_DoublePreference("hoodNudgeDegrees", 1);
+
     // TODO: get ideal positions
     public static final SN_DoublePreference hoodFender = new SN_DoublePreference("hoodFender", 0);
     public static final SN_DoublePreference hoodTerminal = new SN_DoublePreference("hoodTerminal", 35);

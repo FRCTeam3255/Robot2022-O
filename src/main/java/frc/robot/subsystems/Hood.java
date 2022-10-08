@@ -15,7 +15,6 @@ import com.frcteam3255.utils.SN_Math;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotPreferences;
 import frc.robot.RobotMap.HoodMap;
 import frc.robot.RobotPreferences.HoodPrefs;
 
@@ -70,6 +69,12 @@ public class Hood extends SubsystemBase {
     hoodMotor.set(ControlMode.Position, encoderCounts, DemandType.ArbitraryFeedForward,
         HoodPrefs.hoodArbitraryFeedForward.getValue());
     SmartDashboard.putNumber("Hood Desired Angle", angle.getValue());
+  }
+
+  public void setDoubleAngleDegrees(double angle) {
+    double encoderCounts = SN_Math.degreesToFalcon(angle, HoodPrefs.hoodGearRatio.getValue());
+    hoodMotor.set(ControlMode.Position, encoderCounts, DemandType.ArbitraryFeedForward,
+        HoodPrefs.hoodArbitraryFeedForward.getValue());
   }
 
   public double getAngleDegrees() {
