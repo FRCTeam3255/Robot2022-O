@@ -63,7 +63,7 @@ public class RobotContainer {
   // Hood Commands (none here they're done inline on controller)
 
   // Turret Commands
-  private final MoveTurret com_moveTurret = new MoveTurret(sub_turret);
+  private final MoveTurret com_moveTurret = new MoveTurret(sub_turret, sub_climber);
   private final SetTurretPosition com_setTurretCenter = new SetTurretPosition(sub_turret,
       RobotPreferences.zeroDoublePref);
 

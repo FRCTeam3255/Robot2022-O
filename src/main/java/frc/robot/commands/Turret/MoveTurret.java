@@ -6,18 +6,21 @@ package frc.robot.commands.Turret;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Turret;
 import frc.robot.RobotPreferences.TurretPrefs;
 
 public class MoveTurret extends CommandBase {
   Turret turret;
+  Climber climber;
   double speed;
 
   boolean isSpeedPositive;
 
   /** Creates a new MoveTurret. */
-  public MoveTurret(Turret a_turret) {
+  public MoveTurret(Turret a_turret, Climber a_climber) {
     turret = a_turret;
+    climber = a_climber;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(turret);
   }
@@ -33,17 +36,9 @@ public class MoveTurret extends CommandBase {
 
     speed = RobotContainer.coDriverStick.getRightStickX();
 
-    // if (speed > 0) {
-    // isSpeedPositive = true;
-    // } else {
-    // isSpeedPositive = false;
-    // }
-
-    // speed = speed * speed;
-
-    // if (!isSpeedPositive) {
-    // speed = -speed;
-    // }
+    if (climber.isPistonAngled()) {
+      speed = 0;
+    }
 
     turret.setTurretSpeed(speed * TurretPrefs.turretOpenLoopSpeed.getValue());
   }
