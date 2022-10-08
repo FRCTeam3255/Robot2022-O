@@ -119,6 +119,11 @@ public final class RobotPreferences {
     public static final SN_DoublePreference hoodLaunchpad = new SN_DoublePreference("hoodLaunchpad", 5);
     public static final SN_DoublePreference hoodTarmac = new SN_DoublePreference("hoodTarmac", 15);
 
+    public static final SN_DoublePreference hoodOldZero = new SN_DoublePreference("hoodOldZero", 10.8);
+    public static final SN_DoublePreference hoodOldLow = new SN_DoublePreference("hoodOldLow", 16.4);
+    public static final SN_DoublePreference hoodOldMid = new SN_DoublePreference("hoodOldMid", 25.3);
+    public static final SN_DoublePreference hoodOldHigh = new SN_DoublePreference("hoodOldHigh", 35.4);
+
   }
 
   public static final class ShooterPrefs {
