@@ -32,8 +32,10 @@ public final class RobotPreferences {
     public static final SN_DoublePreference climbOpenLoopSpeed = new SN_DoublePreference("climbOpenLoopSpeed", 1);
     public static final SN_DoublePreference climbClosedLoopSpeed = new SN_DoublePreference("climbClosedLoopSpeed", 1);
 
-    public static final SN_DoublePreference climbF = new SN_DoublePreference("climbF", 0);
-    public static final SN_DoublePreference climbP = new SN_DoublePreference("climbP", 1);
+    public static final SN_DoublePreference climbArbitraryFeedForward = new SN_DoublePreference(
+        "climbArbitraryFeedForward", 0);
+
+    public static final SN_DoublePreference climbP = new SN_DoublePreference("climbP", 0);
     public static final SN_DoublePreference climbI = new SN_DoublePreference("climbI", 0);
     public static final SN_DoublePreference climbD = new SN_DoublePreference("climbD", 0);
     public static final SN_DoublePreference climbAllowableClosedLoopError = new SN_DoublePreference(

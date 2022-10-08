@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
@@ -41,7 +42,6 @@ public class Climber extends SubsystemBase {
     climbMotor.configFactoryDefault();
     TalonFXConfiguration config = new TalonFXConfiguration();
 
-    config.slot0.kF = ClimberPrefs.climbF.getValue();
     config.slot0.kP = ClimberPrefs.climbP.getValue();
     config.slot0.kI = ClimberPrefs.climbI.getValue();
     config.slot0.kD = ClimberPrefs.climbD.getValue();
@@ -63,7 +63,8 @@ public class Climber extends SubsystemBase {
   }
 
   public void setClimberPosition(SN_DoublePreference position) {
-    climbMotor.set(ControlMode.Position, position.getValue());
+    climbMotor.set(ControlMode.Position, position.getValue(),
+        DemandType.ArbitraryFeedForward, ClimberPrefs.climbArbitraryFeedForward.getValue());
   }
 
   public void setPistonAngled() {
