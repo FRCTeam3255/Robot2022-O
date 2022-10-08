@@ -70,7 +70,7 @@ public class RobotContainer {
   private final VisionAimTurret com_visionAimTurret = new VisionAimTurret(sub_turret, sub_shooter, sub_vision,
       sub_navX);
   private final VisionSpinTurret com_visionSpinTurret = new VisionSpinTurret(sub_turret, sub_shooter, sub_vision,
-      sub_navX);
+      sub_navX, sub_climber);
 
   // Shooter Commands
   private final PushCargoSimple com_pushCargoSimple = new PushCargoSimple(sub_shooter, sub_transfer);
