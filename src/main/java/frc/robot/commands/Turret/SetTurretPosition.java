@@ -8,20 +8,23 @@ import com.frcteam3255.preferences.SN_DoublePreference;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotPreferences;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Turret;
 
 public class SetTurretPosition extends CommandBase {
   Turret turret;
   double degrees;
   SN_DoublePreference degreesPref;
+  Climber climber;
 
   int loopsInTol;
   int loopsToFinish;
 
   /** Creates a new SetTurretPosition. */
-  public SetTurretPosition(Turret a_turret, SN_DoublePreference a_degreesPref) {
+  public SetTurretPosition(Turret a_turret, SN_DoublePreference a_degreesPref, Climber a_climber) {
     turret = a_turret;
     degreesPref = a_degreesPref;
+    climber = a_climber;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(turret);
   }
@@ -34,7 +37,9 @@ public class SetTurretPosition extends CommandBase {
     loopsInTol = 0;
     loopsToFinish = RobotPreferences.TurretPrefs.turretLoopsToFinish.getValue();
 
-    turret.setTurretAngle(degrees);
+    if (!climber.isPistonAngled()) { // do not let the turret move when the climber is angled
+      turret.setTurretAngle(degrees);
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.

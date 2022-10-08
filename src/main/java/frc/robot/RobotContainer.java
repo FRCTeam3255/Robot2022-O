@@ -65,7 +65,7 @@ public class RobotContainer {
   // Turret Commands
   private final MoveTurret com_moveTurret = new MoveTurret(sub_turret, sub_climber);
   private final SetTurretPosition com_setTurretCenter = new SetTurretPosition(sub_turret,
-      RobotPreferences.zeroDoublePref);
+      RobotPreferences.zeroDoublePref, sub_climber);
 
   private final VisionAimTurret com_visionAimTurret = new VisionAimTurret(sub_turret, sub_shooter, sub_vision,
       sub_navX);
@@ -80,9 +80,9 @@ public class RobotContainer {
   // Shooter Presets
 
   private final SetTurretPosition com_presetToIntake = new SetTurretPosition(sub_turret,
-      TurretPrefs.turretSnapToIntake);
+      TurretPrefs.turretSnapToIntake, sub_climber);
   private final SetTurretPosition com_presetAwayIntake = new SetTurretPosition(sub_turret,
-      TurretPrefs.turretSnapAwayIntake);
+      TurretPrefs.turretSnapAwayIntake, sub_climber);
 
   // Transfer Commands
   private final ReverseTransfer com_reverseTransfer = new ReverseTransfer(sub_transfer, sub_intake);
