@@ -75,6 +75,7 @@ public class Drivetrain extends SubsystemBase {
     negSlewRateLimiter = new SlewRateLimiter(DrivetrainPrefs.driveNegSlewRateLimit.getValue());
 
     configure();
+    initializeTrajectories();
   }
 
   // Sets Drivetrain Variable's Default Settings
