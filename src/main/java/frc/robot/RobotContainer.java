@@ -100,7 +100,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     configureDashboardButtons();
-    sub_drivetrain.setDefaultCommand(com_drive);
+    sub_drivetrain.setDefaultCommand(new ClosedLoopDrive(sub_drivetrain));
     sub_turret.setDefaultCommand(com_visionAimTurret);
 
     sub_climber.setDefaultCommand(new RunCommand(
