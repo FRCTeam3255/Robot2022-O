@@ -228,14 +228,9 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
 
-    RamseteCommand fenderTo1Then2 = sub_drivetrain.getRamseteCommand(sub_drivetrain.fenderTo1Then2Traj);
-
     // An ExampleCommand will run in autonomous
     if (switchBoard.btn_1.get()) {
-      return new SequentialCommandGroup(
-          new InstantCommand(() -> sub_drivetrain.resetOdometry(sub_drivetrain.fenderTo1Then2Traj.getInitialPose())),
-          fenderTo1Then2,
-          new InstantCommand(() -> sub_drivetrain.driveSpeed(0, 0)));
+      return null;
     } else {
       return null;
     }
