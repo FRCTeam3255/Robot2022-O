@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.ConfigureSubsystems;
 import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Turret.*;
@@ -100,7 +102,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     configureDashboardButtons();
-    sub_drivetrain.setDefaultCommand(new ClosedLoopDrive(sub_drivetrain));
+    sub_drivetrain.setDefaultCommand(new Drive(sub_drivetrain));
     sub_turret.setDefaultCommand(com_visionAimTurret);
 
     sub_climber.setDefaultCommand(new RunCommand(
@@ -225,9 +227,15 @@ public class RobotContainer {
    */
 
   public Command getAutonomousCommand() {
+
+    RamseteCommand fenderTo1Then2 = sub_drivetrain.getRamseteCommand(sub_drivetrain.fenderTo1Then2Traj);
+
     // An ExampleCommand will run in autonomous
     if (switchBoard.btn_1.get()) {
-      return null;
+      return new SequentialCommandGroup(
+          new InstantCommand(() -> sub_drivetrain.resetOdometry(sub_drivetrain.fenderTo1Then2Traj.getInitialPose())),
+          fenderTo1Then2,
+          new InstantCommand(() -> sub_drivetrain.driveSpeed(0, 0)));
     } else {
       return null;
     }
