@@ -44,9 +44,14 @@ public final class RobotPreferences {
     // encoder counts position of "up" position or able reach the next bar
     public static final SN_DoublePreference climbUpPosition = new SN_DoublePreference("climbUpPosition", 42069);
 
-    // if the climber is too low and you try to angle the climber will hit turret
+    public static final SN_DoublePreference climbMinPerpPosition = new SN_DoublePreference(
+        "climbMinPerpPosition", 0);
     public static final SN_DoublePreference climbMinAnglePosition = new SN_DoublePreference(
-        "climbMinAnglePosition", 6942);
+        "climbMinAnglePosition", 10000);
+    public static final SN_DoublePreference climbMaxPosition = new SN_DoublePreference(
+        "climbMaxPosition", 182680);
+
+    // if the climber is too low and you try to angle the climber will hit turret
   }
 
   public static final class DrivetrainPrefs {
