@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.ConfigureSubsystems;
+import frc.robot.commands.Autonomous.New.ThreeCargoA;
 import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Turret.*;
 import frc.robot.commands.Intake.*;
@@ -230,7 +231,7 @@ public class RobotContainer {
 
     // An ExampleCommand will run in autonomous
     if (switchBoard.btn_1.get()) {
-      return null;
+      return new ThreeCargoA(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake, sub_climber);
     } else {
       return null;
     }
