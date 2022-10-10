@@ -104,7 +104,7 @@ public class RobotContainer {
     configureButtonBindings();
     configureDashboardButtons();
     sub_drivetrain.setDefaultCommand(new Drive(sub_drivetrain));
-    sub_turret.setDefaultCommand(com_visionAimTurret);
+    // sub_turret.setDefaultCommand(com_visionAimTurret);
 
     sub_climber.setDefaultCommand(new RunCommand(
         () -> sub_climber.setClimberSpeed(

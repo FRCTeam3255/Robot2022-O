@@ -73,6 +73,8 @@ public class Drivetrain extends SubsystemBase {
     posSlewRateLimiter = new SlewRateLimiter(DrivetrainPrefs.drivePosSlewRateLimit.getValue());
     negSlewRateLimiter = new SlewRateLimiter(DrivetrainPrefs.driveNegSlewRateLimit.getValue());
 
+    odometry = new DifferentialDriveOdometry(navx.getRotation2d());
+
     configure();
     initializeTrajectories();
   }
