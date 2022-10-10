@@ -106,9 +106,7 @@ public class RobotContainer {
     sub_turret.setDefaultCommand(com_visionAimTurret);
 
     sub_climber.setDefaultCommand(new RunCommand(
-        () -> sub_climber.setClimberSpeed(
-            (DriverStick.getAxisRT() * ClimberPrefs.climbOpenLoopSpeed.getValue())
-                - (DriverStick.getAxisLT() * ClimberPrefs.climbOpenLoopSpeed.getValue())),
+        () -> sub_climber.setClimberSpeed((DriverStick.getAxisRT()) - DriverStick.getAxisLT()),
         sub_climber));
 
     sub_hood.setDefaultCommand(new RunCommand(
@@ -186,6 +184,8 @@ public class RobotContainer {
         new SN_InstantCommand(sub_shooter::resetShooterEncoderCounts, true, sub_shooter));
     SmartDashboard.putData("Reset NavX Heading",
         new InstantCommand(sub_navX::resetHeading, sub_navX));
+    SmartDashboard.putData("Reset Climber Encoders",
+        new SN_InstantCommand(sub_climber::resetClimberEncoderCounts, true, sub_turret));
 
     // Calibration
     SmartDashboard.putData("Calibrate NavX",
