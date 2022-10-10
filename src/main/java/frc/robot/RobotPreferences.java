@@ -57,8 +57,8 @@ public final class RobotPreferences {
     public static final SN_DoublePreference arcadeClosedLoopMaxSpeed = new SN_DoublePreference(
         "arcadeClosedLoopMaxSpeed", 3);
 
-    public static final SN_DoublePreference driveF = new SN_DoublePreference("driveF", 0);
-    public static final SN_DoublePreference driveP = new SN_DoublePreference("driveP", 1);
+    public static final SN_DoublePreference driveF = new SN_DoublePreference("driveF", 0.045);
+    public static final SN_DoublePreference driveP = new SN_DoublePreference("driveP", 0.1);
     public static final SN_DoublePreference driveI = new SN_DoublePreference("driveI", 0);
     public static final SN_DoublePreference driveD = new SN_DoublePreference("driveD", 0);
 
@@ -127,7 +127,7 @@ public final class RobotPreferences {
     public static final SN_DoublePreference hoodNudgeDegrees = new SN_DoublePreference("hoodNudgeDegrees", 1);
 
     // TODO: get ideal positions
-    public static final SN_DoublePreference hoodFender = new SN_DoublePreference("hoodFender", 0);
+    public static final SN_DoublePreference hoodFender = new SN_DoublePreference("hoodFender", 5);
     public static final SN_DoublePreference hoodTerminal = new SN_DoublePreference("hoodTerminal", 35);
     public static final SN_DoublePreference hoodLaunchpad = new SN_DoublePreference("hoodLaunchpad", 5);
     public static final SN_DoublePreference hoodTarmac = new SN_DoublePreference("hoodTarmac", 15);
