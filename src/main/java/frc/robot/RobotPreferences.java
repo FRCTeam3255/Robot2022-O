@@ -49,7 +49,7 @@ public final class RobotPreferences {
     public static final SN_DoublePreference climbMinAnglePosition = new SN_DoublePreference(
         "climbMinAnglePosition", 10000);
     public static final SN_DoublePreference climbMaxPosition = new SN_DoublePreference(
-        "climbMaxPosition", 182680);
+        "climbMaxPosition", 191460);
 
     // if the climber is too low and you try to angle the climber will hit turret
   }

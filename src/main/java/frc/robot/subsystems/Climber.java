@@ -57,6 +57,8 @@ public class Climber extends SubsystemBase {
 
     climbMotor.configReverseSoftLimitThreshold(ClimberPrefs.climbMinPerpPosition.getValue());
     climbMotor.configReverseSoftLimitEnable(true);
+    climbMotor.configForwardSoftLimitThreshold(ClimberPrefs.climbMaxPosition.getValue());
+    climbMotor.configForwardSoftLimitEnable(true);
 
     climbMotor.setNeutralMode(NeutralMode.Brake);
     climbMotor.setInverted(false);
