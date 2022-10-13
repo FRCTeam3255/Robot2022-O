@@ -63,8 +63,7 @@ public class ThreeCargoA extends SequentialCommandGroup {
             new InstantCommand(() -> hood.setAngleDegrees(ThreeCargo.hoodAngle2_6))), // set hood
 
         // shoot first ball
-        new PushCargoSimple(shooter, transfer)
-            .until(() -> transfer.isTopBallCollected() && transfer.isBottomBallCollected()),
+        new PushCargoSimple(shooter, transfer).withTimeout(3),
 
         // drive and configure shooter on the way
         parallel(
