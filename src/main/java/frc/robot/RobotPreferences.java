@@ -325,14 +325,14 @@ public final class RobotPreferences {
       public static final SN_DoublePreference shooterRPM1_6 = new SN_DoublePreference(
           "shooterRPM1_6", ShooterPrefs.shooterPresetUpperFenderRPM.getValue());
       public static final SN_DoublePreference hoodAngle1_6 = new SN_DoublePreference(
-          "hoodAngle1_6", 5);
+          "hoodAngle1_6", HoodPrefs.hoodOldLow.getValue());
       public static final SN_DoublePreference turretAngle1_6 = new SN_DoublePreference(
           "turretAngle1_6", TurretPrefs.turretSnapAwayIntake.getValue());
 
       public static final SN_DoublePreference shooterRPM2_6 = new SN_DoublePreference(
           "shooterRPM2_6", 3500);
       public static final SN_DoublePreference hoodAngle2_6 = new SN_DoublePreference(
-          "hoodAngle2_6", 5);
+          "hoodAngle2_6", HoodPrefs.hoodOldHigh.getValue());
       public static final SN_DoublePreference turretAngle2_6 = new SN_DoublePreference(
           "turretAngle2_6", -198);
     }

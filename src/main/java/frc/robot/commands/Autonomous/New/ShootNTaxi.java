@@ -7,7 +7,11 @@ package frc.robot.commands.Autonomous.New;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.RobotPreferences.AutoPrefs;
+import frc.robot.RobotPreferences.TurretPrefs;
+import frc.robot.RobotPreferences.AutoPrefs.OpenLoopTwoBall;
 import frc.robot.RobotPreferences.AutoPrefs.ThreeCargo;
+import frc.robot.commands.Autonomous.DriveDistanceOpenLoop;
 import frc.robot.commands.Autonomous.SetShooterRPM;
 import frc.robot.commands.Intake.CollectCargo;
 import frc.robot.commands.Transfer.PushCargoSimple;
@@ -20,7 +24,7 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transfer;
 import frc.robot.subsystems.Turret;
 
-public class ThreeCargoA extends SequentialCommandGroup {
+public class ShootNTaxi extends SequentialCommandGroup {
 
   Drivetrain drivetrain;
   Shooter shooter;
@@ -31,7 +35,7 @@ public class ThreeCargoA extends SequentialCommandGroup {
   Climber climber;
 
   /** Creates a new AutoThreeCargoPP. */
-  public ThreeCargoA(
+  public ShootNTaxi(
       Drivetrain sub_drivetrain,
       Shooter sub_shooter,
       Turret sub_turret,
@@ -48,8 +52,6 @@ public class ThreeCargoA extends SequentialCommandGroup {
     intake = sub_intake;
     climber = sub_climber;
 
-    RamseteCommand fenderTo1Then2 = drivetrain.getRamseteCommand(drivetrain.fenderTo1Then2Traj);
-
     addCommands(
         // config drivetrain
         new InstantCommand(() -> sub_drivetrain.setBrakeMode()),
@@ -63,21 +65,9 @@ public class ThreeCargoA extends SequentialCommandGroup {
             new InstantCommand(() -> hood.setAngleDegrees(ThreeCargo.hoodAngle2_6))), // set hood
 
         // shoot first ball
-        new PushCargoSimple(shooter, transfer)
-            .until(() -> transfer.isTopBallCollected() && transfer.isBottomBallCollected()),
+        new PushCargoSimple(shooter, transfer).withTimeout(5),
 
-        // drive and configure shooter on the way
-        parallel(
-            new CollectCargo(intake, transfer)
-                .until(() -> transfer.isTopBallCollected() && transfer.isBottomBallCollected()),
-            new SetShooterRPM(shooter, ThreeCargo.shooterRPM2_6), // set shooter
-            new SetTurretAngle(turret, ThreeCargo.turretAngle2_6).withTimeout(.5), // set turret
-            new InstantCommand(() -> hood.setAngleDegrees(ThreeCargo.hoodAngle2_6)), // set hood
-            new InstantCommand(() -> drivetrain.resetOdometry(drivetrain.fenderTo1Then2Traj.getInitialPose()))
-                .andThen(fenderTo1Then2
-                    .andThen(new InstantCommand(() -> drivetrain.driveSpeed(0, 0))))),
-
-        new PushCargoSimple(shooter, transfer) // shoot
+        new DriveDistanceOpenLoop(sub_drivetrain, OpenLoopTwoBall.auto4dist1, TurretPrefs.turretOpenLoopSpeed)
 
     );
   }
