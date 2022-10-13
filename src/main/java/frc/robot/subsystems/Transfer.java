@@ -117,6 +117,12 @@ public class Transfer extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putBoolean("Top Ball Collected", isTopBallCollected());
     SmartDashboard.putBoolean("Bottom Ball Collected", isBottomBallCollected());
+
+    SmartDashboard.putBoolean("@ Top Right Switch", transferTopRightLimitSwitch.get());
+    SmartDashboard.putBoolean("@ Top Left Switch", transferTopLeftLimitSwitch.get());
+    SmartDashboard.putBoolean("@ Bottom Right Switch", transferBottomRightLimitSwitch.get());
+    SmartDashboard.putBoolean("@ Bottom Left Switch", transferBottomLeftLimitSwitch.get());
+
     if (RobotContainer.switchBoard.btn_7.get()) {
       SmartDashboard.getNumber("Top Belt Motor Speed",
           topBeltMotor.getMotorOutputPercent());

@@ -71,8 +71,8 @@ public final class RobotMap {
 
     public static final int TRANSFER_TOP_LEFT_LIMIT_SWITCH_DIO = 1;
     public static final int TRANSFER_BOTTOM_LEFT_LIMIT_SWITCH_DIO = 2;
-    public static final int TRANSFER_TOP_RIGHT_LIMIT_SWITCH_DIO = 3;
-    public static final int TRANSFER_BOTTOM_RIGHT_LIMIT_SWITCH_DIO = 4;
+    public static final int TRANSFER_TOP_RIGHT_LIMIT_SWITCH_DIO = 4; // easier to switch in code then to fix physically
+    public static final int TRANSFER_BOTTOM_RIGHT_LIMIT_SWITCH_DIO = 3;
   }
 
   public final class TurretMap {

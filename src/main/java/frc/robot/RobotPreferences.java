@@ -127,7 +127,7 @@ public final class RobotPreferences {
     public static final SN_DoublePreference hoodNudgeDegrees = new SN_DoublePreference("hoodNudgeDegrees", 1);
 
     // TODO: get ideal positions
-    public static final SN_DoublePreference hoodFender = new SN_DoublePreference("hoodFender", 5);
+    public static final SN_DoublePreference hoodFender = new SN_DoublePreference("hoodFender", 7);
     public static final SN_DoublePreference hoodTerminal = new SN_DoublePreference("hoodTerminal", 35);
     public static final SN_DoublePreference hoodLaunchpad = new SN_DoublePreference("hoodLaunchpad", 5);
     public static final SN_DoublePreference hoodTarmac = new SN_DoublePreference("hoodTarmac", 15);
@@ -159,7 +159,7 @@ public final class RobotPreferences {
     public static final SN_DoublePreference shooterD = new SN_DoublePreference("shooterD", 0.0088);
 
     public static final SN_DoublePreference shooterPresetUpperFenderRPM = new SN_DoublePreference(
-        "shooterPresetUpperFenderRPM", 3000);
+        "shooterPresetUpperFenderRPM", 2700);
     public static final SN_DoublePreference shooterPresetUpperTarmacRPM = new SN_DoublePreference(
         "shooterPresetUpperTarmacRPM", 3255);
     public static final SN_DoublePreference shooterPresetUpperLaunchpadRPM = new SN_DoublePreference(
