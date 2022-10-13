@@ -57,8 +57,8 @@ public final class RobotPreferences {
     public static final SN_DoublePreference arcadeClosedLoopMaxSpeed = new SN_DoublePreference(
         "arcadeClosedLoopMaxSpeed", 3);
 
-    public static final SN_DoublePreference driveF = new SN_DoublePreference("driveF", 0);
-    public static final SN_DoublePreference driveP = new SN_DoublePreference("driveP", 1);
+    public static final SN_DoublePreference driveF = new SN_DoublePreference("driveF", 0.045);
+    public static final SN_DoublePreference driveP = new SN_DoublePreference("driveP", 0.1);
     public static final SN_DoublePreference driveI = new SN_DoublePreference("driveI", 0);
     public static final SN_DoublePreference driveD = new SN_DoublePreference("driveD", 0);
 
@@ -325,14 +325,14 @@ public final class RobotPreferences {
       public static final SN_DoublePreference shooterRPM1_6 = new SN_DoublePreference(
           "shooterRPM1_6", ShooterPrefs.shooterPresetUpperFenderRPM.getValue());
       public static final SN_DoublePreference hoodAngle1_6 = new SN_DoublePreference(
-          "hoodAngle1_6", 5);
+          "hoodAngle1_6", HoodPrefs.hoodOldLow.getValue());
       public static final SN_DoublePreference turretAngle1_6 = new SN_DoublePreference(
           "turretAngle1_6", TurretPrefs.turretSnapAwayIntake.getValue());
 
       public static final SN_DoublePreference shooterRPM2_6 = new SN_DoublePreference(
           "shooterRPM2_6", 3500);
       public static final SN_DoublePreference hoodAngle2_6 = new SN_DoublePreference(
-          "hoodAngle2_6", 5);
+          "hoodAngle2_6", HoodPrefs.hoodOldHigh.getValue());
       public static final SN_DoublePreference turretAngle2_6 = new SN_DoublePreference(
           "turretAngle2_6", -198);
     }

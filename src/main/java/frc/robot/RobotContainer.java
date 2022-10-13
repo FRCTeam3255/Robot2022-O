@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.commands.ConfigureSubsystems;
+import frc.robot.commands.Autonomous.New.ShootNTaxi;
 import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Turret.*;
 import frc.robot.commands.Intake.*;
@@ -100,8 +101,8 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     configureDashboardButtons();
-    sub_drivetrain.setDefaultCommand(new ClosedLoopDrive(sub_drivetrain));
-    sub_turret.setDefaultCommand(com_visionAimTurret);
+    sub_drivetrain.setDefaultCommand(new Drive(sub_drivetrain));
+    // sub_turret.setDefaultCommand(com_visionAimTurret);
 
     sub_climber.setDefaultCommand(new RunCommand(
         () -> sub_climber.setClimberSpeed(
@@ -225,9 +226,10 @@ public class RobotContainer {
    */
 
   public Command getAutonomousCommand() {
+
     // An ExampleCommand will run in autonomous
     if (switchBoard.btn_1.get()) {
-      return null;
+      return new ShootNTaxi(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake, sub_climber);
     } else {
       return null;
     }
