@@ -5,9 +5,7 @@
 package frc.robot.commands.Autonomous.New;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.RobotPreferences.AutoPrefs;
 import frc.robot.RobotPreferences.TurretPrefs;
 import frc.robot.RobotPreferences.AutoPrefs.OpenLoopTwoBall;
 import frc.robot.RobotPreferences.AutoPrefs.ThreeCargo;
