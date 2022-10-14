@@ -6,6 +6,8 @@ import com.frcteam3255.preferences.SN_IntPreference;
 import com.frcteam3255.preferences.SN_ZeroDoublePreference;
 import com.frcteam3255.preferences.SN_ZeroIntPreference;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+
 public final class RobotPreferences {
 
   // when mechanical builds stuff, it's almost always (and should be) designed to
@@ -59,9 +61,11 @@ public final class RobotPreferences {
     public static final SN_DoublePreference arcadeTurn = new SN_DoublePreference("arcadeTurn", .5);
     public static final SN_DoublePreference arcadeLowSpeed = new SN_DoublePreference("arcadeLowSpeed", 0.4);
     public static final SN_DoublePreference arcadeHighSpeed = new SN_DoublePreference("arcadeHighSpeed", 1.5);
+    public static final SN_DoublePreference arcadeClosedLoopMaxSpeed = new SN_DoublePreference(
+        "arcadeClosedLoopMaxSpeed", 3);
 
-    public static final SN_DoublePreference driveF = new SN_DoublePreference("driveF", 0);
-    public static final SN_DoublePreference driveP = new SN_DoublePreference("driveP", 1);
+    public static final SN_DoublePreference driveF = new SN_DoublePreference("driveF", 0.045);
+    public static final SN_DoublePreference driveP = new SN_DoublePreference("driveP", 0.1);
     public static final SN_DoublePreference driveI = new SN_DoublePreference("driveI", 0);
     public static final SN_DoublePreference driveD = new SN_DoublePreference("driveD", 0);
 
@@ -99,6 +103,15 @@ public final class RobotPreferences {
 
     public static final SN_DoublePreference driveOpenLoopCounts = new SN_DoublePreference("driveOpenLoopCounts", 44444);
 
+    public static final SN_DoublePreference driveWheelCircumference = new SN_DoublePreference(
+        "driveWheelCircumference", 4 * Math.PI);
+    public static final SN_DoublePreference driveGearRatio = new SN_DoublePreference("driveGearRatio", 6);
+
+    public static final SN_DoublePreference driveWidth = new SN_DoublePreference("driveWidth", 0.55); // meters
+    public static final SN_DoublePreference driveLength = new SN_DoublePreference("driveLength", 0.67); // meters
+    public static final DifferentialDriveKinematics driveKinematics = new DifferentialDriveKinematics(
+        driveWidth.getValue());
+
   }
 
   public static final class HoodPrefs {
@@ -118,11 +131,18 @@ public final class RobotPreferences {
     public static final SN_DoublePreference hoodMinDegrees = new SN_DoublePreference("hoodMinDegrees", 4.89);
     public static final SN_DoublePreference hoodMaxDegrees = new SN_DoublePreference("hoodMaxDegrees", 38);
 
+    public static final SN_DoublePreference hoodNudgeDegrees = new SN_DoublePreference("hoodNudgeDegrees", 1);
+
     // TODO: get ideal positions
-    public static final SN_DoublePreference hoodFender = new SN_DoublePreference("hoodFender", 0);
+    public static final SN_DoublePreference hoodFender = new SN_DoublePreference("hoodFender", 7);
     public static final SN_DoublePreference hoodTerminal = new SN_DoublePreference("hoodTerminal", 35);
-    public static final SN_DoublePreference hoodLaunchpad = new SN_DoublePreference("hoodLaunchpad", 5);
+    public static final SN_DoublePreference hoodLaunchpad = new SN_DoublePreference("hoodLaunchpad", 38);
     public static final SN_DoublePreference hoodTarmac = new SN_DoublePreference("hoodTarmac", 15);
+
+    public static final SN_DoublePreference hoodOldZero = new SN_DoublePreference("hoodOldZero", 10.8);
+    public static final SN_DoublePreference hoodOldLow = new SN_DoublePreference("hoodOldLow", 16.4);
+    public static final SN_DoublePreference hoodOldMid = new SN_DoublePreference("hoodOldMid", 25.3);
+    public static final SN_DoublePreference hoodOldHigh = new SN_DoublePreference("hoodOldHigh", 35.4);
 
   }
 
@@ -146,11 +166,11 @@ public final class RobotPreferences {
     public static final SN_DoublePreference shooterD = new SN_DoublePreference("shooterD", 0.0088);
 
     public static final SN_DoublePreference shooterPresetUpperFenderRPM = new SN_DoublePreference(
-        "shooterPresetUpperFenderRPM", 3000);
+        "shooterPresetUpperFenderRPM", 2700);
     public static final SN_DoublePreference shooterPresetUpperTarmacRPM = new SN_DoublePreference(
         "shooterPresetUpperTarmacRPM", 3255);
     public static final SN_DoublePreference shooterPresetUpperLaunchpadRPM = new SN_DoublePreference(
-        "shooterPresetUpperLaunchpadRPM", 3925);
+        "shooterPresetUpperLaunchpadRPM", 4200);
     public static final SN_DoublePreference shooterPresetUpperTerminalRPM = new SN_DoublePreference(
         "shooterPresetUpperTerminalRPM", 4550);
 
@@ -306,5 +326,23 @@ public final class RobotPreferences {
       public static final SN_DoublePreference autoThreeCargoShooterRPM = new SN_DoublePreference(
           "autoThreeCargoShooterRPM", 3255);
     }
+
+    // auto 6
+    public static final class ThreeCargo {
+      public static final SN_DoublePreference shooterRPM1_6 = new SN_DoublePreference(
+          "shooterRPM1_6", ShooterPrefs.shooterPresetUpperFenderRPM.getValue());
+      public static final SN_DoublePreference hoodAngle1_6 = new SN_DoublePreference(
+          "hoodAngle1_6", HoodPrefs.hoodOldLow.getValue());
+      public static final SN_DoublePreference turretAngle1_6 = new SN_DoublePreference(
+          "turretAngle1_6", TurretPrefs.turretSnapAwayIntake.getValue());
+
+      public static final SN_DoublePreference shooterRPM2_6 = new SN_DoublePreference(
+          "shooterRPM2_6", 3500);
+      public static final SN_DoublePreference hoodAngle2_6 = new SN_DoublePreference(
+          "hoodAngle2_6", HoodPrefs.hoodOldHigh.getValue());
+      public static final SN_DoublePreference turretAngle2_6 = new SN_DoublePreference(
+          "turretAngle2_6", -198);
+    }
+
   }
 }

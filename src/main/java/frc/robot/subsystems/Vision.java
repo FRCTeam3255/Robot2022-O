@@ -31,6 +31,41 @@ public class Vision extends SubsystemBase {
     limelight.setLEDMode(LEDMode.off);
   }
 
+  // ty, degrees, rpm
+  // +23.3, 20, 3000
+  // +12.8, 27, 3000
+  // +0.7, 35, 3300
+  // -5.4, 38, 3600
+  // -7.5, 38, 3700
+  // -14.3, 38, 4200 (launchpad)
+  public double getIdealHoodAngle() {
+
+    double x = limelight.getOffsetY();
+
+    double a = 0.000480075;
+    double b = -0.0173149;
+    double c = -0.521302;
+    double d = 35.4786;
+
+    double angle = (Math.pow(x, 3) * a) + (Math.pow(x, 2) * b) + (x * c) + d;
+
+    return angle;
+
+  }
+
+  public double getIdealShooterRPM() {
+    double x = limelight.getOffsetY();
+
+    double a = 1.22666;
+    double b = -42.5305;
+    double c = 3330.86;
+
+    double rpm = (Math.pow(x, 2) * a) + (x * b) + c;
+
+    return rpm;
+
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

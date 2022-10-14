@@ -4,17 +4,31 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motion.BufferedTrajectoryPointStream;
+import java.io.IOException;
+import java.nio.file.Path;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.frcteam3255.preferences.SN_DoublePreference;
+import com.frcteam3255.utils.SN_Math;
+import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryUtil;
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.RobotPreferences;
@@ -34,6 +48,19 @@ public class Drivetrain extends SubsystemBase {
   public SlewRateLimiter posSlewRateLimiter;
   public SlewRateLimiter negSlewRateLimiter;
 
+  AHRS navx = new AHRS();
+
+  DifferentialDriveOdometry odometry;
+  Field2d field = new Field2d();
+
+  String fenderTo1Then2JSON = "pathplanner/generatedJSON/fenderTo1Then2.wpilib.json";
+  String ball2ToTerminalJSON = "pathplanner/generatedJSON/2ToTerminal.wpilib.json";
+  String terminalTo2JSON = "pathplanner/generatedJSON/TerminalTo2.wpilib.json";
+
+  public Trajectory fenderTo1Then2Traj = new Trajectory();
+  public Trajectory ball2ToTerminalTraj = new Trajectory();
+  public Trajectory terminalTo2Traj = new Trajectory();
+
   // Initializes Variables for Drivetrain
   public Drivetrain() {
     leftLeadMotor = new TalonFX(DrivetrainMap.LEFT_LEAD_MOTOR_CAN);
@@ -46,7 +73,10 @@ public class Drivetrain extends SubsystemBase {
     posSlewRateLimiter = new SlewRateLimiter(DrivetrainPrefs.drivePosSlewRateLimit.getValue());
     negSlewRateLimiter = new SlewRateLimiter(DrivetrainPrefs.driveNegSlewRateLimit.getValue());
 
+    odometry = new DifferentialDriveOdometry(navx.getRotation2d());
+
     configure();
+    initializeTrajectories();
   }
 
   // Sets Drivetrain Variable's Default Settings
@@ -161,6 +191,18 @@ public class Drivetrain extends SubsystemBase {
     return fps;
   }
 
+  public double getLeftMPS() {
+    return SN_Math.falconToMPS(getLeftVelocity(),
+        Units.inchesToMeters(DrivetrainPrefs.driveWheelCircumference.getValue()),
+        DrivetrainPrefs.driveGearRatio.getValue());
+  }
+
+  public double getRightMPS() {
+    return SN_Math.falconToMPS(getRightVelocity(),
+        Units.inchesToMeters(DrivetrainPrefs.driveWheelCircumference.getValue()),
+        DrivetrainPrefs.driveGearRatio.getValue());
+  }
+
   // Method controls Drivetrain Motor speeds
   public void arcadeDrive(double a_speed, double a_turn) {
     double speed = a_speed * DrivetrainPrefs.arcadeSpeed.getValue();
@@ -179,28 +221,16 @@ public class Drivetrain extends SubsystemBase {
     rightLeadMotor.set(ControlMode.PercentOutput, speed * multiplier, DemandType.ArbitraryFeedForward, -turn);
   }
 
-  // starts motion profile using seperate left and right trajectories, and ctre
-  // ControlMode.MotionProfile
-  public void startMotionProfile(BufferedTrajectoryPointStream pointsLeft, BufferedTrajectoryPointStream pointsRight) {
-    configure();
-    resetDrivetrainEncodersCount();
+  public void closedLoopArcadeDrive(double a_speed, double a_turn) {
+    double speed = a_speed * DrivetrainPrefs.arcadeClosedLoopMaxSpeed.getValue();
 
-    leftLeadMotor.startMotionProfile(
-        pointsLeft, DrivetrainPrefs.motionProfileMinBufferedPoints.getValue(), ControlMode.MotionProfile);
-    rightLeadMotor.startMotionProfile(
-        pointsRight, DrivetrainPrefs.motionProfileMinBufferedPoints.getValue(), ControlMode.MotionProfile);
-  }
+    speed = SN_Math.MPSToFalcon(
+        speed, Units.inchesToMeters(DrivetrainPrefs.driveWheelCircumference.getValue()),
+        DrivetrainPrefs.driveGearRatio.getValue());
+    double turn = a_turn * DrivetrainPrefs.arcadeTurn.getValue();
 
-  public boolean isMotionProfileFinished() {
-    return leftLeadMotor.isMotionProfileFinished() && rightLeadMotor.isMotionProfileFinished();
-  }
-
-  public void resetMotionProfile() {
-    rightLeadMotor.set(ControlMode.PercentOutput, 0.0);
-    leftLeadMotor.set(ControlMode.PercentOutput, 0.0);
-    rightLeadMotor.clearMotionProfileTrajectories();
-    leftLeadMotor.clearMotionProfileTrajectories();
-    resetDrivetrainEncodersCount();
+    leftLeadMotor.set(ControlMode.Velocity, speed, DemandType.ArbitraryFeedForward, turn);
+    rightLeadMotor.set(ControlMode.Velocity, speed, DemandType.ArbitraryFeedForward, -turn);
   }
 
   public void driveDistance(SN_DoublePreference a_inchesToDrive, SN_DoublePreference a_peakPercentOutput) {
@@ -209,6 +239,27 @@ public class Drivetrain extends SubsystemBase {
     double position = a_inchesToDrive.getValue() * (DrivetrainPrefs.driveEncoderCountsPerFoot.getValue() / 12);
     leftLeadMotor.set(ControlMode.Position, position);
     rightLeadMotor.set(ControlMode.Position, position);
+  }
+
+  public void driveSpeed(double a_leftMPS, double a_rightMPS) {
+    double leftVelocity = SN_Math.MPSToFalcon(
+        a_leftMPS, Units.inchesToMeters(DrivetrainPrefs.driveWheelCircumference.getValue()),
+        DrivetrainPrefs.driveGearRatio.getValue());
+    double rightVelocity = SN_Math.MPSToFalcon(
+        a_rightMPS, Units.inchesToMeters(DrivetrainPrefs.driveWheelCircumference.getValue()),
+        DrivetrainPrefs.driveGearRatio.getValue());
+
+    leftLeadMotor.set(ControlMode.Velocity, leftVelocity);
+    rightLeadMotor.set(ControlMode.Velocity, rightVelocity);
+  }
+
+  public Pose2d getPose() {
+    return odometry.getPoseMeters();
+  }
+
+  public void resetOdometry(Pose2d pose) {
+    resetDrivetrainEncodersCount();
+    odometry.resetPosition(pose, navx.getRotation2d());
   }
 
   public double getLeftClosedLoopErrorInches() {
@@ -239,6 +290,32 @@ public class Drivetrain extends SubsystemBase {
     rightLeadMotor.setNeutralMode(NeutralMode.Coast);
   }
 
+  public RamseteCommand getRamseteCommand(Trajectory trajectory) {
+    field.getObject("traj").setTrajectory(trajectory);
+
+    return new RamseteCommand(
+        trajectory,
+        this::getPose,
+        new RamseteController(),
+        DrivetrainPrefs.driveKinematics,
+        this::driveSpeed,
+        this);
+  }
+
+  private void initializeTrajectories() {
+    try {
+      Path fenderTo1Then2JSONPath = Filesystem.getDeployDirectory().toPath().resolve(fenderTo1Then2JSON);
+      Path ball2ToTerminalJSONPath = Filesystem.getDeployDirectory().toPath().resolve(ball2ToTerminalJSON);
+      Path terminalTo2JSONPath = Filesystem.getDeployDirectory().toPath().resolve(terminalTo2JSON);
+
+      fenderTo1Then2Traj = TrajectoryUtil.fromPathweaverJson(fenderTo1Then2JSONPath);
+      ball2ToTerminalTraj = TrajectoryUtil.fromPathweaverJson(ball2ToTerminalJSONPath);
+      terminalTo2Traj = TrajectoryUtil.fromPathweaverJson(terminalTo2JSONPath);
+    } catch (IOException ex) {
+      DriverStation.reportError("Unable to open trajectory. Error: ", ex.getStackTrace());
+    }
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -249,10 +326,6 @@ public class Drivetrain extends SubsystemBase {
       SmartDashboard.putNumber("Drivetrain Right Encoder", getRightEncoderCount());
       SmartDashboard.putNumber("Drivetrain Average Encoder",
           getAverageEncoderCount());
-
-      // Motion Profile
-      SmartDashboard.putBoolean("Is Drivetrain Motion Profile Finished",
-          isMotionProfileFinished());
 
       // Motor Percent Output
       SmartDashboard.putNumber("Drivetrain Left Lead Motor Speed",

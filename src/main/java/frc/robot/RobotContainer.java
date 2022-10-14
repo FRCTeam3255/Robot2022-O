@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.commands.ConfigureSubsystems;
+import frc.robot.commands.Autonomous.New.ShootNTaxi;
 import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Turret.*;
 import frc.robot.commands.Intake.*;
@@ -69,8 +70,6 @@ public class RobotContainer {
 
   private final VisionAimTurret com_visionAimTurret = new VisionAimTurret(sub_turret, sub_shooter, sub_vision,
       sub_navX);
-  private final VisionSpinTurret com_visionSpinTurret = new VisionSpinTurret(sub_turret, sub_shooter, sub_vision,
-      sub_navX, sub_climber);
 
   // Shooter Commands
   private final PushCargoSimple com_pushCargoSimple = new PushCargoSimple(sub_shooter, sub_transfer);
@@ -102,16 +101,10 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     configureDashboardButtons();
-    sub_drivetrain.setDefaultCommand(com_drive);
-    // sub_turret.setDefaultCommand(com_visionAimTurret);
-
+    sub_drivetrain.setDefaultCommand(new Drive(sub_drivetrain));
     sub_climber.setDefaultCommand(new RunCommand(
         () -> sub_climber.setClimberSpeed((DriverStick.getAxisRT()) - DriverStick.getAxisLT()),
         sub_climber));
-
-    sub_hood.setDefaultCommand(new RunCommand(
-        () -> sub_hood.setSpeed(coDriverStick.getRightStickY()),
-        sub_hood));
 
     com_setUpperHubGoal.initialize(); // upper hub needs to be set as goal
 
@@ -138,24 +131,30 @@ public class RobotContainer {
     coDriverStick.btn_RBump.whenPressed(com_spinFlywheelGoalRPM);
     coDriverStick.btn_LBump.whileHeld(com_moveTurret);
 
-    // Limelight Command
-    // Just Setting Angle (X Axis)
-    coDriverStick.btn_X.whileHeld(com_visionSpinTurret);
-
     // shooter/hood commands
-    coDriverStick.POV_North.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodFender));
+
+    // NUDGING
+    coDriverStick.btn_X.whileHeld(new VisionSpinTurret(sub_turret, sub_shooter, sub_vision, sub_navX, sub_climber));
+
+    coDriverStick.btn_Y.whileHeld(() -> sub_hood.setDoubleAngleDegrees(sub_vision.getIdealHoodAngle()));
+    coDriverStick.btn_Y.whileHeld(() -> sub_shooter.setGoalRPM(sub_vision.getIdealShooterRPM()));
+
+    coDriverStick.btn_A.whenPressed(com_visionAimTurret.perpetually());
+
+    // PRESETS
+    coDriverStick.POV_North.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodFender), sub_hood);
     coDriverStick.POV_North
         .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperFenderRPM.getValue()));
 
-    coDriverStick.POV_East.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodTerminal));
+    coDriverStick.POV_East.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodTerminal), sub_hood);
     coDriverStick.POV_East
         .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperTerminalRPM.getValue()));
 
-    coDriverStick.POV_South.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodLaunchpad));
+    coDriverStick.POV_South.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodLaunchpad), sub_hood);
     coDriverStick.POV_South
         .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperLaunchpadRPM.getValue()));
 
-    coDriverStick.POV_West.whileHeld(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodTarmac), sub_hood);
+    coDriverStick.POV_West.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodTarmac), sub_hood);
     coDriverStick.POV_West
         .whenPressed(() -> sub_shooter.setGoalRPM(ShooterPrefs.shooterPresetUpperTarmacRPM.getValue()));
 
@@ -227,9 +226,10 @@ public class RobotContainer {
    */
 
   public Command getAutonomousCommand() {
+
     // An ExampleCommand will run in autonomous
     if (switchBoard.btn_1.get()) {
-      return null;
+      return new ShootNTaxi(sub_drivetrain, sub_shooter, sub_turret, sub_hood, sub_transfer, sub_intake, sub_climber);
     } else {
       return null;
     }
