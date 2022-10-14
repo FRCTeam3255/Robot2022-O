@@ -113,7 +113,7 @@ public class Climber extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if (!RobotContainer.switchBoard.btn_7.get()) {
+    if (RobotContainer.switchBoard.btn_7.get()) {
 
       SmartDashboard.putNumber("Climber Encoder Count", getClimberEncoderCounts());
       SmartDashboard.putBoolean("Is Climber Max", isClimberMax());
