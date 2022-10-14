@@ -102,8 +102,6 @@ public class RobotContainer {
     configureButtonBindings();
     configureDashboardButtons();
     sub_drivetrain.setDefaultCommand(new Drive(sub_drivetrain));
-    // sub_turret.setDefaultCommand(com_visionAimTurret);
-
     sub_climber.setDefaultCommand(new RunCommand(
         () -> sub_climber.setClimberSpeed(
             (DriverStick.getAxisRT() * ClimberPrefs.climbOpenLoopSpeed.getValue())
@@ -138,10 +136,12 @@ public class RobotContainer {
     // shooter/hood commands
 
     // NUDGING
-    coDriverStick.btn_X.whenPressed(
-        () -> sub_hood.setDoubleAngleDegrees(sub_hood.getAngleDegrees() - HoodPrefs.hoodNudgeDegrees.getValue()));
-    coDriverStick.btn_Y.whenPressed(
-        () -> sub_hood.setDoubleAngleDegrees(sub_hood.getAngleDegrees() + HoodPrefs.hoodNudgeDegrees.getValue()));
+    coDriverStick.btn_X.whileHeld(new VisionSpinTurret(sub_turret, sub_shooter, sub_vision, sub_navX));
+
+    coDriverStick.btn_Y.whileHeld(() -> sub_hood.setDoubleAngleDegrees(sub_vision.getIdealHoodAngle()));
+    coDriverStick.btn_Y.whileHeld(() -> sub_shooter.setGoalRPM(sub_vision.getIdealShooterRPM()));
+
+    coDriverStick.btn_A.whenPressed(com_visionAimTurret.perpetually());
 
     // PRESETS
     coDriverStick.POV_North.whenPressed(() -> sub_hood.setAngleDegrees(HoodPrefs.hoodFender), sub_hood);
