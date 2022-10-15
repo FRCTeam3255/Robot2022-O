@@ -122,6 +122,10 @@ public class RobotContainer {
     DriverStick.btn_A.whenPressed(() -> sub_climber.setPistonAngled());
     DriverStick.btn_B.whenPressed(() -> sub_climber.setPistonPerpendicular());
 
+    // prep climb
+    DriverStick.btn_Back.whenPressed(() -> sub_turret.setTurretAngle(TurretPrefs.turretMinAngleDegrees.getValue()));
+    DriverStick.btn_Back.whenPressed(() -> sub_intake.retractIntake());
+
     // coDriver Stick
 
     coDriverStick.btn_RTrig.whileHeld(com_pushCargoSimple);
