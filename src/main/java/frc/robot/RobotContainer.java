@@ -64,9 +64,9 @@ public class RobotContainer {
   // Hood Commands (none here they're done inline on controller)
 
   // Turret Commands
-  private final MoveTurret com_moveTurret = new MoveTurret(sub_turret);
+  private final MoveTurret com_moveTurret = new MoveTurret(sub_turret, sub_climber);
   private final SetTurretPosition com_setTurretCenter = new SetTurretPosition(sub_turret,
-      RobotPreferences.zeroDoublePref);
+      RobotPreferences.zeroDoublePref, sub_climber);
 
   private final VisionAimTurret com_visionAimTurret = new VisionAimTurret(sub_turret, sub_shooter, sub_vision,
       sub_navX);
@@ -79,9 +79,9 @@ public class RobotContainer {
   // Shooter Presets
 
   private final SetTurretPosition com_presetToIntake = new SetTurretPosition(sub_turret,
-      TurretPrefs.turretSnapToIntake);
+      TurretPrefs.turretSnapToIntake, sub_climber);
   private final SetTurretPosition com_presetAwayIntake = new SetTurretPosition(sub_turret,
-      TurretPrefs.turretSnapAwayIntake);
+      TurretPrefs.turretSnapAwayIntake, sub_climber);
 
   // Transfer Commands
   private final ReverseTransfer com_reverseTransfer = new ReverseTransfer(sub_transfer, sub_intake);
@@ -103,9 +103,7 @@ public class RobotContainer {
     configureDashboardButtons();
     sub_drivetrain.setDefaultCommand(new Drive(sub_drivetrain));
     sub_climber.setDefaultCommand(new RunCommand(
-        () -> sub_climber.setClimberSpeed(
-            (DriverStick.getAxisRT() * ClimberPrefs.climbOpenLoopSpeed.getValue())
-                - (DriverStick.getAxisLT() * ClimberPrefs.climbOpenLoopSpeed.getValue())),
+        () -> sub_climber.setClimberSpeed((DriverStick.getAxisRT()) - DriverStick.getAxisLT()),
         sub_climber));
 
     com_setUpperHubGoal.initialize(); // upper hub needs to be set as goal
@@ -136,7 +134,7 @@ public class RobotContainer {
     // shooter/hood commands
 
     // NUDGING
-    coDriverStick.btn_X.whileHeld(new VisionSpinTurret(sub_turret, sub_shooter, sub_vision, sub_navX));
+    coDriverStick.btn_X.whileHeld(new VisionSpinTurret(sub_turret, sub_shooter, sub_vision, sub_navX, sub_climber));
 
     coDriverStick.btn_Y.whileHeld(() -> sub_hood.setDoubleAngleDegrees(sub_vision.getIdealHoodAngle()));
     coDriverStick.btn_Y.whileHeld(() -> sub_shooter.setGoalRPM(sub_vision.getIdealShooterRPM()));
@@ -185,6 +183,8 @@ public class RobotContainer {
         new SN_InstantCommand(sub_shooter::resetShooterEncoderCounts, true, sub_shooter));
     SmartDashboard.putData("Reset NavX Heading",
         new InstantCommand(sub_navX::resetHeading, sub_navX));
+    SmartDashboard.putData("Reset Climber Encoders",
+        new SN_InstantCommand(sub_climber::resetClimberEncoderCounts, true, sub_turret));
 
     // Calibration
     SmartDashboard.putData("Calibrate NavX",

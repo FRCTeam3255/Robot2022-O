@@ -34,8 +34,10 @@ public final class RobotPreferences {
     public static final SN_DoublePreference climbOpenLoopSpeed = new SN_DoublePreference("climbOpenLoopSpeed", 1);
     public static final SN_DoublePreference climbClosedLoopSpeed = new SN_DoublePreference("climbClosedLoopSpeed", 1);
 
-    public static final SN_DoublePreference climbF = new SN_DoublePreference("climbF", 0);
-    public static final SN_DoublePreference climbP = new SN_DoublePreference("climbP", 1);
+    public static final SN_DoublePreference climbArbitraryFeedForward = new SN_DoublePreference(
+        "climbArbitraryFeedForward", 0);
+
+    public static final SN_DoublePreference climbP = new SN_DoublePreference("climbP", 0);
     public static final SN_DoublePreference climbI = new SN_DoublePreference("climbI", 0);
     public static final SN_DoublePreference climbD = new SN_DoublePreference("climbD", 0);
     public static final SN_DoublePreference climbAllowableClosedLoopError = new SN_DoublePreference(
@@ -44,9 +46,14 @@ public final class RobotPreferences {
     // encoder counts position of "up" position or able reach the next bar
     public static final SN_DoublePreference climbUpPosition = new SN_DoublePreference("climbUpPosition", 42069);
 
-    // if the climber is too low and you try to angle the climber will hit turret
+    public static final SN_DoublePreference climbMinPerpPosition = new SN_DoublePreference(
+        "climbMinPerpPosition", 0);
     public static final SN_DoublePreference climbMinAnglePosition = new SN_DoublePreference(
-        "climbMinAnglePosition", 6942);
+        "climbMinAnglePosition", 100000);
+    public static final SN_DoublePreference climbMaxPosition = new SN_DoublePreference(
+        "climbMaxPosition", 279000);
+
+    // if the climber is too low and you try to angle the climber will hit turret
   }
 
   public static final class DrivetrainPrefs {

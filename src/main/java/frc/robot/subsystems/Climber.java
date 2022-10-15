@@ -5,11 +5,14 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.frcteam3255.components.SN_DoubleSolenoid;
 import com.frcteam3255.preferences.SN_DoublePreference;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,10 +25,13 @@ public class Climber extends SubsystemBase {
 
   TalonFX climbMotor;
   SN_DoubleSolenoid pivotPiston;
+  DigitalInput maxSwitch;
 
   /** Creates a new Climber. */
   public Climber() {
     climbMotor = new TalonFX(ClimberMap.CLIMB_MOTOR_CAN);
+
+    maxSwitch = new DigitalInput(ClimberMap.CLIMB_EXTENDED_SWITCH_DIO);
 
     pivotPiston = new SN_DoubleSolenoid(
         RobotMap.CLIMBER_PCM,
@@ -41,7 +47,6 @@ public class Climber extends SubsystemBase {
     climbMotor.configFactoryDefault();
     TalonFXConfiguration config = new TalonFXConfiguration();
 
-    config.slot0.kF = ClimberPrefs.climbF.getValue();
     config.slot0.kP = ClimberPrefs.climbP.getValue();
     config.slot0.kI = ClimberPrefs.climbI.getValue();
     config.slot0.kD = ClimberPrefs.climbD.getValue();
@@ -50,32 +55,44 @@ public class Climber extends SubsystemBase {
 
     climbMotor.configAllSettings(config);
 
-    climbMotor.configReverseSoftLimitThreshold(ClimberPrefs.climbMinAnglePosition.getValue());
-    climbMotor.configReverseSoftLimitEnable(false);
+    climbMotor.configReverseSoftLimitThreshold(ClimberPrefs.climbMinPerpPosition.getValue());
+    climbMotor.configReverseSoftLimitEnable(true);
+    climbMotor.configForwardSoftLimitThreshold(ClimberPrefs.climbMaxPosition.getValue());
+    climbMotor.configForwardSoftLimitEnable(true);
+
     climbMotor.setNeutralMode(NeutralMode.Brake);
     climbMotor.setInverted(false);
 
     pivotPiston.setInverted(false);
   }
 
-  public void setClimberSpeed(double speed) {
-    climbMotor.set(ControlMode.PercentOutput, speed * ClimberPrefs.climbOpenLoopSpeed.getValue());
+  public void setClimberSpeed(double a_speed) {
+    double speed = a_speed * ClimberPrefs.climbOpenLoopSpeed.getValue();
+
+    if (isClimberMax() && speed > 0) {
+      speed = 0;
+    }
+
+    SmartDashboard.putNumber("*speed", speed);
+
+    climbMotor.set(ControlMode.PercentOutput, speed);
   }
 
   public void setClimberPosition(SN_DoublePreference position) {
-    climbMotor.set(ControlMode.Position, position.getValue());
+    climbMotor.set(ControlMode.Position, position.getValue(),
+        DemandType.ArbitraryFeedForward, ClimberPrefs.climbArbitraryFeedForward.getValue());
   }
 
   public void setPistonAngled() {
     if (getClimberEncoderCounts() > ClimberPrefs.climbMinAnglePosition.getValue()) {
+      climbMotor.configReverseSoftLimitThreshold(ClimberPrefs.climbMinAnglePosition.getValue());
       pivotPiston.setDeployed();
-      climbMotor.configReverseSoftLimitEnable(true);
     }
   }
 
   public void setPistonPerpendicular() {
+    climbMotor.configReverseSoftLimitThreshold(ClimberPrefs.climbMinPerpPosition.getValue());
     pivotPiston.setRetracted();
-    climbMotor.configReverseSoftLimitEnable(false);
   }
 
   public boolean isPistonAngled() {
@@ -86,12 +103,12 @@ public class Climber extends SubsystemBase {
     return climbMotor.getSelectedSensorPosition();
   }
 
-  public boolean isClimberMax() {
-    return climbMotor.isFwdLimitSwitchClosed() == 1 ? true : false;
+  public void resetClimberEncoderCounts() {
+    climbMotor.setSelectedSensorPosition(0);
   }
 
-  public boolean isClimberMin() {
-    return climbMotor.isRevLimitSwitchClosed() == 1 ? true : false;
+  public boolean isClimberMax() {
+    return !maxSwitch.get();
   }
 
   @Override
@@ -100,7 +117,6 @@ public class Climber extends SubsystemBase {
 
       SmartDashboard.putNumber("Climber Encoder Count", getClimberEncoderCounts());
       SmartDashboard.putBoolean("Is Climber Max", isClimberMax());
-      SmartDashboard.putBoolean("Is Climber Min", isClimberMin());
 
       SmartDashboard.putBoolean("Is Climber Angled", isPistonAngled());
 
