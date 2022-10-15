@@ -69,10 +69,6 @@ public class Climber extends SubsystemBase {
   public void setClimberSpeed(double a_speed) {
     double speed = a_speed * ClimberPrefs.climbOpenLoopSpeed.getValue();
 
-    if (isClimberMax() && speed > 0) {
-      speed = 0;
-    }
-
     SmartDashboard.putNumber("*speed", speed);
 
     climbMotor.set(ControlMode.PercentOutput, speed);
